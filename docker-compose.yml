@@ -1,0 +1,21 @@
+
+services:
+  django:
+    build: ./django-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./django-app:/app
+    environment:
+      - DEBUG=True
+    depends_on:
+      - react
+
+  react:
+    build: ./react-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./react-app:/app
+    stdin_open: true
+    tty: true
