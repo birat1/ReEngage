@@ -1,14 +1,17 @@
-project_name: Project Name
+project_name: ReEngage
 
 project_description: |
-  Short description (100 words) about the web app proposed and developed. You can provide a brief overview of the project here, including which UN's SDGs this project is tackling.
+  This web application is designed to help anxious and neurodivergent students reconnect with formal education and keep up with their peers. It uses interactive quizzes and games to enhance engagement while delivering content aligned with the national curriculum.
 
-  Line breaks are permitted.
+  By providing an accessible, safe and supportive learning environment, ReEngage encourages students to learn independently and build confidence. This project aims to address the UN's Sustainable Development Goal 4 (Quality Education) by making learning more inclusive for students facing educational challenges.
 
 group_members:
-  - Member 1
-  - Member 2
-  - Member 3
-  - Member 4
+  - Gianna Addae
+  - Birat Ale
+  - Isabelle Bill
+  - Nisaar Bista
+  - Jason Gurung
+  - Shizu Rai
+  - Yuken Rai
 
 group_image: team.jpg
