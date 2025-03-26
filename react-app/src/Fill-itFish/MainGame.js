@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
+import './FillitFish.css';
 
 // how to play option
-// finish Round: click and drag
 // score system
-// loop rounds 5 times
 // implement text to speech api
 // wrong choice screen
+// fish gui
+// sound effects
 
 function Choices({text, choices = [], onSelect}){ // outputs text along with the corresponding choices
   return (
       <div>
-        {text}
-          <div>
+        <div className="text">
+          {text}
+        </div>
+          <div className="button-container">
             {choices.map((choice) => (
             <button
                 key={choice}
@@ -25,18 +28,50 @@ function Choices({text, choices = [], onSelect}){ // outputs text along with the
     );
 };
 
-function TitleScreen() { // screen user sees before playing the game
+class AudioComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { play: false };
+    this.audio = new Audio("./water.mp3");
+    this.audio.loop = true;
+    this.togglePlay = this.togglePlay.bind(this);
+  }
+
+  togglePlay() {
+    this.setState(prevState => {
+      if (!prevState.play) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+      return { play: !prevState.play };
+    });
+  }
+}
+
+export default function TitleScreen() { // screen user sees before playing the game
   const [isOpen, setIsOpen] = useState(true); // Controls button visibility
   const [showTransitionScreen, setShowTransitionScreen] = useState(false); // Controls ChooseYear visibility
+  const [audio] = useState(new Audio("/water.mp3"));
+
+  useEffect(() => {
+    audio.loop = true;
+  }, [audio]);
 
   function handleSelect() {
-    setIsOpen(false); // Hide TitleScreen
-    setShowTransitionScreen(true); // Show ChooseYear
+    setIsOpen(false);
+    setShowTransitionScreen(true);
+    audio.play(); // Start playing when the game starts
   }
 
   return ( // only hides button so doesn't need a parent component
-    <div>
-      {isOpen && <button onClick={handleSelect}>Start</button>} 
+    <div className="bg">
+      <div>
+        {isOpen && <h1 className="icon"></h1>}
+      </div>
+      <div className="center-btn">
+        {isOpen && <button onClick={handleSelect}>Start</button>} 
+      </div>
       {showTransitionScreen && <TransitionScreen />}
     </div>
   );
@@ -164,8 +199,9 @@ function Round({ wordBank, numLeft }) {
 
   return ( // hide start round button after clicking
     <div> 
-      {!hasStarted && <button onClick={startRound}>Start Round</button>} 
-      
+      <div className="center-btn">
+        {!hasStarted && <button onClick={startRound}>Start Round</button>} 
+      </div>
       {!isRoundComplete ? (
           <div>
               {word && ( // displays this only when word changes
@@ -198,8 +234,4 @@ function FillitFish({year, roundsLeft}) { // loops rounds and gives a score at t
 
   // make an ending 
   
-}
-
-export default function StartGame() {
-  return <TitleScreen />;
 }
