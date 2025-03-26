@@ -1,25 +1,28 @@
+.star-math-container {
+  min-height: 100vh;
+  font-family: 'Exo 2', sans-serif;
+  background-image: url("moonbackground.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+
 /*TitleScreen*/
 
-#titleScreen, #yrChoices, #mainGame, #howToPlay {
+#titleScreen, #yrChoices, #mainGame, #howToPlay, #qChoices, #diffChoices {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-#titleScreen.hidden, #yrChoices.hidden, #mainGame.hidden, #howToPlay.hidden {
+#titleScreen.hidden, #yrChoices.hidden, #mainGame.hidden, #qChoices.hidden, #howToPlay.hidden, #diffChoices.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
-#mainGame.visible {
-  display: block;
-}
-
-#howToPlay.visible {
-  display: block;
-}
-
-#yrChoices.visible {
+#mainGame.visible, #howToPlay.visible, #yrChoices.visible, #qChoices.visible, #diffChoices.visible {
   display: block;
 }
 
@@ -41,8 +44,9 @@
   gap: 20px;
 }
 
+/*sorting the positioning of the question amount/choices screen*/
 
-#yrChoices {
+#qChoices {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -53,7 +57,35 @@
   text-align: center;
 }
 
-#yrChoices p {
+#qChoices p {
+  color: aliceblue;
+  font-size: 45px;
+}
+
+.btnQ {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: auto;
+}
+
+
+#yrChoices, #diffChoices {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30, 118, 158, 0.184);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#yrChoices p, #diffChoices p {
   color: aliceblue;
   font-size: 45px;
 }
@@ -211,16 +243,6 @@
   left: 4%;
 }
 
-body {
-  font-family: 'Exo 2', sans-serif;
-  background-image: url("moonbackground.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-blend-mode: multiply;
-}
-
 /*make the large/main star glow*/
 @keyframes glow {
   0% {
@@ -370,6 +392,11 @@ body {
   position: absolute;
   right: 20px;
 }
+
+/*
+#mainGame {
+  transform: translate(-5%, 50%);
+}*/
 
 
 /*
