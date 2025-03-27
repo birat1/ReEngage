@@ -23,6 +23,10 @@
     padding: 5px;
     animation: shake 2.0s;
     animation-iteration-count: infinite;
+    filter: drop-shadow(2px 2px 0 white) 
+            drop-shadow(-2px -2px 0 white) 
+            drop-shadow(-2px 2px 0 white) 
+            drop-shadow(2px -2px 0 white);
 }
 
 @keyframes shake {
@@ -31,7 +35,7 @@
   100% { transform: translate(1px, 0px) rotate(0deg); }
 }
 
-.button-container {
+.btn-container {
     display: flex;
     flex-wrap: wrap; /* Allow buttons to wrap to the next row */
     justify-content: space-evenly; /* Distribute buttons evenly across the row */
@@ -51,7 +55,7 @@
     transform: translate(-50%, -50%);
 }
 
-button {
+.btn {
     background-color: #3088D5;
     color: aliceblue;
     border: 2.5px solid aliceblue;
@@ -66,8 +70,7 @@ button {
     max-width: 200px; /* Prevent buttons from getting too wide */
 }
 
-
-p {
+.definition {
     color: aliceblue;
     background-color: #3088D5;
     background-size: 5px;

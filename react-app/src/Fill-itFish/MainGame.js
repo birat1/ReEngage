@@ -8,24 +8,19 @@ import './FillitFish.css';
 // fish gui
 // sound effects
 
-function Choices({text, choices = [], onSelect}){ // outputs text along with the corresponding choices
+function Choices({ text, choices = [], onSelect }) {
   return (
-      <div>
-        <div className="text">
-          {text}
-        </div>
-          <div className="button-container">
-            {choices.map((choice) => (
-            <button
-                key={choice}
-                onClick={() => onSelect(choice)}
-            >
-                {choice}
-            </button>
-            ))}
-          </div>
+    <div>
+      <div className="text">{text}</div>
+      <div className="btn-container">
+        {choices.map((choice) => (
+          <button key={choice} onClick={() => onSelect(choice)} className="btn">
+            {choice}
+          </button>
+        ))}
       </div>
-    );
+    </div>
+  );
 };
 
 class AudioComponent extends Component {
@@ -69,9 +64,7 @@ export default function TitleScreen() { // screen user sees before playing the g
       <div>
         {isOpen && <h1 className="icon"></h1>}
       </div>
-      <div className="center-btn">
-        {isOpen && <button onClick={handleSelect}>Start</button>} 
-      </div>
+      {isOpen && <button onClick={handleSelect} class="center-btn btn">Start</button>} 
       {showTransitionScreen && <TransitionScreen />}
     </div>
   );
@@ -199,14 +192,12 @@ function Round({ wordBank, numLeft }) {
 
   return ( // hide start round button after clicking
     <div> 
-      <div className="center-btn">
-        {!hasStarted && <button onClick={startRound}>Start Round</button>} 
-      </div>
+      {!hasStarted && <button onClick={startRound} class="btn center-btn">Start Round</button>} 
       {!isRoundComplete ? (
           <div>
               {word && ( // displays this only when word changes
               <>
-                <p>Definition: {definition}</p>
+                <p className="definition">Definition: {definition}</p>
                 <Choices
                   text={"Word: " + hiddenWord}
                   choices={["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]}
