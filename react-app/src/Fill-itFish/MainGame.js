@@ -3,15 +3,14 @@ import './FillitFish.css';
 
 // how to play option
 // score system
-// implement text to speech api
+// implement text to speech api: click the fish head to hear it
 // wrong choice screen
-// fish gui
 // sound effects
 
-function Choices({ text, choices = [], onSelect }) {
-  return (
+function Choices({ text, choices = [], onSelect }) { // shws text and buttons
+  return ( // if there is text, show it
     <div>
-      <div className="text">{text}</div>
+      {text !== '' && <div className="text">{text}</div>} 
       <div className="btn-container">
         {choices.map((choice) => (
           <button key={choice} onClick={() => onSelect(choice)} className="btn">
@@ -21,7 +20,8 @@ function Choices({ text, choices = [], onSelect }) {
       </div>
     </div>
   );
-};
+}
+
 
 class AudioComponent extends Component {
   constructor(props) {
@@ -62,7 +62,7 @@ export default function TitleScreen() { // screen user sees before playing the g
   return ( // only hides button so doesn't need a parent component
     <div className="bg">
       <div>
-        {isOpen && <h1 className="icon"></h1>}
+        {isOpen && <h1 className="icon Title-icon"></h1>}
       </div>
       {isOpen && <button onClick={handleSelect} class="center-btn btn">Start</button>} 
       {showTransitionScreen && <TransitionScreen />}
@@ -70,25 +70,33 @@ export default function TitleScreen() { // screen user sees before playing the g
   );
 }
 
-function TransitionScreen() { // choose year hides itself entirely, so a parent component is needed to show FillitFish afterwards
+function TransitionScreen() {
   const [selectedYear, setSelectedYear] = useState(null);
+  const [roundsLeft, setRoundsLeft] = useState(3); // Track remaining rounds
 
   return (
     <div>
       {!selectedYear ? (
         <ChooseYear onSelect={setSelectedYear} />
+      ) : roundsLeft > 0 ? (
+        <Round 
+          key={roundsLeft} // This forces re-mounting when roundsLeft changes
+          wordBank={parseInt(selectedYear.split(" ")[1])} 
+          numLeft={roundsLeft} 
+          onNextRound={() => setRoundsLeft(roundsLeft - 1)}
+        />
       ) : (
-        <FillitFish year={selectedYear} roundsLeft={3} />
+        <Finish />
       )}
     </div>
   );
 }
 
+
 function ChooseYear({ onSelect }) {
   function handleSelect(choice) {
     onSelect(choice); // Pass selected year to parent
   }
-
   return (
     <div>
       <Choices
@@ -100,8 +108,7 @@ function ChooseYear({ onSelect }) {
   );
 }
 
-function Round({ wordBank, numLeft }) {
-  const [hasStarted, setHasStarted] = useState(false); // controls start round button visibility
+function Round({ wordBank, numLeft, onNextRound }) {
   const [word, setWord] = useState(""); // the actual word for this round
   const [definition, setDefinition] = useState(null); // definition for current word
   const [hiddenWord, setHiddenWord] = useState(""); // the partially hidden word displayed to user
@@ -152,10 +159,10 @@ function Round({ wordBank, numLeft }) {
   }
 
   function startRound() {
-    let randomWord = yearArrays[wordBank[5]][Math.floor(Math.random() * wordBank.length)]; // generate random word
+    const words = yearArrays[wordBank];  // Get the correct array
+    const randomWord = words[Math.floor(Math.random() * words.length)]; // Choose a random word
     setWord(randomWord); 
     hideWord(randomWord); // Call hideWord with the new word
-    setHasStarted(true); // Hide the start button
   }
 
   function handleSelect(choice) {  
@@ -188,41 +195,78 @@ function Round({ wordBank, numLeft }) {
             setHiddenWord(resetArray.join(" "));
         }
     }
-}
+  }
+
+  function ChoppedFish(){
+    let hiddenArray = hiddenWord.split(" ");
+
+    function Word() {
+      return (
+        <div className="fish-container "> {/* Flex container */}
+          {hiddenArray.map((item, index) =>
+            index === 0 ? (
+              <div key={index} className="fishbod-container fishhd-container">
+                <p className="text-over-img fishhd-text">{item}</p>
+              </div>
+            ) : index === hiddenArray.length - 1 ? (
+              <div key={index} className="fishbod-container fishtl-container">
+                <p className="text-over-img fishtl-text">{item}</p>
+              </div>
+            ) : (
+              <div key={index} className="fishbod-container fishmd-container">
+                <p className="text-over-img">{item}</p>
+              </div>
+            )
+          )}
+        </div>
+      );
+    }       
+    
+    return(
+      <Word />
+    )
+  }
+
+  useEffect(() => {
+    startRound(); // Auto-start the round when numLeft changes
+  }, [numLeft]);
 
   return ( // hide start round button after clicking
     <div> 
-      {!hasStarted && <button onClick={startRound} class="btn center-btn">Start Round</button>} 
       {!isRoundComplete ? (
           <div>
               {word && ( // displays this only when word changes
               <>
                 <p className="definition">Definition: {definition}</p>
+                <ChoppedFish />
                 <Choices
-                  text={"Word: " + hiddenWord}
+                  text={''}
                   choices={["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]}
                   onSelect={handleSelect}
                 />
               </>
-            )}
+              )}
+              
           </div>
         ) : (
-            <FillitFish year={wordBank} roundsLeft={numLeft - 1} />
+          <div>
+            {isRoundComplete && <h1 className="icon fishhappy-icon"></h1>}
+            <div className="btn-container">
+              <button onClick={onNextRound} className="btn center-btn">
+                {numLeft > 1 ? "Next Round" : "Finish"}
+              </button>
+            </div>
+          </div>
+          
         )}
     </div>
   );
 }
 
-function FillitFish({year, roundsLeft}) { // loops rounds and gives a score at the end
+function Finish({year, roundsLeft}) { // loops rounds and gives a score at the end
 
-  if (roundsLeft > 0){
-    return(
-      <div>
-        <Round wordBank={year} numLeft={roundsLeft}/>
-      </div>
-    )
-  }
-
-  // make an ending 
   
 }
+  // make an ending 
+  
+

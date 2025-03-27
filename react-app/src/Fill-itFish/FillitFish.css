@@ -6,13 +6,80 @@
     background-position: center center;
 }
 
+/* Flex container for the fish body */
+.fish-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 5px; /* Reduce the gap so shorter words don't create large spacing */
+    flex-wrap: nowrap;
+    width: auto; /* Instead of 100%, let it adjust to content */
+    max-width: 90vw; /* Ensures it doesn't take up the entire screen */
+    height: auto;
+    filter: drop-shadow(2px 2px 0 white) 
+            drop-shadow(-2px -2px 0 white) 
+            drop-shadow(-2px 2px 0 white) 
+            drop-shadow(2px -2px 0 white);
+}
+
+
+/* Common container for all fish parts */
+.fishbod-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Fish Head and Tail fixed sizes */
+.fishhd-container, .fishtl-container {
+    flex-shrink: 0;  /* Prevent shrinking */
+    width: 150px;    /* Fixed width for head and tail */
+    height: 150px;   /* Fixed height for head and tail */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Fish Body stretches to fill available space */
+.fishmd-container {
+    flex: 1 1 100px; /* Allows growing but prevents shrinking below 100px */
+    min-width: 100px; /* Ensures body segments are always visible */
+    max-width: 120px; /* Prevents over-expansion */
+    height: 150px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('./fishMid.PNG');
+}
+
+/* Text style */
+.text-over-img {
+    position: absolute;
+    font-size: 2vw;
+    color: black;
+    font-weight: bold;
+}
+
+/* Background variations */
+.fishhd-container { background-image: url('./fishHead.PNG'); }
+.fishtl-container { background-image: url('./fishTail.PNG'); }
+
+.text-over-img {
+    font-size: 3vw;
+    color: black;
+    font-weight: bold;
+}
+
+.fishhd-text {padding-left: 60px; display: inline-block;}
+.fishtl-text {padding-right: 80px; display:inline-block;}
+
 .icon {
     position:absolute;
-    width: 85%;
-    height: 60vh;
-    left: 8%;
-    top: 0%;
-    background-image: url('./FillitFishIcon.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -27,6 +94,23 @@
             drop-shadow(-2px -2px 0 white) 
             drop-shadow(-2px 2px 0 white) 
             drop-shadow(2px -2px 0 white);
+}
+
+.fishhappy-icon {
+    width: 30%;
+    height: 30%;
+    background-image: url('./happyFish.PNG');
+    top: 20%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+.Title-icon {
+    left: 8%;
+    top: 0%;
+    width: 85%;
+    height: 60vh;
+    background-image: url('./FillitFishIcon.png');
 }
 
 @keyframes shake {
@@ -68,6 +152,12 @@
     flex-shrink: 0; /* Don't let buttons shrink */
     flex-basis: auto; /* Allow button to take its natural width */
     max-width: 200px; /* Prevent buttons from getting too wide */
+}
+
+.btn:hover {
+    transition-duration: 0.4s;
+    background-color: aliceblue;
+    color: #3088D5;
 }
 
 .definition {
