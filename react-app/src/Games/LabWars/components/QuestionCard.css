@@ -1,0 +1,27 @@
+.question-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 650px;
+}
+
+.question-card .card-body {
+  padding: 0;
+}
+
+.question-number {
+  color: #8B5CF6;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  color: #1F2937;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 2rem 0;
+  text-align: center;
+} 
