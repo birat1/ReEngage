@@ -1,28 +1,28 @@
 .star-math-container {
-  min-height: 100vh;
   font-family: 'Exo 2', sans-serif;
-  background-image: url("moonbackground.jpg") !important;
+  background-image: url("moonbackground.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   background-blend-mode: multiply;
+  min-height: 100vh;
 }
 
 /*TitleScreen*/
 
-#titleScreen, #yrChoices, #mainGame, #howToPlay, #qChoices, #diffChoices {
+#titleScreen, #yrChoices, #mainGame, #howToPlay, #qChoices, #diffChoices, #endScreen {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-#titleScreen.hidden, #yrChoices.hidden, #mainGame.hidden, #qChoices.hidden, #howToPlay.hidden, #diffChoices.hidden {
+#titleScreen.hidden, #yrChoices.hidden, #mainGame.hidden, #qChoices.hidden, #howToPlay.hidden, #diffChoices.hidden, #endScreen.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
-#mainGame.visible, #howToPlay.visible, #yrChoices.visible, #qChoices.visible, #diffChoices.visible {
+#mainGame.visible, #howToPlay.visible, #yrChoices.visible, #qChoices.visible, #diffChoices.visible, #endScreen.visible {
   display: block;
 }
 
@@ -275,7 +275,7 @@
   background-color: rgb(30, 118, 158, 0.3);
   background-size: auto;
   border-radius: 20px;
-  width: 200vw;
+  width: 100vw;
   max-width: 900px;
   min-width: 300px;
   height: auto;

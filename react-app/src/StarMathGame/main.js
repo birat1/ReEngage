@@ -69,6 +69,7 @@ export function dragElement(elmnt) {
 //this is to position the equation (relative to the small stars)
 export function positionEquation() {
   const dropZone = document.querySelector("#theEquation");
+  if (!dropZone) return;
   const dragItems = document.querySelectorAll(".drag");
 
   let lowestStar = 0;

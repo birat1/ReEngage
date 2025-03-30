@@ -1,7 +1,6 @@
-import StarMathGame from "./Games/StarMathGame/StarMath-Game";
-import GameContainer from "./Games/StarMathGame/testing-game-container.js";
-import StartGame from "./Games/Fill-itFish/MainGame.js";
-import LabWars from "./Games/LabWars/LabWars.js";
+import StarMathGame from "./StarMathGame/StarMath-Game";
+import GameContainer from "./StarMathGame/testing-game-container.js";
+import StartGame from "./Fill-itFish/MainGame.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
