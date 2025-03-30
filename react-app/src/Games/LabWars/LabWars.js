@@ -1,0 +1,109 @@
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
+import QuestionCard from './components/QuestionCard';
+import AnswerOptions from './components/AnswerOptions';
+import FeedbackMessage from './components/FeedbackMessage';
+import { questions } from './data/questions';
+import './LabWars.css';
+
+const BattleScene = () => (
+  <div className="battle-scene">
+    {/* Display the student character */}
+    <div className="battle-container">
+      <div className="character-name student-name">Student</div>
+      <div className="character-circle student-circle">
+        <div className="player-character">👨‍🔬</div>
+      </div>
+    </div>
+
+    {/* Display the VS text */}
+    <div className="vs-text">VS</div>
+
+    {/* Display the boss character */}
+    <div className="battle-container">
+      <div className="character-name boss-name">Science Boss</div>
+      <div className="character-circle boss-circle">
+        <div className="boss-character">👾</div>
+      </div>
+    </div>
+  </div>
+);
+
+const LabWars = () => {
+  // TODO: Implement boss health system
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
+  const [isAnswered, setIsAnswered] = useState(false);
+
+  // Check if the submitted answers are correct based on the question type
+  const checkAnswer = (selectedAnswers, question) => {
+    if (question.type === 'single') {
+      return selectedAnswers.length === 1 && selectedAnswers[0] === question.correct;
+    } else {
+      // For multiple choice, check if selected answers match exactly with correct answers
+      if (selectedAnswers.length !== question.correct.length) return false;
+      const sortedSelected = [...selectedAnswers].sort();
+      const sortedCorrect = [...question.correct].sort();
+      return sortedSelected.every((val, idx) => val === sortedCorrect[idx]);
+    }
+  };
+
+  // Handle the submission of the answer
+  const handleSubmit = (selectedAnswers) => {
+    setIsAnswered(true);
+    const currentQ = questions[currentQuestion];
+    const isCorrect = checkAnswer(selectedAnswers, currentQ);
+
+    // Provide feedback depending on if the answer is correct or not
+    if (isCorrect) {
+      // TODO: Implement boss damage system
+      setFeedback({
+        message: 'Correct! You dealt damage to the boss!',
+        isCorrect: true
+      });
+    } else {
+      setFeedback({
+        message: `Not quite! ${currentQ.explanation}`,
+        isCorrect: false
+      });
+    }
+
+    // Progress to next question after delay
+    if (currentQuestion < questions.length - 1) {
+      setTimeout(() => {
+        setCurrentQuestion(prev => prev + 1);
+        setFeedback({ message: '', isCorrect: null });
+        setIsAnswered(false);
+      }, 2000);
+    }
+  };
+
+  return (
+    <Container className="lab-wars-container">
+      <h1 className="game-title">Lab Wars</h1>
+      
+      <BattleScene />
+
+      <QuestionCard 
+        question={questions[currentQuestion].question}
+        questionNumber={currentQuestion + 1}
+        totalQuestions={questions.length}
+      >
+        <AnswerOptions 
+          options={questions[currentQuestion].options}
+          onSubmit={handleSubmit}
+          correctAnswer={questions[currentQuestion].correct}
+          isAnswered={isAnswered}
+          isMultiple={questions[currentQuestion].type === 'multiple'}
+        />
+      </QuestionCard>
+
+      <FeedbackMessage 
+        message={feedback.message}
+        isCorrect={feedback.isCorrect}
+      />
+    </Container>
+  );
+};
+
+export default LabWars; 

@@ -1,0 +1,134 @@
+.lab-wars-container {
+  padding: 1rem 2rem 2rem;
+  background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+  min-height: 100vh;
+  font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+}
+
+.game-title {
+  color: #1E293B;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0.5rem 0 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.battle-scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.battle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.character-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.student-name {
+  color: #8B5CF6;
+}
+
+.boss-name {
+  color: #EC4899;
+}
+
+.character-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.student-circle {
+  background: rgba(139, 92, 246, 0.1);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.boss-circle {
+  background: rgba(236, 72, 153, 0.1);
+  border: 2px solid rgba(236, 72, 153, 0.2);
+  animation: float 3s ease-in-out infinite reverse;
+}
+
+.player-character {
+  font-size: 3.5rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.boss-character {
+  font-size: 3.5rem;
+  transform: scaleX(-1);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.vs-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #FCD34D;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.feedback-message {
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in;
+}
+
+.feedback-correct {
+  color: #15803D;
+  background-color: #DCFCE7;
+  border: 2px solid #22C55E;
+}
+
+.feedback-incorrect {
+  color: #B91C1C;
+  background-color: #FEE2E2;
+  border: 2px solid #EF4444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+} 
