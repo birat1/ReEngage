@@ -1,0 +1,116 @@
+.answer-options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.answer-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.answer-button {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  border: 3px solid #CBD5E1;
+  border-radius: 12px;
+  background: #E2E8F0;
+  color: #374151;
+  font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.answer-button:hover:not(.correct) {
+  background: #CBD5E1;
+  border-color: #8B5CF6;
+  color: #8B5CF6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.answer-button.selected {
+  background: #8B5CF6;
+  border-color: #7C3AED;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.answer-button.correct {
+  background: #22C55E;
+  border-color: #16A34A;
+  color: white;
+  cursor: default;
+}
+
+.submit-button {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 200px;
+}
+
+.submit-button.active {
+  background: #8B5CF6;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button.active:hover {
+  background: #7C3AED;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button.disabled {
+  background: #E2E8F0;
+  color: #94A3B8;
+  cursor: not-allowed;
+}
+
+.answer-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.option-letter {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.option-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.button-glow {
+  display: none;
+}
