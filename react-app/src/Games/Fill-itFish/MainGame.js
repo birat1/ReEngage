@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Component } from "react";
 import './FillitFish.css';
 
-// how to play option
 // score system
+// ending
 // implement text to speech api: click the fish head to hear it
 // wrong choice screen
-// sound effects
+// skip button that tells your the answer before moving on to the next round
 
 function Choices({ text, choices = [], onSelect }) { // shws text and buttons
   return ( // if there is text, show it
@@ -21,7 +21,6 @@ function Choices({ text, choices = [], onSelect }) { // shws text and buttons
     </div>
   );
 }
-
 
 class AudioComponent extends Component {
   constructor(props) {
@@ -47,6 +46,7 @@ class AudioComponent extends Component {
 export default function TitleScreen() { // screen user sees before playing the game
   const [isOpen, setIsOpen] = useState(true); // Controls button visibility
   const [showTransitionScreen, setShowTransitionScreen] = useState(false); // Controls ChooseYear visibility
+  const [showHelpScreen, setShowHelpScreen] = useState(false); // controls help screen visibility
   const [audio] = useState(new Audio("/water.mp3"));
 
   useEffect(() => {
@@ -59,13 +59,36 @@ export default function TitleScreen() { // screen user sees before playing the g
     audio.play(); // Start playing when the game starts
   }
 
+  function handleHelp() {
+    setShowHelpScreen(true);
+  }
+
+  function closeHelpScreen() {
+    setShowHelpScreen(false);
+  }
+
   return ( // only hides button so doesn't need a parent component
     <div className="bg">
       <div>
         {isOpen && <h1 className="icon Title-icon"></h1>}
       </div>
       {isOpen && <button onClick={handleSelect} class="center-btn btn">Start</button>} 
+      {isOpen && <button onClick={handleHelp} class="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
       {showTransitionScreen && <TransitionScreen />}
+      {showHelpScreen && <HelpScreen onClose={closeHelpScreen} />}
+    </div>
+  );
+}
+
+function HelpScreen({ onClose }) {
+  return (
+    <div className="helpWindow">
+      <button className="close-btn btn" onClick={onClose}>x</button>
+      <p className="helpText" style={{ height: "30%" }}>
+        Help reassemble the fish by filling in the gaps to complete the word based on the definition given.
+        <br /><br />
+        Click on the fish's head for a clue!
+      </p>
     </div>
   );
 }
@@ -81,9 +104,9 @@ function TransitionScreen() {
       ) : roundsLeft > 0 ? (
         <Round 
           key={roundsLeft} // This forces re-mounting when roundsLeft changes
-          wordBank={parseInt(selectedYear.split(" ")[1])} 
-          numLeft={roundsLeft} 
-          onNextRound={() => setRoundsLeft(roundsLeft - 1)}
+          wordBank={parseInt(selectedYear.split(" ")[1])}
+          numLeft={roundsLeft}
+          onNextRound={() => {setRoundsLeft(roundsLeft - 1)}}
         />
       ) : (
         <Finish />
@@ -108,13 +131,12 @@ function ChooseYear({ onSelect }) {
   );
 }
 
-function Round({ wordBank, numLeft, onNextRound }) {
+function Round({ wordBank, numLeft, onNextRound, totalScore }) {
   const [word, setWord] = useState(""); // the actual word for this round
   const [definition, setDefinition] = useState(null); // definition for current word
   const [hiddenWord, setHiddenWord] = useState(""); // the partially hidden word displayed to user
   const [hiddenIndexes, setHiddenIndexes] = useState([]); // indexes for each character hidden in hidden word
   const [isRoundComplete, setIsRoundComplete] = useState(false);
-
 
   const yearArrays = { // wordbanks for each year
     3: ['accept', 'except', 'peace', 'piece', 'knot', 'not', 'reign', 'main', 'mane', 'grate'],
@@ -263,9 +285,20 @@ function Round({ wordBank, numLeft, onNextRound }) {
   );
 }
 
-function Finish({year, roundsLeft}) { // loops rounds and gives a score at the end
-
+function Finish({year, roundsLeft}) { // logives a score at the end
   
+  function handleSelect(choice) {  
+    // redirect to homepage
+  };
+
+  return (
+    <div>
+      <h1 className="icon fishhappy-icon"></h1>
+      <button onClick={handleSelect} className="btn center-btn">
+        {"Return to Homepage"}
+      </button>
+    </div>
+  )
 }
   // make an ending 
   
