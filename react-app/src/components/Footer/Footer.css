@@ -1,0 +1,14 @@
+footer {
+    background-color: #F2F2F2;
+    color: #4A4A4A;
+    font-family: 'Nunito', sans-serif;
+    height: 5em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+h2 {
+    color: #4b9cd3;
+    font-weight: bold;
+}
