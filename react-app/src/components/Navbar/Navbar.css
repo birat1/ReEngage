@@ -1,0 +1,23 @@
+.Navbar {
+    background-color: #F2F2F2;
+    font-family: 'Nunito', sans-serif;
+    color: #4A4A4A;
+    opacity: 95%;
+}
+
+.navbar-brand h2 {
+    color: #4b9cd3;
+    font-weight: bold;
+}
+
+.navbar-collapse Button {
+    font-size: 0.95rem;
+    width: 5rem;
+    background-color: #FFCC00;
+    color: #4A4A4A;
+    border: none;
+}
+
+.navbar-collapse Button:hover {
+    background-color: #FF8C42;
+}
