@@ -15,23 +15,31 @@
     background-color: #A8D3E6;;
 }
 
-.hero-section .blue-button {
+.hero-section .resources {
     background-color: #2596be;
     border: none;
+    width: 11rem;
+    height: 3rem;
+    font-size: 1.1rem;
+    color: #ccdbbe;
 
 }
 
-.hero-section .blue-button:hover {
+.hero-section .resources:hover {
     background-color: #5fa8d7;
 }
 
-.hero-section .green-button {
+.hero-section .games {
     background-color: #6cbc44;
     border: none;
+    width: 11rem;
+    height: 3rem;
+    font-size: 1.1rem;
+    color: #ccdbbe;
 
 }
 
-.hero-section .green-button:hover {
+.hero-section .games:hover {
     background-color: #7ac366;
 }
 
@@ -41,25 +49,25 @@
 }
 
 h1 {
-    font-size: 4em;
+    font-size: 4rem;
     font-weight: bolder;
 }
 
 .hero-section .video-card {
-    height: 25em;
-    width: 25em;
+    height: 25rem;
+    width: 25rem;
 }
 
 .games-section {
     background-color: #ccdbbe;
-    height: 30em;
+    height: 40rem;
 }
 
 .game-card {
     display: flex;
     align-items: center;
-    min-height: 15em;
-    width: 15em;
+    min-height: 15rem;
+    width: 15rem;
     border: none !important;
     background-color: #F2F2F2 !important;
     color: #4A4A4A;
@@ -70,5 +78,5 @@ h1 {
 .d-flex {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 1rem;
 }

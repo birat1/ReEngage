@@ -5,14 +5,18 @@
     opacity: 95%;
 }
 
+.link-style {
+    text-decoration: none;
+}
+
 .navbar-brand h2 {
     color: #4b9cd3;
     font-weight: bold;
 }
 
 .navbar-collapse Button {
-    font-size: 0.95rem;
-    width: 5rem;
+    font-size: 1.1rem;
+    width: 6rem;
     background-color: #FFCC00;
     color: #4A4A4A;
     border: none;

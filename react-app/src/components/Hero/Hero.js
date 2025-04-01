@@ -17,10 +17,10 @@ function Hero() {
                 <h1>Learn Through Play with ReEngage</h1>
                 <p>Exciting games and resources to make learning fun!</p>
                 <div className="hstack gap-2">
-                  <Button className="blue-button rounded-pill">Games</Button>
-                  <Button className="green-button rounded-pill">
+                  <button className="games rounded-pill">Games</button>
+                  <button className="resources rounded-pill">
                     Browse Resources
-                  </Button>
+                  </button>
                 </div>
               </div>
             </Col>
