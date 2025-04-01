@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Component } from "react";
+import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './FillitFish.css';
 
-// score system
-// ending
 // implement text to speech api: click the fish head to hear it
 // wrong choice screen
 // skip button that tells your the answer before moving on to the next round
@@ -72,9 +72,9 @@ export default function TitleScreen() { // screen user sees before playing the g
       <div>
         {isOpen && <h1 className="icon Title-icon"></h1>}
       </div>
-      {isOpen && <button onClick={handleSelect} class="center-btn btn">Start</button>} 
-      {isOpen && <button onClick={handleHelp} class="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
-      {showTransitionScreen && <TransitionScreen />}
+      {isOpen && <button onClick={handleSelect} className="center-btn btn">Start</button>} 
+      {isOpen && <button onClick={handleHelp} className="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
+      {showTransitionScreen && <TransitionScreen audio={audio}/>}
       {showHelpScreen && <HelpScreen onClose={closeHelpScreen} />}
     </div>
   );
@@ -93,9 +93,11 @@ function HelpScreen({ onClose }) {
   );
 }
 
-function TransitionScreen() {
+function TransitionScreen({audio}) {
   const [selectedYear, setSelectedYear] = useState(null);
   const [roundsLeft, setRoundsLeft] = useState(3); // Track remaining rounds
+  const [score, setScore] = useState(0);
+  const [usedWords, setUsedWords] = useState([]);
 
   return (
     <div>
@@ -106,10 +108,15 @@ function TransitionScreen() {
           key={roundsLeft} // This forces re-mounting when roundsLeft changes
           wordBank={parseInt(selectedYear.split(" ")[1])}
           numLeft={roundsLeft}
-          onNextRound={() => {setRoundsLeft(roundsLeft - 1)}}
+          usedWords={usedWords} // ✅ Pass usedWords
+          setUsedWords={setUsedWords} // ✅ Allow Round to update usedWords
+          onNextRound={() => {setRoundsLeft(roundsLeft - 1); setScore(score + 1)}}
         />
       ) : (
-        <Finish />
+        <Finish 
+          score={score}
+          audio={audio}
+        />
       )}
     </div>
   );
@@ -131,12 +138,13 @@ function ChooseYear({ onSelect }) {
   );
 }
 
-function Round({ wordBank, numLeft, onNextRound, totalScore }) {
+function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
   const [word, setWord] = useState(""); // the actual word for this round
   const [definition, setDefinition] = useState(null); // definition for current word
   const [hiddenWord, setHiddenWord] = useState(""); // the partially hidden word displayed to user
   const [hiddenIndexes, setHiddenIndexes] = useState([]); // indexes for each character hidden in hidden word
   const [isRoundComplete, setIsRoundComplete] = useState(false);
+  //const [usedWords, setUsedWords] = useState([]); // ✅ Store words that were already used
 
   const yearArrays = { // wordbanks for each year
     3: ['accept', 'except', 'peace', 'piece', 'knot', 'not', 'reign', 'main', 'mane', 'grate'],
@@ -167,24 +175,35 @@ function Round({ wordBank, numLeft, onNextRound, totalScore }) {
   function hideWord(wordToHide) {
     let num = Math.floor(wordToHide.length / 2);
     let hiddenArray = wordToHide.split(""); 
-
+    let newHiddenIndexes = []; // Track the indexes we are going to hide
+  
     while (num > 0) {
       let index = Math.floor(Math.random() * wordToHide.length);
-      if (!hiddenIndexes.includes(index)) {
+      if (!newHiddenIndexes.includes(index)) {
         hiddenArray[index] = "_"; // Replace letter with "_"
-        setHiddenIndexes(prevIndexes => [...prevIndexes, index]);
+        newHiddenIndexes.push(index); // Add to our new hidden indexes
         num--;
       }
     }
-
+  
+    setHiddenIndexes(newHiddenIndexes); // Store the indexes properly
     setHiddenWord(hiddenArray.join(" ")); // Update state with the hidden word
   }
 
   function startRound() {
-    const words = yearArrays[wordBank];  // Get the correct array
-    const randomWord = words[Math.floor(Math.random() * words.length)]; // Choose a random word
-    setWord(randomWord); 
-    hideWord(randomWord); // Call hideWord with the new word
+    const words = yearArrays[wordBank]; 
+    const availableWords = words.filter(w => !usedWords.includes(w)); // ✅ Remove already used words
+
+    if (availableWords.length === 0) {
+      console.warn("No more words available!"); // Fallback in case all words are used
+      return;
+    }
+
+    const randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+    
+    setWord(randomWord);
+    setUsedWords([...usedWords, randomWord]); // ✅ Add word to used list
+    hideWord(randomWord);
   }
 
   function handleSelect(choice) {  
@@ -208,14 +227,16 @@ function Round({ wordBank, numLeft, onNextRound, totalScore }) {
 
     // After updating, check if the word is fully revealed
     if (!hiddenArray.includes("_")) {  
-        if (hiddenArray.join("") === word) { 
-            //move to next round
-            setIsRoundComplete(true);
-        } else { 
-            //reset word
-            let resetArray = word.split("").map((char, i) => hiddenIndexes.includes(i) ? "_" : char);
-            setHiddenWord(resetArray.join(" "));
-        }
+      if (hiddenArray.join("") === word) { 
+        // Move to next round
+        setIsRoundComplete(true);
+      } else { 
+        // Reset word back to hidden version using stored hiddenIndexes
+        let resetArray = word.split("").map((char, i) => 
+          hiddenIndexes.includes(i) ? "_" : char
+        );
+        setHiddenWord(resetArray.join(" ")); // Reset correctly
+      }
     }
   }
 
@@ -285,21 +306,26 @@ function Round({ wordBank, numLeft, onNextRound, totalScore }) {
   );
 }
 
-function Finish({year, roundsLeft}) { // logives a score at the end
-  
-  function handleSelect(choice) {  
-    // redirect to homepage
+function Finish({ score, audio }) {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  function handleSelect() {  
+    if (audio) {
+      audio.pause();  // Stop the audio
+      audio.currentTime = 0; // Reset playback position
+    }
+    navigate("/"); // Redirect to homepage
   };
 
   return (
     <div>
+      <p className="definition" style={{ left: "41%", top: "5%" }}>Score: {score}/3</p>
       <h1 className="icon fishhappy-icon"></h1>
       <button onClick={handleSelect} className="btn center-btn">
-        {"Return to Homepage"}
+        Exit
       </button>
     </div>
-  )
+  );
 }
-  // make an ending 
   
 

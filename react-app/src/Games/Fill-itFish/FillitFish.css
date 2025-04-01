@@ -191,7 +191,7 @@
     font-size: 3vw;
     font-family: 'Exo 2', Arial;
     position: absolute;
-    top: -5%;
+    top: 0%;
     display: inline-block;      /* Shrinks the element to fit the content */
     border-radius: 5px;
 }
