@@ -11,6 +11,9 @@ let resultNumRef = "";
 let numeratorRef = "";
 let pointRef = "";
 let denominatorRef = "";
+let correctRef = "";
+let wrongRef = "";
+let retryRef = "";
 let starRefs = new Set();
 let retry = 0;
 
@@ -25,7 +28,10 @@ export function yrGroupSorter(
   numeratorRef2,
   pointRef2,
   denominatorRef2,
-  starRefs2
+  starRefs2,
+  correctRef2,
+  wrongRef2,
+  retryRef2
 ) {
   operatorRef = operatorRef2;
   firstNumRef = firstNumRef2;
@@ -35,6 +41,9 @@ export function yrGroupSorter(
   pointRef = pointRef2;
   denominatorRef = denominatorRef2;
   starRefs = starRefs2;
+  correctRef = correctRef2;
+  wrongRef = wrongRef2;
+  retryRef = retryRef2;
   switch (year) {
     case "Year 3":
       generateEqYr3();
@@ -89,7 +98,6 @@ export function changeDenominator() {
   const denominator = document.querySelector("#denominator");
   if (denominator) {
     denominator.innerHTML = numQuestions.trim();
-    console.log("this was ran");
   } else {
     console.error("denominator element not found");
   }
@@ -108,22 +116,14 @@ export function generateEqYr3() {
   let singleAnswer = 0;
   let validAnswers = new Set();
   let starValues = new Set();
-  console.log("this is a test of factor div: " + getFactorPairsDiv(6));
-  console.log("this is a test of factor div: " + getFactorPairsDiv(5));
-  console.log("this is a test of factor div: " + getFactorPairsDiv(8));
-  console.log("this is a test of factor div: " + getFactorPairsDiv(10));
-
-  console.log("this is a test of factor mul: " + getFactorPairs(20));
-  console.log("this is a test of factor mul: " + getFactorPairs(56));
-  console.log("this is a test of factor mul: " + getFactorPairs(70));
-  console.log("this is a test of factor mul: " + getFactorPairs(120));
 
   //I may combine two and three digits
 
   //checking the diffculty and setting variable/const based on that
   switch (difficulty) {
     case "Easy":
-      multDivNum3 = [2, 5, 10, 50, 100];
+      multDivNum3 = [2, 5, 10, 50];
+      // generates random number between 10 and 300 inclusive
       twoOrThreeDigit = Math.floor(Math.random() * (300 - 10 + 1)) + 10;
       break;
     case "Medium":
@@ -153,39 +153,46 @@ export function generateEqYr3() {
     console.error("operator element not found");
   }
 
-  //depending on the operator, a different type of equation will appear
+  const resultNum = document.querySelector(".finalNumber");
+  const firstNum = document.querySelector(".operand1");
+  const secondNum = document.querySelector(".operand2");
+
+  //depending on the operator, a different type of equation will be generated
   switch (selectedOperator) {
     case "+":
-      //to generate an equation similar in the form _ + 18 = 26
-      //randomly chooses a result and second number in the equation
+      //regaining the permission of dragging an element over from result to Num
+      resultNum.classList.add("dropIt");
+      firstNum.classList.remove("dropIt");
+      secondNum.classList.remove("dropIt");
       console.log("+ has run");
-      result = twoOrThreeDigit;
-      resultNumRef.current.innerText = result.toString();
-      secondNumber = Math.floor(Math.random() * (result - 1)) + 1;
+      firstNumber = twoOrThreeDigit;
+      secondNumber =
+        Math.floor(
+          Math.random() *
+            (difficulty === "Easy"
+              ? 300
+              : difficulty === "Medium"
+              ? 600
+              : 999 - 10 + 1)
+        ) + 10;
+      firstNumRef.current.innerText = firstNumber.toString();
       secondNumRef.current.innerText = secondNumber.toString();
-      singleAnswer = result - secondNumber;
-      validAnswers.add(singleAnswer);
-      console.log("2validtask ", validAnswers);
-      starValues = generateStarValues(validAnswers);
-      console.log("starvalues to add ", starValues);
+      result = firstNumber + secondNumber;
+      starValues = generateStarValues(result);
       addValuesToStars(starValues);
-      // starValues = generateStarValues([...validAnswers]);
-      //addValuesToStars(starValues);
       break;
-    case "-": //to generate an equation similar in the form _ - 6 = 26
-      //randomly chooses a result and second number in the equation
-      result = twoOrThreeDigit;
-      resultNumRef.current.innerText = result.toString();
-      secondNumber = Math.floor(Math.random() * (result / 2)) + 1; // ensure secondNumber is smaller
+    case "-":
+      //regaining the permission of dragging an element over from result to Num
+      resultNum.classList.add("dropIt");
+      firstNum.classList.remove("dropIt");
+      secondNum.classList.remove("dropIt");
+      firstNumber = twoOrThreeDigit;
+      firstNumRef.current.innerText = firstNumber.toString();
+      secondNumber = Math.floor(Math.random() * (firstNumber / 2)) + 1; // ensure secondNumber is smaller
       secondNumRef.current.innerText = secondNumber.toString();
-      singleAnswer = result + secondNumber;
-      validAnswers.add(singleAnswer);
-      console.log("2validtask ", validAnswers);
-      starValues = generateStarValues(validAnswers);
-      console.log("starvalues to add ", starValues);
+      result = firstNumber - secondNumber;
+      starValues = generateStarValues(result);
       addValuesToStars(starValues);
-      //starValues = generateStarValues([...validAnswers]);
-      //addValuesToStars(starValues);
       break;
     case "×":
       let a = Math.floor(Math.random() * 2 + 1); //choose number 1 or 2 randomly
@@ -194,28 +201,31 @@ export function generateEqYr3() {
         result = multDiv * maxMul;
         resultNumRef.current.innerText = result.toString();
         if (secondNumRef.current) {
-          secondNumRef.current.innerHTML = multDiv.toString();
+          secondNumRef.current.innerHTML = maxMul.toString();
         } else {
           console.error("secondNumRef.current is undefined!");
         }
-        singleAnswer = maxMul;
-        validAnswers.add(singleAnswer);
-        console.log("2valid answers are: ", validAnswers);
-        starValues = generateStarValues(validAnswers);
-        console.log("starvalues to add ", starValues);
+
+        //removing the permission of dragging an element over from result to Num
+        resultNum.classList.remove("dropIt");
+        firstNum.classList.add("dropIt");
+        secondNum.classList.remove("dropIt");
+        starValues = generateStarValues(multDiv);
         addValuesToStars(starValues);
         //starValues = generateStarValues([...validAnswers]);
       } else {
-        // to generate an equation in the form _ * _ = 18
+        // to generate an equation in the form 6 * 3 = _
+        //regaining the permission of dragging an element over from result to Num
+        resultNum.classList.add("dropIt");
+        firstNum.classList.remove("dropIt");
+        secondNum.classList.remove("dropIt");
+
+        firstNumber = multDiv;
+        secondNumber = maxMul;
+        firstNumRef.current.innerText = firstNumber.toString();
+        secondNumRef.current.innerText = secondNumber.toString();
         result = multDiv * maxMul;
-        resultNumRef.current.innerText = result.toString();
-        let pairs = getFactorPairs(result);
-        for (let value of pairs) {
-          validAnswers.add(value);
-        }
-        console.log("2valid answers are: ", validAnswers);
-        starValues = generateStarValues(validAnswers);
-        console.log("starvalues to add ", starValues);
+        starValues = generateStarValues(result);
         addValuesToStars(starValues);
         //starValues = generateStarValues([...validAnswers]);
       }
@@ -224,152 +234,78 @@ export function generateEqYr3() {
     case "÷":
       let b = Math.floor(Math.random() * 2 + 1); //choose number 1 or 2 randomly
       if (b === 1) {
+        //removing the permission of dragging an element over from result to Num
+        resultNum.classList.remove("dropIt");
+        firstNum.classList.remove("dropIt");
+        secondNum.classList.add("dropIt");
         //to generate an equation in the form 20 / _ = 5
         let temp = multDiv * maxMul;
         firstNumRef.current.innerHTML = temp.toString();
         resultNumRef.current.innerText = multDiv.toString();
-        singleAnswer = maxMul;
-        validAnswers.add(singleAnswer);
-        console.log("2valid answers are: ", validAnswers);
-        starValues = generateStarValues(validAnswers);
-        console.log("starvalues to add ", starValues);
+        starValues = generateStarValues(maxMul);
         addValuesToStars(starValues);
-        //starValues = generateStarValues([...validAnswers]);
       } else {
-        // to generate an equation in the form _ / _ = 18
-        result = maxMul;
-        resultNumRef.current.innerText = result.toString();
-        let pairs = getFactorPairsDiv(result);
-        for (let value of pairs) {
-          validAnswers.add(value);
-        }
-        starValues = generateStarValues(validAnswers);
-        console.log("2valid answers are: ", validAnswers);
-        console.log("starvalues to add ", starValues);
+        //regaining the permission of dragging an element over from result to Num
+        resultNum.classList.add("dropIt");
+        firstNum.classList.remove("dropIt");
+        secondNum.classList.remove("dropIt");
+        // to generate an equation in the form 18 / 3 = _
+        result = multDiv * maxMul;
+        firstNumber = result;
+        secondNumber = multDiv;
+        firstNumRef.current.innerText = firstNumber.toString();
+        secondNumRef.current.innerText = secondNumber.toString();
+        starValues = generateStarValues(maxMul);
         addValuesToStars(starValues);
-        //starValues = generateStarValues([...validAnswers]);
-        //console.log(starValues + "these are star values");
       }
-      //addValuesToStars(starValues);
       break;
   }
-}
-
-//returns factors of a number -- used in multiply
-function getFactorPairs(result) {
-  let factorPairs = [];
-  for (let i = 1; i <= Math.sqrt(result); i++) {
-    if (result % i === 0) {
-      let pair = [i, result / i];
-      //ensuring the pairs are ascending
-      if (pair[0] > pair[1]) {
-        pair = [pair[1], pair[0]];
-      }
-
-      if (i === result / i) {
-        //perfect square so only one pair is added
-        factorPairs.push(pair);
-      } else {
-        factorPairs.push(pair);
-      }
-    }
-  }
-
-  // factor pairs code
-  if (factorPairs.length < 3) return factorPairs;
-
-  //fisher-yates shuffle to randomise the array
-  for (let i = factorPairs.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [factorPairs[i], factorPairs[j]] = [factorPairs[j], factorPairs[i]];
-  }
-
-  console.log("factor pairs choice set div ", factorPairs.toString());
-
-  let finalChoiceSet = new Set(
-    [factorPairs[0], factorPairs[1], factorPairs[2]].flat()
-  );
-
-  console.log("final choice set div ", finalChoiceSet);
-
-  return finalChoiceSet;
-}
-
-////returns possible results of a number -- used in divide
-function getFactorPairsDiv(result) {
-  let factorPairs = [];
-  for (let i = 1; i <= 12; i++) {
-    //checking possible divisors
-    factorPairs.push([i * result, i]);
-  }
-
-  if (factorPairs.length < 3) return factorPairs;
-
-  //fisher-yates shuffle to randomise the array
-  for (let i = factorPairs.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [factorPairs[i], factorPairs[j]] = [factorPairs[j], factorPairs[i]];
-  }
-
-  let finalChoiceSet = new Set(
-    [factorPairs[0], factorPairs[1], factorPairs[2]].flat()
-  );
-
-  console.log("final choice set div ", finalChoiceSet);
-
-  console.log("factor pairs choice set div ", factorPairs.toString());
-
-  return finalChoiceSet;
 }
 
 //change the numbers on the small stars, dependent on the valid answers
 //and generate some false star numbers
 
-function generateStarValues(validAnswersArray) {
-  let fakeAnswers = new Set();
+//change the numbers on the small stars, dependent on the valid answers
+//and generate some false star numbers
 
-  //find max/min value in array
-  let maxVal = Math.max(...validAnswersArray);
-  let minVal = Math.min(...validAnswersArray);
-  console.log(maxVal);
-  console.log(minVal);
+function generateStarValues(answer) {
+  let allValues = new Set();
 
   let numberOfStars = starRefs.current.length;
-  console.log("number of stars", numberOfStars);
-  console.log("valid answer array", validAnswersArray);
 
   //generating fake answers
-  while (fakeAnswers.size < numberOfStars - validAnswersArray.size) {
+  while (allValues.size < numberOfStars - 1) {
     //to generate a 50% chance a number is above max
     let randomCondition = Math.random();
     let fakeAnswer;
 
     if (randomCondition < 0.33) {
       // generate a number less than min
-      fakeAnswer = Math.floor(Math.random() * 50) + minVal - 50;
+      fakeAnswer = Math.floor(Math.random() * 50) + answer - 50;
 
       //ensuring fakeAnswer is not less than 0
       if (fakeAnswer < 0) {
-        fakeAnswer = Math.floor(Math.random() * (minVal - 1));
+        fakeAnswer = Math.floor(Math.random() * (answer - 1));
       }
     } else if (randomCondition < 0.66) {
       // generate a number between min and max
-      fakeAnswer = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+      fakeAnswer = Math.floor(Math.random() * (answer - answer + 1)) + answer;
     } else {
       //generate a fake answer greater than max
-      fakeAnswer = Math.floor(Math.random() * 50) + maxVal + 1;
+      fakeAnswer = Math.floor(Math.random() * 50) + answer + 1;
     }
-    console.log("fake answer");
-    if (!validAnswersArray.has(fakeAnswer) && fakeAnswer > 0) {
-      fakeAnswers.add(fakeAnswer);
+
+    if (fakeAnswer != answer && fakeAnswer > 0) {
+      allValues.add(fakeAnswer);
     }
   }
 
-  //converting the set to an array
-  const allAnswers = [...fakeAnswers, ...validAnswersArray];
+  //adding actual answer to fakeanswers
+  allValues.add(answer);
 
-  let shuffleAnswers = shuffleArray(allAnswers);
-  console.log("shuffle answes", shuffleAnswers);
+  //converting the set to an array
+  const allAnswers = [...allValues];
+
   return shuffleArray(allAnswers);
 }
 
@@ -413,7 +349,10 @@ provide visual feedback - red */
 export function checkEquation(changeToEndScreen) {
   //return true or false
   let firstNumber = parseInt(firstNumRef.current.innerHTML);
-  let secondNumber = parseInt(secondNumRef.current.innerHTML);
+  let secondNumber;
+  if (secondNumRef.current) {
+    secondNumber = parseInt(secondNumRef.current.innerHTML);
+  }
   let result = parseInt(resultNumRef.current.innerHTML);
   let operator = operatorRef.current.innerHTML.trim();
   let numerator = parseInt(numeratorRef.current.innerHTML);
@@ -444,30 +383,37 @@ export function checkEquation(changeToEndScreen) {
     if (numerator > denominator) {
       //end game
       //switch to different screen
+      numeratorRef.current.innerHTML = numerator.toString();
       console.log("Changing to End Screen...g");
       changeToEndScreen();
       console.log("Changing to End Screen...a");
-      return;
+      return "end";
     } else {
       retry = 0;
       points += pointIncrease;
       //clear operand stars
+      resultNumRef.current.innerHTML = "";
       secondNumRef.current.innerHTML = "";
       firstNumRef.current.innerHTML = "";
       pointRef.current.innerHTML = points.toString();
       numeratorRef.current.innerHTML = numerator.toString();
       generateEqYr3();
+      return "correct";
     }
   } else if (retry < 2) {
     //retry
     retry++;
+    return "retry";
   } else {
     //reveal answer and move on
     retry = 0;
+    //clear operand stars
+    resultNumRef.current.innerHTML = "";
     secondNumRef.current.innerHTML = "";
     firstNumRef.current.innerHTML = "";
     numerator++;
     numeratorRef.current.innerHTML = numerator.toString();
     generateEqYr3();
+    return "wrong";
   }
 }

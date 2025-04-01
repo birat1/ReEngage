@@ -1,6 +1,6 @@
 import React from "react";
-import StarMathGame from "./StarMath-Game";
-import "./GameContainer.css";
+import StarMathGame from "../StarMath-Game";
+import "../GameContainer.css";
 
 const GameContainer = () => {
   return (

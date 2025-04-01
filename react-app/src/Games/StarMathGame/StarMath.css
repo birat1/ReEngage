@@ -1,6 +1,6 @@
 .star-math-container {
-  font-family: 'Exo 2', sans-serif;
-  background-image: url("moonbackground.jpg");
+  font-family: "Exo 2", sans-serif;
+  background-image: url("./images/moonbackground.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -11,18 +11,44 @@
 
 /*TitleScreen*/
 
-#titleScreen, #yrChoices, #mainGame, #howToPlay, #qChoices, #diffChoices, #endScreen {
+#titleScreen,
+#yrChoices,
+#mainGame,
+#howToPlay,
+#qChoices,
+#diffChoices,
+#endScreen,
+#retryResp,
+#correctResp,
+#wrongResp {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-#titleScreen.hidden, #yrChoices.hidden, #mainGame.hidden, #qChoices.hidden, #howToPlay.hidden, #diffChoices.hidden, #endScreen.hidden {
+#titleScreen.hidden,
+#yrChoices.hidden,
+#mainGame.hidden,
+#qChoices.hidden,
+#howToPlay.hidden,
+#diffChoices.hidden,
+#endScreen.hidden,
+#retryResp.hidden,
+#correctResp.hidden,
+#wrongResp.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
-#mainGame.visible, #howToPlay.visible, #yrChoices.visible, #qChoices.visible, #diffChoices.visible, #endScreen.visible {
+#mainGame.visible,
+#howToPlay.visible,
+#yrChoices.visible,
+#qChoices.visible,
+#diffChoices.visible,
+#endScreen.visible,
+#retryResp.visible,
+#correctResp.visible,
+#wrongResp.visible {
   display: block;
 }
 
@@ -37,7 +63,7 @@
   top: 0;
   left: 1%;
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   font-size: 2.5vw;
   margin-top: 15vh;
   pointer-events: auto;
@@ -70,8 +96,8 @@
   height: auto;
 }
 
-
-#yrChoices, #diffChoices {
+#yrChoices,
+#diffChoices {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -85,7 +111,8 @@
   align-items: center;
 }
 
-#yrChoices p, #diffChoices p {
+#yrChoices p,
+#diffChoices p {
   color: aliceblue;
   font-size: 45px;
 }
@@ -100,7 +127,7 @@
   cursor: pointer;
   border-radius: 10px;
   margin: 5px;
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   border-color: aliceblue;
   border-style: solid;
   border-width: 2.5px;
@@ -113,12 +140,12 @@
 }
 
 .titleImg {
-  position:absolute;
+  position: absolute;
   width: 85%;
   height: 60vh;
   left: 8%;
   top: 0%;
-  background-image: url("game_title2.png");
+  background-image: url("images/game_title2.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -151,7 +178,7 @@
   font-size: 3vw;
   cursor: pointer;
   border-radius: 10px;
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   border-color: aliceblue;
   border-style: solid;
   border-width: 2.5px;
@@ -178,7 +205,7 @@
   border-style: solid;
   border-width: 2.5px;
   color: aliceblue;
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   z-index: 2;
 }
 
@@ -196,7 +223,7 @@
   border-radius: 50%;
   height: 2rem;
   width: 2rem;
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
 }
 
 .HTPBtn-M {
@@ -205,7 +232,6 @@
   right: 1%;
   font-size: 1.5vw;
 }
-
 
 /*draggable elements*/
 
@@ -218,7 +244,7 @@
   min-width: 90px;
   height: 90px;
   aspect-ratio: 1 / 1;
-  background-image: url("star.png");
+  background-image: url("images/star.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -295,7 +321,6 @@
   padding: 0;
   position: absolute;
   top: 75%;
-  left: 39%;
   background-color: #2287b6;
   color: aliceblue;
   border: none;
@@ -304,7 +329,7 @@
   font-size: 2vw;
   cursor: pointer;
   border-radius: 10px;
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   border-color: aliceblue;
   border-style: solid;
   border-width: 2.5px;
@@ -316,13 +341,13 @@
   color: #2287b6;
 }
 
-.dropIt {
+.operandStars {
   width: 28vw;
   max-width: 300px;
   min-width: 130px;
   height: auto;
   aspect-ratio: 1 / 1;
-  background-image: url("star.png");
+  background-image: url("images/star.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -347,7 +372,7 @@
   min-width: 150px;
   height: auto;
   aspect-ratio: 1 / 1;
-  background-image: url("star.png");
+  background-image: url("images/star.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -361,7 +386,8 @@
 
 /*game points and equations*/
 
-.gamePoints, .numQuestions {
+.gamePoints,
+.numQuestions {
   font-size: 2vw;
   font-weight: bold;
   color: aliceblue;
@@ -374,7 +400,8 @@
   padding: 0;
 }
 
-.gamePoints2, .numQuestions2 {
+.gamePoints2,
+.numQuestions2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -393,11 +420,49 @@
   right: 20px;
 }
 
+.correctResponse,
+.wrongResponse,
+.retryResponse {
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  width: auto;
+  white-space: nowrap;
+  top: 15px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  padding: 15px;
+  border-radius: 50px 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2.5px;
+  color: aliceblue;
+}
+
+.correctResponse {
+  background: rgba(26, 188, 156, 0.636);
+  border-color: #1abc9c;
+}
+
+.retryResponse {
+  background: rgba(255, 166, 0, 0.664);
+  border-color: #ffa600b0;
+}
+
+.wrongResponse {
+  background: hsla(348, 78%, 53%, 0.662);
+  border-color: #e52b50;
+}
+
 /*
 #mainGame {
   transform: translate(-5%, 50%);
 }*/
-
 
 /*
 adjusting for smaller screens
@@ -413,5 +478,3 @@ adjusting for smaller screens
         background-repeat: repeat-y;
         }
 }*/
-
-

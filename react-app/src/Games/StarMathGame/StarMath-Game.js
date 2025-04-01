@@ -6,13 +6,13 @@ import {
   changeDenominator,
   difficultyChoice,
   checkEquation,
-} from "./game-logic";
+} from "./components/game-logic";
 import {
   positionEquation,
   positionStars,
   intialiseDragAndDrop,
   setupClickSounds,
-} from "./main";
+} from "./components/main";
 
 function StarMathGame() {
   const [showTitleScreen, setShowTitleScreen] = useState(true);
@@ -22,6 +22,10 @@ function StarMathGame() {
   const [showQuestionChoices, setQuestionChoices] = useState(false);
   const [showDifficulty, setDifficulty] = useState(false);
   const [showEndScreen, setEndScreen] = useState(false);
+  const [showWrongResponse, setWrongResponse] = useState(false);
+  const [showCorrectResponse, setCorrectResponse] = useState(false);
+  const [showRetryResponse, setRetryResponse] = useState(false);
+
   const [yearG, setYearG] = useState("");
   const operatorRef = useRef(null);
   const firstNumRef = useRef(null);
@@ -30,6 +34,9 @@ function StarMathGame() {
   const numeratorRef = useRef(null);
   const denominatorRef = useRef(null);
   const pointRef = useRef(null);
+  const correctRef = useRef(null);
+  const wrongRef = useRef(null);
+  const retryRef = useRef(null);
   const starRefs = useRef([]);
 
   //removes title screen and reveals the next screen - yr group choices
@@ -72,8 +79,41 @@ function StarMathGame() {
 
   const changeToEndScreen = () => {
     console.log("Changing to End Screen...");
-    setShowMainGame(false);
+
+    setTimeout(() => {
+      setShowMainGame(false);
+    }, 3000);
+
     setEndScreen(true);
+  };
+
+  //controls the wrong, correct and retry response
+  const toggleWrongResponse = () => {
+    setRetryResponse(false);
+    setWrongResponse(true);
+
+    setTimeout(() => {
+      setWrongResponse(false);
+    }, 3000);
+  };
+
+  const toggleCorrectResponse = () => {
+    setWrongResponse(false);
+    setCorrectResponse(true);
+
+    setTimeout(() => {
+      setCorrectResponse(false);
+    }, 3000);
+  };
+
+  const toggleRetryResponse = () => {
+    setCorrectResponse(false);
+    setWrongResponse(false);
+    setRetryResponse(true);
+
+    setTimeout(() => {
+      setRetryResponse(false);
+    }, 3000);
   };
 
   // intialises the main game
@@ -95,7 +135,10 @@ function StarMathGame() {
         numeratorRef,
         pointRef,
         denominatorRef,
-        starRefs
+        starRefs,
+        correctRef,
+        wrongRef,
+        retryRef
       );
 
       window.addEventListener("resize", () => {
@@ -149,6 +192,24 @@ function StarMathGame() {
       console.log("Changing to End Screen...u");
     }
   }, [showEndScreen]);
+
+  useEffect(() => {
+    if (showCorrectResponse) {
+      setupClickSounds();
+    }
+  }, showCorrectResponse);
+
+  useEffect(() => {
+    if (showWrongResponse) {
+      setupClickSounds();
+    }
+  }, showCorrectResponse);
+
+  useEffect(() => {
+    if (showCorrectResponse) {
+      setupClickSounds();
+    }
+  }, showRetryResponse);
 
   return (
     <div className="star-math-container">
@@ -284,10 +345,11 @@ function StarMathGame() {
               )
             )}
           </div>
+
           {/* the equation, points and no. of questions solved elements */}
           <div id="theEquation">
             <div className="mainEquation">
-              <div className="dropIt">
+              <div className="operandStars operand1">
                 <p id="firstNumber" ref={firstNumRef}></p>
               </div>
               <p
@@ -298,22 +360,36 @@ function StarMathGame() {
               >
                 +
               </p>
-              <div className="dropIt">
+              <div className="operandStars operand2">
                 <p id="secondNumber" ref={secondNumRef}></p>
               </div>
               <p id="equals" className="operands">
                 =
               </p>
-              <div className="finalNumber">
-                <p id="result" ref={resultNumRef}>
-                  0
-                </p>
+              <div className="finalNumber dropIt">
+                <p id="result" ref={resultNumRef}></p>
               </div>
               <button
                 type="button"
                 className="check"
                 id="checkEq"
-                onClick={() => checkEquation(() => changeToEndScreen())}
+                onClick={() => {
+                  const result = checkEquation(() => changeToEndScreen());
+                  let retry = 0;
+                  if (result === "correct") {
+                    retry = 0;
+                    toggleCorrectResponse();
+                  } else if (result === "retry") {
+                    retry++;
+                    if (retryRef.current && retry == 1) {
+                      retryRef.current.innerHTML = "Not quite, try once more!";
+                    }
+                    toggleRetryResponse();
+                  } else if (result === "wrong") {
+                    retry = 0
+                    toggleWrongResponse();
+                  }
+                }}
               >
                 Check
               </button>
@@ -329,7 +405,7 @@ function StarMathGame() {
 
               <div className="numQuestions" id="numQuestions">
                 <div className="numQuestions2">
-                  <p>Questions: </p>
+                  <p>Question: </p>
                   <p id="numerator" ref={numeratorRef}>
                     1
                   </p>
@@ -339,6 +415,29 @@ function StarMathGame() {
                   </p>
                 </div>
               </div>
+
+              {/* Correct answer response */}
+              {showCorrectResponse && (
+                <div id="correctResp" className="correctResponse">
+                  <p id="correctResponse2" ref={correctRef}>
+                    Correct answer, well done!
+                  </p>
+                </div>
+              )}
+
+              {/* Retry answer response */}
+              {showRetryResponse && (
+                <div id="retryResp" className="retryResponse">
+                  <p id="retryResponse2" ref={retryRef}>Not quite, give it another go!</p>
+                </div>
+              )}
+
+              {/* Wrong answer response */}
+              {showWrongResponse && (
+                <div id="wrongResp" className="wrongResponse">
+                  <p id="wrongResponse2" ref={wrongRef}>Nice effort, but the correct answer is </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -347,7 +446,7 @@ function StarMathGame() {
       {/* end game screen */}
       {showEndScreen && (
         <div className="endScreen" id="endScreen">
-          <h2 style={{color: 'aliceblue'}}>End game screen</h2>
+          <h2 style={{ color: "aliceblue" }}>End game screen</h2>
         </div>
       )}
     </div>
