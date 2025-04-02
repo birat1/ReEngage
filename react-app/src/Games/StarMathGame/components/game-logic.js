@@ -16,6 +16,8 @@ let wrongRef = "";
 let retryRef = "";
 let starRefs = new Set();
 let retry = 0;
+let thisIsTheEnd = 0;
+let answer = 0;
 
 //so just retrieving the choice options for year group, difficulty, and questionCount
 
@@ -46,18 +48,21 @@ export function yrGroupSorter(
   retryRef = retryRef2;
   switch (year) {
     case "Year 3":
-      generateEqYr3();
-      yearGroup = "Year 3";
+      yearGroup = "Year3";
       console.log(yearGroup + " yearGroup");
+      answer = generateEquation();
       break;
     case "Year 4":
-      yearGroup = "Year 4";
+      yearGroup = "Year4";
+      answer = generateEquation();
       break;
     case "Year 5":
-      yearGroup = "Year 5";
+      yearGroup = "Year5";
+      answer = generateEquation();
       break;
     case "Year 6":
-      yearGroup = "Year 6";
+      yearGroup = "Year6";
+      answer = generateEquation();
       break;
   }
 }
@@ -103,39 +108,50 @@ export function changeDenominator() {
   }
 }
 
+
+//decides year group and difficulty chosen by user
+const yearSettings = {
+  Year3: {
+    Easy: { multDivNum3: [2, 5, 10], range: [10, 300] },
+    Medium: { multDivNum3: [2, 3, 4, 5, 10], range: [10, 600] },
+    Hard: { multDivNum3: [2, 3, 4, 5, 8, 10], range: [10, 999] }
+  },
+  Year4: {
+    Easy: { multDivNum3: [2, 3, 4, 5, 8, 10], range: [10, 3000] },
+    Medium: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11], range: [10, 6000] },
+    Hard: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], range: [10, 9999] }
+  },
+  Year5: {
+    Easy: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 30000] },
+    Medium: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 60000] },
+    Hard: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 99999] }
+  },
+  Year6: {
+    Easy: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 100000] },
+    Medium: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 250000] },
+    Hard: { multDivNum3: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100], range: [10, 500000] }
+  },
+};
+
 //GENERATING EQUATIONS
-export function generateEqYr3() {
-  let twoOrThreeDigit = 0;
-  let twoDigit = Math.floor(Math.random() * 99 + 10);
-  let oneDigit = Math.floor(Math.random() * 9 + 1);
+export function generateEquation() {
+  let twoOrMoreDigit = 0;
+  let answer;
+  let twoOrMoreDigit2 = 0;
   let maxMul = Math.floor(Math.random() * 12 + 1);
   let multDivNum3 = [];
   let result = 0;
   let secondNumber = 0;
   let firstNumber = 0;
-  let singleAnswer = 0;
-  let validAnswers = new Set();
   let starValues = new Set();
+  
 
-  //I may combine two and three digits
+  const settings = yearSettings[yearGroup][difficulty];
+  multDivNum3 = settings.multDivNum3;
+  const range = settings.range;
 
-  //checking the diffculty and setting variable/const based on that
-  switch (difficulty) {
-    case "Easy":
-      multDivNum3 = [2, 5, 10, 50];
-      // generates random number between 10 and 300 inclusive
-      twoOrThreeDigit = Math.floor(Math.random() * (300 - 10 + 1)) + 10;
-      break;
-    case "Medium":
-      multDivNum3 = [2, 3, 4, 5, 8, 10, 50, 100];
-      twoOrThreeDigit = Math.floor(Math.random() * (600 - 10 + 1)) + 10;
-
-      break;
-    case "Hard":
-      multDivNum3 = [2, 3, 4, 5, 6, 8, 10, 50, 100];
-      twoOrThreeDigit = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
-      break;
-  }
+  twoOrMoreDigit = Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
+  twoOrMoreDigit2 = Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
 
   //intialising the index for divide and multiply operators for random choice
   let multDivNum3Idx = Math.floor(Math.random() * multDivNum3.length);
@@ -164,20 +180,12 @@ export function generateEqYr3() {
       resultNum.classList.add("dropIt");
       firstNum.classList.remove("dropIt");
       secondNum.classList.remove("dropIt");
-      console.log("+ has run");
-      firstNumber = twoOrThreeDigit;
-      secondNumber =
-        Math.floor(
-          Math.random() *
-            (difficulty === "Easy"
-              ? 300
-              : difficulty === "Medium"
-              ? 600
-              : 999 - 10 + 1)
-        ) + 10;
+      firstNumber = twoOrMoreDigit;
+      secondNumber = twoOrMoreDigit2;
       firstNumRef.current.innerText = firstNumber.toString();
       secondNumRef.current.innerText = secondNumber.toString();
       result = firstNumber + secondNumber;
+      answer = result;
       starValues = generateStarValues(result);
       addValuesToStars(starValues);
       break;
@@ -186,11 +194,12 @@ export function generateEqYr3() {
       resultNum.classList.add("dropIt");
       firstNum.classList.remove("dropIt");
       secondNum.classList.remove("dropIt");
-      firstNumber = twoOrThreeDigit;
+      firstNumber = twoOrMoreDigit;
       firstNumRef.current.innerText = firstNumber.toString();
       secondNumber = Math.floor(Math.random() * (firstNumber / 2)) + 1; // ensure secondNumber is smaller
       secondNumRef.current.innerText = secondNumber.toString();
       result = firstNumber - secondNumber;
+      answer = result;
       starValues = generateStarValues(result);
       addValuesToStars(starValues);
       break;
@@ -210,6 +219,7 @@ export function generateEqYr3() {
         resultNum.classList.remove("dropIt");
         firstNum.classList.add("dropIt");
         secondNum.classList.remove("dropIt");
+        answer = multDiv;
         starValues = generateStarValues(multDiv);
         addValuesToStars(starValues);
         //starValues = generateStarValues([...validAnswers]);
@@ -219,12 +229,12 @@ export function generateEqYr3() {
         resultNum.classList.add("dropIt");
         firstNum.classList.remove("dropIt");
         secondNum.classList.remove("dropIt");
-
         firstNumber = multDiv;
         secondNumber = maxMul;
         firstNumRef.current.innerText = firstNumber.toString();
         secondNumRef.current.innerText = secondNumber.toString();
         result = multDiv * maxMul;
+        answer = result;
         starValues = generateStarValues(result);
         addValuesToStars(starValues);
         //starValues = generateStarValues([...validAnswers]);
@@ -240,6 +250,7 @@ export function generateEqYr3() {
         secondNum.classList.add("dropIt");
         //to generate an equation in the form 20 / _ = 5
         let temp = multDiv * maxMul;
+        answer = maxMul;
         firstNumRef.current.innerHTML = temp.toString();
         resultNumRef.current.innerText = multDiv.toString();
         starValues = generateStarValues(maxMul);
@@ -253,6 +264,7 @@ export function generateEqYr3() {
         result = multDiv * maxMul;
         firstNumber = result;
         secondNumber = multDiv;
+        answer = maxMul;
         firstNumRef.current.innerText = firstNumber.toString();
         secondNumRef.current.innerText = secondNumber.toString();
         starValues = generateStarValues(maxMul);
@@ -260,6 +272,8 @@ export function generateEqYr3() {
       }
       break;
   }
+
+  return answer;
 }
 
 //change the numbers on the small stars, dependent on the valid answers
@@ -336,19 +350,10 @@ function addValuesToStars(starValues) {
 }
 
 //this will check if the player's answer is correct
-/*
-retrieve the numbers from the operand variables
-perform the equation calculation using the stored operator
-compare the calculated result to the displayed result
-if the answer correct:
-increment the correct answer count
-provide visual feedback - green checkmark
-if the answer incorrect:
-provide visual feedback - red */
-//then advance onto the next question
-export function checkEquation(changeToEndScreen) {
+export function checkEquation(changeToEndScreen, toggleCorrect, toggleWrong, toggleRetry) {
   //return true or false
-  let firstNumber = parseInt(firstNumRef.current.innerHTML);
+  if (thisIsTheEnd != 1) {
+     let firstNumber = parseInt(firstNumRef.current.innerHTML);
   let secondNumber;
   if (secondNumRef.current) {
     secondNumber = parseInt(secondNumRef.current.innerHTML);
@@ -378,42 +383,73 @@ export function checkEquation(changeToEndScreen) {
 
   //checking if answer is correct
   if (leftEquation === result) {
-    //correct
+    //correct answer
     numerator++;
-    if (numerator > denominator) {
-      //end game
-      //switch to different screen
-      numeratorRef.current.innerHTML = numerator.toString();
-      console.log("Changing to End Screen...g");
-      changeToEndScreen();
-      console.log("Changing to End Screen...a");
-      return "end";
-    } else {
-      retry = 0;
-      points += pointIncrease;
-      //clear operand stars
-      resultNumRef.current.innerHTML = "";
-      secondNumRef.current.innerHTML = "";
-      firstNumRef.current.innerHTML = "";
-      pointRef.current.innerHTML = points.toString();
-      numeratorRef.current.innerHTML = numerator.toString();
-      generateEqYr3();
-      return "correct";
-    }
-  } else if (retry < 2) {
-    //retry
-    retry++;
-    return "retry";
-  } else {
-    //reveal answer and move on
     retry = 0;
-    //clear operand stars
+    points += pointIncrease;
+
+    //end game - switch to different screen
+    if (numerator > denominator) {
+      thisIsTheEnd++;
+      toggleCorrect();
+      removeCheckButtonListenser();
+      pointRef.current.innerHTML = points.toString();
+      changeToEndScreen();
+      return "end";
+    }
+
+    pointRef.current.innerHTML = points.toString();
+    toggleCorrect();
+    setTimeout(() => {
+       //continue to next question & clear operand stars
     resultNumRef.current.innerHTML = "";
     secondNumRef.current.innerHTML = "";
     firstNumRef.current.innerHTML = "";
-    numerator++;
+    answer = generateEquation();
     numeratorRef.current.innerHTML = numerator.toString();
-    generateEqYr3();
-    return "wrong";
+    }, 2500);
+    return "correct";
+  }
+
+  if (retry < 1) {
+    //retry
+    retry++;
+    toggleRetry();
+    return "retry";
+  }
+
+  //reveal answer and move on
+  retry = 0;
+  numerator++;
+
+  //check if game should end again
+  if (numerator > denominator) {
+    toggleWrong(answer);
+    removeCheckButtonListenser();
+    changeToEndScreen();
+    return "end";
+  }
+
+  toggleWrong(answer);
+
+  setTimeout(() => {
+    //clear operand stars
+  resultNumRef.current.innerHTML = "";
+  secondNumRef.current.innerHTML = "";
+  firstNumRef.current.innerHTML = "";
+  answer = generateEquation();
+  numeratorRef.current.innerHTML = numerator.toString();
+  }, 2500);
+  return {response: "wrong", answer: answer};
+  }
+ 
+}
+
+//set checkbutton onclick to null
+export function removeCheckButtonListenser() {
+  const checkButton = document.getElementById("checkEq");
+  if (checkButton) {
+    checkButton.onClick = null;
+
   }
 }

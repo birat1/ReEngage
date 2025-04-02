@@ -1,5 +1,4 @@
 import StarMathGame from "./Games/StarMathGame/StarMath-Game.js";
-import GameContainer from "./Games/StarMathGame/components/testing-game-container.js";
 import StartGame from "./Games/Fill-itFish/MainGame.js";
 import LabWars from "./Games/LabWars/LabWars.js";
 import Home from "./pages/Home.js";
@@ -11,15 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/starmath"
-          /*element={
-                <GameContainer>
-                  <StarMathGame />
-                </GameContainer>
-              }*/
-          element={<StarMathGame />}
-        />
+        <Route path="/starmath" element={<StarMathGame />} />
         <Route path="/fill-itfish" element={<StartGame />} />
         <Route path="/lab-wars" element={<LabWars />} />
       </Routes>
