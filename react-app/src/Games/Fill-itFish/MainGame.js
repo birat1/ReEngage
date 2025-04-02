@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './FillitFish.css';
 
 // implement text to speech api: click the fish head to hear it
-// wrong choice screen
-// skip button that tells your the answer before moving on to the next round
 
 function Choices({ text, choices = [], onSelect }) { // shws text and buttons
   return ( // if there is text, show it
@@ -75,19 +73,22 @@ export default function TitleScreen() { // screen user sees before playing the g
       {isOpen && <button onClick={handleSelect} className="center-btn btn">Start</button>} 
       {isOpen && <button onClick={handleHelp} className="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
       {showTransitionScreen && <TransitionScreen audio={audio}/>}
-      {showHelpScreen && <HelpScreen onClose={closeHelpScreen} />}
+      {showHelpScreen && <MiniScreen onClose={closeHelpScreen} text={[
+        "Help reassemble the fish by filling in the gaps to complete the word based on the definition given.",
+        <br key="br1" />,
+        //<br key="br2" />,
+        "Click on the fish's head for a clue!"
+      ]} />}
     </div>
   );
 }
 
-function HelpScreen({ onClose }) {
+function MiniScreen({ onClose, text }) { // a mini pop up screen
   return (
-    <div className="helpWindow">
+    <div className="miniWindow">
       <button className="close-btn btn" onClick={onClose}>x</button>
-      <p className="helpText" style={{ height: "30%" }}>
-        Help reassemble the fish by filling in the gaps to complete the word based on the definition given.
-        <br /><br />
-        Click on the fish's head for a clue!
+      <p className="helpText" style={{ height: "20%" }}>
+        {text}
       </p>
     </div>
   );
@@ -99,18 +100,25 @@ function TransitionScreen({audio}) {
   const [score, setScore] = useState(0);
   const [usedWords, setUsedWords] = useState([]);
 
+  function handleNextRound(increaseScore) {
+    setRoundsLeft(roundsLeft - 1);
+    if (increaseScore) {
+      setScore(prevScore => prevScore + 1);
+    }
+  }
+
   return (
     <div>
       {!selectedYear ? (
         <ChooseYear onSelect={setSelectedYear} />
       ) : roundsLeft > 0 ? (
         <Round 
-          key={roundsLeft} // This forces re-mounting when roundsLeft changes
+          key={roundsLeft} // forces re-mounting when roundsLeft changes
           wordBank={parseInt(selectedYear.split(" ")[1])}
           numLeft={roundsLeft}
-          usedWords={usedWords} // ✅ Pass usedWords
-          setUsedWords={setUsedWords} // ✅ Allow Round to update usedWords
-          onNextRound={() => {setRoundsLeft(roundsLeft - 1); setScore(score + 1)}}
+          usedWords={usedWords} // pass usedWords
+          setUsedWords={setUsedWords} // update usedWords
+          onNextRound={handleNextRound} 
         />
       ) : (
         <Finish 
@@ -121,7 +129,6 @@ function TransitionScreen({audio}) {
     </div>
   );
 }
-
 
 function ChooseYear({ onSelect }) {
   function handleSelect(choice) {
@@ -144,7 +151,25 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
   const [hiddenWord, setHiddenWord] = useState(""); // the partially hidden word displayed to user
   const [hiddenIndexes, setHiddenIndexes] = useState([]); // indexes for each character hidden in hidden word
   const [isRoundComplete, setIsRoundComplete] = useState(false);
-  //const [usedWords, setUsedWords] = useState([]); // ✅ Store words that were already used
+  const [showWrongScreen, setShowWrongScreen] = useState(false); // controls help screen visibility
+  const [showSkipScreen, setShowSkipScreen] = useState(false);
+
+  function handleSkip() {
+    setShowSkipScreen(true);
+  }
+
+  function closeSkipScreen() {
+    setShowWrongScreen(false);
+    onNextRound(false);
+  }
+
+  function closeWrongScreen() {
+    setShowWrongScreen(false);
+  }
+
+  useEffect(() => {
+    startRound(); // Auto-start the round when numLeft changes
+  }, [numLeft]);
 
   const yearArrays = { // wordbanks for each year
     3: ['accept', 'except', 'peace', 'piece', 'knot', 'not', 'reign', 'main', 'mane', 'grate'],
@@ -231,6 +256,7 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
         // Move to next round
         setIsRoundComplete(true);
       } else { 
+        setShowWrongScreen(true);
         // Reset word back to hidden version using stored hiddenIndexes
         let resetArray = word.split("").map((char, i) => 
           hiddenIndexes.includes(i) ? "_" : char
@@ -270,10 +296,6 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
     )
   }
 
-  useEffect(() => {
-    startRound(); // Auto-start the round when numLeft changes
-  }, [numLeft]);
-
   return ( // hide start round button after clicking
     <div> 
       {!isRoundComplete ? (
@@ -287,6 +309,17 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
                   choices={["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]}
                   onSelect={handleSelect}
                 />
+                {showWrongScreen && <MiniScreen onClose={closeWrongScreen} text={[
+                  <br key="br1" />,
+                  "Incorrect, try again!"
+                ]} />}
+                <button onClick={handleSkip} className="btn center-btn" style={{ top: "35%", left: "90%",padding: "0px 0px" }}>
+                  Skip
+                </button>
+                {showSkipScreen && <MiniScreen onClose={closeSkipScreen} text={[
+                  <br key="br1" />,
+                  "The word was " + word
+                ]} />}
               </>
               )}
               
@@ -295,7 +328,7 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
           <div>
             {isRoundComplete && <h1 className="icon fishhappy-icon"></h1>}
             <div className="btn-container">
-              <button onClick={onNextRound} className="btn center-btn">
+              <button onClick={() => onNextRound(true)} className="btn center-btn">
                 {numLeft > 1 ? "Next Round" : "Finish"}
               </button>
             </div>
