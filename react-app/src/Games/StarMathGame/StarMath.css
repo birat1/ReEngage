@@ -1,3 +1,46 @@
+@keyframes subtlePulseAndFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+
+@keyframes expandAndBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseAndFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .star-math-container {
   font-family: "Exo 2", sans-serif;
   background-image: url("./images/moonbackground.jpg");
@@ -26,13 +69,8 @@
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-#titleScreen.hidden,
-#yrChoices.hidden,
-#mainGame.hidden,
-#qChoices.hidden,
 #howToPlay.hidden,
 #diffChoices.hidden,
-#endScreen.hidden,
 #retryResp.hidden,
 #correctResp.hidden,
 #wrongResp.hidden {
@@ -40,6 +78,7 @@
   visibility: hidden;
 }
 
+#titleScreen.hidden,
 #mainGame.visible,
 #howToPlay.visible,
 #yrChoices.visible,
@@ -50,6 +89,28 @@
 #correctResp.visible,
 #wrongResp.visible {
   display: block;
+}
+
+#titleScreen.hidden,
+#yrChoices.hidden,
+#mainGame.hidden,
+#qChoices.hidden,
+#diffChoices.hidden,
+#endScreen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  animation: subtlePulseAndFade 0.3s ease-out forwards;
+}
+
+#mainGame.visible,
+#yrChoices.visible,
+#qChoices.visible,
+#diffChoices.visible,
+#endScreen.visible,
+#titleScreen.visible {
+  opacity: 1;
+  visibility: visible;
+  animation: subtlePulseAndFade 0.3s ease-out forwards;
 }
 
 #titleScrnComp {
@@ -195,9 +256,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  margin-top: 0px;
+  margin-left: -320px;
+  transform-origin: top left;
   background: rgb(34, 135, 182, 0.924);
-  /*0.924*/
   padding: 20px;
   border-radius: 50px 20px;
   text-align: center;
@@ -207,6 +269,11 @@
   color: aliceblue;
   font-family: "Exo 2", sans-serif;
   z-index: 2;
+  animation: expandAndBounce 0.5s ease-out forwards;
+}
+
+.htpTitle {
+  color: aliceblue;
 }
 
 .exitHTP {
@@ -257,10 +324,19 @@
 
 .smallStar {
   color: rgb(30, 118, 158);
-  font-size: 1.25vw;
+  font-size: 1vw;
   font-weight: bold;
   text-align: center;
   text-shadow: 2px 2px 4px #1e769e80;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 #smallStars {
@@ -442,6 +518,7 @@
   border-style: solid;
   border-width: 2.5px;
   color: aliceblue;
+  animation: pulseAndFade 0.5s ease-out forwards;
 }
 
 .correctResponse {
@@ -457,6 +534,19 @@
 .wrongResponse {
   background: hsla(348, 78%, 53%, 0.662);
   border-color: #e52b50;
+}
+
+#theEquation {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+#theEquation.fade-out {
+  opacity: 0;
+}
+
+#theEquation.fade-in {
+  opacity: 1;
 }
 
 /*
