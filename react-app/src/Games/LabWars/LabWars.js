@@ -6,13 +6,13 @@ import FeedbackMessage from './components/FeedbackMessage';
 import { questions } from './data/questions';
 import './LabWars.css';
 
-const BattleScene = () => (
+const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
     {/* Display the student character */}
     <div className="battle-container">
       <div className="character-name student-name">Student</div>
-      <div className="character-circle student-circle">
-        <div className="player-character">👨‍🔬</div>
+      <div className={`character-circle student-circle ${isAttacking ? 'shake' : ''}`}>
+        <div className={`player-character ${isAttacking ? 'shake' : ''}`}>👨‍🔬</div>
       </div>
     </div>
 
@@ -22,7 +22,7 @@ const BattleScene = () => (
     {/* Display the boss character */}
     <div className="battle-container">
       <div className="character-name boss-name">Science Boss</div>
-      <div className="character-circle boss-circle">
+      <div className={`character-circle boss-circle ${isBossTilting ? 'tilt' : ''}`}>
         <div className="boss-character">👾</div>
       </div>
     </div>
@@ -34,6 +34,8 @@ const LabWars = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
   const [isAnswered, setIsAnswered] = useState(false);
+  const [isAttacking, setIsAttacking] = useState(false);
+  const [isBossTilting, setIsBossTilting] = useState(false);
 
   // Check if the submitted answers are correct based on the question type
   const checkAnswer = (selectedAnswers, question) => {
@@ -57,10 +59,17 @@ const LabWars = () => {
     // Provide feedback depending on if the answer is correct or not
     if (isCorrect) {
       // TODO: Implement boss damage system
+      setIsAttacking(true);
+      setIsBossTilting(true);
       setFeedback({
         message: 'Correct! You dealt damage to the boss!',
         isCorrect: true
       });
+      // Reset the attack and tilt animations after they complete
+      setTimeout(() => {
+        setIsAttacking(false);
+        setIsBossTilting(false);
+      }, 300);
     } else {
       setFeedback({
         message: `Not quite! ${currentQ.explanation}`,
@@ -82,7 +91,7 @@ const LabWars = () => {
     <Container className="lab-wars-container">
       <h1 className="game-title">Lab Wars</h1>
       
-      <BattleScene />
+      <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
 
       <QuestionCard 
         question={questions[currentQuestion].question}

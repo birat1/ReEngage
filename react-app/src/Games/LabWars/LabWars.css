@@ -2,6 +2,7 @@
   padding: 1rem 2rem 2rem;
   background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
   min-height: 100vh;
+  min-width: 100%;
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
 }
 
@@ -131,4 +132,37 @@
   50% {
     transform: translateY(-10px);
   }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.student-circle.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.boss-circle.tilt {
+  animation: tilt 0.3s ease-in-out;
 } 
