@@ -3,17 +3,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import Maths from "./assets/Maths.png";
-import Flask from "./assets/Flask.png";
-import Book from "./assets/Open-Book.png";
-import GameCard from "../GameCard/GameCard.js";
-import "./Hero.css";
+import Maths from "../../assets/images/Maths.png";
+import Flask from "../../assets/images/Flask.png";
+import Book from "../../assets/images/Open-Book.png";
+import GameCard from "../../components/GameCard/GameCard.js";
+import Icons from "../../assets/icons.svg";
+import "./styles/Hero.css";
 
 function Hero() {
   return (
     <div className="body">
       <section>
-        <Container className="hero-section" fluid>
+        <Container className="hero-section" style={{ backgroundImage: `url(${Icons})` }} fluid>
           <Row style={{ minHeight: "40em" }}>
             <Col>
               <div>
@@ -58,6 +59,7 @@ function Hero() {
       <section>
         <Container
           className="ending-section d-flex flex-column justify-content-center align-items-center"
+          style={{ backgroundImage: `url(${Icons})` }}
           fluid
         >
           <div className="ending-content rounded d-flex flex-column justify-content-center align-items-center p-5 shadow-sm">
