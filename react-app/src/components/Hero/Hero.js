@@ -2,11 +2,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import Maths from "./assets/Maths.png";
 import Flask from "./assets/Flask.png";
 import Book from "./assets/Open-Book.png";
+import GameCard from "../GameCard/GameCard.js";
 import "./Hero.css";
 
 function Hero() {
@@ -42,30 +42,15 @@ function Hero() {
           <p>
             Fun and interactive games that help children learn while they play!
           </p>
-          <div className="d-flex flex-column flex-md-row align-items-center flex-wrap">
+          <div className="d-flex flex-column flex-md-row align-items-center flex-wrap gap-3">
             <Link to="/starmath" className="link-style">
-              <Card className="game-card shadow-sm d-flex justify-content-center align-items-center">
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  <img src={Maths} className="card-icon" width="25%" />
-                  <Card.Title>Starmath</Card.Title>
-                </div>
-              </Card>
+              <GameCard image={Maths} title={"Starmath"} background={"#e8eede"} />
             </Link>
             <Link to="/fill-itfish" className="link-style">
-              <Card className="game-card shadow-sm d-flex justify-content-center align-items-center">
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  <img src={Book} className="card-icon" width="25%" />
-                  <Card.Title>Fill-itFish</Card.Title>
-                </div>
-              </Card>
+              <GameCard image={Book} title={"Fill-itFish"} background={"#e8eede"}/>
             </Link>
             <Link to="/lab-wars" className="link-style">
-              <Card className="game-card shadow-sm d-flex justify-content-center align-items-center">
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  <img src={Flask} className="card-icon" width="25%" />
-                  <Card.Title>Lab Wars</Card.Title>
-                </div>
-              </Card>
+              <GameCard image={Flask} title={"LabWars"} background={"#e8eede"}/>
             </Link>
           </div>
         </Container>

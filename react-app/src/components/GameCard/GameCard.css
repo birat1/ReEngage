@@ -1,0 +1,25 @@
+.game-card {
+    min-height: 15rem;
+    width: 15rem;
+    border: none !important;
+    color: #4A4A4A;
+    font-weight: bolder;
+    transition-duration: 0.4s;
+}
+
+.game-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.game-card:hover .card-icon {
+    animation: wiggle 0.5s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }

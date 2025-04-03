@@ -24,14 +24,17 @@ function Navigationbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-center">
           <Nav className="d-flex justify-content-center w-100">
-            <Nav.Link href="#home">
+            <Nav.Link href="/" to="/Home">
               <span className="underline-ani">Home</span>
             </Nav.Link>
-            <Nav.Link href="#games">
+            <Nav.Link href="/games">
               <span className="underline-ani">Games</span>
             </Nav.Link>
             <Nav.Link href="#resources">
               <span className="underline-ani">Resources</span>
+            </Nav.Link>
+            <Nav.Link href="#resources">
+              <span className="underline-ani">Leaderboard</span>
             </Nav.Link>
           </Nav>
           {/* <div className="ms-auto hstack gap-2">
