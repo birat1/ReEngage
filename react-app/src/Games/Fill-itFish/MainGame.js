@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FillitFish.css';
 
-// implement text to speech api: click the fish head to hear it
-
 function Choices({ text, choices = [], onSelect }) { // shws text and buttons
   return ( // if there is text, show it
     <div>
@@ -32,7 +30,10 @@ class AudioComponent extends Component {
   togglePlay() {
     this.setState(prevState => {
       if (!prevState.play) {
-        this.audio.play();
+        this.audio.volume = 0.3;
+        setTimeout(() => {
+          this.audio.play();
+        }, 0);
       } else {
         this.audio.pause();
       }
@@ -54,7 +55,7 @@ export default function TitleScreen() { // screen user sees before playing the g
   function handleSelect() {
     setIsOpen(false);
     setShowTransitionScreen(true);
-    audio.play(); // Start playing when the game starts
+    //audio.play(); // Start playing when the game starts
   }
 
   function handleHelp() {
@@ -269,12 +270,23 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
   function ChoppedFish(){
     let hiddenArray = hiddenWord.split(" ");
 
+    function speakWord() {
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = "en-US"; // Set the language
+        utterance.volume = 1.0;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        console.warn("Speech synthesis not supported in this browser.");
+      }
+    }
+
     function Word() {
       return (
         <div className="fish-container "> {/* Flex container */}
           {hiddenArray.map((item, index) =>
             index === 0 ? (
-              <div key={index} className="fishbod-container fishhd-container">
+              <div key={index} className="fishbod-container fishhd-container" onClick={speakWord}>
                 <p className="text-over-img fishhd-text">{item}</p>
               </div>
             ) : index === hiddenArray.length - 1 ? (
