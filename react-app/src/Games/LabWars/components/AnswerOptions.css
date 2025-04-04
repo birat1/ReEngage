@@ -38,7 +38,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.answer-button:hover:not(.correct) {
+.answer-button:hover:not(.correct):not(.selected) {
   background: #CBD5E1;
   border-color: #8B5CF6;
   color: #8B5CF6;
