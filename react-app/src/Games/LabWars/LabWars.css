@@ -71,15 +71,13 @@
   animation: float 3s ease-in-out infinite reverse;
 }
 
-.player-character {
+.player-character, .boss-character {
   font-size: 3.5rem;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .boss-character {
-  font-size: 3.5rem;
   transform: scaleX(-1);
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .vs-text {
@@ -114,6 +112,7 @@
   border: 2px solid #EF4444;
 }
 
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -155,11 +154,8 @@
   }
 }
 
-.shake {
-  animation: shake 0.3s ease-in-out;
-}
-
-.student-circle.shake {
+/* Animation classes */
+.shake, .student-circle.shake {
   animation: shake 0.3s ease-in-out;
 }
 
