@@ -6,6 +6,12 @@ import FeedbackMessage from './components/FeedbackMessage';
 import { questions } from './data/questions';
 import './LabWars.css';
 
+
+/*
+  TODO: implement start menu, timer, score system, game over screen, restart button, next button
+
+*/
+
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
     {/* Display the student character */}
