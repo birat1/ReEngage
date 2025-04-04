@@ -100,7 +100,7 @@ const AnswerOptions = ({ options, onSubmit, correctAnswer, isAnswered, isMultipl
           onClick={handleSubmit}
           disabled={selectedAnswers.length === 0}
         >
-          Submit Answer{isMultiple ? 's' : ''}
+          Submit Answer(s)
         </button>
       )}
     </div>
