@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework import permissions
 from . models import Student, Admin, Avatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer

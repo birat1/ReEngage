@@ -8,6 +8,7 @@ services:
       - ./django-app:/app
     environment:
       - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=backend.settings
     depends_on:
       - react
 
