@@ -313,7 +313,7 @@ function StarMathGame() {
           </button>
           <h2 className="htpTitle">How to play</h2>
           <p>
-            Drag a number from the stars and drop it on the blank star, to
+            Drag a number from the stars and drop it onto the blank star, to
             complete the equation.
           </p>
           <p>
