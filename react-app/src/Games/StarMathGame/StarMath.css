@@ -257,7 +257,7 @@
   top: 50%;
   left: 50%;
   margin-top: 0px;
-  margin-left: -320px;
+  margin-left: -360px;
   transform-origin: top left;
   background: rgb(34, 135, 182, 0.924);
   padding: 20px;
@@ -295,9 +295,32 @@
 
 .HTPBtn-M {
   position: absolute;
-  top: 30%;
+  top: 1%;
   right: 1%;
   font-size: 1.5vw;
+}
+
+/*web speech api button*/
+.speechBtn {
+  background-color: #2287b6;
+  color: aliceblue;
+  border: none;
+  padding: 5px 32px;
+  text-decoration: none;
+  font-size: 1.5vw;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 5px;
+  font-family: "Exo 2", sans-serif;
+  border-color: aliceblue;
+  border-style: solid;
+  border-width: 2.5px;
+}
+
+.speechBtn:hover {
+   transition-duration: 0.4s;
+  background-color: aliceblue;
+  color: #2287b6;
 }
 
 /*draggable elements*/
@@ -464,7 +487,6 @@
 
 .gamePoints,
 .numQuestions {
-  font-size: 2vw;
   font-weight: bold;
   color: aliceblue;
   text-align: center;
@@ -478,6 +500,7 @@
 
 .gamePoints2,
 .numQuestions2 {
+  font-size: 2vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -547,6 +570,10 @@
 
 #theEquation.fade-in {
   opacity: 1;
+}
+
+.gameSlogan {
+  font-size: 2.5vw;
 }
 
 /*

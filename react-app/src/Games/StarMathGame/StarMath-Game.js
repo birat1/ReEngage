@@ -64,6 +64,23 @@ function StarMathGame() {
     pointRef.current.innerHTML = "0";
   };
 
+  // converts symbols to words for better pronunciation
+  const convertSymbolsToWords = (text) => {
+    return text
+      .replace(/\+/g, " plus ")
+      .replace(/-/g, " minus ")
+      .replace(/\×/g, " times ")
+      .replace(/÷/g, " divided by ");
+  };
+
+  //handling webToSpeech API
+  const handleTextToSpeech = (text) => {
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = convertSymbolsToWords(text);
+    speech.lang = "en-GB";
+    window.speechSynthesis.speak(speech);
+  };
+
   //removes title screen and reveals the next screen - yr group choices
   const removeTitleScrn = () => {
     setShowTitleScreen(false);
@@ -264,7 +281,7 @@ function StarMathGame() {
           </div>
           <div id="titleScrnComp">
             <div>
-              <p>Drag the stars and solve the math!</p>
+              <p className="gameSlogan">Drag the stars and solve the math!</p>
             </div>
             <div>
               <button
@@ -295,8 +312,14 @@ function StarMathGame() {
             ✕
           </button>
           <h2 className="htpTitle">How to play</h2>
-          <p>Drag a number from the stars and drop it on the blank star to complete the equation.</p>
-          <p>You have 2 tries to get it right before the answer is shown, good luck!</p>
+          <p>
+            Drag a number from the stars and drop it on the blank star, to
+            complete the equation.
+          </p>
+          <p>
+            You have 2 tries to get it right before the answer is shown, good
+            luck!
+          </p>
         </div>
       )}
 
@@ -365,13 +388,25 @@ function StarMathGame() {
       {/* main game */}
       {showMainGame && (
         <div id="mainGame">
-          <div>
+          <div className="side-button-container">
             <button
               type="button"
               onClick={toggleHTP}
               className="playBtn HTPBtn HTPBtn-M"
             >
               How to Play
+            </button>
+             {/* Text-to-Speech button */}
+            <button
+              type="button"
+              className="speechBtn"
+              onClick={() =>
+                handleTextToSpeech(
+                  `${firstNumRef.current.innerHTML} ${operatorRef.current.innerHTML} ${secondNumRef.current.innerHTML} = ${resultNumRef.current.innerHTML}`
+                )
+              }
+            >
+              Read Equation
             </button>
           </div>
           <div id="smallStars">
