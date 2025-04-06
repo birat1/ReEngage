@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import QuestionCard from './components/QuestionCard';
 import AnswerOptions from './components/AnswerOptions';
 import FeedbackMessage from './components/FeedbackMessage';
 import StartMenu from './components/StartMenu';
+import GameOver from './components/GameOver';
 import { questions } from './data/questions';
 import './LabWars.css';
-
-
-/*
-  TODO: implement start menu, timer, score system, game over screen, restart button, next button
-
-*/
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
@@ -37,7 +33,9 @@ const BattleScene = ({ isAttacking, isBossTilting }) => (
 );
 
 const LabWars = () => {
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
   const [isAnswered, setIsAnswered] = useState(false);
@@ -91,13 +89,42 @@ const LabWars = () => {
         setFeedback({ message: '', isCorrect: null });
         setIsAnswered(false);
       }, 2000);
+    } else {
+      // If this was the last question, show game over screen after delay
+      setTimeout(() => {
+        setGameOver(true);
+      }, 2000);
     }
+  };
+
+  // Handle play again
+  const handlePlayAgain = () => {
+    setGameOver(false);
+    setCurrentQuestion(0);
+    setFeedback({ message: '', isCorrect: null });
+    setIsAnswered(false);
+  };
+
+  // Handle return to homepage
+  const handleReturnHome = () => {
+    navigate('/');
   };
 
   if (!gameStarted) {
     return (
       <Container className="lab-wars-container">
         <StartMenu onPlay={() => setGameStarted(true)} />
+      </Container>
+    );
+  }
+
+  if (gameOver) {
+    return (
+      <Container className="lab-wars-container">
+        <GameOver 
+          onPlayAgain={handlePlayAgain} 
+          onReturnHome={handleReturnHome} 
+        />
       </Container>
     );
   }
