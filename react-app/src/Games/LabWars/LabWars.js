@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import QuestionCard from './components/QuestionCard';
 import AnswerOptions from './components/AnswerOptions';
 import FeedbackMessage from './components/FeedbackMessage';
+import StartMenu from './components/StartMenu';
 import { questions } from './data/questions';
 import './LabWars.css';
 
@@ -36,7 +37,7 @@ const BattleScene = ({ isAttacking, isBossTilting }) => (
 );
 
 const LabWars = () => {
-  // TODO: Implement boss health system
+  const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
   const [isAnswered, setIsAnswered] = useState(false);
@@ -92,6 +93,14 @@ const LabWars = () => {
       }, 2000);
     }
   };
+
+  if (!gameStarted) {
+    return (
+      <Container className="lab-wars-container">
+        <StartMenu onPlay={() => setGameStarted(true)} />
+      </Container>
+    );
+  }
 
   return (
     <Container className="lab-wars-container">
