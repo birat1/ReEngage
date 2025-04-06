@@ -16,7 +16,7 @@ const StartMenu = ({ onPlay }) => {
         <Button variant="primary" size="lg" onClick={onPlay} className="menu-button">
           Play Game
         </Button>
-        <Button variant="info" size="lg" onClick={() => setShowHowToPlay(true)} className="menu-button">
+        <Button variant="primary" size="lg" onClick={() => setShowHowToPlay(true)} className="menu-button">
           How to Play
         </Button>
       </div>
