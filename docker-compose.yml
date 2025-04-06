@@ -15,7 +15,7 @@ services:
   react:
     build: ./react-app
     ports:
-      - "3000:3000"
+      - "5000:3000"
     volumes:
       - ./react-app:/app
       - /app/node_modules
