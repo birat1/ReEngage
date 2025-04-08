@@ -47,7 +47,7 @@ function Navigationbar() {
             </div>
             <NavDropdown title="Student Name">
               <NavDropdown.Item href="#action/3.1">Avatar Page</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+              <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
         </Navbar.Collapse>

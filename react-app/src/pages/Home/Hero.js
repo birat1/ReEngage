@@ -10,11 +10,22 @@ import GameCard from "../../components/GameCard/GameCard.js";
 import Icons from "../../assets/icons.svg";
 import "./styles/Hero.css";
 
+const games = [
+  { to: "/starmath", image: Maths, title: "Starmath"},
+  { to: "/fill-itfish", image: Book, title: "Fill-itFish"},
+  { to: "/lab-wars", image: Flask, title: "LabWars"},
+];
+
+
 function Hero() {
   return (
     <div className="body">
       <section>
-        <Container className="hero-section" style={{ backgroundImage: `url(${Icons})` }} fluid>
+        <Container
+          className="hero-section"
+          style={{ backgroundImage: `url(${Icons})` }}
+          fluid
+        >
           <Row style={{ minHeight: "40em" }}>
             <Col>
               <div>
@@ -44,15 +55,19 @@ function Hero() {
             Fun and interactive games that help children learn while they play!
           </p>
           <div className="d-flex flex-column flex-md-row align-items-center flex-wrap gap-3">
-            <Link to="/starmath" className="link-style">
-              <GameCard image={Maths} title={"Starmath"} background={"#e8eede"} />
-            </Link>
-            <Link to="/fill-itfish" className="link-style">
-              <GameCard image={Book} title={"Fill-itFish"} background={"#e8eede"}/>
-            </Link>
-            <Link to="/lab-wars" className="link-style">
-              <GameCard image={Flask} title={"LabWars"} background={"#e8eede"}/>
-            </Link>
+            {games.map((game, index) => (
+              <Link to={game.to} className="link-style" key={index}>
+                <div
+                  className="gamecard"
+                >
+                  <GameCard
+                    image={game.image}
+                    title={game.title}
+                    background="#e6eddf"
+                  />
+                </div>
+              </Link>
+            ))}
           </div>
         </Container>
       </section>

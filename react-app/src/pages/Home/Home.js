@@ -5,7 +5,6 @@ import Hero from "./Hero.js";
 function Home () {
     return (
         <div>
-            <Navigationbar/>
             <Hero />
             <Footer/>
         </div>
