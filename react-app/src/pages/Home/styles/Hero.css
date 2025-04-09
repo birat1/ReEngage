@@ -1,86 +1,40 @@
-.body {
+.hero {
     font-family: 'Nunito', sans-serif;
     color: #4A4A4A;
 }
 
 .hero-section {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    overflow: hidden;
-    color: white;
-    background-repeat: repeat;
-    background-size: contain;
-    background-color: #A8D3E6;
+    background-image: linear-gradient(#A8D3E6, #D4E9F3);
 }
 
-.resources {
-    background-color: #2596be;
+.hero-button {
+    background-color: #6cbc44;
+    color: white;
     border: none;
     width: 11rem;
     height: 3rem;
     font-size: 1.1rem;
-    color: white;
     transition-duration: 0.4s;
 
 }
 
-.resources:hover {
-    background-color: #5fa8d7;
+.hero-button:hover {
+    background-color: #61a93d;
     transform: rotate(2deg) scale(1.05);
     
 }
 
-.games {
-    background-color: #6cbc44;
-    border: none;
-    width: 11rem;
-    height: 3rem;
-    font-size: 1.1rem;
-    color: white;
-    transition-duration: 0.4s;
-
+.hero-video {
+    width: 48rem;
+    height: 27rem;
 }
 
-.games:hover {
-    background-color: #7ac366;
-    transform: rotate(2deg) scale(1.05);
+.features-section {
+    background-color: #d4e9f3;
+    color: "#4b9cd3";
 }
 
-.row {
-    display: flex;
-    align-items: center;
-}
-
-p {
-    font-size: 1.1rem;
-}
-
-h1 {
-    font-size: 4rem;
-    font-weight: bolder;
-}
-
-.hero-section .video-card {
-    height: 25rem;
-    width: 25rem;
-}
-
-.games-section {
-    background-color: #ccdbbe;
-    min-height: 40rem;
-    font-family: 'Nunito', sans-serif;
-    color: #4A4A4A;
-}
-
-.ending-section {
-    background-color: #A8D3E6;
-    height: 40rem;
-    background-repeat: repeat;
-    background-size: contain;
-}
-
-.ending-content {
-    background-color: #d8eaf2;
-    width: 50%;
+.testimonials-section {
+    background-color: #d4e9f3;
+    color: "#4b9cd3";
 }

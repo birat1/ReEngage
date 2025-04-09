@@ -1,90 +1,138 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import Maths from "../../assets/images/Maths.png";
-import Flask from "../../assets/images/Flask.png";
-import Book from "../../assets/images/Open-Book.png";
-import GameCard from "../../components/GameCard/GameCard.js";
-import Icons from "../../assets/icons.svg";
+import FeatureCard from "./FeatureCard";
+import TestimonialCard from "./TestimonialCard";
 import "./styles/Hero.css";
+import Controller from "../../assets/images/Controller.png";
+import Store from "../../assets/images/Store.png";
+import Bars from "../../assets/images/Bars.png";
+import List from "../../assets/images/List.png";
+import Brain from "../../assets/images/Brain.png";
+import Podium from "../../assets/images/Podium.png";
 
-const games = [
-  { to: "/starmath", image: Maths, title: "Starmath"},
-  { to: "/fill-itfish", image: Book, title: "Fill-itFish"},
-  { to: "/lab-wars", image: Flask, title: "LabWars"},
+const features = [
+  {
+    image: Controller,
+    title: "Games",
+    body: "Enaging, interactive games to help children engage.",
+  },
+  {
+    image: Store,
+    title: "Virtual Currency",
+    body: "In game currency to purchase avatars.",
+  },
+  {
+    image: Bars,
+    title: "Progress Tracking",
+    body: "Detailed analytics for parents and teachers to monitor learning.",
+  },
+  {
+    image: List,
+    title: "National Curriculum",
+    body: "Resources closely aligned with the UK National Curriculum.",
+  },
+  {
+    image: Brain,
+    title: "Daily Learning",
+    body: "Daily Tasks and facts to encourage lifelong learning.",
+  },
+  {
+    image: Podium,
+    title: "Leaderboard",
+    body: "Friendly competition to motivate children to engage with learning.",
+  },
 ];
 
-
+const testimonials = [
+  {
+    body: "My students can't wait for ReEngage time! It's made teaching so much more enjoyable and the progress tracking helps me identify areas where extra support is needed.",
+    person: "Mrs. Thompson",
+    about: "Year 4 Teacher, London",
+  },
+  {
+    body: "My son used to struggle with maths, but the games on ReEngage have made it fun for him. He's now excited to practice his times tables and his confidence has grown tremendously.",
+    person: "Sarah J.",
+    about: "Parent of Year 5 pupil",
+  },
+  {
+    body: "I love earning XP and leveling up on ReEngage! The games are really fun and I've learned so many cool facts. The daily streak keeps me coming back every day!",
+    person: "Jamie, Age 9",
+    about: "Year 5 Student",
+  },
+];
 function Hero() {
   return (
-    <div className="body">
+    <div className="hero">
       <section>
         <Container
-          className="hero-section"
-          style={{ backgroundImage: `url(${Icons})` }}
+          className="hero-section d-flex flex-column justify-content-center align-items-center"
+          style={{ minHeight: "50rem" }}
           fluid
         >
-          <Row style={{ minHeight: "40em" }}>
-            <Col>
-              <div>
-                <h1>Learn Through Play with ReEngage</h1>
-                <p>Exciting games and resources to make learning fun!</p>
-                <div className="hstack gap-2">
-                  <button className="games rounded-pill">Games</button>
-                  <button className="resources rounded-pill">
-                    Browse Resources
-                  </button>
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <Card className="video-card shadow-sm"></Card>
-            </Col>
-          </Row>
+          <div className="d-flex flex-column text-center mt-3">
+            <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
+            <p>Exciting games and resources to make learning fun!</p>
+            <div className="d-flex gap-2 mx-auto">
+              <button className="hero-button rounded-pill shadow-sm">
+                Games
+              </button>
+              <button className="hero-button rounded-pill shadow-sm">
+                Resources
+              </button>
+            </div>
+          </div>
+          <div className="hero-video card shadow-sm mt-3"></div>
         </Container>
       </section>
       <section>
         <Container
-          className="games-section d-flex flex-column justify-content-center align-items-center"
+          className="features-section"
+          style={{ minHeight: "40rem" }}
           fluid
         >
-          <h1>Games</h1>
-          <p>
-            Fun and interactive games that help children learn while they play!
-          </p>
-          <div className="d-flex flex-column flex-md-row align-items-center flex-wrap gap-3">
-            {games.map((game, index) => (
-              <Link to={game.to} className="link-style" key={index}>
-                <div
-                  className="gamecard"
-                >
-                  <GameCard
-                    image={game.image}
-                    title={game.title}
-                    background="#e6eddf"
+          <div className="d-flex flex-column justify-content-center align-items-center pt-3">
+            <h1 className="fw-bolder">Features</h1>
+            <p>Say no to boring lessons and hello to gamification.</p>
+            <div
+              className="d-flex flex-wrap justify-content-center align-items-center gap-4"
+              style={{ width: "60%" }}
+            >
+              {features.map((feature, index) => (
+                <div key={index}>
+                  <FeatureCard
+                    image={feature.image}
+                    title={feature.title}
+                    body={feature.body}
+                    bgcolour="#A8D3E6"
                   />
                 </div>
-              </Link>
-            ))}
+              ))}
+            </div>
           </div>
         </Container>
       </section>
       <section>
         <Container
-          className="ending-section d-flex flex-column justify-content-center align-items-center"
-          style={{ backgroundImage: `url(${Icons})` }}
+          className="testimonials-section pt-5"
+          style={{ minHeight: "40rem" }}
           fluid
         >
-          <div className="ending-content rounded d-flex flex-column justify-content-center align-items-center p-5 shadow-sm">
-            <h1>About ReEngage</h1>
-            <p>
-              ReEngage was created by students for students. Our mission is to
-              provide high-quality educational resources, that are aligned with
-              the national curriculum, in a fun and interactive way!
-            </p>
-            <button className="games rounded-pill">Sign Up</button>
+          <div className="d-flex flex-column justify-content-center align-items-center pt-3">
+            <h1 className="fw-bolder">Loved by Children, Teachers, and Parents</h1>
+            <p>What our current users have to say about ReEngage:</p>
+            <div
+              className="d-flex flex-wrap justify-content-center align-items-center gap-5"
+            >
+              {testimonials.map((testimonial, index) => (
+                <div key={index}>
+                  <TestimonialCard
+                    body={testimonial.body}
+                    person={testimonial.person}
+                    about={testimonial.about}
+                    bgcolour="#b6dea2"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>

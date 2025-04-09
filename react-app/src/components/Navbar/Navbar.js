@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Navigationbar() {
   return (
-    <Navbar sticky="top" expand="lg" className="w-100 Navbar shadow-sm">
+    <Navbar sticky="top" expand="lg" className="w-100 Navbar">
       <Container>
         <Link to="/" className="link-style">
           <Navbar.Brand className="d-flex align-items-center gap-2">
