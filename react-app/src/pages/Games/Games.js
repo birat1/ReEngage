@@ -5,7 +5,6 @@ import GameCard from "../../components/GameCard/GameCard.js";
 import Maths from "../../assets/images/Maths.png";
 import Flask from "../../assets/images/Flask.png";
 import Book from "../../assets/images/Open-Book.png";
-import Icons from "../../assets/icons.svg";
 import "./styles/Games.css";
 
 function Games() {
@@ -28,8 +27,8 @@ function GamesContent() {
     <div>
       <section>
         <Container
-          className="hero-section d-flex flex-column justify-content-center align-items-center"
-          style={{ height: "55rem", backgroundImage: `url(${Icons})`, backgroundColor: "#A8D3E6" }}
+          className="games-section d-flex flex-column justify-content-center align-items-center"
+          style={{ height: "50rem" }}
           fluid
         >
           <div className="d-flex flex-column flex-md-row align-items-center flex-wrap gap-3">
@@ -42,7 +41,7 @@ function GamesContent() {
                   <GameCard
                     image={game.image}
                     title={game.title}
-                    background="#d8eaf2"
+                    background="#F2F2F2"
                   />
                 </div>
               </Link>

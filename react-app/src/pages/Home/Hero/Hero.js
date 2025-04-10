@@ -2,12 +2,12 @@ import Container from "react-bootstrap/Container";
 import FeatureCard from "./FeatureCard";
 import TestimonialCard from "./TestimonialCard";
 import "./styles/Hero.css";
-import Controller from "../../assets/images/Controller.png";
-import Store from "../../assets/images/Store.png";
-import Bars from "../../assets/images/Bars.png";
-import List from "../../assets/images/List.png";
-import Brain from "../../assets/images/Brain.png";
-import Podium from "../../assets/images/Podium.png";
+import Controller from "../../../assets/images/Controller.png";
+import Store from "../../../assets/images/Store.png";
+import Bars from "../../../assets/images/Bars.png";
+import List from "../../../assets/images/List.png";
+import Brain from "../../../assets/images/Brain.png";
+import Podium from "../../../assets/images/Podium.png";
 
 const features = [
   {
@@ -50,15 +50,16 @@ const testimonials = [
   },
   {
     body: "My son used to struggle with maths, but the games on ReEngage have made it fun for him. He's now excited to practice his times tables and his confidence has grown tremendously.",
-    person: "Sarah J.",
+    person: "Sarah",
     about: "Parent of Year 5 pupil",
   },
   {
     body: "I love earning XP and leveling up on ReEngage! The games are really fun and I've learned so many cool facts. The daily streak keeps me coming back every day!",
-    person: "Jamie, Age 9",
+    person: "Jamie",
     about: "Year 5 Student",
   },
 ];
+
 function Hero() {
   return (
     <div className="hero">
@@ -70,7 +71,9 @@ function Hero() {
         >
           <div className="d-flex flex-column text-center mt-3">
             <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
-            <p>Exciting games and resources to make learning fun!</p>
+            <p className="fs-4">
+              Exciting games and resources to make learning fun!
+            </p>
             <div className="d-flex gap-2 mx-auto">
               <button className="hero-button rounded-pill shadow-sm">
                 Games
@@ -80,7 +83,7 @@ function Hero() {
               </button>
             </div>
           </div>
-          <div className="hero-video card shadow-sm mt-3"></div>
+          <div className="hero-video card shadow mt-3"></div>
         </Container>
       </section>
       <section>
@@ -91,9 +94,11 @@ function Hero() {
         >
           <div className="d-flex flex-column justify-content-center align-items-center pt-3">
             <h1 className="fw-bolder">Features</h1>
-            <p>Say no to boring lessons and hello to gamification.</p>
+            <p className="fs-4">
+              Say no to boring lessons and hello to gamification!
+            </p>
             <div
-              className="d-flex flex-wrap justify-content-center align-items-center gap-4"
+              className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-4"
               style={{ width: "60%" }}
             >
               {features.map((feature, index) => (
@@ -116,12 +121,14 @@ function Hero() {
           style={{ minHeight: "40rem" }}
           fluid
         >
-          <div className="d-flex flex-column justify-content-center align-items-center pt-3">
-            <h1 className="fw-bolder">Loved by Children, Teachers, and Parents</h1>
-            <p>What our current users have to say about ReEngage:</p>
-            <div
-              className="d-flex flex-wrap justify-content-center align-items-center gap-5"
-            >
+          <div className="d-flex flex-column justify-content-center align-items-center pt-5">
+            <h1 className="fw-bolder">
+              Loved by Children, Teachers, and Parents
+            </h1>
+            <p className="fs-4">
+              What our current users have to say about ReEngage:
+            </p>
+            <div className="d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5">
               {testimonials.map((testimonial, index) => (
                 <div key={index}>
                   <TestimonialCard

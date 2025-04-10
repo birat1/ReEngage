@@ -1,6 +1,5 @@
-import Navigationbar from "../../components/Navbar/Navbar.js";
 import Footer from "../../components/Footer/Footer.js";
-import Hero from "./Hero.js";
+import Hero from "./Hero/Hero.js";
 
 function Home () {
     return (

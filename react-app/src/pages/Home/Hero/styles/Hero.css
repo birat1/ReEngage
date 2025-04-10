@@ -38,3 +38,13 @@
     background-color: #d4e9f3;
     color: "#4b9cd3";
 }
+
+.hidden {
+    opacity: 0;
+    transition: 1s;
+}
+
+.show {
+    opacity: 1;
+    transition: 1s;
+}
