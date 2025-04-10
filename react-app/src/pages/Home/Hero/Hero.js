@@ -8,6 +8,7 @@ import Bars from "../../../assets/images/Bars.png";
 import List from "../../../assets/images/List.png";
 import Brain from "../../../assets/images/Brain.png";
 import Podium from "../../../assets/images/Podium.png";
+import { useInView } from "react-intersection-observer";
 
 const features = [
   {
@@ -61,6 +62,25 @@ const testimonials = [
 ];
 
 function Hero() {
+  const { ref: heroTextRef, inView: heroTextInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: heroVideoRef, inView: heroVideoInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: featuresTextRef, inView: featuresTextInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: featuresRef, inView: featuresInView } = useInView({
+    threshold: 0.1, triggerOnce: true
+  });
+  const { ref: testimonialTextRef, inView: testimonialTextInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({
+    threshold: 0.3,
+  });
+
   return (
     <div className="hero">
       <section>
@@ -70,11 +90,22 @@ function Hero() {
           fluid
         >
           <div className="d-flex flex-column text-center mt-3">
-            <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
-            <p className="fs-4">
-              Exciting games and resources to make learning fun!
-            </p>
-            <div className="d-flex gap-2 mx-auto">
+            <div
+              className={`${heroTextInView ? "slide-from-left" : ""}`}
+              ref={heroTextRef}
+            >
+              <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
+              <p className="fs-4">
+                Exciting games and resources to make learning fun!
+              </p>
+            </div>
+            <div
+              className={`d-flex gap-2 mx-auto ${
+                heroTextInView ? "slide-up" : ""
+              }`}
+              ref={heroTextRef}
+              style={{ animationDelay: "0.1s", opacity: 0 }}
+            >
               <button className="hero-button rounded-pill shadow-sm">
                 Games
               </button>
@@ -83,7 +114,12 @@ function Hero() {
               </button>
             </div>
           </div>
-          <div className="hero-video card shadow mt-3"></div>
+          <div
+            className={`hero-video card shadow mt-4 ${
+              heroVideoInView ? "slide-up" : ""
+            }`}
+            ref={heroVideoRef}
+          ></div>
         </Container>
       </section>
       <section>
@@ -93,16 +129,31 @@ function Hero() {
           fluid
         >
           <div className="d-flex flex-column justify-content-center align-items-center pt-3">
-            <h1 className="fw-bolder">Features</h1>
-            <p className="fs-4">
-              Say no to boring lessons and hello to gamification!
-            </p>
+            <div
+              className={`d-flex flex-column justify-content-center align-items-center ${
+                featuresTextInView ? "slide-from-left" : ""
+              }`}
+              ref={featuresTextRef}
+            >
+              <h1 className="fw-bolder">Features</h1>
+              <p className="fs-4">
+                Say no to boring lessons and hello to gamification!
+              </p>
+            </div>
             <div
               className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-4"
               style={{ width: "60%" }}
             >
               {features.map((feature, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  className={`${featuresInView ? "slide-from-left" : ""}`}
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    opacity: 0,
+                  }}
+                  ref={featuresRef}
+                >
                   <FeatureCard
                     image={feature.image}
                     title={feature.title}
@@ -122,15 +173,28 @@ function Hero() {
           fluid
         >
           <div className="d-flex flex-column justify-content-center align-items-center pt-5">
-            <h1 className="fw-bolder">
-              Loved by Children, Teachers, and Parents
-            </h1>
-            <p className="fs-4">
-              What our current users have to say about ReEngage:
-            </p>
+            <div
+              className={`text-center ${testimonialTextInView ? "slide-from-left" : ""}`}
+              ref={testimonialTextRef}
+            >
+              <h1 className="fw-bolder">
+                Loved by Children, Teachers, and Parents
+              </h1>
+              <p className="fs-4">
+                What our current users have to say about ReEngage:
+              </p>
+            </div>
             <div className="d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5">
               {testimonials.map((testimonial, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  className={`${testimonialsInView ? "slide-up" : ""}`}
+                  style={{
+                    animationDelay: `${index * 0.2}s`,
+                    opacity: 0,
+                  }}
+                  ref={testimonialsRef}
+                >
                   <TestimonialCard
                     body={testimonial.body}
                     person={testimonial.person}

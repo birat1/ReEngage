@@ -27,6 +27,7 @@
 .hero-video {
     width: 48rem;
     height: 27rem;
+    opacity: 0;
 }
 
 .features-section {
@@ -39,12 +40,34 @@
     color: "#4b9cd3";
 }
 
-.hidden {
-    opacity: 0;
-    transition: 1s;
-}
+.slide-up {
+    animation: slideUp .8s ease-in-out forwards;
+  }
 
-.show {
-    opacity: 1;
-    transition: 1s;
+.slide-from-left {
+    animation: slidefromleft .8s ease-in-out forwards;
 }
+  
+@keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(70px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+@keyframes slidefromleft{
+    from {
+      opacity: 0;
+      filter: blur(2px);
+      transform: translateX(-50%);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+  }
