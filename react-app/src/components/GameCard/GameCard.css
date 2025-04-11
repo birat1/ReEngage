@@ -4,11 +4,11 @@
     border: none !important;
     color: #4A4A4A;
     font-weight: bolder;
-    transition-duration: 0.4s;
+    transition: transform 0.6s ease;
 }
 
 .game-card:hover {
-    transform: translateY(-0.5rem);
+    transform: translateY(-1rem);
 }
 
 .game-card:hover .card-icon {

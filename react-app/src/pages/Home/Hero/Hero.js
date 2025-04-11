@@ -72,12 +72,15 @@ function Hero() {
     threshold: 0.3,
   });
   const { ref: featuresRef, inView: featuresInView } = useInView({
-    threshold: 0.1, triggerOnce: true
+    threshold: 0.1,
   });
   const { ref: testimonialTextRef, inView: testimonialTextInView } = useInView({
     threshold: 0.3,
   });
   const { ref: testimonialsRef, inView: testimonialsInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: joinRef, inView: joinInView } = useInView({
     threshold: 0.3,
   });
 
@@ -92,6 +95,7 @@ function Hero() {
           <div className="d-flex flex-column text-center mt-3">
             <div
               className={`${heroTextInView ? "slide-from-left" : ""}`}
+              style={{ opacity: 0 }}
               ref={heroTextRef}
             >
               <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
@@ -107,10 +111,10 @@ function Hero() {
               style={{ animationDelay: "0.1s", opacity: 0 }}
             >
               <button className="hero-button rounded-pill shadow-sm">
-                Games
+                Join Us
               </button>
               <button className="hero-button rounded-pill shadow-sm">
-                Resources
+                Contact Us
               </button>
             </div>
           </div>
@@ -133,6 +137,7 @@ function Hero() {
               className={`d-flex flex-column justify-content-center align-items-center ${
                 featuresTextInView ? "slide-from-left" : ""
               }`}
+              style={{ opacity: 0 }}
               ref={featuresTextRef}
             >
               <h1 className="fw-bolder">Features</h1>
@@ -174,7 +179,10 @@ function Hero() {
         >
           <div className="d-flex flex-column justify-content-center align-items-center pt-5">
             <div
-              className={`text-center ${testimonialTextInView ? "slide-from-left" : ""}`}
+              className={`text-center ${
+                testimonialTextInView ? "slide-from-left" : ""
+              }`}
+              style={{ opacity: 0 }}
               ref={testimonialTextRef}
             >
               <h1 className="fw-bolder">
@@ -203,6 +211,40 @@ function Hero() {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section>
+        <Container
+          className="join-section pt-5"
+          style={{ minHeight: "30rem" }}
+          fluid
+        >
+          <div className="d-flex flex-column justify-content-center align-items-center pt-5 gap-3">
+            <div
+              className={`text-center ${joinInView ? "slide-from-left" : ""}`}
+              ref={joinRef}
+              style={{ opacity: 0 }}
+            >
+              <h1 className="fw-bolder">Ready to elevate your learning?</h1>
+              <p className="fs-4">
+                Join the hundreds of schools and families using ReEnage
+              </p>
+            </div>
+            <div
+              className={`d-flex gap-2 mx-auto ${
+                joinInView ? "slide-up" : ""
+              }`}
+              ref={joinRef}
+              style={{ opacity: 0 }}
+            >
+              <button className="hero-button rounded-pill shadow-sm">
+                Join Us
+              </button>
+              <button className="hero-button rounded-pill shadow-sm">
+                Contact Us
+              </button>
             </div>
           </div>
         </Container>

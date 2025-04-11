@@ -3,4 +3,9 @@
     width: 17.5rem;
     padding: 1rem;
     background-color: #F2F2F2;
+    transition: transform 0.6s ease;
+}
+
+.feature:hover {
+    transform: translateY(-1rem);
 }

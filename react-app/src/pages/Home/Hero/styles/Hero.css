@@ -40,6 +40,10 @@
     color: "#4b9cd3";
 }
 
+.join-section {
+    background-color: #d4e9f3;
+}
+
 .slide-up {
     animation: slideUp .8s ease-in-out forwards;
   }
@@ -47,7 +51,7 @@
 .slide-from-left {
     animation: slidefromleft .8s ease-in-out forwards;
 }
-  
+
 @keyframes slideUp {
     from {
       opacity: 0;
