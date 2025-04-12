@@ -104,7 +104,7 @@ function Hero() {
               </p>
             </div>
             <div
-              className={`d-flex gap-2 mx-auto ${
+              className={`d-flex gap-3 mx-auto ${
                 heroTextInView ? "slide-up" : ""
               }`}
               ref={heroTextRef}
@@ -233,7 +233,7 @@ function Hero() {
               </p>
             </div>
             <div
-              className={`d-flex gap-2 mx-auto ${
+              className={`d-flex gap-3 mx-auto ${
                 joinInView ? "slide-up" : ""
               }`}
               ref={joinRef}

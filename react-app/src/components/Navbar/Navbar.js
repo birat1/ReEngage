@@ -33,7 +33,7 @@ function Navigationbar() {
             <Nav.Link href="#resources">
               <span className="underline-ani">Resources</span>
             </Nav.Link>
-            <Nav.Link href="#resources">
+            <Nav.Link href="leaderboard">
               <span className="underline-ani">Leaderboard</span>
             </Nav.Link>
           </Nav>

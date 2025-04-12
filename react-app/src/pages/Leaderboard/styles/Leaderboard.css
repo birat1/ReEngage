@@ -1,0 +1,11 @@
+.board-section {
+    background-color: #D4E9F3;
+    font-family: 'Nunito', sans-serif;
+    color: #4A4A4A;
+}
+
+.board {
+    background-color: #f2f2f2;
+    border: solid 2px #4A4A4A;
+    width: 50rem;
+}
