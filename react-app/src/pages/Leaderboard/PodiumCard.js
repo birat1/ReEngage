@@ -19,7 +19,7 @@ function PodiumCard({height, width, position, colour}) {
     <div className="podium-card shadow rounded p-3 d-flex flex-column align-items-center gap-3" style={{ height: height, width: width, backgroundColor: colour }}>
       <div className="d-flex flex-column align-items-center">
         {position === 1 && <img src={Crown} className="crown" alt="Crown" />}
-        <div className="avatar-frame rounded overflow-hidden">
+        <div className="avatar-frame rounded overflow-hidden" style={{ height: "6rem", width: "6rem" }}>
           <img
             alt="Avatar"
             src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
@@ -28,7 +28,7 @@ function PodiumCard({height, width, position, colour}) {
         </div>
       </div>
       <h3>Student Name</h3>
-      <p>0000 Points</p>
+      <h5>0000 Points</h5>
       <Medal position = {position}/>
     </div>
   );
