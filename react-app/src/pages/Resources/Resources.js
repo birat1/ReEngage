@@ -1,0 +1,36 @@
+import Footer from "../../components/Footer/Footer";
+import YearCard from "./YearCard.js";
+import Container from "react-bootstrap/Container";
+import "./styles/Resources.css";
+
+function Resources() {
+  return (
+    <div>
+      <YearsContent />
+      <Footer />
+    </div>
+  );
+}
+
+function YearsContent() {
+  return (
+    <div>
+      <section>
+        <Container
+          className="years gradient d-flex flex-column align-items-center"
+          style={{ minHeight: "100vh" }}
+          fluid
+        >
+          <div className="year-cards d-flex justify-content-center align-items-center gap-4">
+            <div className="slide-up" style={{ opacity: "0%"}} ><YearCard year={3} /></div>
+            <div className="slide-up" style={{ animationDelay: ".1s ", opacity: "0"}}><YearCard year={4} /></div>
+            <div className="slide-up" style={{ animationDelay: ".2s ", opacity: "0"}}><YearCard year={5} /></div>
+            <div className="slide-up" style={{ animationDelay: ".3s ", opacity: "0"}}><YearCard year={6} /></div>
+          </div>
+        </Container>
+      </section>
+    </div>
+  );
+}
+
+export default Resources;

@@ -1,6 +1,6 @@
 import "./styles/BoardEntry.css";
 
-function BoardEntry() {
+function BoardEntry({name, points}) {
   return (
     <div className="entry d-flex align-items-center justify-content-between gap-3 rounded">
       <div className="d-flex align-items-center gap-4">

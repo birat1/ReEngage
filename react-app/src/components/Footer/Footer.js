@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer fluid>
+    <footer>
       <div>
         <h2>ReEngage</h2>
       </div>

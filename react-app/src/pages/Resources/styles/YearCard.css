@@ -1,0 +1,14 @@
+.year-card {
+    min-height: 15rem;
+    width: 15rem;
+    background-color: #f2f2f2;
+    color: #4A4A4A;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bolder;
+    transition: transform 0.3s ease;
+}
+
+.year-card:hover {
+    filter: brightness(95%);
+    transform: scale(1.05);
+}

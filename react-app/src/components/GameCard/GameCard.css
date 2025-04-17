@@ -5,11 +5,12 @@
     color: #4A4A4A;
     font-family: 'Nunito', sans-serif;
     font-weight: bolder;
-    transition: transform 0.6s ease;
+    transition: transform 0.3s ease;
 }
 
 .game-card:hover {
-    transform: translateY(-1rem);
+    filter: brightness(95%);
+    transform: scale(1.05);
 }
 
 .game-card:hover .card-icon {

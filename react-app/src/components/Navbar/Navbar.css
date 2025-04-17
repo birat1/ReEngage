@@ -28,7 +28,7 @@
 }
 
 .navbar-collapse Button:hover {
-    background-color: #FF8C42;
+    filter: brightness(105%);
     transform: scale(1.1);
 }
 

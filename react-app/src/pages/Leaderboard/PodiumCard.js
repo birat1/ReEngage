@@ -16,7 +16,7 @@ function Medal ({position}) {
 
 function PodiumCard({height, width, position, colour}) {
   return (
-    <div className="podium-card shadow rounded p-3 d-flex flex-column align-items-center gap-3" style={{ height: height, width: width, backgroundColor: colour }}>
+    <div className="podium-card shadow rounded p-3 d-flex flex-column align-items-center gap-3" style={{ height: height, width: width, borderColor: colour }}>
       <div className="d-flex flex-column align-items-center">
         {position === 1 && <img src={Crown} className="crown" alt="Crown" />}
         <div className="avatar-frame rounded overflow-hidden" style={{ height: "6rem", width: "6rem" }}>

@@ -11,7 +11,6 @@ function Games() {
   return (
     <div>
       <GamesContent />
-      <Footer />
     </div>
   );
 }
@@ -27,11 +26,11 @@ function GamesContent() {
     <div>
       <section>
         <Container
-          className="games-section d-flex flex-column justify-content-center align-items-center"
-          style={{ height: "50rem" }}
+          className="games-section gradient d-flex flex-column align-items-center"
+          style={{ minHeight: "100vh" }}
           fluid
         >
-          <div className="d-flex flex-column flex-md-row align-items-center flex-wrap gap-3">
+          <div className="games d-flex flex-md-row align-items-center flex-wrap gap-4">
             {games.map((game, index) => (
               <Link to={game.to} className="link-style" key={index}>
                 <div

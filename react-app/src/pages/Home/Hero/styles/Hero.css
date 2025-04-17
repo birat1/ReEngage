@@ -1,6 +1,8 @@
 .hero {
     font-family: 'Nunito', sans-serif;
+    background-color: #d4e9f3;
     color: #4A4A4A;
+    min-height: 100vh;
 }
 
 .hero-section {
@@ -15,11 +17,10 @@
     height: 3rem;
     font-size: 1.1rem;
     transition-duration: 0.4s;
-
 }
 
 .hero-button:hover {
-    background-color: #61a93d;
+    filter: brightness(105%);
     scale: 1.05;
     transform: rotate(2deg) scale(1.05);
     
