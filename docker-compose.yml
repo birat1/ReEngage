@@ -2,6 +2,8 @@
 services:
   django:
     build: ./django-app
+    env_file:
+      - ./django-app/secrets.env
     ports:
       - "8000:8000"
     volumes:
@@ -9,8 +11,11 @@ services:
     environment:
       - DEBUG=True
       - DJANGO_SETTINGS_MODULE=backend.settings
+      - REDIS_URL=redis://redis:6379/0
+    networks:
+      - app-network
     depends_on:
-      - react
+      - redis
 
   react:
     build: ./react-app
@@ -21,3 +26,22 @@ services:
       - /app/node_modules
     stdin_open: true
     tty: true
+    environment:
+      - REACT_APP_API_URL=http://django:8000
+      - PORT=3000
+    networks:
+      - app-network
+    depends_on:
+      - django
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

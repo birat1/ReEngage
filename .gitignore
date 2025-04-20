@@ -20,4 +20,5 @@ node_modules/
 yarn.lock
 Thumbs.db
 Desktop.ini
-.env/
+.env/secrets/
+!django-app/secrets.env

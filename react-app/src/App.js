@@ -10,6 +10,7 @@ import LoginRegister from "./pages/LoginRegister/LoginRegister.js";
 import Navigationbar from "./components/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/starmath" element={<StarMathGame />} />
         <Route path="/fill-itfish" element={<StartGame />} />
         <Route path="/lab-wars" element={<LabWars />} />
+        {/* testing */}
+        <Route path="/funfact" element={<AnimalFact />} />
       </Routes>
     </BrowserRouter>
   );

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +27,15 @@ SECRET_KEY = 'django-insecure-4ua_mtm+9-y8!i-wsv#3l#%n4j9-hh7u_0@otj)(1#pu-b7gl6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django', 'localhost', '127.0.0.1', '10.2.8.15']
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '10.2.8.15']
+
+API_NINJAS_KEY = os.getenv("API_NINJAS_KEY")
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,11 +44,39 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'data_wizard',
     'data_wizard.sources',
+    'channels',
     'ReEngage',
     'rest_framework',
 ]
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('redis', 6379)],
+        },
+    },
+}
+
+REDIS_URL = "redis://redis:6379/0"
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
+    "http://10.2.8.15:5000",
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Sec-WebSocket-Key',
+    'Sec-WebSocket-Version',
+    'Upgrade',
+    'Connection',
+    'Origin',
+]
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,6 +105,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+ASGI_APPLICATION = 'backend.routing.application'
 
 
 # Database

@@ -44,7 +44,7 @@ docker-compose up --build
 ```
 
 ### Access the App
-* Frontend: http://localhost:3000
+* Frontend: http://localhost:5000
 * Backend API: http://localhost:8000
 
 **Note**: The app’s database has been populated with sample data for testing purposes. No real user information is used.
