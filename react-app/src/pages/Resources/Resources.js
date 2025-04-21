@@ -6,19 +6,10 @@ import "./styles/Resources.css";
 function Resources() {
   return (
     <div>
-      <YearsContent />
-      <Footer />
-    </div>
-  );
-}
-
-function YearsContent() {
-  return (
-    <div>
       <section>
         <Container
           className="years gradient d-flex flex-column align-items-center"
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "calc(100vh - 76px)" }}
           fluid
         >
           <div className="year-cards d-flex justify-content-center align-items-center gap-4">

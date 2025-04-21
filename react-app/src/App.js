@@ -3,6 +3,7 @@ import StartGame from "./Games/Fill-itFish/MainGame.js";
 import LabWars from "./Games/LabWars/LabWars.js";
 import Home from "./pages/Home/Home.js";
 import Games from "./pages/Games/Games.js";
+import Game from "./pages/Games/Game.js";
 import Leaderboard from "./pages/Leaderboard/Leaderboard.js";
 import Resources from "./pages/Resources/Resources.js";
 import Subjects from "./pages/Resources/Subjects/Subjects.js";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<LoginRegister />} />
         <Route path="/" element={<Home />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/games/:game" element={<Game />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/resources/:year" element={<Subjects />} />
         <Route path="/leaderboard" element={<Leaderboard />} />

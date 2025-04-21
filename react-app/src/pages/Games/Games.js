@@ -16,9 +16,9 @@ function Games() {
 }
 
 const games = [
-  { to: "/starmath", image: Maths, title: "Starmath", delay: "0.1s" },
-  { to: "/fill-itfish", image: Book, title: "Fill-itFish", delay: "0.3s" },
-  { to: "/lab-wars", image: Flask, title: "LabWars", delay: "0.5s" },
+  { to: "starmath", image: Maths, title: "Starmath", delay: "0.1s" },
+  { to: "fill-itfish", image: Book, title: "Fill-itFish", delay: "0.3s" },
+  { to: "lab-wars", image: Flask, title: "LabWars", delay: "0.5s" },
 ];
 
 function GamesContent() {
@@ -27,12 +27,12 @@ function GamesContent() {
       <section>
         <Container
           className="games-section gradient d-flex flex-column align-items-center"
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "calc(100vh - 76px)" }}
           fluid
         >
           <div className="games d-flex flex-md-row align-items-center flex-wrap gap-4">
             {games.map((game, index) => (
-              <Link to={game.to} className="link-style" key={index}>
+              <Link to={`/games/${game.to}`} className="link-style" key={index}>
                 <div
                   className="gamecard-animate"
                   style={{ animationDelay: game.delay }}
