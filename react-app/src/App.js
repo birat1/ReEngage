@@ -11,6 +11,7 @@ import Navigationbar from "./components/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
+import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/starmath" element={<StarMathGame />} />
         <Route path="/fill-itfish" element={<StartGame />} />
         <Route path="/lab-wars" element={<LabWars />} />
+        <Route path="/student-progress" element={<StudentProgress />} />
         {/* testing */}
         <Route path="/funfact" element={<AnimalFact />} />
       </Routes>

@@ -1,0 +1,269 @@
+.SPTitle {
+    text-align: center;
+    padding: 2.5%;
+    animation: fadeInTop 0.6s ease;
+    width: 100%;
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+.SPTAuth {
+  text-align: center;
+  animation: fadeInTop 0.6s ease;
+}
+
+.table-container {
+    width: 70%;
+    margin: 20px auto 0;
+  }
+
+@media (max-width: 768px) {
+    .SPTitle,
+    .controls-container,
+    .table-container {
+      width: 95%;
+      max-width: 95%;
+    }
+    
+    .controls-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .SearchBar,
+    .sort-container {
+      width: 100%;
+    }
+    
+    .searchInput {
+      width: 100%;
+    }
+
+    .table-container {
+        overflow-x: auto;
+      }
+  }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+table tr:first-child th:first-child {
+  border-top-left-radius: 15px;
+}
+
+table tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+.headerRow {
+  background-color: #4b9cd3;
+  color: white;
+}
+
+.headerRow th {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.headerRow th:first-child {
+  cursor: default;
+}
+
+.name-cell {
+  text-align: left;
+  align-items: center;
+}
+
+.fullRow:hover {
+  background-color: #4b9cd34e;
+}
+
+td,
+th {
+  border: 1px solid #d4e9f3;
+  text-align: center;
+  padding: 8px;
+  font-size: 1rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.xp-bar {
+  background-color: #e0f2f7;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+}
+
+.fill {
+  height: 100%;
+  background-color: #81c784;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.SPContainer {
+    background-image: linear-gradient(#A8D3E6, #D4E9F3);
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    
+  }
+
+.dataRows {
+  background-color: #E0F7FA;
+}
+
+tr {
+  animation: fadeIn 0.4s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.table-wrapper {
+  font-size: 10vw;
+  width: 100%;
+}
+
+.expand-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.expand-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.open {
+  transform: rotate(90deg);
+}
+
+.hiddenRow {
+  background-color: #e0f2f77c;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  padding: 10px 20px;
+  border-top: 1px solid #d4e9f3;
+  text-align: left;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.details-content {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.controls-container {
+    width: 70%;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+.SearchBar {
+  display: flex;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 2px solid #81d4fa;
+  border-radius: 8px;
+  outline: none;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 5px #81d4fa;
+  border-color: #4fc3f7;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+}
+
+.sort-label {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #37474f;
+}
+
+#sort-select {
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 2px solid #81d4fa;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: white;
+  cursor: pointer;
+}
+
+#sort-select:focus {
+  box-shadow: 0 0 5px #81d4fa;
+  border-color: #4fc3f7;
+}
