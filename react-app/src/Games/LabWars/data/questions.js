@@ -5,8 +5,8 @@ const API_KEY = "f38bf624-bdb7-46a7-8bce-b938e5563d0e"
 
 // Fetch questions from the National Academy API
 export async function fetchQuestions() {
-  const keyStage = "ks1"; // Key stage 1
-  const subject = "science"; // Science
+  const keyStage = "ks2";
+  const subject = "science"; 
 
   try {
     const url = API_URL.replace("{keyStage}", keyStage).replace("{subject}", subject);
