@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import QuestionCard from './components/QuestionCard';
@@ -6,7 +6,7 @@ import AnswerOptions from './components/AnswerOptions';
 import FeedbackMessage from './components/FeedbackMessage';
 import StartMenu from './components/StartMenu';
 import GameOver from './components/GameOver';
-import { questions } from './data/questions';
+import { fetchQuestions } from './data/questions';
 import './LabWars.css';
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
@@ -36,23 +36,34 @@ const LabWars = () => {
   const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
 
+  useEffect(() => {
+    const loadQuestions = async () => {
+      const fetchedQuestions = await fetchQuestions();
+      setQuestions(fetchedQuestions);
+    };
+    loadQuestions();
+  }, []);
+
   // Check if the submitted answers are correct based on the question type
   const checkAnswer = (selectedAnswers, question) => {
-    if (question.type === 'single') {
-      return selectedAnswers.length === 1 && selectedAnswers[0] === question.correct;
-    } else {
-      // For multiple choice, check if selected answers match exactly with correct answers
-      if (selectedAnswers.length !== question.correct.length) return false;
-      const sortedSelected = [...selectedAnswers].sort();
-      const sortedCorrect = [...question.correct].sort();
-      return sortedSelected.every((val, idx) => val === sortedCorrect[idx]);
+    const correctAnswers = question.answers
+      .map((answer, index) => (answer.distractor === false ? index : null))
+      .filter((index) => index !== null);
+
+    if (selectedAnswers.length !== correctAnswers.length) {
+      return false;
     }
+
+    const sortedSelected = [...selectedAnswers].sort();
+    const sortedCorrect = [...correctAnswers].sort();
+    return sortedSelected.every((val, idx) => val === sortedCorrect[idx]);
   };
 
   // Handle the submission of the answer
@@ -77,7 +88,7 @@ const LabWars = () => {
       }, 300);
     } else {
       setFeedback({
-        message: `Not quite! ${currentQ.explanation}`,
+        message: `Not quite!`,
         isCorrect: false
       });
     }
@@ -129,6 +140,14 @@ const LabWars = () => {
     );
   }
 
+  if (questions.length === 0) {
+    return (
+      <Container className="lab-wars-container">
+        <h1 className="game-title">Loading Questions...</h1>
+      </Container>
+    );
+  }
+
   return (
     <Container className="lab-wars-container">
       <h1 className="game-title">Lab Wars</h1>
@@ -141,11 +160,13 @@ const LabWars = () => {
         totalQuestions={questions.length}
       >
         <AnswerOptions 
-          options={questions[currentQuestion].options}
+          options={questions[currentQuestion].answers.map(answer => answer.content)}
           onSubmit={handleSubmit}
-          correctAnswer={questions[currentQuestion].correct}
           isAnswered={isAnswered}
-          isMultiple={questions[currentQuestion].type === 'multiple'}
+          correctAnswers={questions[currentQuestion].answers
+            .map((answer, index) => (answer.distractor === false ? index : null))
+            .filter((index) => index !== null)}
+          isMultiple={questions[currentQuestion].answers.filter(answer => answer.distractor === false).length > 1}
         />
       </QuestionCard>
 

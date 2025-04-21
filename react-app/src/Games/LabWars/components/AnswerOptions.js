@@ -8,15 +8,15 @@
  * @param {Object} props
  * @param {string[]} props.options - Array of answer options to display
  * @param {Function} props.onSubmit - Callback function when answers are submitted
- * @param {(number|number[])} props.correctAnswer - Index or array of indices of correct answer(s)
- * @param {boolean} props.isAnswered - Whether the question has been answered
- * @param {boolean} props.isMultiple - Whether this is a multiple choice question
+ * @param {boolean} props.isAnswered - Indicates if the question has been answered
+ * @param {number[]} props.correctAnswers - Array of correct answer indices
+ * @param {boolean} props.isMultiple - Indicates if the question is multiple choice
  */
 
 import React, { useState, useEffect } from 'react';
 import './AnswerOptions.css';
 
-const AnswerOptions = ({ options, onSubmit, correctAnswer, isAnswered, isMultiple }) => {
+const AnswerOptions = ({ options, onSubmit, isAnswered, correctAnswers, isMultiple }) => {
   // Track selected answer indices
   const [selectedAnswers, setSelectedAnswers] = useState([]);
 
@@ -62,15 +62,13 @@ const AnswerOptions = ({ options, onSubmit, correctAnswer, isAnswered, isMultipl
     
     if (isAnswered) {
       // Show correct answer(s) after submission
-      if (Array.isArray(correctAnswer)) {
-        if (correctAnswer.includes(index)) {
-          className += ' correct';
-        }
-      } else if (index === correctAnswer) {
+      if (correctAnswers.includes(index)) {
         className += ' correct';
+      } else if (selectedAnswers.includes(index)) {
+        className += ' incorrect';
       }
     } else if (selectedAnswers.includes(index)) {
-      // Show selected state before submission
+      // Show selected answer(s) before submission
       className += ' selected';
     }
     
