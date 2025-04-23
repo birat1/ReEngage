@@ -1,9 +1,9 @@
 .entry {
-    border: solid 1px black;
     padding: 1rem;
     height: 5rem;
     width: 45rem;
     transition: transform 0.3s ease;
+    background-color: #f2f2f2;
 }
 
 .entry:hover {

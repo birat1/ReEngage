@@ -23,7 +23,7 @@ function PodiumCard({height, width, position, colour}) {
           <img
             alt="Avatar"
             src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
-            className="avatar"
+            className="avatar1"
           />
         </div>
       </div>

@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import logo from "./logo.png";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -13,7 +14,7 @@ function Navigationbar() {
           <Navbar.Brand className="d-flex align-items-center gap-2">
             <img
               alt="ReEngage Logo"
-              src="logo.png"
+              src={logo}
               width="50"
               height="50"
               className="logo"

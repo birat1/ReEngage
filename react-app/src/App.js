@@ -7,6 +7,9 @@ import Game from "./pages/Games/Game.js";
 import Leaderboard from "./pages/Leaderboard/Leaderboard.js";
 import Resources from "./pages/Resources/Resources.js";
 import Subjects from "./pages/Resources/Subjects/Subjects.js";
+import Units from "./pages/Resources/Units/Units.js";
+import UnitLayout from "./pages/Resources/Unit/UnitLayout.js";
+import Lesson from "./pages/Resources/Unit/Lesson.js";
 import LoginRegister from "./pages/LoginRegister/LoginRegister.js";
 import Navigationbar from "./components/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,25 +17,31 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 
+
+
 function App() {
   return (
     <BrowserRouter>
-      <Navigationbar/>
-      <Routes>
-        <Route path="/login" element={<LoginRegister />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/games/:game" element={<Game />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/resources/:year" element={<Subjects />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/starmath" element={<StarMathGame />} />
-        <Route path="/fill-itfish" element={<StartGame />} />
-        <Route path="/lab-wars" element={<LabWars />} />
-        <Route path="/student-progress" element={<StudentProgress />} />
-        {/* testing */}
-        <Route path="/funfact" element={<AnimalFact />} />
-      </Routes>
+        <Navigationbar />
+        <Routes>
+          <Route path="/login" element={<LoginRegister />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/:game" element={<Game />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/:year" element={<Subjects />} />
+          <Route path="/resources/:year/:subject" element={<Units />} />
+          <Route path="/resources/:year/:subject/:unit" element={<UnitLayout />} >
+            <Route path=":lesson" element={<Lesson />} />
+          </Route>
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/starmath" element={<StarMathGame />} />
+          <Route path="/fill-itfish" element={<StartGame />} />
+          <Route path="/lab-wars" element={<LabWars />} />
+          <Route path="/student-progress" element={<StudentProgress />} />
+          {/* testing */}
+          <Route path="/funfact" element={<AnimalFact />} />
+        </Routes>
     </BrowserRouter>
   );
 }

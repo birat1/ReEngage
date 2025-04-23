@@ -1,0 +1,39 @@
+.unit-list {
+    background-color: #d8eaf2;
+    width: 52rem;
+    height: 45rem;
+    font-family: 'Nunito', sans-serif;
+    color: #4A4A4A;
+}
+
+.unit-entry {
+    padding: 1rem;
+    background-color: #f2f2f2;
+    width: 95%;
+}
+
+.unit-entry:hover {
+    filter: brightness(0.95);
+}
+
+
+.p-button {
+    background-color: #f2f2f2;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    font-size: larger;
+}
+
+.p-button:hover {
+    filter: brightness(0.95);
+}
+
+.subject-icon {
+    width: 4rem;
+    margin-bottom: .5rem;;
+}
+
+.subject-icon:hover {
+    animation: wiggle 0.5s ease-in-out infinite;
+}

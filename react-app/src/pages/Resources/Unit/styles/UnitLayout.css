@@ -1,0 +1,16 @@
+.lesson-layout {
+    color: #4A4A4A;
+    font-family: 'Nunito', sans-serif;
+}
+
+
+.lesson-list-section {
+    height: calc(100vh - 76px);
+    width: 20%;
+
+}
+
+.lesson-section {
+    height: calc(100vh - 76px);
+    width: 80%;
+}

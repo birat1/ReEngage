@@ -18,7 +18,7 @@ function Subjects() {
     <div>
       <section>
         <Container
-          className="years gradient d-flex flex-column align-items-center"
+          className="years gradient d-flex flex-column justify-content-center align-items-center"
           style={{ minHeight: "calc(100vh - 76px)" }}
           fluid
         >

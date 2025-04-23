@@ -2,10 +2,6 @@
   background-color: #D4E9F3;
 }
 
-.games {
-  margin-top: 17rem;
-}
-
 .gamecard-animate {
   animation: fadeSlideUp 0.6s ease-in forwards;
   opacity: 0;
