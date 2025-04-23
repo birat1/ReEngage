@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Col, Card } from "react-bootstrap";
 import "./styles/StudentProgress.css";
 import "./avataaars.png";
 import avatars from "./avataaars.png";
+import Footer from "../../components/Footer/Footer.js";
 
 /*
 Parents/teachers should be able to see each of their student’s progress. 
@@ -134,7 +134,8 @@ function StudentProgress() {
     };
   
     return (
-      <div className="SPContainer">
+      <div>
+        <div className="SPContainer">
         <h2 className="SPTitle">Your Students' Progress Dashboard</h2>
   
         <div className="controls-container">
@@ -156,7 +157,7 @@ function StudentProgress() {
               <option value="xp">XP</option>
               <option value="name">Name</option>
               <option value="questionsAnswered">Questions Answered</option>
-              <option value="questionsCorrectly">Questions Correctly</option>
+              <option value="questionsCorrectly">Questions Answered Correctly</option>
               <option value="points">Points</option>
             </select>
           </div>
@@ -170,7 +171,7 @@ function StudentProgress() {
                 <th>Rank</th>
                 <th>Name</th>
                 <th>Questions Answered</th>
-                <th>Questions Correctly</th>
+                <th>Questions Answered Correctly</th>
                 <th>Points</th>
                 <th>XP</th>
               </tr>
@@ -252,6 +253,8 @@ function StudentProgress() {
             </tbody>
           </table>
         </div>
+      </div>
+      <Footer/>
       </div>
     );
   }

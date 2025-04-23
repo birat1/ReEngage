@@ -1,0 +1,24 @@
+.backgroundMusic {
+  background-color: #2287b6;
+  color: aliceblue;
+  border: 2.5px solid aliceblue;
+  font-size: 2vw;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  transition: all 0.4s;
+  z-index: 10;
+  height: 4.5vw;
+  width: 4.5vw;
+  position: absolute;
+  top: 12%;
+  right: 4%;
+}
+
+.backgroundMusic:hover {
+  background-color: aliceblue;
+  color: #2287b6;
+}
+

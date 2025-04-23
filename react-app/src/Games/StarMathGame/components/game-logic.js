@@ -392,7 +392,6 @@ export function checkEquation(changeToEndScreen, toggleCorrect, toggleWrong, tog
     if (numerator > denominator) {
       thisIsTheEnd++;
       toggleCorrect();
-      removeCheckButtonListenser();
       pointRef.current.innerHTML = points.toString();
       changeToEndScreen();
       return "end";
@@ -425,7 +424,6 @@ export function checkEquation(changeToEndScreen, toggleCorrect, toggleWrong, tog
   //check if game should end again
   if (numerator > denominator) {
     toggleWrong(answer);
-    removeCheckButtonListenser();
     changeToEndScreen();
     return "end";
   }
@@ -443,13 +441,4 @@ export function checkEquation(changeToEndScreen, toggleCorrect, toggleWrong, tog
   return {response: "wrong", answer: answer};
   }
  
-}
-
-//set checkbutton onclick to null
-export function removeCheckButtonListenser() {
-  const checkButton = document.getElementById("checkEq");
-  if (checkButton) {
-    checkButton.onClick = null;
-
-  }
 }
