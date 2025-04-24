@@ -14,6 +14,7 @@ function UnitList() {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ["units", subject, year],
     queryFn: () => fetchUnits(subject, year),
+    refetchOnWindowFocus: false,
   });
 
   const paginatedUnits = data?.slice((currentPage - 1) * 5, currentPage * 5);

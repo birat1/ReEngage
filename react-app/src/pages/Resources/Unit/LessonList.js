@@ -10,13 +10,14 @@ function LessonList() {
   const { data, isLoading } = useQuery({
     queryKey: ["lessons", subject, unit],
     queryFn: () => fetchLessons(subject, unit),
+    refetchOnWindowFocus: false,
   });
 
   return (
     <>
-      <div className="lesson-list-card shadow-sm rounded d-flex flex-column">
+      <div className="lesson-list-card rounded shadow-sm d-flex flex-column align-items-center">
         {isLoading ? (
-          <>Loading...</>
+          <div className="">Loading...</div>
         ) : (
           <>
             <h4 className="text-center">{data[0].unitTitle}</h4>

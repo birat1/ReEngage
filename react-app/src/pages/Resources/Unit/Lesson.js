@@ -1,30 +1,51 @@
 import { useParams } from "react-router-dom";
 import "./styles/Lesson.css";
-import { useQuery } from "@tanstack/react-query";
-import { fetchVideo } from "../api/lessonAssets";
+import { useQueries } from "@tanstack/react-query";
+import { fetchVideo, fetchSummary } from "../api/lessonAssets";
 
 function Lesson() {
   const { year, subject, lesson } = useParams();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["video", lesson],
-    queryFn: () => fetchVideo(lesson),
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ["video", lesson],
+        queryFn: () => fetchVideo(lesson),
+        refetchOnWindowFocus: false,
+      },
+      {
+        queryKey: ["summary", lesson],
+        queryFn: () => fetchSummary(lesson),
+        refetchOnWindowFocus: false,
+      },
+    ],
   });
 
-  const video = data;
+  const videoResult = results[0];
+  const summaryResult = results[1];
+
+  const video = videoResult.data;
+  const summary = summaryResult.data;
 
   return (
     <>
-      <div className="lesson-card shadow-sm rounded">
-        <p>
-          {year} {subject} {lesson}
-        </p>
-        {video ? (
-          <>
-            <video controls width="600" src={video} />
-          </>
+      <div className="lesson-card slide-up shadow-sm rounded d-flex flex-column align-items-center gap-2 mt-5">
+        {videoResult.isLoading || summaryResult.isLoading ? (
+          <div>Loading...</div>
         ) : (
-          <>Loading...</>
+          <>
+            <h2>{summary.lessonTitle}</h2>
+            <div className="video-card rounded shadow-sm">
+              {video ? (
+                <video controls src={video} className="lesson-video rounded" />
+              ) : (
+                <div>Loading...</div>
+              )}
+            </div>
+            <div>
+
+            </div>
+          </>
         )}
       </div>
     </>

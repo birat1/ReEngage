@@ -19,3 +19,21 @@ export const fetchVideo = async (lesson) => {
 
   return videoUrl;
 };
+
+export const fetchSummary = async (lesson) => {
+  const url = `${baseUrl}/${lesson}/summary`;
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${lesson} summary`);
+  }
+
+  const data = await response.json();
+
+  return data;
+};
