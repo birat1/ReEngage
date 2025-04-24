@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StarMath.css";
-import EndGameOverlay from "./components/EndGameOverlay";
+import EndGameOverlay from "./components/EndGameOverlay.js";
+import BackgroundMusic from "./components/backgroundMusic.js";
 import {
   yrGroupSorter,
   questionCount,
   changeDenominator,
   difficultyChoice,
   checkEquation,
-  removeCheckButtonListenser,
 } from "./components/game-logic";
 import {
   positionEquation,
@@ -31,6 +31,7 @@ function StarMathGame() {
   const [wrongMessage, setWrongMessage] = useState("");
   const [finalPoints, setFinalPoints] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [isCheckDisabled, setIsCheckDisabled] = useState(false);
 
   const [yearG, setYearG] = useState("");
   const operatorRef = useRef(null);
@@ -43,26 +44,8 @@ function StarMathGame() {
   const correctRef = useRef(null);
   const wrongRef = useRef(null);
   const retryRef = useRef(null);
+  const playbtnRef = useRef(null);
   const starRefs = useRef([]);
-
-  //reset game
-  const resetGame = () => {
-    setShowTitleScreen(true);
-    setShowYearChoices(false);
-    setShowMainGame(false);
-    setShowHowToPlay(false);
-    setQuestionChoices(false);
-    setDifficulty(false);
-    setShowEndOverlay(false);
-    setWrongResponse(false);
-    setCorrectResponse(false);
-    setRetryResponse(false);
-    setFinalPoints(false);
-    setTotalQuestions(false);
-    setEndScreen(false);
-    numeratorRef.current.innerHTML = "1";
-    pointRef.current.innerHTML = "0";
-  };
 
   // converts symbols to words for better pronunciation
   const convertSymbolsToWords = (text) => {
@@ -142,12 +125,14 @@ function StarMathGame() {
   };
 
   const toggleCorrectResponse = () => {
+    setIsCheckDisabled(true);
     setRetryResponse(false);
     setWrongResponse(false);
     setCorrectResponse(true);
 
     setTimeout(() => {
       setCorrectResponse(false);
+      setIsCheckDisabled(false);
     }, 2500);
   };
 
@@ -159,6 +144,26 @@ function StarMathGame() {
     setTimeout(() => {
       setRetryResponse(false);
     }, 2500);
+  };
+
+  //reset game
+  const resetGame = () => {
+    setShowTitleScreen(true);
+    setShowYearChoices(false);
+    setShowMainGame(false);
+    setShowHowToPlay(false);
+    setQuestionChoices(false);
+    setDifficulty(false);
+    setShowEndOverlay(false);
+    setWrongResponse(false);
+    setCorrectResponse(false);
+    setRetryResponse(false);
+    setFinalPoints(0);
+    setTotalQuestions(0);
+    setEndScreen(false);
+    if (numeratorRef.current) numeratorRef.current.innerHTML = "1";
+    if (pointRef.current) pointRef.current.innerHTML = "0";
+    window.location.reload();
   };
 
   // intialises the main game
@@ -202,64 +207,18 @@ function StarMathGame() {
 
   // Adding the button click sound to all screens within the game
   useEffect(() => {
-    if (showYearChoices) {
-      setupClickSounds();
-    }
-  }, [showYearChoices]);
-
-  useEffect(() => {
-    if (showTitleScreen) {
-      setupClickSounds();
-    }
-  }, [showTitleScreen]);
-
-  useEffect(() => {
-    if (showHowToPlay) {
-      setupClickSounds();
-    }
-  }, [showHowToPlay]);
-
-  useEffect(() => {
-    if (showQuestionChoices) {
-      setupClickSounds();
-    }
-  }, [showQuestionChoices]);
-
-  useEffect(() => {
-    if (showDifficulty) {
-      setupClickSounds();
-    }
-  });
-
-  useEffect(() => {
-    if (showEndScreen) {
-      setupClickSounds();
-    }
-  }, [showEndScreen]);
-
-  useEffect(() => {
-    if (showCorrectResponse) {
-      setupClickSounds();
-    }
-  }, showCorrectResponse);
-
-  useEffect(() => {
-    if (showWrongResponse) {
-      setupClickSounds();
-    }
-  }, showWrongResponse);
-
-  useEffect(() => {
-    if (showCorrectResponse) {
-      setupClickSounds();
-    }
-  }, showCorrectResponse);
-
-  useEffect(() => {
-    if (showEndOverlay) {
-      setupClickSounds();
-    }
-  }, showEndOverlay);
+    setupClickSounds();
+  }, [
+    showYearChoices,
+    showTitleScreen,
+    showHowToPlay,
+    showQuestionChoices,
+    showDifficulty,
+    showEndScreen,
+    showCorrectResponse,
+    showWrongResponse,
+    showEndOverlay,
+  ]);
 
   useEffect(() => {
     if (wrongMessage && wrongRef.current) {
@@ -273,26 +232,27 @@ function StarMathGame() {
 
   return (
     <div className="star-math-container">
+      {/* Background Music button */}
+      <div>
+        <BackgroundMusic playBtn = {playbtnRef}  />
+      </div>
       {/* title screen */}
       {showTitleScreen && (
         <div id="titleScreen">
-          <div>
-            <h1 className="titleImg"></h1>
-          </div>
+          <h1 className="titleImg"></h1>
+
           <div id="titleScrnComp">
-            <div>
-              <p className="gameSlogan">Drag the stars and solve the math!</p>
-            </div>
-            <div>
+            <p className="gameSlogan">Drag the stars and solve the math!</p>
+
+            <div className="playBtnContainer">
               <button
                 type="button"
                 className="playBtn"
                 onClick={removeTitleScrn}
+                ref={playbtnRef}
               >
                 Play
               </button>
-            </div>
-            <div>
               <button
                 type="button"
                 className="playBtn HTPBtn"
@@ -326,6 +286,15 @@ function StarMathGame() {
       {/* choices of year group screen */}
       {showYearChoices && (
         <div id="yrChoices" className={showYearChoices ? "visible" : ""}>
+          <button
+            className="back-button"
+            onClick={() => {
+              setShowTitleScreen(true);
+              setShowYearChoices(false);
+            }}
+          >
+            ⬅
+          </button>
           <div>
             <p>Choose your year group!</p>
           </div>
@@ -346,6 +315,15 @@ function StarMathGame() {
       {/* choices of difficulty */}
       {showDifficulty && (
         <div id="diffChoices" className={showDifficulty ? "visible" : ""}>
+          <button
+            className="back-button"
+            onClick={() => {
+              setShowYearChoices(true);
+              setDifficulty(false);
+            }}
+          >
+            ⬅
+          </button>
           <div>
             <p>Choose your difficulty!</p>
           </div>
@@ -366,6 +344,15 @@ function StarMathGame() {
       {/* choice of how many questions */}
       {showQuestionChoices && (
         <div id="qChoices" className={showQuestionChoices ? "visible" : ""}>
+          <button
+            className="back-button"
+            onClick={() => {
+              setQuestionChoices(false);
+              setDifficulty(true);
+            }}
+          >
+            ⬅
+          </button>
           <div>
             <p>Pick the number of questions!</p>
           </div>
@@ -396,7 +383,7 @@ function StarMathGame() {
             >
               How to Play
             </button>
-             {/* Text-to-Speech button */}
+            {/* Text-to-Speech button */}
             <button
               type="button"
               className="speechBtn"
@@ -452,13 +439,16 @@ function StarMathGame() {
                 type="button"
                 className="check"
                 id="checkEq"
+                disabled={isCheckDisabled}
                 onClick={() => {
-                  checkEquation(
-                    () => changeToEndScreen(),
-                    toggleCorrectResponse,
-                    (answer) => toggleWrongResponse(answer),
-                    toggleRetryResponse
-                  );
+                  if (!isCheckDisabled) {
+                    checkEquation(
+                      () => changeToEndScreen(),
+                      toggleCorrectResponse,
+                      (answer) => toggleWrongResponse(answer),
+                      toggleRetryResponse
+                    );
+                  }
                 }}
               >
                 Check
