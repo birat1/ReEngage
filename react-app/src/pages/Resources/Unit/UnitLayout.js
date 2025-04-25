@@ -18,7 +18,7 @@ function UnitLayout() {
       </div>
       <div className={`lesson-content d-flex flex-column align-items-center ${isExpanded ? "with-sidebar" : ""}`}>
         <div className="icon-holder">
-        <div className={`hamburger ${isExpanded ? "change" : ""}`} onClick={toggleUnitList}>
+        <div className={`hamburger slide-from-left ${isExpanded ? "change" : ""}`} onClick={toggleUnitList}>
           <div class="bar1 rounded"> </div>
           <div class="bar2 rounded"> </div>
           <div class="bar3 rounded"> </div>

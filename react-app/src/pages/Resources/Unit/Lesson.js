@@ -30,23 +30,26 @@ function Lesson() {
   return (
     <>
       <div className="lesson-card slide-up shadow-sm rounded d-flex flex-column align-items-center gap-2 mt-5">
-        {videoResult.isLoading || summaryResult.isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <h2>{summary.lessonTitle}</h2>
-            <div className="video-card rounded shadow-sm">
-              {video ? (
-                <video controls src={video} className="lesson-video rounded" />
-              ) : (
-                <div>Loading...</div>
-              )}
-            </div>
-            <div>
-
-            </div>
-          </>
-        )}
+        <div>
+          {summaryResult.isLoading ? (
+            <div>​</div>
+          ) : (
+            <>
+              <h2>{summary.lessonTitle}</h2>
+            </>
+          )}
+        </div>
+        <h1>Hello</h1>
+        <h1>Gello</h1>
+        <div className="video-card rounded shadow-sm">
+          {videoResult.isLoading ? (
+            <div>Loading video...</div>
+          ) : (
+            video && (
+              <video controls src={video} className="lesson-video rounded" />
+            )
+          )}
+        </div>
       </div>
     </>
   );
