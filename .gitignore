@@ -22,3 +22,4 @@ Thumbs.db
 Desktop.ini
 .env/secrets/
 !django-app/secrets.env
+db.sqlite3
