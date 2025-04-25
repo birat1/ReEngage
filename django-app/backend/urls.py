@@ -51,11 +51,6 @@ urlpatterns = [
     path('api/oak/units/<str:keystage>/<str:subject>/<int:year>/', UnitsAPI.as_view(), name='oak-units'),
     path('api/oak/lessons/<str:unit>/', LessonsAPI.as_view(), name='oak-lessons'),
     path('api/oak/questions/<str:keystage>/<str:subject>/', QuestionsAPI.as_view(), name='oak-questions'),
-<<<<<<< HEAD
     path('api/oak/lessons/<int:lesson_id>/assets/', LessonAssetAPI.as_view(), name='oak-lesson-assets'),
     path('api/oak/lessons/<int:lesson_id>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
-=======
-    path('api/oak/lessons/<str:lesson>/video/', LessonAssetAPI.as_view(), name='oak-lesson-video'),
-    path('api/oak/lessons/<str:lesson>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
->>>>>>> a9b4ffecc8f6f4060a61867b7aa67a7d716a3b37
 ]
