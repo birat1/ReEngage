@@ -1,0 +1,2304 @@
+[
+  {
+    "lessonSlug": "introduction-to-food-chains",
+    "lessonTitle": "Introduction to food chains",
+    "starterQuiz": [
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "All animals eat the same food."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "All animals hunt to get their food."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "All animals need food to stay alive."
+          }
+        ]
+      },
+      {
+        "question": "Animals that are herbivores eat ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "plants and other animals"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "plants"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "animals"
+          }
+        ]
+      },
+      {
+        "question": "Match the animal to its description.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "koala"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "An excellent climber that eats leaves."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "fox"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "Has great senses of hearing and smell to hunt for its food."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "donkey"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "Often looked after by people who give it food."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "seal"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "Is carnivorous, eating mainly fish."
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "Bluefin tuna are carnivores so they eat ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "food from plants like seaweed"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "food from other animals like fish and squid"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "food from both plants and animals like seaweed and squid"
+          }
+        ]
+      },
+      {
+        "question": "If an animal does not get enough food it will eventually ...",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "die"
+          },
+          {
+            "type": "text",
+            "content": "die."
+          }
+        ]
+      },
+      {
+        "question": "The arrows in a food chain mean ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "eats"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "is food for"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "grazes"
+          }
+        ]
+      },
+      {
+        "question": "In this food chain the rabbit is food for the ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "grass"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "rabbit"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "fox"
+          }
+        ]
+      },
+      {
+        "question": "Put this food chain in the correct order.",
+        "questionType": "order",
+        "answers": [
+          {
+            "order": 1,
+            "type": "text",
+            "content": "leaves"
+          },
+          {
+            "order": 2,
+            "type": "text",
+            "content": "caterpillar"
+          },
+          {
+            "order": 3,
+            "type": "text",
+            "content": "blackbird"
+          }
+        ]
+      },
+      {
+        "question": "Aisha puts these animals in a food chain but she has made a mistake. Put this food chain in the correct order.",
+        "questionType": "order",
+        "answers": [
+          {
+            "order": 1,
+            "type": "text",
+            "content": "seaweed"
+          },
+          {
+            "order": 2,
+            "type": "text",
+            "content": "starfish"
+          },
+          {
+            "order": 3,
+            "type": "text",
+            "content": "sea otter"
+          },
+          {
+            "order": 4,
+            "type": "text",
+            "content": "shark"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "young-animals",
+    "lessonTitle": "Young animals",
+    "starterQuiz": [
+      {
+        "question": "Robins, barn owls and blue tits are all...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "mammals"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "birds"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "fish"
+          }
+        ]
+      },
+      {
+        "question": "Jacob is grouping animals. He decides to group the reptiles first but which animals should he choose?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A sheep, a pig and a cat."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "A crocodile, a snake and a lizard."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A shark, a goldfish and a seahorse."
+          }
+        ]
+      },
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Mammals give birth to live young and feed them milk."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Mammals lay eggs."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Mammals have scales."
+          }
+        ]
+      },
+      {
+        "question": "Match each word to the correct meaning.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "A carnivore"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "eats food that comes from other animals."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "A herbivore"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "eats food that comes from plants."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "An omnivore"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "eats food that comes from plants and other animals."
+            }
+          }
+        ]
+      },
+      {
+        "question": "Match these different types of animals to the correct description.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "mammals"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "are warm blooded and feed their young milk."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "amphibians"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "can live on land or in water."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "reptiles"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "lay eggs and have a body covered in scales or hard parts."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "fish"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "live in water and have gills to help them breathe."
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "birds"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "lay eggs and have wings and feathers."
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "Animals including humans have babies which are called young or...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "parents."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "observe."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "offspring."
+          }
+        ]
+      },
+      {
+        "question": "When we {{}} things we look at them closely with our eyes. ",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "observe"
+          }
+        ]
+      },
+      {
+        "question": "A cygnet is the offspring of a...",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "swan"
+          },
+          {
+            "type": "text",
+            "content": "Swan"
+          },
+          {
+            "type": "text",
+            "content": "swan."
+          }
+        ]
+      },
+      {
+        "question": "True or false? All animal offspring look like their parents.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "false"
+          },
+          {
+            "type": "text",
+            "content": "False"
+          },
+          {
+            "type": "text",
+            "content": "false."
+          }
+        ]
+      },
+      {
+        "question": "The offspring of a butterfly is... ",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a caterpillar"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a kitten"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a cub"
+          }
+        ]
+      },
+      {
+        "question": "Match the offspring to its parent.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "puppy"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "dog"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "chick"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "hen"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "cub"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "lion"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "tadpole"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "frog"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "growing-up",
+    "lessonTitle": "Growing up",
+    "starterQuiz": [
+      {
+        "question": "The offspring of a sheep is called...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a puppy"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a kitten"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a lamb"
+          }
+        ]
+      },
+      {
+        "question": "Offspring is a word that means...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "the parent of an animal"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "the baby or young of an animal"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "that an animal looks like its parents"
+          }
+        ]
+      },
+      {
+        "question": "True or false. The offspring of this butterfly will be a smaller butterfly that has the same coloured wings.",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "False. The offspring of a butterfly is a caterpillar."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "True. All animals have offspring that look similar to them."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "False. The offspring of this butterfly will have different colours on its wings."
+          }
+        ]
+      },
+      {
+        "question": "When we match animals to their offspring which skill do we use?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "observation"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "research"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "measuring"
+          }
+        ]
+      },
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "All animals have offspring that look similar to them."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "All animals have offspring that look different to them."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Some animals have offspring that look similar to them."
+          }
+        ]
+      },
+      {
+        "question": "Match the offspring to its parent.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "calf"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "elephant"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "caterpillar"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "butterfly"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "kitten"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "cat"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "foal"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "horse"
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "Put the offspring and adult into the correct order starting with the youngest.",
+        "questionType": "order",
+        "answers": [
+          {
+            "order": 1,
+            "type": "text",
+            "content": "tadpole"
+          },
+          {
+            "order": 2,
+            "type": "text",
+            "content": "frog"
+          }
+        ]
+      },
+      {
+        "question": "Offspring are...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "parent animals"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "fully grown animals"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "young animals"
+          }
+        ]
+      },
+      {
+        "question": "Offspring change and grow into...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "adults"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "butterflies"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "mammals"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "offspring"
+          }
+        ]
+      },
+      {
+        "question": "Match the offspring to its parent.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "tadpole"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "frog"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "calf"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "cow"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "chick"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "hen"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "hatchling"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "crocodile"
+            }
+          }
+        ]
+      },
+      {
+        "question": "Jacob has lots of photos of animals. He sorts the animals into offspring and adults. This is called...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "researching"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "grouping"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "observing"
+          }
+        ]
+      },
+      {
+        "question": "When we sort animals by their stage of growth, we put them into which groups?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "offspring or adults"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "mammals or reptiles"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "fur or feathers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "plants-and-animals-in-microhabitats",
+    "lessonTitle": "Plants and animals in microhabitats",
+    "starterQuiz": [
+      {
+        "question": "Living things live in different ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "homes."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "houses."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "habitats."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "hibernations."
+          }
+        ]
+      },
+      {
+        "question": "Which of these habitats provides the things that a water lily needs to survive?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a desert"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "the Arctic"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a river"
+          }
+        ]
+      },
+      {
+        "question": "True or false? Living things cannot be suited to the habitat in which they live.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "false"
+          }
+        ]
+      },
+      {
+        "question": "Different plants live in different habitats depending on their basic needs. What are the basic needs of a plant?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "water, light and warmth"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "water, food and air"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "water, light and air"
+          }
+        ]
+      },
+      {
+        "question": "Match these plants to the correct habitat.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a fern"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "woodland"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a prickly pear cactus"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "desert"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "seaweed"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "ocean"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a pine tree"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "the Arctic"
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "A woodland is a place where many different plants and animals live. This is called ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a minibeast."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a habitat."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a living thing."
+          }
+        ]
+      },
+      {
+        "question": "A habitat provides the things that a plant or animal needs to survive. What does survive mean?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "to stay alive"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "to stay still"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "to stay awake"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "to grow quickly"
+          }
+        ]
+      },
+      {
+        "question": "A rock pool, under a log and on a leaf are all ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "minibeasts."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "living things."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "microhabitats."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "protecting-microhabitats",
+    "lessonTitle": "Protecting microhabitats",
+    "starterQuiz": [
+      {
+        "question": "A smaller area where plants and animals live is called ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a microhabitat."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a woodland."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a minibeast."
+          }
+        ]
+      },
+      {
+        "question": "Alex says that a lion can't live in a microhabitat. Which statement below do you agree with?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A lion can live in a microhabitat because it can hide."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "A lion is too big to live in a microhabitat."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A lion is too scary to live in a microhabitat."
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "A microhabitat is a ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "small area where plants and animals live."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "large area where plants and animals live."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "damp area where plants and animals live."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "rainy area where plants and animals live."
+          }
+        ]
+      },
+      {
+        "question": "Some microhabitats are under threat. Why is this?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "they have grown too big"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "there are too many minibeasts"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "some people are not looking after planet Earth"
+          }
+        ]
+      },
+      {
+        "question": "A wildlife-friendly garden is a garden that...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "has lots of microhabitats to encourage wildlife to live safely."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "has a shed."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "is in the countryside."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "has lots of animals like foxes and squirrels."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "everyday-objects-and-materials",
+    "lessonTitle": "Everyday objects and materials",
+    "starterQuiz": [
+      {
+        "question": "Which part of a plant is this?",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "roots"
+          },
+          {
+            "type": "text",
+            "content": "root"
+          }
+        ]
+      },
+      {
+        "question": "Which sense is being shown in this picture?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "touch"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "taste"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "smell"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "hear"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "sight"
+          }
+        ]
+      },
+      {
+        "question": "Match what might happen to the correct season.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "wear warm coats and woolly hats"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "winter"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "put on sun cream"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "summer"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "some leaves change to red and orange"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "autumn"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "many flowers begin to grow again"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "spring"
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "An object is ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Something that you can touch but that is not alive."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A plant or animal that is alive."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A material."
+          }
+        ]
+      },
+      {
+        "question": "What is a material?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A material is an object."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A material is how big an object is."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "A material is is what an object is made from."
+          }
+        ]
+      },
+      {
+        "question": "True or false? Different objects can be made from different materials.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "true"
+          }
+        ]
+      },
+      {
+        "question": "Match each object to the material that it is often made from.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a toy duck"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "plastic"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a pair of scissors"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "metal"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a chair"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "wood"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a t-shirt"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "fabric"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "a marble"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "glass"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "materials-for-recycling",
+    "lessonTitle": "Materials for recycling",
+    "starterQuiz": [
+      {
+        "question": "What do we call a thing that we can touch but that is not alive?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a material"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "an object"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "an animal"
+          }
+        ]
+      },
+      {
+        "question": "Objects are made from...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "materials."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "ideas."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "things."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "colours."
+          }
+        ]
+      },
+      {
+        "question": "True or false? All objects are made from the same material.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "false"
+          }
+        ]
+      },
+      {
+        "question": "What is this saucepan made from?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "glass and plastic"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "metal and plastic"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "wood and plastic"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "glass and wood"
+          }
+        ]
+      },
+      {
+        "question": "Which of these are materials?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Wood, water and rock."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Glass, a cup and a chair."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "A book, plastic and metal."
+          }
+        ]
+      },
+      {
+        "question": "Match each object to the material that it is made from.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "building bricks"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "plastic"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "blocks"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "wood"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "cans"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "metal"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "jar"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "glass"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "statue"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "rock"
+            }
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "What material is a drinks can made from?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "plastic"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "glass"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "metal"
+          }
+        ]
+      },
+      {
+        "question": "What material is this chair made from?",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "wood"
+          }
+        ]
+      },
+      {
+        "question": "Materials such glass, wood, metal and plastic can often be...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "recycled."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "recovered."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "reached."
+          }
+        ]
+      },
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Materials cannot be recycled and used again."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Some materials can be recycled and used again."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "All materials can be recycled and used again."
+          }
+        ]
+      },
+      {
+        "question": "Which skills do scientists use when they sort materials?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "counting and ordering"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "observing and comparing"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "researching and recording"
+          }
+        ]
+      },
+      {
+        "question": "Recycling is important because...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "it reduces waste and this helps the planet."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "it means we throw more things away."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "it keeps our homes tidy."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "transparent-and-opaque-materials-review",
+    "lessonTitle": "Transparent and opaque materials: review",
+    "starterQuiz": [
+      {
+        "question": "Transparent materials ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "let water through."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "let light through."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "do not bend."
+          }
+        ]
+      },
+      {
+        "question": "Materials that do not let light through are called ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "opaque."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "transparent."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "bumpy."
+          }
+        ]
+      },
+      {
+        "question": "Izzy has recorded these results in ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a test."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a desk."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a table."
+          }
+        ]
+      },
+      {
+        "question": "What equipment could Laura use to investigate opaque and transparent materials?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a ruler and a book"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a jug and a spoon"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a torch and a window"
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "When we put materials into groups of transparent and opaque, which science skill are we using?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "talking"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "measuring"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "sorting"
+          }
+        ]
+      },
+      {
+        "question": "Transparent materials are useful for making ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a curtain."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a light bulb."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a book."
+          }
+        ]
+      },
+      {
+        "question": "Opaque materials are useful for making ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a window."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a pair of glasses."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "a garden fence."
+          }
+        ]
+      },
+      {
+        "question": "What do these results tell us?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "which materials are waterproof and not waterproof"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "which materials are transparent and opaque"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "which materials are rough and smooth"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "animal-life-cycles",
+    "lessonTitle": "Animal life cycles",
+    "starterQuiz": [
+      {
+        "question": "Match the offspring to their parent.",
+        "questionType": "match",
+        "answers": [
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "foal"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "horse"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "owlet"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "owl"
+            }
+          },
+          {
+            "matchOption": {
+              "type": "text",
+              "content": "cygnet"
+            },
+            "correctChoice": {
+              "type": "text",
+              "content": "swan"
+            }
+          }
+        ]
+      },
+      {
+        "question": "True or false? Offspring always look like their parents.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "false"
+          },
+          {
+            "type": "text",
+            "content": "False"
+          },
+          {
+            "type": "text",
+            "content": "false."
+          }
+        ]
+      },
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Offspring change and grow into adult animals."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Offspring do not grow or change."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Offspring grow but do not change."
+          }
+        ]
+      },
+      {
+        "question": "Which of these groups only has animals that are offspring?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "foal, horse, zebra"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "chick, penguin, hen"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "tadpole, kitten, hatchling"
+          }
+        ]
+      },
+      {
+        "question": "Which of these groups only has animals that are adults?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "caterpillar, butterfly, ladybird"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "horse, crocodile, owl"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "frog, tadpole, toad"
+          }
+        ]
+      },
+      {
+        "question": "Izzy has some animal photos. She puts them into {{}} by looking at what is the same and what is different about them.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "groups"
+          },
+          {
+            "type": "text",
+            "content": "group"
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "From when they are born to when they become an adult, all animals...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "grow and change"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "have offspring"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "stay the same"
+          }
+        ]
+      },
+      {
+        "question": "The journey of an animal from beginning to when it is fully grown is called its...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "offspring"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "life cycle"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "parent"
+          }
+        ]
+      },
+      {
+        "question": "Put these monkeys in order from youngest to oldest.",
+        "questionType": "order",
+        "answers": [
+          {
+            "order": 1,
+            "type": "text",
+            "content": "newborn infant"
+          },
+          {
+            "order": 2,
+            "type": "text",
+            "content": "infant"
+          },
+          {
+            "order": 3,
+            "type": "text",
+            "content": "monkey"
+          }
+        ]
+      },
+      {
+        "question": "When we observe this seal and its pup we notice that...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "The pup is smaller and has darker fur. The seal is bigger and has white fur."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "The pup is bigger and has white fur. The seal is smaller and has spotty fur."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "The pup is smaller and has white fur. The seal is bigger and has spotty fur."
+          }
+        ]
+      },
+      {
+        "question": "Put these different stages of a butterfly's life cycle in order starting with the youngest. ",
+        "questionType": "order",
+        "answers": [
+          {
+            "order": 1,
+            "type": "text",
+            "content": "egg"
+          },
+          {
+            "order": 2,
+            "type": "text",
+            "content": "caterpillar"
+          },
+          {
+            "order": 3,
+            "type": "text",
+            "content": "chrysalis"
+          },
+          {
+            "order": 4,
+            "type": "text",
+            "content": "butterfly"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lessonSlug": "suitable-and-unsuitable-materials",
+    "lessonTitle": "Suitable and unsuitable materials",
+    "starterQuiz": [
+      {
+        "question": "Objects are made from ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "materials."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "properties."
+          }
+        ]
+      },
+      {
+        "question": "The describing words we use for a material are called its ...",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "objects."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "compares."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "properties."
+          }
+        ]
+      },
+      {
+        "question": "Which of these is a material?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a food tin"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "a saucepan"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "metal"
+          }
+        ]
+      },
+      {
+        "question": "Which of these are properties of materials?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "plastic"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "waterproof"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "glass"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "smooth"
+          }
+        ]
+      },
+      {
+        "question": "What do we do when we describe something?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "We say or write about what something is like."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "We sort objects into groups."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "We say or write the results of an investigation."
+          }
+        ]
+      },
+      {
+        "question": "Which of these statements is true?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Objects are made from different materials depending on their use."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Objects are made from different materials depending on their size."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Objects are all made from the same material."
+          }
+        ]
+      }
+    ],
+    "exitQuiz": [
+      {
+        "question": "True or false? Different objects are made of different materials.",
+        "questionType": "short-answer",
+        "answers": [
+          {
+            "type": "text",
+            "content": "true"
+          },
+          {
+            "type": "text",
+            "content": "True"
+          }
+        ]
+      },
+      {
+        "question": "What does suitable mean?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Suitable means that a material is not right for an object."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Suitable means that a material is strong."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Suitable means that a material is right for an object."
+          }
+        ]
+      },
+      {
+        "question": "Why is a window usually made from glass?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Glass is the most unsuitable material for a window."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Glass is the strongest material."
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Glass is the most suitable material for a window."
+          }
+        ]
+      },
+      {
+        "question": "Which of these materials is suitable for making a warm hat?",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "plastic"
+          },
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "wool"
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "paper"
+          }
+        ]
+      },
+      {
+        "question": "Sofia has sorted these materials into two groups: materials suitable to make a chair / materials unsuitable to make a chair. Which material has she put in the wrong group, and why? ",
+        "questionType": "multiple-choice",
+        "answers": [
+          {
+            "distractor": false,
+            "type": "text",
+            "content": "Metal because it is strong."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Paper because it is waterproof."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Wood because it is rigid and holds its shape."
+          },
+          {
+            "distractor": true,
+            "type": "text",
+            "content": "Metal because it is soft and flexible."
+          }
+        ]
+      }
+    ]
+  }
+]
