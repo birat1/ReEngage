@@ -13,7 +13,7 @@ def fetch_from_oak_api(endpoint, params=None):
     except requests.RequestException as e:
         print(f"Error fetching from Oak OpenAPI: {e}")
         return None
-    
+
 
 def get_units(keystage, subject, year):
     endpoint = f"key-stages/{keystage}/subject/{subject}/units"
@@ -21,7 +21,7 @@ def get_units(keystage, subject, year):
     data = fetch_from_oak_api(endpoint)
     if not data:
         return []
-    
+
     expected_year = f"year-{year}"
     year_data = next((entry for entry in data if entry["yearSlug"] == expected_year), None)
 
