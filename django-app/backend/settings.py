@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '10.2.8.15']
 
 API_NINJAS_KEY = os.getenv("API_NINJAS_KEY")
+API_OAK_KEY = os.getenv("API_OAK_KEY")
 
 
 # Application definition

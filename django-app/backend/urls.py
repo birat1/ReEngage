@@ -17,6 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ReEngage.views import apiAdmin, apiAvatar, apiStudent
+from ReEngage.oak_api_views import (
+    UnitsAPI,
+    LessonsAPI,
+    LessonAssetAPI,
+    LessonSummaryAPI,
+    QuestionsAPI,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +46,11 @@ urlpatterns = [
     path('api/avatar', apiAvatar.as_view({'get':'list'}), name = 'listapiavatar'), #///Need more for avatar?
     path('api/avatar/<int:user_id>', apiAvatar.as_view({'get':'retrieve'}), name = 'viewavatar'),
     path('api/avatar/<int:user_id>/update', apiAvatar.as_view({'put':'update'}), name = 'editapiavatar'),
+
+    # Routes for Oak OpenAPI
+    path('api/oak/units/<str:keystage>/<str:subject>/<int:year>/', UnitsAPI.as_view(), name='oak-units'),
+    path('api/oak/lessons/<int:unit_id>/', LessonsAPI.as_view(), name='oak-lessons'),
+    path('api/oak/questions/<str:keystage>/<str:subject>/', QuestionsAPI.as_view(), name='oak-questions'),
+    path('api/oak/lessons/<int:lesson_id>/video/', LessonAssetAPI.as_view(), name='oak-lesson-video'),
+    path('api/oak/lessons/<int:lesson_id>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
 ]
