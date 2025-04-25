@@ -11,7 +11,7 @@ class Admin(models.Model):
 #Class for students
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    year = models.IntegerField(choices=[(i, i) for i in range(3, 6)])
+    year = models.IntegerField(choices=[(i, i) for i in range(3, 7)])
     managed_by = models.ForeignKey(Admin, on_delete=models.CASCADE)
     level = models.PositiveIntegerField()
     xp = models.PositiveIntegerField()
@@ -28,7 +28,8 @@ class Student(models.Model):
 #Class for each avatar
 class Avatar(models.Model):
     avatar_id = models.AutoField(primary_key=True)
-    image = models.ImageField(upload_to='uploads') #//Where to store??
+    name = models.CharField(max_length=20)
+    #image = models.ImageField(upload_to='uploads')
     price = models.PositiveIntegerField()
 
 #Class for avatar's owned by students
