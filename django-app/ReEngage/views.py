@@ -9,6 +9,7 @@ from . models import Student, Admin, Avatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
 
 class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIMIZE CODE REUSE???
+	queryset = Student.objects.all()
 
 	def get_item(self, person_id):
 		try:
@@ -17,9 +18,8 @@ class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIM
 			return None
 		
 	def list(self, request):
-		queryset = Student.objects.all()
-		serializer_class = StudentSerializer (queryset, many=True)
-		return Response(serializer_class.data, status-status.HTTP_200_OK)
+		serializer_class = StudentSerializer (self.queryset, many=True)
+		return Response(serializer_class.data, status=status.HTTP_200_OK)
 
 	def create(self, request):
 		data = {
@@ -45,7 +45,7 @@ class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIM
 			return Response({"res": "Object with person_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 		else:
 			serializer = StudentSerializer (student_instance)
-			return Response (serializer.data, status-status.HTTP_200_OK)
+			return Response (serializer.data, status=status.HTTP_200_OK)
 	
 	def destroy(self, request, person_id):
 		student_instance = self.get_object(person_id, request.user.person_id)
@@ -78,6 +78,7 @@ class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIM
 				return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class apiAdmin(viewsets.ModelViewSet):
+	queryset = Admin.objects.all()
 
 	def get_item(self, person_id):
 		try:
@@ -86,9 +87,8 @@ class apiAdmin(viewsets.ModelViewSet):
 			return None
 		
 	def list(self, request):
-		queryset = Admin.objects.all()
-		serializer_class = AdminSerializer (queryset, many=True)
-		return Response(serializer_class.data, status-status.HTTP_200_OK)
+		serializer_class = AdminSerializer (self.queryset, many=True)
+		return Response(serializer_class.data, status=status.HTTP_200_OK)
 
 	def create(self, request):
 		data = {
@@ -110,7 +110,7 @@ class apiAdmin(viewsets.ModelViewSet):
 			return Response({"res": "Object with person_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 		else:
 			serializer = AdminSerializer (admin_instance)
-			return Response (serializer.data, status-status.HTTP_200_OK)
+			return Response (serializer.data, status=status.HTTP_200_OK)
 	
 	def destroy(self, request, person_id):
 		admin_instance = self.get_object(person_id, request.user.person_id)
@@ -139,6 +139,7 @@ class apiAdmin(viewsets.ModelViewSet):
 				return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 			
 class apiAvatar(viewsets.ModelViewSet):
+	queryset = Avatar.objects.all()
 
 	def get_item(self, avatar_id):
 		try:
@@ -147,9 +148,8 @@ class apiAvatar(viewsets.ModelViewSet):
 			return None
 		
 	def list(self, request):
-		queryset = Avatar.objects.all()
-		serializer_class = AvatarSerializer (queryset, many=True)
-		return Response(serializer_class.data, status-status.HTTP_200_OK)
+		serializer_class = AvatarSerializer (self.queryset, many=True)
+		return Response(serializer_class.data, status=status.HTTP_200_OK)
 
 	def retrieve(self, request, avatar_id):
 		avatar_instance= self.get_object (avatar_id=avatar_id)
@@ -157,7 +157,7 @@ class apiAvatar(viewsets.ModelViewSet):
 			return Response({"res": "Object with person_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 		else:
 			serializer = AvatarSerializer (avatar_instance)
-			return Response (serializer.data, status-status.HTTP_200_OK)
+			return Response (serializer.data, status=status.HTTP_200_OK)
 		
 	def update(self, request, avatar_id):
 		avatar_instance= self.get_object (avatar_id, request.user.avatar_id) #///??? :(

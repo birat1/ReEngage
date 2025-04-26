@@ -3,6 +3,7 @@ import "./styles/StudentProgress.css";
 import "./avataaars.png";
 import avatars from "./avataaars.png";
 import Footer from "../../components/Footer/Footer.js";
+import { backendAPI } from "../../constants.js";
 
 /*
 Parents/teachers should be able to see each of their student’s progress. 

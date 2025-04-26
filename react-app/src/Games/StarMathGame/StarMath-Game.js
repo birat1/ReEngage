@@ -31,6 +31,7 @@ function StarMathGame() {
   const [wrongMessage, setWrongMessage] = useState("");
   const [finalPoints, setFinalPoints] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [totalCorrect, setTotalCorrect] = useState(0);
   const [isCheckDisabled, setIsCheckDisabled] = useState(false);
 
   const [yearG, setYearG] = useState("");
@@ -129,6 +130,7 @@ function StarMathGame() {
     setRetryResponse(false);
     setWrongResponse(false);
     setCorrectResponse(true);
+    setTotalCorrect((prevTotalCorrect) => prevTotalCorrect + 1);
 
     setTimeout(() => {
       setCorrectResponse(false);
@@ -511,6 +513,7 @@ function StarMathGame() {
           points={finalPoints}
           questions={totalQuestions}
           resetGame={resetGame}
+          correctQuestions={totalCorrect}
         />
       )}
     </div>
@@ -518,3 +521,7 @@ function StarMathGame() {
 }
 
 export default StarMathGame;
+
+/* Add a check, at the end of show end overlay (or within here 
+rather) - if authenticated, update the code
+if not dont need to */
