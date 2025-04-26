@@ -25,6 +25,7 @@ export async function fetchQuestions() {
       ...(lesson.exitQuiz || []),
     ]);
 
+    // Keywords to identify questions with assets
     const assetKeywords = [
       "graph",
       "figure",
@@ -40,9 +41,7 @@ export async function fetchQuestions() {
       "refer to the"
     ];
 
-
-
-    // Filter for singular/multiple-choice questions
+    // Filter for singular/multiple-choice questions and exclude those with assets
     const multipleChoiceQuestions = allQuestions.filter(
       (question) => 
         question.questionType === "multiple-choice" && 
