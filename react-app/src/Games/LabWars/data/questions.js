@@ -25,9 +25,30 @@ export async function fetchQuestions() {
       ...(lesson.exitQuiz || []),
     ]);
 
+    const assetKeywords = [
+      "graph",
+      "figure",
+      "image",
+      "diagram",
+      "table",
+      "chart",
+      "see below",
+      "shown",
+      "in this picture",
+      "in the picture",
+      "in this diagram",
+      "refer to the"
+    ];
+
+
+
     // Filter for singular/multiple-choice questions
     const multipleChoiceQuestions = allQuestions.filter(
-      (question) => question.questionType === "multiple-choice"
+      (question) => 
+        question.questionType === "multiple-choice" && 
+        !assetKeywords.some((keyword) =>
+          question.question.toLowerCase().includes(keyword)
+        )
     );
 
     // Shuffle the questions and select 10 random ones
