@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import QuestionCard from './components/QuestionCard';
 import AnswerOptions from './components/AnswerOptions';
@@ -8,6 +8,7 @@ import StartMenu from './components/StartMenu';
 import GameOver from './components/GameOver';
 import { fetchQuestions } from './data/questions';
 import './LabWars.css';
+
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
@@ -36,6 +37,7 @@ const LabWars = () => {
   const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
@@ -43,13 +45,27 @@ const LabWars = () => {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
 
-  useEffect(() => {
-    const loadQuestions = async () => {
-      const fetchedQuestions = await fetchQuestions();
-      setQuestions(fetchedQuestions);
-    };
-    loadQuestions();
-  }, []);
+  const handleStartGame = async () => {
+    setIsLoading(true);
+    const fetchedQuestions = await fetchQuestions();
+    setQuestions(fetchedQuestions);
+    setIsLoading(false);
+    setGameStarted(true);
+  };
+
+  const handlePlayAgain = async () => {
+    const fetchedQuestions = await fetchQuestions();
+    setQuestions(fetchedQuestions);
+    setGameOver(false);
+    setCurrentQuestion(0);
+    setFeedback({ message: '', isCorrect: null });
+    setIsAnswered(false);
+  };
+
+  // Handle return to homepage
+  const handleReturnHome = () => {
+    navigate('/');
+  };
 
   // Check if the submitted answers are correct based on the question type
   const checkAnswer = (selectedAnswers, question) => {
@@ -108,23 +124,19 @@ const LabWars = () => {
     }
   };
 
-  // Handle play again
-  const handlePlayAgain = () => {
-    setGameOver(false);
-    setCurrentQuestion(0);
-    setFeedback({ message: '', isCorrect: null });
-    setIsAnswered(false);
-  };
-
-  // Handle return to homepage
-  const handleReturnHome = () => {
-    navigate('/');
-  };
-
   if (!gameStarted) {
+    if (isLoading) {
+      return (
+        <Container className="lab-wars-container loading-screen">
+          <Spinner animation="border" variant="primary" role="status" />
+          <h2 className="mt-4">Loading Questions...</h2>
+        </Container>
+      );
+    }
+
     return (
       <Container className="lab-wars-container">
-        <StartMenu onPlay={() => setGameStarted(true)} />
+        <StartMenu onPlay={handleStartGame} />
       </Container>
     );
   }
@@ -143,7 +155,7 @@ const LabWars = () => {
   if (questions.length === 0) {
     return (
       <Container className="lab-wars-container">
-        <h1 className="game-title">Loading Questions...</h1>
+        <h1 className="game-title">No Questions Found...</h1>
       </Container>
     );
   }
