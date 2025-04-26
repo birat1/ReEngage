@@ -12,7 +12,7 @@
 
 .lesson-list {
     overflow-y: scroll;
-    padding-right: 1rem;
+    padding-right: .5rem;
 }
 
 .lesson-entry {

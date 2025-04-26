@@ -15,7 +15,7 @@ function LessonList() {
 
   return (
     <>
-      <div className="lesson-list-card rounded shadow-sm d-flex flex-column align-items-center">
+      <div className="lesson-list-card slide-up rounded shadow-sm d-flex flex-column align-items-center">
         {isLoading ? (
           <div className="">Loading...</div>
         ) : (
