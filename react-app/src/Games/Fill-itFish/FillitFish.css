@@ -1,5 +1,5 @@
 .bg {
-    min-height: 100vh;
+    min-height: calc(100vh - 76px);
     background-image: url('./images/seaBG.jpg');
     background-size: cover;
     background-repeat: no-repeat;

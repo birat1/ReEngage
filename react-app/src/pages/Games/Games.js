@@ -32,7 +32,7 @@ function GamesContent() {
         >
           <div className="games d-flex align-items-center flex-wrap gap-4">
             {games.map((game, index) => (
-              <Link to={`/games/${game.to}`} className="link-style" key={index}>
+              <Link to={`/${game.to}`} className="link-style" key={index}>
                 <div
                   className="gamecard-animate"
                   style={{ animationDelay: game.delay }}

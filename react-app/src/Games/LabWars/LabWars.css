@@ -1,7 +1,7 @@
 .lab-wars-container {
   padding: 1rem 2rem 2rem;
   background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
-  min-height: 100vh;
+  min-height: calc(100vh - 76px);
   min-width: 100%;
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
 }
