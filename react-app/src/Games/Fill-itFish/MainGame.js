@@ -55,7 +55,7 @@ export default function TitleScreen() { // screen user sees before playing the g
   function handleSelect() {
     setIsOpen(false);
     setShowTransitionScreen(true);
-    //audio.play(); // Start playing when the game starts
+    audio.play(); // Start playing music when the game starts
   }
 
   function handleHelp() {
@@ -67,7 +67,7 @@ export default function TitleScreen() { // screen user sees before playing the g
   }
 
   return ( // only hides button so doesn't need a parent component
-    <div className="bg">
+    <div className="bg" style={{position: "relative"}}>
       <div>
         {isOpen && <h1 className="icon Title-icon"></h1>}
       </div>
@@ -120,6 +120,7 @@ function TransitionScreen({audio}) {
           usedWords={usedWords} // pass usedWords
           setUsedWords={setUsedWords} // update usedWords
           onNextRound={handleNextRound} 
+          music={audio}
         />
       ) : (
         <Finish 
@@ -146,7 +147,7 @@ function ChooseYear({ onSelect }) {
   );
 }
 
-function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
+function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music }) {
   const [word, setWord] = useState(""); // the actual word for this round
   const [definition, setDefinition] = useState(null); // definition for current word
   const [hiddenWord, setHiddenWord] = useState(""); // the partially hidden word displayed to user
@@ -166,6 +167,15 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
 
   function closeWrongScreen() {
     setShowWrongScreen(false);
+  }
+
+  function handleSound() {
+    if (music.paused){
+      music.play(); 
+    }
+    else {
+      music.pause();
+    }
   }
 
   useEffect(() => {
@@ -325,6 +335,9 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords }) {
                   <br key="br1" />,
                   "Incorrect, try again!"
                 ]} />}
+                <button onClick={handleSound} className="btn center-btn" style={{ top: "35%", left: "10%",padding: "0px 0px" }}>
+                  🔉
+                </button>
                 <button onClick={handleSkip} className="btn center-btn" style={{ top: "35%", left: "90%",padding: "0px 0px" }}>
                   Skip
                 </button>
