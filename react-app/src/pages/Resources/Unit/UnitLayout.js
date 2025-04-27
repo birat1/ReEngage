@@ -13,12 +13,12 @@ function UnitLayout() {
 
   return (
     <div className="unit-layout gradient d-flex">
-      <div className={`sidebar ${isExpanded ? "expanded" : ""}`}>
+      <div className={`sidebar pt-2 ${isExpanded ? "expanded" : ""}`}>
         <LessonList />
       </div>
       <div className={`lesson-content d-flex flex-column align-items-center ${isExpanded ? "with-sidebar" : ""}`}>
         <div className="icon-holder">
-        <div className={`hamburger slide-from-left ${isExpanded ? "change" : ""}`} onClick={toggleUnitList}>
+        <div className={`hamburger slide-from-left pt-2 ${isExpanded ? "change" : ""}`} onClick={toggleUnitList}>
           <div class="bar1 rounded"> </div>
           <div class="bar2 rounded"> </div>
           <div class="bar3 rounded"> </div>

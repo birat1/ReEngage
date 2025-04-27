@@ -1,6 +1,6 @@
 import "./styles/BoardEntry.css";
 
-function BoardEntry({name, points}) {
+function BoardEntry({name, xp}) {
   return (
     <div className="entry shadow-sm d-flex align-items-center justify-content-between gap-3 rounded">
       <div className="d-flex align-items-center gap-4">
@@ -16,7 +16,7 @@ function BoardEntry({name, points}) {
         </div>
         <h4 className="mb-0">Student Name</h4>
       </div>
-      <h5 className="mb-0">0000 Points</h5>
+      <h5 className="mb-0">{xp} XP</h5>
     </div>
   );
 }

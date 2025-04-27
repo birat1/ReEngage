@@ -27,15 +27,18 @@ def get_units(keystage, subject, year):
 
     return year_data["units"] if year_data else []
 
-def get_lessons(keystage, subject):
-    endpoint = f"key-stages/{keystage}/subject/{subject}/lessons"
+def get_lessons(keystage, subject, unit):
+    endpoint = f"key-stages/{keystage}/subject/{subject}/lessons?unit={unit}&offset=0&limit=100"
 
     return fetch_from_oak_api(endpoint)
 
 def get_lesson_asset(lesson, asset_type):
-    endpoint = f"lessons/{lesson}/{asset_type}"
+    endpoint = f"lessons/{lesson}/assets/{asset_type}"
 
-    return fetch_from_oak_api(endpoint)
+    headers = {"Authorization": f"Bearer {settings.API_OAK_KEY}"}
+    response = requests.get(f"{BASE_URL}/{endpoint}", headers=headers, stream=True)
+    
+    return response
 
 def get_lesson_summary(lesson):
     endpoint = f"lessons/{lesson}/summary"

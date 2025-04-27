@@ -1,39 +1,18 @@
-const apiKey = "f38bf624-bdb7-46a7-8bce-b938e5563d0e";
-const baseUrl = "https://open-api.thenational.academy/api/v0/lessons";
+import axios from "axios";
 
 export const fetchVideo = async (lesson) => {
-  const url = `${baseUrl}/${lesson}/assets/video`;
-
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
+  const response = await axios.get(`http://localhost:8000/api/oak/lesson/assets/${lesson}/video/`, {
+    responseType: "blob", // Specify that we're expecting binary data (video)
   });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${lesson} video`);
-  }
-
-  const blob = await response.blob();
-  const videoUrl = URL.createObjectURL(blob);
-
-  return videoUrl;
+  return URL.createObjectURL(response.data)
 };
 
-export const fetchSummary = async (lesson) => {
-  const url = `${baseUrl}/${lesson}/summary`;
-
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
+export const fetchWorksheet = async (lesson) => {
+  const response = await axios.get(`http://localhost:8000/api/oak/lesson/assets/${lesson}/worksheet/`, {
+    responseType: "blob", // Specify that we're expecting binary data (video)
   });
+  
+  const pdfBlob = new Blob([response.data], { type: "application/pdf" });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${lesson} summary`);
-  }
-
-  const data = await response.json();
-
-  return data;
+  return URL.createObjectURL(pdfBlob);
 };

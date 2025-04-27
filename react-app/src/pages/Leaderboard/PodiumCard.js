@@ -28,7 +28,7 @@ function PodiumCard({height, width, position, colour}) {
         </div>
       </div>
       <h3>Student Name</h3>
-      <h5>0000 Points</h5>
+      <h5>0000 XP</h5>
       <Medal position = {position}/>
     </div>
   );

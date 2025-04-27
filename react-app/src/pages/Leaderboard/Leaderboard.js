@@ -17,7 +17,7 @@ const students = [];
 for (let i = 1; i <= 17; i++) {
   students.push({
     student: "Student Name",
-    points: "0000",
+    xp: "0000",
   });
 }
 
@@ -89,10 +89,11 @@ function Content() {
                 style={{
                   animationDelay: `${(index + 1) * 0.1}s`,
                   opacity: "0%",
+                  width: "100%",
                 }}
                 key={index}
               >
-                <BoardEntry name={student.name} points={student.points} />
+                <BoardEntry name={student.name} xp={student.xp} />
               </div>
             ))}
           </div>

@@ -1,20 +1,32 @@
 .lesson-card {
     background-color: #d8eaf2;
     width: 60rem;
-    height: 100rem;
-    padding: 1rem;
-    overflow: auto;
+    min-height: 50rem;
+    padding: 2rem;
+}
+
+.bricks {
+    width: 15%;
 }
 
 .video-card {
     background-color: #f2f2f2;
-    width: 48rem;
-    height: 27rem;
-    overflow: hidden;
+    width: 80%;
+    height: 25rem;
 }
 
 .lesson-video {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+}
 
+.content-card {
+    background-color: #f2f2f2;
+    padding: 2rem;
+    width: 90%;
+}
+
+.worksheet-entry {
+    border: solid 1px #d8eaf2;
 }

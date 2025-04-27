@@ -49,8 +49,8 @@ urlpatterns = [
 
     # Routes for Oak OpenAPI
     path('api/oak/units/<str:keystage>/<str:subject>/<int:year>/', UnitsAPI.as_view(), name='oak-units'),
-    path('api/oak/lessons/<str:unit>/', LessonsAPI.as_view(), name='oak-lessons'),
+    path('api/oak/lessons/<str:keystage>/<str:subject>/<str:unit>/', LessonsAPI.as_view(), name='oak-lessons'),
+    path('api/oak/lesson/<str:lesson>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
+    path('api/oak/lesson/assets/<str:lesson>/<str:asset_type>/', LessonAssetAPI.as_view(), name='oak-lesson-assets'),
     path('api/oak/questions/<str:keystage>/<str:subject>/', QuestionsAPI.as_view(), name='oak-questions'),
-    path('api/oak/lessons/<str:lesson>/assets/<str:asset_type>/', LessonAssetAPI.as_view(), name='oak-lesson-assets'),
-    path('api/oak/lessons/<str:lesson>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
 ]
