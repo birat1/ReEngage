@@ -2,12 +2,12 @@ from ReEngage.models import Avatar
 
 def seedAvatar():
     avatars = [
-        {"name": "default", "price": 10},
-        {"name": "One", "price": 20},
-        {"name": "Two", "price": 30},
-        {"name": "Three", "price": 40},
-        {"name": "Four", "price": 50},
-        {"name": "Five", "price": 60}
+        {"name": "default", "price": 100},
+        {"name": "One", "price": 200},
+        {"name": "Two", "price": 300},
+        {"name": "Three", "price": 400},
+        {"name": "Four", "price": 500},
+        {"name": "Five", "price": 600}
     ]
 
     # Seed 6 avatars

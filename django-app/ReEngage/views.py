@@ -24,7 +24,8 @@ class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIM
 	def create(self, request):
 		data = {
 			'person_id': request.data.get('person_id'),
-			'name': request.data.get('name'),
+			'firstname': request.data.get('firstname'),
+			'surname': request.data.get('surname'),
 			'password': request.data.get('password'),
 			'year': request.data.get('year'),
 			'managed_by': request.data.get('managed_by'),
@@ -62,7 +63,8 @@ class apiStudent(viewsets.ModelViewSet): #///SHOULD I DO A USER VIEWSET TO MINIM
 		else:	
 			data = {
 				'person_id': request.user.person_id,
-				'name': request.data.get('name'),
+				'firstname': request.data.get('firstname'),
+				'surname': request.data.get('surname'),
 				'password': request.data.get('password'),
 				'year': request.data.get('year'),
 				'managed_by': request.data.get('managed_by'),
@@ -93,7 +95,8 @@ class apiAdmin(viewsets.ModelViewSet):
 	def create(self, request):
 		data = {
 			'person_id': request.data.get('person_id'),
-			'name': request.data.get('name'),
+			'firstname': request.data.get('firstname'),
+			'surname': request.data.get('surname'),
 			'password': request.data.get('password'),
 			'email': request.data.get('email')
 		}
@@ -127,7 +130,8 @@ class apiAdmin(viewsets.ModelViewSet):
 		else:	
 			data = {
 				'person_id': request.user.person_id,
-				'name': request.data.get('name'),
+				'firstname': request.data.get('firstname'),
+				'surname': request.data.get('surname'),
 				'password': request.data.get('password'),
 				'email': request.data.get('email')
 			}

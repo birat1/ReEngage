@@ -15,7 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
-
+import ChildRegister from "./pages/ChildRegister/ChildRegister.js";
 
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
           <Route path="/fill-itfish" element={<StartGame />} />
           <Route path="/lab-wars" element={<LabWars />} />
           <Route path="/student-progress" element={<StudentProgress />} />
+          <Route path="/child-register" element={<ChildRegister />} />
           {/* testing */}
           <Route path="/funfact" element={<AnimalFact />} />
         </Routes>

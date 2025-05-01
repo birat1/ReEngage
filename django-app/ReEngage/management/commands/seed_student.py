@@ -21,20 +21,30 @@ def seedStudent():
                 email=f"{username}@example.com"
             )
 
+            englishA=random.randint(10, 100)
+            mathsA=random.randint(10, 100)
+            scienceA=random.randint(10, 100)
+
+            englishC=random.randint(0, englishA)
+            mathsC=random.randint(0, mathsA)
+            scienceC=random.randint(0, scienceA)
+
             Student.objects.create(
                 user=student_user,
+                firstname = username + "'s firstname",
+                surname = username + "'s surname",
                 year=3 + i,
                 managed_by=random.choice(admin_objects),
                 level=random.randint(1, 10),
                 xp=random.randint(0, 1000),
                 points=random.randint(0, 500),
                 streak=random.randint(0, 10),
-                english_answered=random.randint(10, 100),
-                maths_answered=random.randint(10, 100),
-                science_answered=random.randint(10, 100),
-                english_correct=random.randint(5, 95),
-                maths_correct=random.randint(5, 95),
-                science_correct=random.randint(5, 95)
+                english_answered=englishA,
+                maths_answered=mathsA,
+                science_answered=scienceA,
+                english_correct=englishC,
+                maths_correct=mathsC,
+                science_correct=scienceC
             )
             print(f'Student {username} created.')
         else:
