@@ -5,6 +5,8 @@ const LoginRegister = () => {
     const [view, setView] = useState('login'); // 'login', 'register', 'forgot'
     const [dob, setDob] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [error, setError] = useState('');
     const [resetEmail, setResetEmail] = useState('');
     const [resetMessage, setResetMessage] = useState('');
@@ -30,7 +32,9 @@ const LoginRegister = () => {
         e.preventDefault();
         const age = calculateAge(dob);
 
-        if (age < 18) {
+        if (!firstName.trim() || !lastName.trim()) {
+            setError('First name and last name are required.');
+        } else if (age < 18) {
             setError('You must be at least 18 years old to register.');
         } else if (password.length < 8) {
             setError('Password must be at least 8 characters long.');
@@ -83,6 +87,24 @@ const LoginRegister = () => {
                     <div className="form-box register">
                         <form onSubmit={handleRegister}>
                             <h1>Registration</h1>
+                            <div className="inputbox">
+                                <input
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="inputbox">
+                                <input
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                />
+                            </div>
                             <div className="inputbox">
                                 <input type="text" placeholder="Username" required />
                             </div>
