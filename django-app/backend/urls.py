@@ -32,8 +32,8 @@ urlpatterns = [
     path('api/students', apiStudent.as_view({'get':'list'}), name = 'listapistudents'),
     path('api/students', apiStudent.as_view({'post':'create'}), name = 'createapistudents'),
     path('api/students/<int:user_id>', apiStudent.as_view({'get':'retrieve'}), name = 'viewapistudent'),
-    path('api/students/<user_id>/delete', apiStudent.as_view({'delete':'destroy'}), name = 'deleteapistudent'),
-    path('api/students/<user_id>/edit', apiStudent.as_view({'put':'update'}), name = 'editapistudent'),
+    path('api/students/<int:user_id>/delete', apiStudent.as_view({'delete':'destroy'}), name = 'deleteapistudent'),
+    path('api/students/<int:user_id>/edit', apiStudent.as_view({'put':'update'}), name = 'editapistudent'),
 
     path('api/admins', apiAdmin.as_view({'get':'list'}), name = 'listapiadmin'),
     path('api/admins/create', apiAdmin.as_view({'get':'retrieve'}), name = 'viewapiadmin'),

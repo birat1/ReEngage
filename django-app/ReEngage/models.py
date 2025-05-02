@@ -7,10 +7,14 @@ from django.contrib.auth.models import User
 #Class for parents/teachers; people who create/manage the student's accounts
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=20, default='def')
+    surname = models.CharField(max_length=20, default='def')
 
 #Class for students
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=20, default='def')
+    surname = models.CharField(max_length=20, default='def')
     year = models.IntegerField(choices=[(i, i) for i in range(3, 7)])
     managed_by = models.ForeignKey(Admin, on_delete=models.CASCADE)
     level = models.PositiveIntegerField()

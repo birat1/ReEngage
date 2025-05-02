@@ -1,33 +1,33 @@
 .login-register-container {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: linear-gradient(#A8D3E6, #D4E9F3);
+    font-family: 'Nunito', sans-serif;
+    color: #4A4A4A;
 }
 
 .wrapper {
-    position: relative;
     width: 420px;
     height: 450px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-    color: #277988;
+    background-color: #d8eaf2;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     display: flex;
     align-items: center;
     overflow: hidden;
     transition: height 0.3s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    animation: flyin 0.6s ease-in-out forwards;
+    position: relative;
 }
 
+
 .wrapper.active {
-    height: 520px;
+    height: 720px;
 }
 
 .wrapper .form-box {
@@ -62,7 +62,7 @@
 form h1 {
     font-size: 36px;
     text-align: center;
-    color: #277988;
+    color: #4A4A4A;
 }
 
 form .inputbox {
@@ -75,18 +75,18 @@ form .inputbox {
 .inputbox input {
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: #ffffff;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 40px;
     font-size: 16px;
-    color: black;
+    color: #4A4A4A;
     padding: 0 45px 0 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .inputbox input::placeholder {
-    color: black;
+    color: #4A4A4A;
 }
 
 .inputbox svg {
@@ -94,7 +94,7 @@ form .inputbox {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: black;
+    color: #4A4A4A;
     pointer-events: none;
 }
 
@@ -102,16 +102,16 @@ form .remember-forgot {
     display: flex;
     justify-content: space-between;
     font-size: 14.5px;
-    color: black;
+    color: #4A4A4A;
 }
 
 .remember-forgot label input {
-    accent-color: black;
+    accent-color: #4A4A4A;
     margin-right: 4px;
 }
 
 .remember-forgot a {
-    color: black;
+    color: #4A4A4A;
     text-decoration: none;
 }
 
@@ -122,14 +122,14 @@ form .remember-forgot {
 form button {
     width: 100%;
     height: 45px;
-    background: #fff;
+    background: #A8D3E6;
     border: none;
     outline: none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 16px;
-    color: #333;
+    color: #4A4A4A;
     font-weight: 700;
 }
 
@@ -137,11 +137,11 @@ form .register-link {
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;
-    color: black;
+    color: #4A4A4A;
 }
 
 .register-link p a {
-    color: black;
+    color: #4A4A4A;
     text-decoration: none;
     font-weight: 600;
 }
@@ -150,3 +150,17 @@ form .register-link {
     text-decoration: underline;
 }
 
+.fly-in {
+    animation: flyin 0.6s ease-in-out forwards;
+}
+
+@keyframes flyin {
+    0% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

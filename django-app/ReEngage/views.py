@@ -23,7 +23,11 @@ class apiStudent(viewsets.ModelViewSet):
 
 	def create(self, request):
 		data = {
-			'user': request.data.get('user'), #///
+
+			'person_id': request.data.get('person_id'),
+			'firstname': request.data.get('firstname'),
+			'surname': request.data.get('surname'),
+			'password': request.data.get('password'),
 			'year': request.data.get('year'),
 			'managed_by': request.data.get('managed_by'),
 			'level': request.data.get('level'),
@@ -43,17 +47,17 @@ class apiStudent(viewsets.ModelViewSet):
 		else:
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-	def retrieve(self, request):
-		student_instance = self.get_item(request.user.user_id)
+	def retrieve(self, request, user_id):
+		student_instance = self.get_item(user_id)
 		if not student_instance:
-			return Response({"res": "Object with user_id does not exists"},status=status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with user_id does not exist"},status=status.HTTP_400_BAD_REQUEST)
 		serializer = StudentSerializer(student_instance)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	
-	def update(self, request):
-		student_instance = self.get_item(request.user.user_id)
+	def update(self, request, user_id):
+		student_instance = self.get_item(user_id)
 		if not student_instance:
-			return Response({"res": "Object with user_id does not exists"},status=status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with user_id does not exist"},status=status.HTTP_400_BAD_REQUEST)
 		data = {
 			'user': request.data.get('user'), #///
 			'year': request.data.get('year'),
@@ -75,12 +79,28 @@ class apiStudent(viewsets.ModelViewSet):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 	
-	def destroy(self, request):
-		student_instance = self.get_object(request.user.user_id)
+	def destroy(self, request, user_id):
+		student_instance = self.get_object(user_id)
 		if not student_instance:
-			return Response({"res": "Object with student id does not exists"},status=status.HTTP_400_BAD_REQUEST)
-		student_instance.delete()
-		return Response({"res": "Object deleted!"},status=status.HTTP_200_OK)
+			return Response({"res": "Object with person_id does not exists"},status=status.HTTP_400_BAD_REQUEST)
+		else:	
+			data = {
+				'person_id': request.user.person_id,
+				'firstname': request.data.get('firstname'),
+				'surname': request.data.get('surname'),
+				'password': request.data.get('password'),
+				'year': request.data.get('year'),
+				'managed_by': request.data.get('managed_by'),
+				'xp': request.data.get('xp'),
+				'points': request.data.get('points'),
+				'streak': request.data.get('streak')
+			}
+			serializer = StidentSerializer(instance = student_instance, data=data, partial = True)
+			if serializer.is_valid():
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			else:
+				return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class apiAdmin(viewsets.ModelViewSet):
 	queryset = Admin.objects.all()
@@ -97,7 +117,11 @@ class apiAdmin(viewsets.ModelViewSet):
 
 	def create(self, request):
 		data = {
-			'user': request.data.get('user'), #///
+			'person_id': request.data.get('person_id'),
+			'firstname': request.data.get('firstname'),
+			'surname': request.data.get('surname'),
+			'password': request.data.get('password'),
+			'email': request.data.get('email')
 		}
 		serializer = AdminSerializer(data=data)
 		if serializer.is_valid():
@@ -106,26 +130,32 @@ class apiAdmin(viewsets.ModelViewSet):
 		else:
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-	def retrieve (self, request):
-		admin_instance= self.get_item (request.user.user_id)
+	def retrieve (self, request, user_id):
+		admin_instance= self.get_item (user_id)
 		if not admin_instance:
 			return Response({"res": "Object with user_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 		else:
 			serializer = AdminSerializer (admin_instance)
 			return Response (serializer.data, status=status.HTTP_200_OK)
 	
-	def update(self, request):
-		admin_instance= self.get_item (request.user.user_id)
+	def update(self, request, person_id):
+		admin_instance= self.get_object (person_id, request.user.person_id) #///is this right???
 		if not admin_instance:
-			return Response({"res": "Object with user_id does not exists"},status=status.HTTP_400_BAD_REQUEST)	
-		data = {
-			'user': request.user.user_id,
-		}
-		serializer = AdminSerializer(instance = admin_instance, data=data, partial = True)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with person_id does not exists"},status=status.HTTP_400_BAD_REQUEST)
+		else:	
+			data = {
+				'person_id': request.user.person_id,
+				'firstname': request.data.get('firstname'),
+				'surname': request.data.get('surname'),
+				'password': request.data.get('password'),
+				'email': request.data.get('email')
+			}
+			serializer = AdminSerializer(instance = admin_instance, data=data, partial = True)
+			if serializer.is_valid():
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			else:
+				return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
 	def destroy(self, request, user):
 		admin_instance = self.get_item(request.user.user_id)
@@ -148,15 +178,15 @@ class apiAvatar(viewsets.ModelViewSet):
 		serializer_class = AvatarSerializer (self.queryset, many=True)
 		return Response(serializer_class.data, status=status.HTTP_200_OK)
 
-	def retrieve(self, request):
-		avatar_instance= self.get_object (request.avatar_id)
+	def retrieve(self, request, avatar_id):
+		avatar_instance= self.get_object (avatar_id)
 		if not avatar_instance:
 			return Response({"res": "Object with avatar_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 		serializer = AvatarSerializer (avatar_instance)
 		return Response (serializer.data, status=status.HTTP_200_OK)
 		
-	def update(self, request):
-		avatar_instance= self.get_object (request.avatar_id)
+	def update(self, request, avatar_id):
+		avatar_instance= self.get_object (avatar_id)
 		if not avatar_instance:
 			return Response({"res": "Object with avatar_id does not exists"},status=status.HTTP_400_BAD_REQUEST)
 		data = {

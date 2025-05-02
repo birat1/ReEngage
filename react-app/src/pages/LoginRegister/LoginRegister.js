@@ -1,70 +1,178 @@
 import React, { useState } from "react";
 import './LoginRegister.css';
-// import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 
 const LoginRegister = () => {
-    const [action, setAction] = useState('');
+    const [view, setView] = useState('login'); // 'login', 'register', 'forgot'
+    const [dob, setDob] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [error, setError] = useState('');
+    const [resetEmail, setResetEmail] = useState('');
+    const [resetMessage, setResetMessage] = useState('');
 
-    const registerLink = () => {
-        setAction('active');
+    const showRegister = () => {
+        setView('register');
+        setError('');
     };
 
-    const loginLink = () => {
-        setAction('');
+    const showLogin = () => {
+        setView('login');
+        setError('');
+        setResetMessage('');
+        setResetEmail('');
+    };
+
+    const showForgotPassword = () => {
+        setView('forgot');
+        setResetMessage('');
+    };
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const age = calculateAge(dob);
+
+        if (!firstName.trim() || !lastName.trim()) {
+            setError('First name and last name are required.');
+        } else if (age < 18) {
+            setError('You must be at least 18 years old to register.');
+        } else if (password.length < 8) {
+            setError('Password must be at least 8 characters long.');
+        } else {
+            setError('');
+            console.log('Registration successful');
+            // Registration logic goes here
+        }
+    };
+
+    const calculateAge = (birthDate) => {
+        const today = new Date();
+        const dob = new Date(birthDate);
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
     };
 
     return (
         <div className="login-register-container">
-            <div className={`wrapper ${action}`}>
-                <div className="form-box login">
-                    <form onSubmit={(e) => e.preventDefault()}>
-                        <h1>Login</h1>
-                        <div className="inputbox">
-                            <input type="text" placeholder='Username' required />
-                            {/* <FaUser /> */}
-                        </div>
-                        <div className="inputbox">
-                            <input type="password" placeholder='Password' required />
-                            {/* <FaLock /> */}
-                        </div>
-                        <div className="remember-forgot">
-                            <label><input type="checkbox" /> Remember me</label>
-                            <a href="#">Forgot password?</a>
-                        </div>
-                        <button type="submit">Login</button>
-                        <div className="register-link">
-                            <p>Don't have an account? <a href="#" onClick={registerLink}>Register</a></p>
-                        </div>
-                    </form>
-                </div>
+            <div className={`wrapper ${view === 'register' ? 'active' : ''}`}>
+                {/* LOGIN FORM */}
+                {view === 'login' && (
+                    <div className="form-box login">
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <h1>Login</h1>
+                            <div className="inputbox">
+                                <input type="text" placeholder="Username" required />
+                            </div>
+                            <div className="inputbox">
+                                <input type="password" placeholder="Password" required />
+                            </div>
+                            <div className="remember-forgot">
+                                <label><input type="checkbox" /> Remember me</label>
+                                <a href="#" onClick={showForgotPassword}>Forgot password?</a>
+                            </div>
+                            <button type="submit">Login</button>
+                            <div className="register-link">
+                                <p>Don't have an account? <a href="#" onClick={showRegister}>Register</a></p>
+                            </div>
+                        </form>
+                    </div>
+                )}
 
-                <div className="form-box register">
-                    <form onSubmit={(e) => e.preventDefault()}>
-                        <h1>Registration</h1>
-                        <div className="inputbox">
-                            <input type="text" placeholder='Username' required />
-                            {/* <FaUser /> */}
-                        </div>
-                        <div className="inputbox">
-                            <input type="email" placeholder='Email' required />
-                            {/* <FaEnvelope /> */}
-                        </div>
-                        <div className="inputbox">
-                            <input type="password" placeholder='Password' required />
-                            {/* <FaLock /> */}
-                        </div>
-                        <div className="remember-forgot">
-                            <label><input type="checkbox" /> I agree to the terms and conditions</label>
-                        </div>
-                        <button type="submit">Register</button>
-                        <div className="register-link">
-                            <p>Already have an account? <a href="#" onClick={loginLink}>Login</a></p>
-                        </div>
-                    </form>
-                </div>
+                {/* REGISTER FORM */}
+                {view === 'register' && (
+                    <div className="form-box register">
+                        <form onSubmit={handleRegister}>
+                            <h1>Registration</h1>
+                            <div className="inputbox">
+                                <input
+                                    type="text"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="inputbox">
+                                <input
+                                    type="text"
+                                    placeholder="Last Name"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="inputbox">
+                                <input type="text" placeholder="Username" required />
+                            </div>
+                            <div className="inputbox">
+                                <input type="email" placeholder="Email" required />
+                            </div>
+                            <div className="inputbox">
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            <div className="inputbox">
+                                <input
+                                    type="date"
+                                    required
+                                    value={dob}
+                                    onChange={(e) => setDob(e.target.value)}
+                                />
+                            </div>
+                            <div className="remember-forgot">
+                                <label><input type="checkbox" required /> I agree to the terms and conditions</label>
+                            </div>
+                            {error && <p className="error-message">{error}</p>}
+                            <button type="submit">Register</button>
+                            <div className="register-link">
+                                <p>Already have an account? <a href="#" onClick={showLogin}>Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                )}
+
+                {/* FORGOT PASSWORD FORM */}
+                {view === 'forgot' && (
+                    <div className="form-box forgot">
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            if (!resetEmail.trim()) {
+                                setResetMessage('Please enter your email address.');
+                            } else {
+                                setResetMessage('Password reset instructions have been sent to your email.');
+                                // API call to send reset link goes here
+                            }
+                        }}>
+                            <h1>Reset Password</h1>
+                            <div className="inputbox">
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={resetEmail}
+                                    onChange={(e) => setResetEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            {resetMessage && <p className="error-message">{resetMessage}</p>}
+                            <button type="submit">Send Reset Link</button>
+                            <div className="register-link">
+                                <p>Back to <a href="#" onClick={showLogin}>Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                )}
             </div>
         </div>
     );
 };
 
-export default LoginRegister; 
+export default LoginRegister;
