@@ -7,6 +7,7 @@ import FeedbackMessage from './components/FeedbackMessage';
 import StartMenu from './components/StartMenu';
 import GameOver from './components/GameOver';
 import { fetchQuestions } from './data/questions';
+import BackgroundMusic from './components/backgroundMusic';
 import './LabWars.css';
 
 
@@ -162,8 +163,9 @@ const LabWars = () => {
 
   return (
     <Container className="lab-wars-container">
+      <BackgroundMusic />
       <h1 className="game-title">Lab Wars</h1>
-      
+
       <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
 
       <QuestionCard 
