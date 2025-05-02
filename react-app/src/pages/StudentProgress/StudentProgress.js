@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import "./styles/StudentProgress.css";
-import "./avataaars.png";
+// import "./avataaars.png";
 import One from "../../avatars/One.png";
 import Two from "../../avatars/Two.png";
 import Three from "../../avatars/Three.png";
