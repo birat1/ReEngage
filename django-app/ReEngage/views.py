@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 
 # Create your views here.
@@ -11,6 +12,7 @@ from .models import Student, Admin, Avatar, StudentAvatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
