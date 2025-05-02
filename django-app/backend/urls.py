@@ -29,8 +29,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('datawizard/', include('data_wizard.urls')),
 
-    #///API root?
-
     path('api/students', apiStudent.as_view({'get':'list'}), name = 'listapistudents'),
     path('api/students', apiStudent.as_view({'post':'create'}), name = 'createapistudents'),
     path('api/students/<int:user_id>', apiStudent.as_view({'get':'retrieve'}), name = 'viewapistudent'),
@@ -41,7 +39,7 @@ urlpatterns = [
     path('api/admins/create', apiAdmin.as_view({'get':'retrieve'}), name = 'viewapiadmin'),
     path('api/admins/<int:user_id>', apiAdmin.as_view({'get':'retrieve'}), name = 'viewapiadmin'),
     path('api/admins/<int:user_id>/delete', apiAdmin.as_view({'delete':'destroy'}), name = 'deleteapiadmin'),
-    path('api/admins/<int:user_id>/update', apiAdmin.as_view({'putpost':'update'}), name = 'editapiadmin'),
+    path('api/admins/<int:user_id>/update', apiAdmin.as_view({'put':'update'}), name = 'editapiadmin'),
 
     path('api/avatar', apiAvatar.as_view({'get':'list'}), name = 'listapiavatar'), #///Need more for avatar?
     path('api/avatar/<int:user_id>', apiAvatar.as_view({'get':'retrieve'}), name = 'viewavatar'),
