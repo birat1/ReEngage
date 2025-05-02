@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "./styles/StudentProgress.css";
 import "./avataaars.png";
-import avatars from "./avataaars.png";
+import One from "../../avatars/One.png";
+import Two from "../../avatars/Two.png";
+import Three from "../../avatars/Three.png";
+import Four from "../../avatars/Four.png";
+import Five from "../../avatars/Five.png";
+import Six from "../../avatars/Six.png";
+import Default from "../../avatars/Default.png";
 import Footer from "../../components/Footer/Footer.js";
 import { backendAPI } from "../../constants.js";
+import { Navigate } from "react-router-dom";
 
 /*
-Parents/teachers should be able to see each of their student’s progress. 
-Maybe a web page where they can see each of their student’s progress
-Could be very simple and
-- display the number of questions a student has answered per game, their points, XP, and ranking on the leaderboard.
-NEED TO ADD AUTHENTICATION TO THIS PAGE AS ONLY A PARENT OR TEACHER CAN ACCESS THIS
+need to check the student's avatar id and 
+match with the avatar name in images
 */
 
+//backup data
 const initialStudents = [
   {
     rank: 1,
@@ -76,69 +82,175 @@ const initialStudents = [
   },
 ];
 
-
-
 function StudentProgress() {
-    const [expandedIndex, setExpandedIndex] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [sortBy, setSortBy] = useState("xp");
-    const [students, setStudents] = useState(initialStudents);
-    const [rankedStudents, setRankedStudents] = useState([]);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("xp");
+  const [students, setStudents] = useState(initialStudents);
+  const [rankedStudents, setRankedStudents] = useState([]);
 
-    const toggleExpand = (index) => {
-        setExpandedIndex(expandedIndex === index ? null : index);
-      };
-  
-    useEffect(() => {
-      const filtered = initialStudents.filter((student) =>
-        student.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-  
-      let sorted = [...filtered];
-  
-      switch (sortBy) {
-        case "name":
-          sorted.sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case "questionsAnswered":
-          sorted.sort(
-            (a, b) =>
-              (b.englishAnswered + b.mathAnswered + b.scienceAnswered) -
-              (a.englishAnswered + a.mathAnswered + a.scienceAnswered)
-          );
-          break;
-        case "questionsCorrectly":
-          sorted.sort(
-            (a, b) =>
-              (b.englishCorrect + b.mathCorrect + b.scienceCorrect) -
-              (a.englishCorrect + a.mathCorrect + a.scienceCorrect)
-          );
-          break;
-        case "points":
-          sorted.sort((a, b) => b.points - a.points);
-          break;
-        case "xp":
-        default:
-          sorted.sort((a, b) => b.xp - a.xp);
-          break;
+  //data fetching
+  const { isPending, data, error } = useQuery({
+    queryKey: ["StudentsData"],
+    queryFn: async () => {
+      const response = await fetch(`${backendAPI}api/get-students/`, {
+        method: "GET",
+        credentials: "include",
+      });
+      return await response.json();
+    },
+  });
+
+  // fetch logged-in user info
+  const {
+    isPending: userPending,
+    data: userInfo,
+    error: userError,
+  } = useQuery({
+    queryKey: ["UserInfo"],
+    queryFn: async () => {
+      const response = await fetch(`${backendAPI}api/current-user-info/`, {
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch user info");
       }
-      const ranked = sorted.map((student, index) => ({
-        ...student,
-        rank: index + 1,
-      }));
-  
-      setRankedStudents(ranked);
-    }, [searchTerm, sortBy]);
-  
-    const handleSortChange = (event) => {
-      setSortBy(event.target.value);
-    };
-  
-    return (
-      <div>
-        <div className="SPContainer">
+      return await response.json();
+    },
+    retry: false,
+  });
+
+  //updating students state
+  useEffect(() => {
+    if (data) {
+      const transformStudents = async () => {
+        const students = Array.isArray(data) ? data : data.students || [];
+        const transformed = [];
+
+        for (const student of students) {
+          // fetch avatar for each student
+          let avatarName = "default";
+          try {
+            const response = await fetch(
+              `${backendAPI}api/current-equipped-avatar/${student.user_id}/`,
+              { credentials: "include" }
+            );
+            if (response.ok) {
+              const avatarData = await response.json();
+              avatarName = avatarData.name;
+            }
+          } catch (error) {
+            console.error("Failed to fetch avatar:", error);
+          }
+
+          transformed.push({
+            ...student,
+            name: `${student.firstname} ${student.surname}`,
+            englishAnswered: student.english_answered,
+            englishCorrect: student.english_correct,
+            mathAnswered: student.maths_answered,
+            mathCorrect: student.maths_correct,
+            scienceAnswered: student.science_answered,
+            scienceCorrect: student.science_correct,
+            points: student.points,
+            xp: student.xp,
+            avatar: avatarName,
+          });
+        }
+
+        setStudents(transformed);
+      };
+
+      transformStudents();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const filtered = students.filter((student) =>
+      student.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    let sorted = [...filtered];
+
+    switch (sortBy) {
+      case "name":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "questionsAnswered":
+        sorted.sort(
+          (a, b) =>
+            b.englishAnswered +
+            b.mathAnswered +
+            b.scienceAnswered -
+            (a.englishAnswered + a.mathAnswered + a.scienceAnswered)
+        );
+        break;
+      case "questionsCorrectly":
+        sorted.sort(
+          (a, b) =>
+            b.englishCorrect +
+            b.mathCorrect +
+            b.scienceCorrect -
+            (a.englishCorrect + a.mathCorrect + a.scienceCorrect)
+        );
+        break;
+      case "points":
+        sorted.sort((a, b) => b.points - a.points);
+        break;
+      case "xp":
+      default:
+        sorted.sort((a, b) => b.xp - a.xp);
+        break;
+    }
+    const ranked = sorted.map((student, index) => ({
+      ...student,
+      rank: index + 1,
+    }));
+
+    setRankedStudents(ranked);
+  }, [searchTerm, sortBy, students]);
+
+  //redirect if user is not admin or logged in
+  if (userPending) {
+    return "Loading user information...";
+  }
+
+  if (userError) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!userInfo?.is_admin) {
+    return <Navigate to="/403" replace />;
+  }
+  if (isPending) return "Loading";
+  if (error) return "An error occured here: " + error.message;
+  console.log(data);
+  console.log("Logged in user:", userInfo);
+
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
+  };
+
+  // avatar mapping
+  const avatarImages = {
+    'One': One,
+    'Two': Two,
+    'Three': Three,
+    'Four': Four,
+    'Five': Five,
+    'Six': Six,
+    'Default': Default,
+  };
+
+  return (
+    <div>
+      <div className="SPContainer">
         <h2 className="SPTitle">Your Students' Progress Dashboard</h2>
-  
+
         <div className="controls-container">
           {/*Search Bar*/}
           <div className="SearchBar">
@@ -150,20 +262,24 @@ function StudentProgress() {
               className="searchInput"
             />
           </div>
-  
+
           {/*filter dropdown*/}
           <div className="sort-container">
-            <label htmlFor="sort-select" className="sort-label">Sort by:</label>
+            <label htmlFor="sort-select" className="sort-label">
+              Sort by:
+            </label>
             <select id="sort-select" value={sortBy} onChange={handleSortChange}>
               <option value="xp">XP</option>
               <option value="name">Name</option>
               <option value="questionsAnswered">Questions Answered</option>
-              <option value="questionsCorrectly">Questions Answered Correctly</option>
+              <option value="questionsCorrectly">
+                Questions Answered Correctly
+              </option>
               <option value="points">Points</option>
             </select>
           </div>
         </div>
-  
+
         {/* Table */}
         <div className="table-container">
           <table id="data-table">
@@ -196,7 +312,13 @@ function StudentProgress() {
                     </td>
                     <td className="name-cell">
                       <span className="expand-toggle">
-                        <img src={avatars} alt="Avatar" className="avatar" />
+                        <img
+                          src={
+                            avatarImages[student.avatar] || Default
+                          }
+                          alt="Avatar"
+                          className="avatar"
+                        />
                         {student.name}
                         <span
                           className={`expand-icon ${
@@ -228,7 +350,7 @@ function StudentProgress() {
                       <span>{student.xp} XP</span>
                     </td>
                   </tr>
-  
+
                   {expandedIndex === index && (
                     <tr>
                       <td colSpan="6" className="hiddenRow">
@@ -255,9 +377,9 @@ function StudentProgress() {
           </table>
         </div>
       </div>
-      <Footer/>
-      </div>
-    );
-  }
-  
-  export default StudentProgress;
+      <Footer />
+    </div>
+  );
+}
+
+export default StudentProgress;

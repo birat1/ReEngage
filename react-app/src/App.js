@@ -16,7 +16,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 import ChildRegister from "./pages/ChildRegister/ChildRegister.js";
-
+import ForbiddenPage403 from "./pages/Forbidden/forbidden.js";
 
 function App() {
   return (
@@ -38,6 +38,7 @@ function App() {
           <Route path="/lab-wars" element={<LabWars />} />
           <Route path="/student-progress" element={<StudentProgress />} />
           <Route path="/child-register" element={<ChildRegister />} />
+          <Route path="/403" element={<ForbiddenPage403 />} />
           {/* testing */}
           <Route path="/funfact" element={<AnimalFact />} />
         </Routes>

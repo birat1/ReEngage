@@ -8,6 +8,7 @@ function BackgroundMusic(playBtn) {
   useEffect(() => {
     backgrndAudio.current.loop = true;
     backgrndAudio.current.volume = 0.5;
+    backgrndSoundbtn.current.innerHTML = "🔉";
     backgrndAudio.current.play().catch((error) => {
       console.error("audio play prevented", error);
     });
@@ -23,9 +24,6 @@ function BackgroundMusic(playBtn) {
           backgrndAudio.current.play().catch((error) => {
             console.error("audio play prevented", error);
           });
-          if (backgrndSoundbtn.current) {
-            backgrndSoundbtn.current.innerHTML = "🔉";
-          }
         },
         {
           once: true,
@@ -39,16 +37,15 @@ function BackgroundMusic(playBtn) {
     };
   }, []);
 
-  let counter = 2;
 
   //background sound logic
   const toggleSound = () => {
     if (backgrndSoundbtn.current) {
-      if (counter % 3 == 0) {
+      if (backgrndSoundbtn.current.innerHTML == "🔊") {
         //mute
         backgrndAudio.current.muted = true;
         backgrndSoundbtn.current.innerHTML = "🔈";
-      } else if (counter % 3 == 1) {
+      } else if (backgrndSoundbtn.current.innerHTML == "🔈") {
         //medium sound
         backgrndAudio.current.muted = false;
         backgrndAudio.current.volume = 0.5;
@@ -60,11 +57,6 @@ function BackgroundMusic(playBtn) {
         backgrndSoundbtn.current.innerHTML = "🔊";
         backgrndAudio.current.play().catch(() => {});
       }
-    }
-    counter++;
-    ///reseting counter after a large number of clicks
-    if (counter > 500) {
-      counter = 0;
     }
   };
 
