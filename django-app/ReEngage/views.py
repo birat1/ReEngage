@@ -11,6 +11,7 @@ from .models import Student, Admin, Avatar, StudentAvatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def login_user(request):
