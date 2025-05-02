@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ReEngage.views import apiAdmin, apiAvatar, apiStudent
+from django.contrib.auth import views as auth_views
+from ReEngage.views import apiAdmin, apiAvatar, apiStudent, login_user
 from ReEngage.oak_api_views import (
     UnitsAPI,
     LessonsAPI,
@@ -51,4 +52,6 @@ urlpatterns = [
     path('api/oak/lesson/<str:lesson>/summary/', LessonSummaryAPI.as_view(), name='oak-lesson-summary'),
     path('api/oak/lesson/assets/<str:lesson>/<str:asset_type>/', LessonAssetAPI.as_view(), name='oak-lesson-assets'),
     path('api/oak/questions/<str:keystage>/<str:subject>/', QuestionsAPI.as_view(), name='oak-questions'),
+
+    path('api/login/', login_user, name='login_user'),
 ]

@@ -10,6 +10,7 @@ const LoginRegister = () => {
     const [error, setError] = useState('');
     const [resetEmail, setResetEmail] = useState('');
     const [resetMessage, setResetMessage] = useState('');
+    const [username, setUsername] = useState('');
 
     const showRegister = () => {
         setView('register');
@@ -45,6 +46,31 @@ const LoginRegister = () => {
         }
     };
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                console.log('Login successful:', data);
+                // Handle successful login (e.g., redirect, save token, etc.)
+            } else {
+                console.error('Login failed:', data.error);
+                setError(data.error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('An error occurred. Please try again.');
+        }
+    };
+
     const calculateAge = (birthDate) => {
         const today = new Date();
         const dob = new Date(birthDate);
@@ -62,18 +88,31 @@ const LoginRegister = () => {
                 {/* LOGIN FORM */}
                 {view === 'login' && (
                     <div className="form-box login">
-                        <form onSubmit={(e) => e.preventDefault()}>
+                        <form onSubmit={handleLogin}>
                             <h1>Login</h1>
                             <div className="inputbox">
-                                <input type="text" placeholder="Username" required />
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                />
                             </div>
                             <div className="inputbox">
-                                <input type="password" placeholder="Password" required />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
                             </div>
                             <div className="remember-forgot">
                                 <label><input type="checkbox" /> Remember me</label>
                                 <a href="#" onClick={showForgotPassword}>Forgot password?</a>
                             </div>
+                            {error && <p className="error-message">{error}</p>}
                             <button type="submit">Login</button>
                             <div className="register-link">
                                 <p>Don't have an account? <a href="#" onClick={showRegister}>Register</a></p>

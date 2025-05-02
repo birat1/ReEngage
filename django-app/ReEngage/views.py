@@ -1,12 +1,34 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import permissions
 from . models import Student, Admin, Avatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
+
+@csrf_exempt
+def login_user(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            username = data.get('username')
+            password = data.get('password')
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return JsonResponse({'message': 'Login successful', 'username': user.username}, status=200)
+            else:
+                return JsonResponse({'error': 'Invalid username or password'}, status=400)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 class apiStudent(viewsets.ModelViewSet):
 	queryset = Student.objects.all()
