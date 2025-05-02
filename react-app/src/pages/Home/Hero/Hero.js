@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import FeatureCard from "./FeatureCard";
 import TestimonialCard from "./TestimonialCard";
@@ -64,6 +65,11 @@ const testimonials = [
 ];
 
 function Hero() {
+  const navigate = useNavigate();
+  const handleJoinUs = () => {
+    navigate("/login");
+  };
+
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.3, triggerOnce: true });
   const { ref: videoRef, inView: videoInView } = useInView({ threshold: 0.3, triggerOnce: true });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.3, triggerOnce: true });
@@ -88,7 +94,7 @@ function Hero() {
               className={classNames("d-flex justify-content-center gap-3 mx-auto", { "slide-up": heroInView })}
               style={{ animationDelay: "0.1s", opacity: 0 }}
             >
-              <button className="hero-button rounded-pill shadow-sm">Join Us</button>
+              <button className="hero-button rounded-pill shadow-sm" onClick={handleJoinUs}>Join Us</button>
               <button className="hero-button rounded-pill shadow-sm">Contact Us</button>
             </div>
           </div>
@@ -159,7 +165,7 @@ function Hero() {
               className={classNames("d-flex gap-3 mx-auto", { "slide-up": joinInView })}
               style={{ opacity: 0 }}
             >
-              <button className="hero-button rounded-pill shadow-sm">Join Us</button>
+              <button className="hero-button rounded-pill shadow-sm" onClick={handleJoinUs}>Join Us</button>
               <button className="hero-button rounded-pill shadow-sm">Contact Us</button>
             </div>
           </div>
