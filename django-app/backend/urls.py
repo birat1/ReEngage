@@ -52,9 +52,6 @@ urlpatterns = [
     path('api/oak/lesson/assets/<str:lesson>/<str:asset_type>/', LessonAssetAPI.as_view(), name='oak-lesson-assets'),
     path('api/oak/questions/<str:keystage>/<str:subject>/', QuestionsAPI.as_view(), name='oak-questions'),
 
-<<<<<<< HEAD
-    path('api/login/', login_user, name='login_user'),
-=======
     #to return current logged in user
     path('api/current-user-info/', get_user_info, name='get_user_info'),
 
@@ -63,7 +60,4 @@ urlpatterns = [
 
     #to return current equipped student avatar
     path('api/current-equipped-avatar/<int:user_id>', current_equipped_avatar, name='current_equipped_avatar'),
-
-
->>>>>>> 0eb4c65a742792942a008e79110131b5d0e3c36a
 ]
