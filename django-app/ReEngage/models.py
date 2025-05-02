@@ -9,6 +9,7 @@ class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     firstname = models.CharField(max_length=20, default='def')
     surname = models.CharField(max_length=20, default='def')
+    is_admin = models.BooleanField(default=True)
 
 #Class for students
 class Student(models.Model):
@@ -27,6 +28,7 @@ class Student(models.Model):
     english_correct = models.PositiveIntegerField()
     maths_correct = models.PositiveIntegerField()
     science_correct = models.PositiveIntegerField()
+    is_admin = models.BooleanField(default=False)
     avatars = models.ManyToManyField('Avatar', through='StudentAvatar')
 
 #Class for each avatar
