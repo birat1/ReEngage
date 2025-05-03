@@ -47,7 +47,7 @@ function Navigationbar() {
               <img alt="Avatar" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif" className="img-cover"/>
             </div>
             <NavDropdown title="Student Name">
-              <NavDropdown.Item href="#action/3.1">Avatar Page</NavDropdown.Item>
+              <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
               <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
