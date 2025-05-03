@@ -16,9 +16,9 @@ function Games() {
 }
 
 const games = [
-  { to: "starmath", image: Maths, title: "Starmath", delay: "0.1s" },
-  { to: "fill-itfish", image: Book, title: "Fill-itFish", delay: "0.3s" },
-  { to: "lab-wars", image: Flask, title: "LabWars", delay: "0.5s" },
+  { to: "/games/starmath", image: Maths, title: "Starmath", delay: "0.1s" },
+  { to: "/games/fill-itfish", image: Book, title: "Fill-itFish", delay: "0.3s" },
+  { to: "/games/labwars", image: Flask, title: "LabWars", delay: "0.5s" },
 ];
 
 function GamesContent() {
@@ -32,7 +32,7 @@ function GamesContent() {
         >
           <div className="games d-flex align-items-center flex-wrap gap-4">
             {games.map((game, index) => (
-              <Link to={`/${game.to}`} className="link-style" key={index}>
+              <Link to={game.to} className="link-style" key={index}>
                 <div
                   className="gamecard-animate"
                   style={{ animationDelay: game.delay }}

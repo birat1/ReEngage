@@ -17,31 +17,34 @@ import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 import ChildRegister from "./pages/ChildRegister/ChildRegister.js";
 import ForbiddenPage403 from "./pages/Forbidden/forbidden.js";
+import Dashboard from "./pages/Dashboard/dashboard.js";
 
 function App() {
   return (
     <BrowserRouter>
-        <Navigationbar />
-        <Routes>
-          <Route path="/login" element={<LoginRegister />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/:year" element={<Subjects />} />
-          <Route path="/resources/:year/:subject" element={<Units />} />
-          <Route path="/resources/:year/:subject/:unit" element={<UnitLayout />} >
-            <Route path=":lesson" element={<Lesson />} />
-          </Route>
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/starmath" element={<StarMathGame />} />
-          <Route path="/fill-itfish" element={<StartGame />} />
-          <Route path="/lab-wars" element={<LabWars />} />
-          <Route path="/student-progress" element={<StudentProgress />} />
-          <Route path="/child-register" element={<ChildRegister />} />
-          <Route path="/403" element={<ForbiddenPage403 />} />
-          {/* testing */}
-          <Route path="/funfact" element={<AnimalFact />} />
-        </Routes>
+      <Navigationbar />
+      <Routes>
+        <Route path='/login' element={<LoginRegister />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/games' element={<Games />} />
+        <Route path='/resources' element={<Resources />} />
+        <Route path='/resources/:year' element={<Subjects />} />
+        <Route path='/resources/:year/:subject' element={<Units />} />
+        <Route path='/resources/:year/:subject/:unit' element={<UnitLayout />}>
+          <Route path=':lesson' element={<Lesson />} />
+        </Route>
+        <Route path='/leaderboard' element={<Leaderboard />} />
+        <Route path='/games/starmath' element={<StarMathGame />} />
+        <Route path='/games/fill-itfish' element={<StartGame />} />
+        <Route path='/games/labwars' element={<LabWars />} />
+        <Route path='/student-progress' element={<StudentProgress />} />
+        <Route path='/child-register' element={<ChildRegister />} />
+        <Route path='/403' element={<ForbiddenPage403 />} />
+
+        <Route path='/dashboard' element={<Dashboard />} />
+        {/* testing */}
+        <Route path='/funfact' element={<AnimalFact />} />
+      </Routes>
     </BrowserRouter>
   );
 }
