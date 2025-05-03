@@ -129,19 +129,24 @@ function StudentProgress() {
 
         for (const student of students) {
           // fetch avatar for each student
-          let avatarName = "default";
+          let avatarName = "Default";
           try {
             const response = await fetch(
-              `${backendAPI}api/current-equipped-avatar/${student.user_id}/`,
-              { credentials: "include" }
+                `${backendAPI}api/current-equipped-avatar/${student.user.id}/`,
+                { credentials: "include" }
             );
             if (response.ok) {
-              const avatarData = await response.json();
-              avatarName = avatarData.name;
+                const avatarData = await response.json();
+                console.log("Raw avatar data:", avatarData); // Debug log
+                avatarName = avatarData.name;
+                console.log("Using avatar:", avatarName); // Debug log
+                console.log("Available avatars:", Object.keys(avatarImages)); // Debug log
+            } else {
+                console.error("Avatar fetch failed:", response.status);
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Failed to fetch avatar:", error);
-          }
+        }
 
           transformed.push({
             ...student,

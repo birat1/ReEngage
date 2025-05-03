@@ -26,7 +26,14 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return JsonResponse({'message': 'Login successful', 'username': user.username}, status=200)
+                request.session.save() #need to save the session
+                return JsonResponse({
+                    'message': 'Login successful',
+                    'username': user.username,
+                    'is_admin': hasattr(user, 'admin'),
+                    'user_id': user.id,
+                    'sessionid': request.session.session_key
+                }, status=200)
             else:
                 return JsonResponse({'error': 'Invalid username or password'}, status=400)
         except json.JSONDecodeError:
@@ -80,31 +87,18 @@ class apiStudent(viewsets.ModelViewSet):
 		serializer = StudentSerializer(student_instance)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	
+	@csrf_exempt
 	def update(self, request, user_id):
 		student_instance = self.get_item(user_id)
 		if not student_instance:
-			return Response({"res": "Object with user_id does not exist"},status=status.HTTP_400_BAD_REQUEST)
-		data = {
-			'user': request.data.get('user'), #///
-			'year': request.data.get('year'),
-			'managed_by': request.data.get('managed_by'),
-			'level': request.data.get('level'),
-			'xp': request.data.get('xp'),
-			'points': request.data.get('points'),
-			'english_answered': request.data.get('english_answered'),
-			'maths_answered': request.data.get('maths_answered'),
-			'science_answered': request.data.get('science_answered'),
-			'english_correct': request.data.get('english_correct'),
-			'maths_correct': request.data.get('maths_correct'),
-			'science_correct': request.data.get('science_correct')
-		}
-		serializer = StudentSerializer(instance = student_instance, data=data, partial = True)
+			return Response({"res": "Object with user_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+		
+		serializer = StudentSerializer(instance=student_instance, data=request.data, partial=True)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_200_OK)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-	
+		
 	def destroy(self, request, user_id):
 		student_instance = self.get_item(user_id)
 		if not student_instance:
@@ -231,56 +225,63 @@ class apiAvatar(viewsets.ModelViewSet):
 #to return all the students managed by the current logged in admin
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_students(request, user):
-    if not hasattr(user, 'admin'):
-        return Response({'detail': 'Forbidden'}, status=403)
-
+def get_students(request):
+    if not hasattr(request.user, 'admin'):
+        return Response({'detail': 'Forbidden - Admin access required'}, status=403)
+    
     try:
         admin = Admin.objects.get(user=request.user)
         students = Student.objects.filter(managed_by=admin)
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
-    except:
-        return Response({'detail': 'Forbidden'}, status=403)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
 
-	
-#to return current logged in user
+
+# returns current logged in user info
 @api_view(['GET'])
-@login_required
-def get_user_info(user):
-    if hasattr(user, 'admin') and user.admin.is_admin:
-        return JsonResponse({
-		'id': user.id,
-        'username': user.username,
-        'email': user.email,
-        'first_name': user.admin.firstname,
-        'last_name': user.admin.surname,
-        'is_admin': user.admin.is_admin,
-	})
-    elif hasattr(user, 'student'):
-        return JsonResponse({
-		'id': user.id,
-        'username': user.username,
-        'email': user.email,
-        'first_name': user.student.firstname,
-        'last_name': user.student.surname,
-        'is_admin': user.student.is_admin,
-		})
+@permission_classes([IsAuthenticated])
+def get_user_info(request):
+    print("Session ID:", request.session.session_key)
+    print("User:", request.user)
+    print("Headers:", request.headers) 
+    user = request.user
+    if not request.user.is_authenticated:
+        return Response({'error': 'Not authenticated'}, status=401)
+    
+    try:
+        if hasattr(user, 'admin'):
+            return Response({
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.admin.firstname,
+                'last_name': user.admin.surname,
+                'is_admin': True
+            })
+        elif hasattr(user, 'student'):
+            return Response({
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.student.firstname,
+                'last_name': user.student.surname,
+                'is_admin': False
+            })
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+    return Response({'error': 'User type not recognized'}, status=400)
 
 #to return current equipped student avatar
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def current_equipped_avatar(request, user_id):
-	if request.user.id != user_id:
-		return Response({"error": "Unauthorized access"}, status=403)
-
-	if hasattr(request.user, 'student'):
-		try: 
-			equipped_avatar = StudentAvatar.objects.get(
-                student_id=request.user.student,
+        try: 
+            equipped_avatar = StudentAvatar.objects.get(
+                student_id=user_id,
                 is_equipped=True
             )
-			serializer = AvatarSerializer(equipped_avatar.avatar_id)
-			return Response(serializer.data)
-		except StudentAvatar.DoesNotExist:
-			 return Response({"error": "No avatar equipped"}, status=404)
+            serializer = AvatarSerializer(equipped_avatar.avatar_id)
+            return Response(serializer.data)
+        except StudentAvatar.DoesNotExist:
+            return Response({"error": "No avatar equipped"}, status=404)

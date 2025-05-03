@@ -17,7 +17,7 @@ export function useUpdateStudentStats({ points, subject, questions, correctQuest
   });
 
   //fetch current student data
-  const { data: studentData } = useQuery({
+  const { data: studentData, isPending: isUpdating } = useQuery({
     queryKey: ["StudentCurrentData", userInfo?.id],
     queryFn: async () => {
       if (!userInfo?.id || userInfo?.is_admin) return null;
@@ -31,12 +31,21 @@ export function useUpdateStudentStats({ points, subject, questions, correctQuest
   });
 
   // update student data mutation
-  const { mutate: updateStudentData, isPending: isUpdating } = useMutation({
+  const { mutate: updateStudentData } = useMutation({
     mutationFn: async (updateData) => {
+      //getting csrf token
+      const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
+        credentials: "include"
+      });
+      const { csrfToken } = await csrfResponse.json();
+  
       const response = await fetch(`${backendAPI}api/students/${userInfo.id}/edit/`, {
         method: "PUT",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken
+        },
         body: JSON.stringify(updateData),
       });
       if (!response.ok) throw new Error("Failed to update student data");

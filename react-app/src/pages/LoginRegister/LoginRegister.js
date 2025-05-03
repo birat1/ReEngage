@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './LoginRegister.css';
+import { backendAPI } from "../../constants.js";
 
 const LoginRegister = () => {
     const [view, setView] = useState('login'); // 'login', 'register', 'forgot'
@@ -49,18 +50,29 @@ const LoginRegister = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/login/', {
+            const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
+                credentials: 'include',
+                mode: 'cors'
+            });
+            const csrfData = await csrfResponse.json();
+            const csrfToken = csrfData.csrfToken;
+    
+            const response = await fetch(`${backendAPI}api/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
                 },
+                credentials: 'include',
+                mode: 'cors',
                 body: JSON.stringify({ username, password }),
             });
-
+    
             const data = await response.json();
             if (response.ok) {
                 console.log('Login successful:', data);
                 // Handle successful login (e.g., redirect, save token, etc.)
+                window.location.href = '/dashboard'; 
             } else {
                 console.error('Login failed:', data.error);
                 setError(data.error);

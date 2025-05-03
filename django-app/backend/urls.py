@@ -24,12 +24,21 @@ from ReEngage.oak_api_views import (
     LessonSummaryAPI,
     QuestionsAPI,
 )
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def get_csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('datawizard/', include('data_wizard.urls')),
 
     path('api/login/', login_user, name='login_user'),
+    path('api/csrf/', get_csrf, name='get_csrf'),
+
 
     path('api/students/', apiStudent.as_view({'get':'list'}), name = 'listapistudents'),
     path('api/students/', apiStudent.as_view({'post':'create'}), name = 'createapistudents'),
@@ -60,6 +69,7 @@ urlpatterns = [
     #to return all the students managed by the current logged in admin
     path('api/get-students/', get_students, name='get_students'),
 
-    #to return current equipped student avatar
-    path('api/current-equipped-avatar/<int:user_id>', current_equipped_avatar, name='current_equipped_avatar'),
+    #to return a student's current equipped avatar
+    path('api/current-equipped-avatar/<int:user_id>/', current_equipped_avatar, name='current_equipped_avatar'),
+
 ]
