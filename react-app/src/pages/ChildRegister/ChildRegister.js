@@ -9,13 +9,23 @@ const ChildRegister = () => {
         firstname: '',
         surname: '',
         year: '',
-        managed_by: ''
+        managed_by: '',
+        english_answered: 0,
+        english_correct: 0,
+        maths_answered: 0,
+        maths_correct: 0,
+        science_answered: 0,
+        science_correct: 0,
+        level: 0,
+        points: 0,
+        streak: 0,
+        xp: 0,
     });
 
     const [admins, setAdmins] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/admins') // Replace 'backend' with your service name in docker-compose.yml
+        axios.get('http://localhost:8000/api/admins') // Replace 'backend' with your service name in docker-compose.yml
             .then(response => setAdmins(response.data))
             .catch(error => console.error('Failed to fetch admins:', error));
     }, []);
@@ -30,10 +40,43 @@ const ChildRegister = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Child Registered:', formData);
-        // Add logic to send formData to your backend or API
-        setFormData({ name: '', age: '', email: '' });
+        console.log("Selected Admin ID:", formData.managed_by);
+    
+        // Build the user object to match the backend structure
+        const userData = {
+            username: formData.username,
+            password: formData.password,
+            email: formData.email,
+        };
+    
+        const studentData = {
+            user: userData,
+            firstname: formData.firstname,
+            surname: formData.surname,
+            year: formData.year,
+            managed_by: formData.managed_by,
+            english_answered: formData.english_answered,
+            english_correct: formData.english_correct,
+            maths_answered: formData.maths_answered,
+            maths_correct: formData.maths_correct,
+            science_answered: formData.science_answered,
+            science_correct: formData.science_correct,
+            level: formData.level,
+            points: formData.points,
+            streak: formData.streak,
+            xp: formData.xp,
+        };
+    
+        // Sends the entire student data to the backend API
+        axios.post('http://localhost:8000/api/students/', studentData)
+            .then(response => {
+                alert('Child Registered Successfully!');
+            })
+            .catch(error => {
+                console.error('Error registering student:', error.response?.data || error.message);
+            });
     };
+    
 
     return (
         <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
@@ -127,7 +170,7 @@ const ChildRegister = () => {
                         required
                         style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     >
-                        <option value="">Select an admin</option>
+                        <option value="">Select an admin</option> 
                         {admins.map((admin) => (
                             <option key={admin.id} value={admin.id}>
                                 {admin.username || `${admin.firstname} ${admin.surname}`}

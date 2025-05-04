@@ -2,6 +2,8 @@ import React, { useState, useEffect, Component } from "react";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FillitFish.css';
+import { useUpdateStudentStats } from "../../components/UpdateStudentStats"; // Import the custom hook
+import CheckLoggedIn from "../../components/CheckLoggedIn"; // Import the checkLoggedIn function
 
 function Choices({ text, choices = [], onSelect }) { // shws text and buttons
   return ( // if there is text, show it
@@ -67,20 +69,22 @@ export default function TitleScreen() { // screen user sees before playing the g
   }
 
   return ( // only hides button so doesn't need a parent component
-    <div className="bg" style={{position: "relative"}}>
-      <div>
-        {isOpen && <h1 className="icon Title-icon"></h1>}
+    <CheckLoggedIn>
+      <div className="bg" style={{position: "relative"}}>
+        <div>
+          {isOpen && <h1 className="icon Title-icon"></h1>}
+        </div>
+        {isOpen && <button onClick={handleSelect} className="center-btn btn">Start</button>} 
+        {isOpen && <button onClick={handleHelp} className="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
+        {showTransitionScreen && <TransitionScreen audio={audio}/>}
+        {showHelpScreen && <MiniScreen onClose={closeHelpScreen} text={[
+          "Help reassemble the fish by filling in the gaps to complete the word based on the definition given.",
+          <br key="br1" />,
+          //<br key="br2" />,
+          "Click on the fish's head for a clue!"
+        ]} />}
       </div>
-      {isOpen && <button onClick={handleSelect} className="center-btn btn">Start</button>} 
-      {isOpen && <button onClick={handleHelp} className="btn" style = {{top: "85%", position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>Help</button>}
-      {showTransitionScreen && <TransitionScreen audio={audio}/>}
-      {showHelpScreen && <MiniScreen onClose={closeHelpScreen} text={[
-        "Help reassemble the fish by filling in the gaps to complete the word based on the definition given.",
-        <br key="br1" />,
-        //<br key="br2" />,
-        "Click on the fish's head for a clue!"
-      ]} />}
-    </div>
+    </CheckLoggedIn>
   );
 }
 
@@ -367,11 +371,12 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
 function Finish({ score, audio }) {
   const navigate = useNavigate(); // Initialize navigate function
 
-  function handleSelect() {  
+  function HandleSelect() {  
     if (audio) {
       audio.pause();  // Stop the audio
       audio.currentTime = 0; // Reset playback position
     }
+    useUpdateStudentStats(score * 100, "english", 3, score); // Update student stats
     navigate("/"); // Redirect to homepage
   };
 
@@ -379,7 +384,7 @@ function Finish({ score, audio }) {
     <div>
       <p className="definition" style={{ left: "41%", top: "5%" }}>Score: {score}/3</p>
       <h1 className="icon fishhappy-icon"></h1>
-      <button onClick={handleSelect} className="btn center-btn">
+      <button onClick={HandleSelect} className="btn center-btn">
         Exit
       </button>
     </div>
