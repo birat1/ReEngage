@@ -1,8 +1,8 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+/* import { useQuery, useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { backendAPI } from '../constants';
+import { backendAPI } from '../constants'; */
 
-export function useUpdateStudentStats({ points, subject, questions, correctQuestions }) {
+/* export function useUpdateStudentStats({ points, subject, questions, correctQuestions }) {
   // fetch logged-in user info
   const { data: userInfo } = useQuery({
     queryKey: ["UserInfo"],
@@ -67,4 +67,80 @@ export function useUpdateStudentStats({ points, subject, questions, correctQuest
   }, [studentData, points, questions, correctQuestions, subject, userInfo?.is_admin]);
 
   return { isUpdating };
+} */
+
+// useUpdateStudentStats.js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { backendAPI } from '../constants';
+
+export function useUpdateStudentStats() {
+  const queryClient = useQueryClient();
+
+  // Fetch user info
+  const { data: userInfo } = useQuery({
+    queryKey: ["UserInfo"],
+    queryFn: async () => {
+      const response = await fetch(`${backendAPI}api/current-user-info/`, {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch user info");
+      return await response.json();
+    },
+    retry: false,
+  });
+
+  // Fetch student data
+  const { data: studentData } = useQuery({
+    queryKey: ["StudentCurrentData", userInfo?.id],
+    queryFn: async () => {
+      if (!userInfo?.id || userInfo?.is_admin) return null;
+      const response = await fetch(`${backendAPI}api/students/${userInfo.id}/`, {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch student data");
+      return await response.json();
+    },
+    enabled: !!userInfo && !userInfo?.is_admin,
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: async (updateData) => {
+      const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
+        credentials: "include"
+      });
+      const { csrfToken } = await csrfResponse.json();
+
+      const response = await fetch(`${backendAPI}api/students/${userInfo.id}/edit/`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken
+        },
+        body: JSON.stringify(updateData),
+      });
+      if (!response.ok) throw new Error("Failed to update student data");
+      return await response.json();
+    },
+    onSuccess: () => {
+      // Optionally invalidate queries here
+      queryClient.invalidateQueries(["StudentCurrentData", userInfo?.id]);
+    }
+  });
+
+  // Return a callback function you can call from your component
+  function updateStats(points, subject, questions, correctQuestions) {
+    if (!studentData || userInfo?.is_admin) return;
+
+    const updateData = {
+      points: (studentData.points || 0) + parseInt(points),
+      [`${subject}_answered`]: (studentData[`${subject}_answered`] || 0) + questions,
+      [`${subject}_correct`]: (studentData[`${subject}_correct`] || 0) + correctQuestions,
+      xp: (studentData.xp || 0) + parseInt(points),
+    };
+    mutate(updateData);
+  }
+
+  return updateStats;
 }

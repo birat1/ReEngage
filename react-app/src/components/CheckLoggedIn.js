@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { backendAPI } from '../constants';
 
 // wrap this function around the code in return. 
-// if the user is logged in, that code is returned. if not, the user is redirected to the login page.
+// if the user is logged in, that code is returned. if not, the user is redirected to the error page.
 export default function CheckLoggedIn({ children }) {
     const navigate = useNavigate();
 

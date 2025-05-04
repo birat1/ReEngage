@@ -339,10 +339,10 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
                   <br key="br1" />,
                   "Incorrect, try again!"
                 ]} />}
-                <button onClick={handleSound} className="btn center-btn" style={{ top: "35%", left: "10%",padding: "0px 0px" }}>
+                <button onClick={handleSound} className="btn center-btn" style={{ top: "45%", left: "5%",padding: "0px 0px" }}>
                   🔉
                 </button>
-                <button onClick={handleSkip} className="btn center-btn" style={{ top: "35%", left: "90%",padding: "0px 0px" }}>
+                <button onClick={handleSkip} className="btn center-btn" style={{ top: "45%", left: "95%",padding: "0px 0px" }}>
                   Skip
                 </button>
                 {showSkipScreen && <MiniScreen onClose={closeSkipScreen} text={[
@@ -369,14 +369,15 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
 }
 
 function Finish({ score, audio }) {
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate(); // Initialize hook functions
+  const updateStats = useUpdateStudentStats();
 
-  function HandleSelect() {  
+  function handleSelect() {  
     if (audio) {
       audio.pause();  // Stop the audio
       audio.currentTime = 0; // Reset playback position
     }
-    useUpdateStudentStats(score * 100, "english", 3, score); // Update student stats
+    updateStats(score * 100, "english", 3, score); // Update student stats
     navigate("/"); // Redirect to homepage
   };
 
@@ -384,7 +385,7 @@ function Finish({ score, audio }) {
     <div>
       <p className="definition" style={{ left: "41%", top: "5%" }}>Score: {score}/3</p>
       <h1 className="icon fishhappy-icon"></h1>
-      <button onClick={HandleSelect} className="btn center-btn">
+      <button onClick={handleSelect} className="btn center-btn">
         Exit
       </button>
     </div>
