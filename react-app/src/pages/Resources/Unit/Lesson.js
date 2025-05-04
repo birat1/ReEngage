@@ -5,6 +5,7 @@ import { fetchVideo } from "../api/lessonAssets";
 import { fetchSummary } from "../api/lessonSummary";
 import WorkSheetButton from "./WorksheetButton";
 import Bricks from "./assets/bricks.png";
+import Spinner from 'react-bootstrap/Spinner';
 
 function Lesson() {
   const { year, subject, lesson } = useParams();
@@ -32,10 +33,12 @@ function Lesson() {
 
   return (
     <>
-      <div className="lesson-card slide-up shadow-sm rounded d-flex flex-column align-items-center gap-3 mt-5">
+      <div className="lesson-card slide-up shadow-sm rounded d-flex flex-column align-items-center gap-3 mt-5 mb-5">
         <div>
           {summaryResult.isLoading ? (
             <div></div>
+          ) : summaryResult.isError ? (
+            <div>Something went wrong. Failed to load Lesson.</div>
           ) : (
             <>
               <h2 className="text-center">{summary.lessonTitle}</h2>
@@ -45,11 +48,13 @@ function Lesson() {
         <div className="video-card rounded shadow-sm d-flex flex-column justify-content-center align-items-center">
           {subject === "science" ? (
             <>
-            <img src={Bricks} alt="Bricks" className="bricks" />
-            <p>This video is under construction.</p>
+              <img src={Bricks} alt="Bricks" className="bricks" />
+              <p>This video is under construction.</p>
             </>
           ) : videoResult.isLoading ? (
-            <div>Loading video...</div>
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <Spinner animation="border" variant="secondary" />
+            </div>
           ) : (
             video && (
               <video
@@ -65,6 +70,8 @@ function Lesson() {
           <h4 className="fw-bolder mb-3">Learning Points</h4>
           {summaryResult.isLoading ? (
             <div></div>
+          ) : summaryResult.isError ? (
+            <div></div>
           ) : (
             <>
               <ul>
@@ -78,6 +85,8 @@ function Lesson() {
         <div className="content-card rounded shadow-sm">
           <h4 className="fw-bolder mb-3">Keywords</h4>
           {summaryResult.isLoading ? (
+            <div></div>
+          ) : summaryResult.isError ? (
             <div></div>
           ) : (
             <>
@@ -94,17 +103,19 @@ function Lesson() {
             </>
           )}
         </div>
-        <div className="content-card rounded shadow-sm">
+        <div className="content-card rounded shadow-sm mb-3">
           <h4 className="fw-bolder mb-3">Worksheet</h4>
           <div className="worksheet-entry rounded d-flex align-items-center justify-content-between px-3 py-3">
             {summaryResult.isLoading ? (
               <div></div>
+            ) : summaryResult.isError ? (
+              <div></div>
             ) : (
               <>
                 <p className="mb-0">Worksheet</p>
+                <WorkSheetButton />
               </>
             )}
-            <WorkSheetButton />
           </div>
         </div>
       </div>

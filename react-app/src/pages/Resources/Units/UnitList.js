@@ -6,12 +6,13 @@ import { useState } from "react";
 import Maths from "../../../assets/images/Maths.png";
 import Flask from "../../../assets/images/Flask.png";
 import Book from "../../../assets/images/Open-Book.png";
+import Spinner from "react-bootstrap/Spinner";
 
 function UnitList() {
   const { year, subject } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["units", subject, year],
     queryFn: () => fetchUnits(subject, year),
     refetchOnWindowFocus: false,
@@ -34,11 +35,17 @@ function UnitList() {
 
       <div className="unit-list shadow-sm rounded d-flex flex-column justify-content-between align-items-center gap-3 pt-4 pb-4 mt-1">
         {isLoading || isFetching ? (
-          <>Loading...</>
+          <div className="d-flex justify-content-center align-items-center h-100">
+            <Spinner animation="border" variant="secondary" />
+          </div>
+        ) : error ? (
+          <div className="d-flex justify-content-center align-items-center h-100">
+            Sorry, something went wrong on our side. Please try again later.
+          </div>
         ) : (
           <>
             <div className="unit-entries d-flex flex-column align-items-center gap-3 w-100">
-              {paginatedUnits.map((unit) => (
+              {(paginatedUnits || []).map((unit) => (
                 <div
                   className="unit-entry rounded shadow-sm"
                   key={unit.unitSlug}
