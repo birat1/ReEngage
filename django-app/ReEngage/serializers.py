@@ -1,19 +1,21 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Student, Admin, Avatar
-
+    
 class StudentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'email']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            email=validated_data.get('email', ''),
-        )
+        password = validated_data.pop('password', None)
+        user = User(**validated_data)
+        if password:
+            user.set_password(password)  # Hash the password
+        user.save()
         return user
+
 
 class AdminUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,10 +38,20 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        user_data = validated_data.pop('user')  # Pop the nested user data
-        user = StudentUserSerializer.create(StudentUserSerializer(), validated_data=user_data)
+        print("VALIDATED DATA:", validated_data)  # Debug validated data
+        user_data = validated_data.pop('user')
+        print("USER DATA:", user_data)  # Debug user data
+
+        user_serializer = StudentUserSerializer(data=user_data)
+        user_serializer.is_valid(raise_exception=True)
+        user = user_serializer.save()
+        print("USER CREATED:", user)  # Debug created user
+
         student = Student.objects.create(user=user, **validated_data)
+        print("STUDENT CREATED:", student)  # Debug created student
         return student
+
+
 
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:

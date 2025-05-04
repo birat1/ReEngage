@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useCheckAdmin } from './useCheckAdmin';
 
 const ChildRegister = () => {
     const [formData, setFormData] = useState({
@@ -22,13 +24,19 @@ const ChildRegister = () => {
         xp: 0,
     });
 
-    const [admins, setAdmins] = useState([]);
+    const { isAdmin, isLoading } = useCheckAdmin();
+    const navigate = useNavigate();
 
+    // check if the user is an admin
     useEffect(() => {
-        axios.get('http://localhost:8000/api/admins') // Replace 'backend' with your service name in docker-compose.yml
-            .then(response => setAdmins(response.data))
-            .catch(error => console.error('Failed to fetch admins:', error));
-    }, []);
+        if (!isLoading) {
+          console.log("Admin status:", isAdmin);
+          if (!isAdmin) {
+            alert("You are not authorized to register a child.");
+            //navigate("/", { replace: true });
+          }
+        }
+      }, [isAdmin, isLoading, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,9 +48,8 @@ const ChildRegister = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Selected Admin ID:", formData.managed_by);
+        console.log("Selected Admin ID:", isAdmin.id);
     
-        // Build the user object to match the backend structure
         const userData = {
             username: formData.username,
             password: formData.password,
@@ -54,7 +61,7 @@ const ChildRegister = () => {
             firstname: formData.firstname,
             surname: formData.surname,
             year: formData.year,
-            managed_by: formData.managed_by,
+            managed_by: isAdmin?.id,
             english_answered: formData.english_answered,
             english_correct: formData.english_correct,
             maths_answered: formData.maths_answered,
@@ -66,14 +73,20 @@ const ChildRegister = () => {
             streak: formData.streak,
             xp: formData.xp,
         };
+        console.log("Payload being sent:", studentData);
     
         // Sends the entire student data to the backend API
-        axios.post('http://localhost:8000/api/students/', studentData)
+        axios.post('http://localhost:8000/api/students/', studentData, {
+            headers: {
+                'Content-Type': 'application/json'
+              }
+            })
             .then(response => {
                 alert('Child Registered Successfully!');
             })
             .catch(error => {
                 console.error('Error registering student:', error.response?.data || error.message);
+                alert(JSON.stringify(error.response?.data, null, 2));
             });
     };
     
@@ -161,22 +174,7 @@ const ChildRegister = () => {
                 </div>
 
                 <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="managed_by">Managed By (Admin):</label>
-                    <select
-                        id="managed_by"
-                        name="managed_by"
-                        value={formData.managed_by}
-                        onChange={handleChange}
-                        required
-                        style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-                    >
-                        <option value="">Select an admin</option> 
-                        {admins.map((admin) => (
-                            <option key={admin.id} value={admin.id}>
-                                {admin.username || `${admin.firstname} ${admin.surname}`}
-                            </option>
-                        ))}
-                    </select>
+                    <label htmlFor="managed_by">Managed By { isAdmin?.username }</label>
                 </div>
 
                 <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007BFF', color: '#fff', border: 'none', cursor: 'pointer' }}>

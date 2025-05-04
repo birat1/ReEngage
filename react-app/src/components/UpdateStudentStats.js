@@ -69,7 +69,6 @@ import { backendAPI } from '../constants'; */
   return { isUpdating };
 } */
 
-// useUpdateStudentStats.js
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { backendAPI } from '../constants';
