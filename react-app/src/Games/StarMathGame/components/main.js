@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const btnAudio = new Audio("zipclick.flac");
+const btnAudio = new Audio("/zipclick.flac");
 
 export function dragElement(elmnt) {
   let pos1 = 0,

@@ -52,6 +52,10 @@ export default function TitleScreen() { // screen user sees before playing the g
 
   useEffect(() => {
     audio.loop = true;
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, [audio]);
 
   function handleSelect() {

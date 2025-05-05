@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./backgroundMusic.css";
 
-function BackgroundMusic(playBtn) {
+function BackgroundMusic() {
   const backgrndSoundbtn = useRef(null);
   const backgrndAudio = useRef(null);
 
@@ -17,26 +17,14 @@ function BackgroundMusic(playBtn) {
       console.error("audio play prevented", error);
     });
 
-    const handleClick = () => {
-      if (playBtn.current) {
-        playBtn.current.click();
-      }
-      backgrndAudio.current.play().catch((error) => {
-        console.error("audio play prevented", error);
-      });
-    };
-
-    document.addEventListener("click", handleClick, { once: true });
-
     return () => {
-      document.removeEventListener("click", handleClick);
       if (backgrndAudio.current) {
         backgrndAudio.current.pause();
         backgrndAudio.current.currentTime = 0;
         backgrndAudio.current = null;
       }
     };
-  }, [playBtn]);
+  }, []);
 
 
   //background sound logic

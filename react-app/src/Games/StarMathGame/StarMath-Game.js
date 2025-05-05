@@ -15,6 +15,7 @@ import {
   intialiseDragAndDrop,
   setupClickSounds,
 } from "./components/main";
+import CheckLoggedIn from "../../components/CheckLoggedIn.js";
 
 function StarMathGame() {
   const [showTitleScreen, setShowTitleScreen] = useState(true);
@@ -233,6 +234,7 @@ function StarMathGame() {
   }, [wrongMessage]);
 
   return (
+    <CheckLoggedIn>
     <div className="star-math-container">
       {/* Background Music button */}
       <div>
@@ -517,6 +519,7 @@ function StarMathGame() {
         />
       )}
     </div>
+    </CheckLoggedIn>
   );
 }
 

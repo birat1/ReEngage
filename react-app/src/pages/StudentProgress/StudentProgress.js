@@ -132,21 +132,21 @@ function StudentProgress() {
           let avatarName = "Default";
           try {
             const response = await fetch(
-                `${backendAPI}api/current-equipped-avatar/${student.user.id}/`,
-                { credentials: "include" }
+              `${backendAPI}api/current-equipped-avatar/${student.user.id}/`,
+              { credentials: "include" }
             );
             if (response.ok) {
-                const avatarData = await response.json();
-                console.log("Raw avatar data:", avatarData); // Debug log
-                avatarName = avatarData.name;
-                console.log("Using avatar:", avatarName); // Debug log
-                console.log("Available avatars:", Object.keys(avatarImages)); // Debug log
+              const avatarData = await response.json();
+              console.log("Raw avatar data:", avatarData); // Debug log
+              avatarName = avatarData.name;
+              console.log("Using avatar:", avatarName); // Debug log
+              console.log("Available avatars:", Object.keys(avatarImages)); // Debug log
             } else {
-                console.error("Avatar fetch failed:", response.status);
+              console.error("Avatar fetch failed:", response.status);
             }
-        } catch (error) {
+          } catch (error) {
             console.error("Failed to fetch avatar:", error);
-        }
+          }
 
           transformed.push({
             ...student,
@@ -242,13 +242,13 @@ function StudentProgress() {
 
   // avatar mapping
   const avatarImages = {
-    'One': One,
-    'Two': Two,
-    'Three': Three,
-    'Four': Four,
-    'Five': Five,
-    'Six': Six,
-    'Default': Default,
+    One: One,
+    Two: Two,
+    Three: Three,
+    Four: Four,
+    Five: Five,
+    Six: Six,
+    Default: Default,
   };
 
   return (
@@ -318,9 +318,7 @@ function StudentProgress() {
                     <td className="name-cell">
                       <span className="expand-toggle">
                         <img
-                          src={
-                            avatarImages[student.avatar] || Default
-                          }
+                          src={avatarImages[student.avatar] || Default}
                           alt="Avatar"
                           className="avatar"
                         />
@@ -349,7 +347,9 @@ function StudentProgress() {
                       <div className="xp-bar">
                         <div
                           className="fill"
-                          style={{ width: `${student.xp / 10}%` }}
+                          style={{
+                            width: `${Math.min(student.xp / 10, 100)}%`,
+                          }}
                         ></div>
                       </div>
                       <span>{student.xp} XP</span>
