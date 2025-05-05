@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCheckAdmin } from './useCheckAdmin';
+import './ChildRegister.css'; // Assuming you have some CSS for styling
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ChildRegister = () => {
     const [formData, setFormData] = useState({
@@ -30,10 +32,10 @@ const ChildRegister = () => {
     // check if the user is an admin
     useEffect(() => {
         if (!isLoading) {
-          console.log("Admin status:", isAdmin);
+          //console.log("Admin status:", isAdmin);
           if (!isAdmin) {
             alert("You are not authorized to register a child.");
-            //navigate("/", { replace: true });
+            navigate("/", { replace: true });
           }
         }
       }, [isAdmin, isLoading, navigate]);
@@ -83,20 +85,53 @@ const ChildRegister = () => {
             })
             .then(response => {
                 alert('Child Registered Successfully!');
+                setFormData({ // wipe form data after successful registration
+                    username: '',
+                    password: '',
+                    email: '',
+                    firstname: '',
+                    surname: '',
+                    year: '',
+                    managed_by: ''
+                });
             })
             .catch(error => {
-                console.error('Error registering student:', error.response?.data || error.message);
-                alert(JSON.stringify(error.response?.data, null, 2));
+                if (error.response && error.response.data) {
+                    const errors = error.response.data;
+                    let messages = [];
+            
+                    const extractMessages = (errObj) => {
+                        for (const key in errObj) {
+                            const value = errObj[key];
+                            if (Array.isArray(value)) {
+                                messages.push(...value);
+                            } else if (typeof value === 'string') {
+                                messages.push(value);
+                            } else if (typeof value === 'object' && value !== null) {
+                                extractMessages(value);  // Recursively handle nested objects
+                            } else {
+                                messages.push(String(value));
+                            }
+                        }
+                    };
+            
+                    extractMessages(errors);
+            
+                    alert(messages.join('\n'));
+                } else {
+                    alert('An unexpected error occurred.');
+                }
             });
+            
     };
     
 
     return (
-        <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
-            <h2>Register Child</h2>
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="firstname">First Name:</label>
+        <div className='boxed row' style={{ padding: '20px', maxWidth: '400px', margin: '0 auto', top: '50px', marginTop: '50px' }}>
+            <h2 className='heading2'>Register a Child</h2>
+            <form onSubmit={handleSubmit} class="row g-3">
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="firstname">First Name:</label>
                     <input
                         type="text"
                         id="fn"
@@ -107,8 +142,8 @@ const ChildRegister = () => {
                         style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="surname">Surname:</label>
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="surname">Surname:</label>
                     <input
                         type="text"
                         id="sn"
@@ -119,8 +154,8 @@ const ChildRegister = () => {
                         style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="username">Username:</label>
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="username">Username:</label>
                     <input
                         type="text"
                         id="un"
@@ -131,8 +166,8 @@ const ChildRegister = () => {
                         style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="password">Password:</label>
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="password">Password:</label>
                     <input
                         type="text"
                         id="pw"
@@ -143,8 +178,8 @@ const ChildRegister = () => {
                         style={{ width: '100%', padding: '8px', marginTop: '5px' }}
                     />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="email">Email:</label>
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="email">Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -156,8 +191,8 @@ const ChildRegister = () => {
                     />
                 </div>
 
-                <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="year">Year:</label>
+                <div className='column' style={{ marginBottom: '10px' }}>
+                    <label className='lbl-txt' htmlFor="year">Year:</label>
                     <select
                         id="year"
                         name="year"
@@ -174,7 +209,7 @@ const ChildRegister = () => {
                 </div>
 
                 <div style={{ marginBottom: '10px' }}>
-                    <label htmlFor="managed_by">Managed By { isAdmin?.username }</label>
+                    <label className='lbl-txt' htmlFor="managed_by">Managed By { isAdmin?.username }</label>
                 </div>
 
                 <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007BFF', color: '#fff', border: 'none', cursor: 'pointer' }}>

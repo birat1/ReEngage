@@ -9,12 +9,12 @@ export function useCheckAdmin() {
           credentials: "include",
         });
         if (!response.ok) throw new Error("Failed to fetch user info");
-        return await response.json();
+        return false; // return false if the user is not logged in
       },
       retry: false,
     });
   
-    const isAdmin = userInfo?.is_admin ? userInfo : false;
+    const isAdmin = userInfo?.is_admin ? userInfo : false; // if the user is an admin, return the user info, otherwise return false
 
     return {isAdmin, isLoading};
   }

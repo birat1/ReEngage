@@ -58,9 +58,9 @@ class apiStudent(viewsets.ModelViewSet):
 		data = {
 
 			'person_id': request.data.get('person_id'),
+			'user': request.data.get('user'),
 			'firstname': request.data.get('firstname'),
 			'surname': request.data.get('surname'),
-			'password': request.data.get('password'),
 			'year': request.data.get('year'),
 			'managed_by': request.data.get('managed_by'),
 			'level': request.data.get('level'),

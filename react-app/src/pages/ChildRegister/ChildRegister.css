@@ -1,0 +1,31 @@
+.h2 {
+    font-size: 10px;
+    margin-bottom: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.lbl-txt {
+    color:#3088D5;
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+}
+
+.boxed {
+    width: 500px;
+    border: 5px solid #A8D3E6;
+    padding: 50px;
+    margin: 40px;
+    box-shadow: #a8d3e642 0px 2px 4px, #a8d3e680 0px 7px 13px -3px, #A8D3E6 0px -3px 0px inset;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
