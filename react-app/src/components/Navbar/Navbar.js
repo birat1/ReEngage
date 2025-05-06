@@ -81,6 +81,9 @@ function Navigationbar() {
             <Nav.Link href="/leaderboard">
               <span className="underline-ani">Leaderboard</span>
             </Nav.Link>
+            <Nav.Link href="/contact">
+              <span className="underline-ani">Contact</span>
+            </Nav.Link>
           </Nav>
           <div className="ms-auto hstack gap-3">
             {isLoading ? (

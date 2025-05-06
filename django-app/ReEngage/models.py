@@ -49,3 +49,12 @@ class StudentAvatar(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['student_id'], condition=models.Q(is_equipped=True), name='single_avatar_equipped')
         ]
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"

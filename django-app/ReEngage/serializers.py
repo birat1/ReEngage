@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Student, Admin, Avatar
+from .models import Student, Admin, Avatar, ContactMessage
     
 class StudentUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,3 +62,8 @@ class AvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Avatar
         fields = '__all__'
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ['id', 'name', 'email', 'message', 'created_at']
