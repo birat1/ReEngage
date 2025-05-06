@@ -46,9 +46,9 @@ const LabWars = () => {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
 
-  const handleStartGame = async () => {
+  const handleStartGame = async (keyStage) => {
     setIsLoading(true);
-    const fetchedQuestions = await fetchQuestions();
+    const fetchedQuestions = await fetchQuestions(keyStage);
     setQuestions(fetchedQuestions);
     setIsLoading(false);
     setGameStarted(true);

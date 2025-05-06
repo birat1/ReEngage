@@ -4,8 +4,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8000/api/oak/questions/{keyStage}/{subject}";
 
 // Fetch questions from the National Academy API
-export async function fetchQuestions() {
-  const keyStage = "ks2";
+export async function fetchQuestions(keyStage) {
   const subject = "science"; 
 
   try {
