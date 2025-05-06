@@ -8,8 +8,8 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import permissions
-from .models import Student, Admin, Avatar, StudentAvatar
-from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
+from .models import Student, Admin, Avatar, StudentAvatar, ContactMessage
+from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer, ContactMessageSerializer
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -296,3 +296,11 @@ def current_equipped_avatar(request, user_id):
             return Response(serializer.data)
         except StudentAvatar.DoesNotExist:
             return Response({"error": "No avatar equipped"}, status=404)
+
+@api_view(['POST'])
+def submit_contact_form(request):
+    serializer = ContactMessageSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Your message has been sent successfully!'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

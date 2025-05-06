@@ -70,6 +70,10 @@ function Hero() {
     navigate("/login");
   };
 
+  const handleContactUs = () => {
+    navigate("/contact");
+  };
+
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.3, triggerOnce: true });
   const { ref: videoRef, inView: videoInView } = useInView({ threshold: 0.3, triggerOnce: true });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.3, triggerOnce: true });
@@ -95,7 +99,7 @@ function Hero() {
               style={{ animationDelay: "0.1s", opacity: 0 }}
             >
               <button className="hero-button rounded-pill shadow-sm" onClick={handleJoinUs}>Join Us</button>
-              <button className="hero-button rounded-pill shadow-sm">Contact Us</button>
+              <button className="hero-button rounded-pill shadow-sm" onClick={handleContactUs}>Contact Us</button>
             </div>
           </div>
 
@@ -166,7 +170,7 @@ function Hero() {
               style={{ opacity: 0 }}
             >
               <button className="hero-button rounded-pill shadow-sm" onClick={handleJoinUs}>Join Us</button>
-              <button className="hero-button rounded-pill shadow-sm">Contact Us</button>
+              <button className="hero-button rounded-pill shadow-sm" onClick={handleContactUs}>Contact Us</button>
             </div>
           </div>
         </Container>
