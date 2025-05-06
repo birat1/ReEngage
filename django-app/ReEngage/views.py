@@ -12,7 +12,7 @@ from .models import Student, Admin, Avatar, StudentAvatar
 from .serializers import StudentSerializer, AdminSerializer, AvatarSerializer
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -39,6 +39,17 @@ def login_user(request):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@csrf_exempt
+def logout_user(request):
+	if request.method == 'POST':
+		try:
+			logout(request)
+			return JsonResponse({'message': 'Logout successful'}, status=200)
+		except Exception as e:
+			return JsonResponse({'error': str(e)}, status=500)
+	return JsonResponse({'error': 'Invalid request method'}, status=405)
+
 
 class apiStudent(viewsets.ModelViewSet):
 	queryset = Student.objects.all()
