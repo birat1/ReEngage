@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import axios from 'axios';
 import { backendAPI } from '../constants';
 
 /*How to use if this function is triggered by a button in your code, 
@@ -25,11 +25,10 @@ export function useUpdateStudentStats() {
   const { data: userInfo } = useQuery({
     queryKey: ["UserInfo"],
     queryFn: async () => {
-      const response = await fetch(`${backendAPI}api/current-user-info/`, {
-        credentials: "include",
+      const response = await axios.get(`${backendAPI}api/current-user-info/`, { 
+        withCredentials: true,
       });
-      if (!response.ok) throw new Error("Failed to fetch user info");
-      return await response.json();
+      return response.data;
     },
     retry: false,
   });
@@ -39,38 +38,37 @@ export function useUpdateStudentStats() {
     queryKey: ["StudentCurrentData", userInfo?.id],
     queryFn: async () => {
       if (!userInfo?.id || userInfo?.is_admin) return null;
-      const response = await fetch(`${backendAPI}api/students/${userInfo.id}/`, {
-        credentials: "include",
+      const response = await axios.get(`${backendAPI}api/students/${userInfo.id}/`, {
+        withCredentials: true,
       });
-      if (!response.ok) throw new Error("Failed to fetch student data");
-      return await response.json();
+      return response.data;
     },
     enabled: !!userInfo && !userInfo?.is_admin,
   });
 
   const { mutate } = useMutation({
     mutationFn: async (updateData) => {
-      // console.log("Sending data to backend:", updateData);
-      const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
-        credentials: "include"
+      const csrfResponse = await axios.get(`${backendAPI}api/csrf/`, {
+        withCredentials: true,
       });
-      const { csrfToken } = await csrfResponse.json();
-
-      const response = await fetch(`${backendAPI}api/students/${userInfo.id}/edit/`, {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken
-        },
-        body: JSON.stringify(updateData),
-      });
-      if (!response.ok) throw new Error("Failed to update student data");
-      return await response.json();
+      const csrfToken = csrfResponse.data.csrfToken;
+  
+      const response = await axios.put(
+        `${backendAPI}api/students/${userInfo.id}/edit/`,
+        updateData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+          withCredentials: true,
+        }
+      );
+      return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["StudentCurrentData", userInfo?.id]);
-    }
+    },
   });
 
   // Return a callback function
