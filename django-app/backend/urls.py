@@ -77,6 +77,6 @@ urlpatterns = [
     #to return a student's current equipped avatar
     path('api/current-equipped-avatar/<int:user_id>/', current_equipped_avatar, name='current_equipped_avatar'),
 
-    path('api/contact/', submit_contact_form, name='submit_contact_form'),   path('api/contact/', submit_contact_form, name='submit_contact_form'),
+    path('api/contact/', submit_contact_form, name='submit_contact_form'),
 ]
 
