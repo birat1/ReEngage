@@ -29,23 +29,12 @@ function BackgroundMusic() {
 
   //background sound logic
   const toggleSound = () => {
-    if (backgrndSoundbtn.current) {
-      if (backgrndSoundbtn.current.innerHTML === "🔊") {
-        //mute
-        backgrndAudio.current.muted = true;
-        backgrndSoundbtn.current.innerHTML = "🔈";
-      } else if (backgrndSoundbtn.current.innerHTML === "🔈") {
-        //medium sound
-        backgrndAudio.current.muted = false;
-        backgrndAudio.current.volume = 0.5;
-        backgrndSoundbtn.current.innerHTML = "🔉";
-        backgrndAudio.current.play().catch(() => {});
-      } else {
-        //more sound
-        backgrndAudio.current.volume = 1;
-        backgrndSoundbtn.current.innerHTML = "🔊";
-        backgrndAudio.current.play().catch(() => {});
-      }
+    if (backgrndAudio.current) {
+      // Toggle the muted state
+      backgrndAudio.current.muted = !backgrndAudio.current.muted;
+  
+      // Update the button icon based on the muted state
+      backgrndSoundbtn.current.innerHTML = backgrndAudio.current.muted ? "🔇" : "🔉";
     }
   };
 
