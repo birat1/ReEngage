@@ -23,10 +23,10 @@ class Student(models.Model):
     points = models.PositiveIntegerField(default=0)
     streak = models.PositiveIntegerField(default=0) #We may not ned this
     english_answered = models.PositiveIntegerField(default=0)
-    maths_answered = models.PositiveIntegerField(default=0)
-    science_answered = models.PositiveIntegerField(default=0)
     english_correct = models.PositiveIntegerField(default=0)
+    maths_answered = models.PositiveIntegerField(default=0)
     maths_correct = models.PositiveIntegerField(default=0)
+    science_answered = models.PositiveIntegerField(default=0)
     science_correct = models.PositiveIntegerField(default=0)
     is_admin = models.BooleanField(default=False)
     avatars = models.ManyToManyField('Avatar', through='StudentAvatar')
