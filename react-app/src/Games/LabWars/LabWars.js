@@ -15,7 +15,6 @@ const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
     {/* Display the student character */}
     <div className="battle-container">
-      <div className="character-name student-name">Student</div>
       <div className={`character-circle student-circle ${isAttacking ? 'shake' : ''}`}>
         <div className={`player-character ${isAttacking ? 'shake' : ''}`}>👨‍🔬</div>
       </div>
@@ -26,7 +25,6 @@ const BattleScene = ({ isAttacking, isBossTilting }) => (
 
     {/* Display the boss character */}
     <div className="battle-container">
-      <div className="character-name boss-name">Science Boss</div>
       <div className={`character-circle boss-circle ${isBossTilting ? 'tilt' : ''}`}>
         <div className="boss-character">👾</div>
       </div>
