@@ -6,6 +6,27 @@
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
 }
 
+.read-question-btn {
+  position: absolute;
+  top: 300px;
+  left: 20px;
+  background-color: #2287b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease; /* Add transition */
+  z-index: 1000;
+}
+
+.read-question-btn:disabled {
+  background-color: #94a3b8; /* Gray color for disabled state */
+  cursor: not-allowed; /* Show not-allowed cursor */
+  opacity: 0.7; /* Reduce opacity */
+}
+
 .game-title {
   color: #1E293B;
   text-align: center;
@@ -170,3 +191,9 @@
 .boss-circle.tilt {
   animation: tilt 0.3s ease-in-out;
 } 
+
+.read-question-btn:active {
+  transform: scale(0.95); /* Slightly shrink the button */
+  background-color: #1d6a8c; /* Darken the button color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}

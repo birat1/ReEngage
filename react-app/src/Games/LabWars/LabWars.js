@@ -45,6 +45,21 @@ const LabWars = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const handleTextToSpeech = (text) => {
+    if (isSpeaking) return; // Prevent multiple clicks
+  
+    setIsSpeaking(true); // Set speaking state to true
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+    speech.lang = 'en-GB';
+  
+    // Reset speaking state when speech ends
+    speech.onend = () => setIsSpeaking(false);
+  
+    window.speechSynthesis.speak(speech);
+  };
 
   const handleStartGame = async (keyStage) => {
     setIsLoading(true);
@@ -164,6 +179,11 @@ const LabWars = () => {
   return (
     <Container className="lab-wars-container">
       <BackgroundMusic />
+
+      <button type="button" className="read-question-btn" onClick={() => handleTextToSpeech(questions[currentQuestion].question)} disabled={isSpeaking}>
+        {isSpeaking ? 'Speaking...' : 'Read Question'}
+      </button>
+
       <h1 className="game-title">Lab Wars</h1>
 
       <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
