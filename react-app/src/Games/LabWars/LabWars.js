@@ -46,6 +46,9 @@ const LabWars = () => {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  const [correctQuestionsAnswered, setCorrectQuestionsAnswered] = useState(0);
+  const [points, setPoints] = useState(0);
 
   const handleTextToSpeech = (text) => {
     if (isSpeaking) return; // Prevent multiple clicks
@@ -104,9 +107,16 @@ const LabWars = () => {
     const currentQ = questions[currentQuestion];
     const isCorrect = checkAnswer(selectedAnswers, currentQ);
 
+    // Increment the number of questions answered
+    setQuestionsAnswered(prev => prev + 1);
+
     // Provide feedback depending on if the answer is correct or not
     if (isCorrect) {
-      // TODO: Implement boss damage system
+      // Increment the number of correct questions answered
+      setCorrectQuestionsAnswered(prev => prev + 1);
+      // Update points based on the number of correct answers
+      setPoints(prev => prev + 100);
+
       setIsAttacking(true);
       setIsBossTilting(true);
       setFeedback({
@@ -163,6 +173,9 @@ const LabWars = () => {
         <GameOver 
           onPlayAgain={handlePlayAgain} 
           onReturnHome={handleReturnHome} 
+          questionsAnswered={questionsAnswered}
+          correctQuestionsAnswered={correctQuestionsAnswered}
+          points={points}
         />
       </Container>
     );
