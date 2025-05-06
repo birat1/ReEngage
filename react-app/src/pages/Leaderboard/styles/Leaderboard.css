@@ -2,6 +2,7 @@
     background-color: #D4E9F3;
     font-family: 'Nunito', sans-serif;
     color: #4A4A4A;
+    min-height: calc(100vh - 76px);
 }
 
 .gradient {

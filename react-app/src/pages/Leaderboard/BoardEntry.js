@@ -14,7 +14,7 @@ function BoardEntry({name, xp}) {
             className="avatar1"
           />
         </div>
-        <h4 className="mb-0">Student Name</h4>
+        <h4 className="mb-0">{name}</h4>
       </div>
       <h5 className="mb-0">{xp} XP</h5>
     </div>

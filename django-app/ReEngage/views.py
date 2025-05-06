@@ -65,7 +65,11 @@ class apiStudent(viewsets.ModelViewSet):
 			return None
 	
 	def list(self, request):
+		sort_field = request.query_params.get('sort_by', None)
 		students = Student.objects.all()
+
+		if sort_field in ['points', 'xp', 'firstname', 'surname']:
+			students = students.order_by(f'-{sort_field}') 
 		serializer = StudentSerializer(students, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
