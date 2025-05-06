@@ -37,7 +37,8 @@ export async function fetchQuestions(keyStage) {
       "in this picture",
       "in the picture",
       "in this diagram",
-      "refer to the"
+      "refer to the",
+      "these results"
     ];
 
     // Filter for singular/multiple-choice questions and exclude those with assets
