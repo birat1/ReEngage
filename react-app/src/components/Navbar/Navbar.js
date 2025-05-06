@@ -5,8 +5,51 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function Navigationbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    // Check if the user is logged in
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/current-user-info/", { withCredentials: true });
+        if (response.status === 200 && response.data.username) {
+          setIsLoggedIn(true);
+          setUserName(response.data.username); // Set the username from the API response
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        setIsLoggedIn(false);
+      } finally {
+        setIsLoading(false); // Set loading to false after the check
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/logout/", {}, { withCredentials: true });
+      if (response.status === 200) {
+        setIsLoggedIn(false);
+        setUserName("");
+        window.location.href = "/login"; // Redirect to login page
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   return (
     <Navbar sticky="top" expand="lg" className="w-100 Navbar">
       <Container>
@@ -38,18 +81,29 @@ function Navigationbar() {
               <span className="underline-ani">Leaderboard</span>
             </Nav.Link>
           </Nav>
-          {/* <div className="ms-auto hstack gap-2">
-            <button className="login rounded-pill">Login</button>
-            <button className="sign rounded-pill">Sign Up</button>
-          </div> */}
           <div className="ms-auto hstack gap-3">
-            <div className="avatar-holder rounded overflow-hidden">
-              <img alt="Avatar" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif" className="img-cover"/>
-            </div>
-            <NavDropdown title="Student Name">
-              <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
-              <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
-            </NavDropdown>
+            {isLoading ? (
+              // Show nothing or a placeholder while loading
+              <div style={{ width: "100px", height: "40px" }}></div>
+            ) : isLoggedIn ? (
+              <>
+                <div className="avatar-holder rounded overflow-hidden">
+                  <img
+                    alt="Avatar"
+                    src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
+                    className="img-cover"
+                  />
+                </div>
+                <NavDropdown title={userName}>
+                  <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/login">
+                <button className="login-button">Login</button>
+              </Nav.Link>
+            )}
           </div>
         </Navbar.Collapse>
       </Container>

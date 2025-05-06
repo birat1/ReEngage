@@ -19,19 +19,25 @@
     font-weight: bold;
 }
 
-.navbar-collapse Button {
-    height: 3rem;;
-    width: 6rem;
-    background-color: #FFCC00;
-    color: #4A4A4A;
+.navbar-collapse .login-button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #4b9cd3; /* Blue background */
     border: none;
-    transition: all 0.4s;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
 }
 
-.navbar-collapse Button:hover {
-    filter: brightness(105%);
+.navbar-collapse .login-button:hover {
+    filter: brightness(110%);
     transform: scale(1.1);
+    color: #FFFFFF;
+    background-color: #357ABD; /* Darker blue on hover */
 }
+
 
 .avatar-holder {
     height: 3.5rem;
