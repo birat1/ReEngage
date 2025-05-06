@@ -9,7 +9,7 @@ import GameOver from './components/GameOver';
 import { fetchQuestions } from './data/questions';
 import BackgroundMusic from './components/backgroundMusic';
 import './LabWars.css';
-
+import CheckLoggedIn from '../../components/CheckLoggedIn';
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
@@ -110,7 +110,7 @@ const LabWars = () => {
       setIsAttacking(true);
       setIsBossTilting(true);
       setFeedback({
-        message: 'Correct! You dealt damage to the boss!',
+        message: 'Great job! You got it right! 🎉',
         isCorrect: true
       });
       // Reset the attack and tilt animations after they complete
@@ -120,7 +120,7 @@ const LabWars = () => {
       }, 300);
     } else {
       setFeedback({
-        message: `Not quite!`,
+        message: `Oops! That’s not correct. Try again next time! ❌`,
         isCorrect: false
       });
     }
@@ -177,38 +177,40 @@ const LabWars = () => {
   }
 
   return (
-    <Container className="lab-wars-container">
-      <BackgroundMusic />
+    <CheckLoggedIn>
+      <Container className="lab-wars-container">
+        <BackgroundMusic />
 
-      <button type="button" className="read-question-btn" onClick={() => handleTextToSpeech(questions[currentQuestion].question)} disabled={isSpeaking}>
-        {isSpeaking ? 'Speaking...' : 'Read Question'}
-      </button>
+        <button type="button" className="read-question-btn" onClick={() => handleTextToSpeech(questions[currentQuestion].question)} disabled={isSpeaking}>
+          {isSpeaking ? 'Speaking...' : 'Read Question'}
+        </button>
 
-      <h1 className="game-title">Lab Wars</h1>
+        <h1 className="game-title">Lab Wars</h1>
 
-      <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
+        <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
 
-      <QuestionCard 
-        question={questions[currentQuestion].question}
-        questionNumber={currentQuestion + 1}
-        totalQuestions={questions.length}
-      >
-        <AnswerOptions 
-          options={questions[currentQuestion].answers.map(answer => answer.content)}
-          onSubmit={handleSubmit}
-          isAnswered={isAnswered}
-          correctAnswers={questions[currentQuestion].answers
-            .map((answer, index) => (answer.distractor === false ? index : null))
-            .filter((index) => index !== null)}
-          isMultiple={questions[currentQuestion].answers.filter(answer => answer.distractor === false).length > 1}
+        <QuestionCard 
+          question={questions[currentQuestion].question}
+          questionNumber={currentQuestion + 1}
+          totalQuestions={questions.length}
+        >
+          <AnswerOptions 
+            options={questions[currentQuestion].answers.map(answer => answer.content)}
+            onSubmit={handleSubmit}
+            isAnswered={isAnswered}
+            correctAnswers={questions[currentQuestion].answers
+              .map((answer, index) => (answer.distractor === false ? index : null))
+              .filter((index) => index !== null)}
+            isMultiple={questions[currentQuestion].answers.filter(answer => answer.distractor === false).length > 1}
+          />
+        </QuestionCard>
+
+        <FeedbackMessage 
+          message={feedback.message}
+          isCorrect={feedback.isCorrect}
         />
-      </QuestionCard>
-
-      <FeedbackMessage 
-        message={feedback.message}
-        isCorrect={feedback.isCorrect}
-      />
-    </Container>
+      </Container>
+    </CheckLoggedIn>
   );
 };
 
