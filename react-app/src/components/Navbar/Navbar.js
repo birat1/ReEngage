@@ -38,7 +38,7 @@ function Navigationbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/logout/", {}, { withCredentials: true });
+      const response = await axios.post(`${backendAPI}api/logout/`, {}, { withCredentials: true });
       if (response.status === 200) {
         setIsLoggedIn(false);
         setUserName("");
