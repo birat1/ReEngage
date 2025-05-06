@@ -7,6 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { backendAPI } from '../../constants';
 
 function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,7 +18,7 @@ function Navigationbar() {
     // Check if the user is logged in
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/current-user-info/", { withCredentials: true });
+        const response = await axios.get(`${backendAPI}api/current-user-info/`, { withCredentials: true });
         if (response.status === 200 && response.data.username) {
           setIsLoggedIn(true);
           setUserName(response.data.username); // Set the username from the API response
