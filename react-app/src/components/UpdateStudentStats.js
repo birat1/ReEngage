@@ -50,6 +50,7 @@ export function useUpdateStudentStats() {
 
   const { mutate } = useMutation({
     mutationFn: async (updateData) => {
+      // console.log("Sending data to backend:", updateData);
       const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
         credentials: "include"
       });
@@ -82,6 +83,8 @@ export function useUpdateStudentStats() {
       [`${subject}_correct`]: (studentData[`${subject}_correct`] || 0) + correctQuestions,
       xp: (studentData.xp || 0) + parseInt(points),
     };
+
+    // console.log("Updating stats with data:", updateData);
     mutate(updateData);
   }
 

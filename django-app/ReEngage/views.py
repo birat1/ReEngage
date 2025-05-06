@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 from django.shortcuts import render
 
@@ -62,7 +65,8 @@ class apiStudent(viewsets.ModelViewSet):
 			return None
 	
 	def list(self, request):
-		serializer = StudentSerializer(self.queryset, many=True)
+		students = Student.objects.all()
+		serializer = StudentSerializer(students, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 	def create(self, request):
@@ -100,15 +104,27 @@ class apiStudent(viewsets.ModelViewSet):
 	
 	@csrf_exempt
 	def update(self, request, user_id):
-		student_instance = self.get_item(user_id)
-		if not student_instance:
-			return Response({"res": "Object with user_id does not exist"}, status=status.HTTP_400_BAD_REQUEST)
-		
-		serializer = StudentSerializer(instance=student_instance, data=request.data, partial=True)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+		if request.method == 'PUT':
+			try:
+				data = json.loads(request.body)
+				# logger.info(f"Received data for user {user_id}: {data}")
+
+				student_instance = self.get_item(user_id)
+				if not student_instance:
+					return JsonResponse({'error': f'Student with user_id {user_id} does not exist'}, status=404)
+
+				serializer = StudentSerializer(instance=student_instance, data=data, partial=True)
+				if serializer.is_valid():
+					serializer.save()
+					# logger.info(f"Student {user_id} updated successfully")
+					return JsonResponse({'message': 'Student updated successfully'}, status=200)
+				else:
+					# logger.error(f"Validation errors: {serializer.errors}")
+					return JsonResponse({'error': serializer.errors}, status=400)
+			except Exception as e:
+				# logger.error(f"Error updating student {user_id}: {str(e)}")
+				return JsonResponse({'error': str(e)}, status=500)
+		return JsonResponse({'error': 'Invalid request method'}, status=405)
 		
 	def destroy(self, request, user_id):
 		student_instance = self.get_item(user_id)
