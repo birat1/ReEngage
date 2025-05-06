@@ -6,42 +6,16 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useAuthStatus } from "../Authentication/CheckLoginStatus";
 import { backendAPI } from '../../constants';
 
 function Navigationbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [isLoading, setIsLoading] = useState(true); // New loading state
-
-  useEffect(() => {
-    // Check if the user is logged in
-    const checkLoginStatus = async () => {
-      try {
-        const response = await axios.get(`${backendAPI}api/current-user-info/`, { withCredentials: true });
-        if (response.status === 200 && response.data.username) {
-          setIsLoggedIn(true);
-          setUserName(response.data.username); // Set the username from the API response
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        console.error("Error checking login status:", error);
-        setIsLoggedIn(false);
-      } finally {
-        setIsLoading(false); // Set loading to false after the check
-      }
-    };
-
-    checkLoginStatus();
-  }, []);
+  const { isLoggedIn, userName, isLoading } = useAuthStatus();
 
   const handleLogout = async () => {
     try {
       const response = await axios.post(`${backendAPI}api/logout/`, {}, { withCredentials: true });
       if (response.status === 200) {
-        setIsLoggedIn(false);
-        setUserName("");
         window.location.href = "/login"; // Redirect to login page
       } else {
         console.error("Logout failed");

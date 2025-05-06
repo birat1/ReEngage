@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FillitFish.css';
 import { useUpdateStudentStats } from "../../components/UpdateStudentStats"; // Import the custom hook
-import CheckLoggedIn from "../../components/CheckLoggedIn"; // Import the checkLoggedIn function
+import { CheckLoggedIn } from "../../components/Authentication/CheckLoginStatus";
 
 function Choices({ text, choices = [], onSelect }) { // shws text and buttons
   return ( // if there is text, show it

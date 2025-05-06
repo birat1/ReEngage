@@ -9,7 +9,7 @@ import GameOver from './components/GameOver';
 import { fetchQuestions } from './data/questions';
 import BackgroundMusic from './components/backgroundMusic';
 import './LabWars.css';
-import CheckLoggedIn from '../../components/CheckLoggedIn';
+import { CheckLoggedIn } from "../../components/Authentication/CheckLoginStatus";
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">

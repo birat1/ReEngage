@@ -15,7 +15,7 @@ import {
   intialiseDragAndDrop,
   setupClickSounds,
 } from "./components/main";
-import CheckLoggedIn from "../../components/CheckLoggedIn.js";
+import { CheckLoggedIn } from "../../components/Authentication/CheckLoginStatus";
 
 function StarMathGame() {
   const [showTitleScreen, setShowTitleScreen] = useState(true);
