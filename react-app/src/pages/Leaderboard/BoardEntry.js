@@ -1,6 +1,7 @@
 import "./styles/BoardEntry.css";
+import { useAnyEquippedAvatar } from "../../components/RetrievingAvatars/AnyEquippedAvatar";
 
-function BoardEntry({name, xp}) {
+function BoardEntry({name, xp, user_id}) {
   return (
     <div className="entry shadow-sm d-flex align-items-center justify-content-between gap-3 rounded">
       <div className="d-flex align-items-center gap-4">
@@ -10,7 +11,7 @@ function BoardEntry({name, xp}) {
         >
           <img
             alt="Avatar"
-            src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
+            src={useAnyEquippedAvatar(user_id)}
             className="avatar1"
           />
         </div>

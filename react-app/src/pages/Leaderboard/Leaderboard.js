@@ -71,6 +71,7 @@ function Content() {
                     colour={"#C4C4C4"}
                     name={data[1].firstname}
                     xp={data[1].xp}
+                    user_id={data[1].user.id}
                   />
                 </div>
                 <div
@@ -84,6 +85,7 @@ function Content() {
                     colour={"#efbf04"}
                     name={data[0].firstname}
                     xp={data[0].xp}
+                    user_id={data[0].user.id}
                   />
                 </div>
                 <div
@@ -97,6 +99,7 @@ function Content() {
                     colour={"#CE8946"}
                     name={data[2].firstname}
                     xp={data[2].xp}
+                    user_id={data[2].user.id}
                   />
                 </div>
               </div>
@@ -111,7 +114,7 @@ function Content() {
                     }}
                     key={index}
                   >
-                    <BoardEntry name={student.firstname} xp={student.xp} />
+                    <BoardEntry name={student.firstname} xp={student.xp} user_id={student.user.id}/>
                   </div>
                 ))}
               </div>

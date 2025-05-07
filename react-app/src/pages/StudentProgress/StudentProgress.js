@@ -137,10 +137,10 @@ function StudentProgress() {
             );
             if (response.ok) {
               const avatarData = await response.json();
-              console.log("Raw avatar data:", avatarData); // Debug log
+              console.log("Raw avatar data:", avatarData);
               avatarName = avatarData.name;
-              console.log("Using avatar:", avatarName); // Debug log
-              console.log("Available avatars:", Object.keys(avatarImages)); // Debug log
+              console.log("Using avatar:", avatarName);
+              console.log("Available avatars:", Object.keys(avatarImages));
             } else {
               console.error("Avatar fetch failed:", response.status);
             }
@@ -361,15 +361,15 @@ function StudentProgress() {
                       <td colSpan="6" className="hiddenRow">
                         <div className="details-content">
                           <p>
-                            <strong>English Game:</strong>{" "}
+                            <strong>Fill-itFish Game (English):</strong>{" "}
                             {student.englishCorrect}/{student.englishAnswered}
                           </p>
                           <p>
-                            <strong>Math Game:</strong> {student.mathCorrect}/
+                            <strong>Starmath Game (Maths):</strong> {student.mathCorrect}/
                             {student.mathAnswered}
                           </p>
                           <p>
-                            <strong>Science Game:</strong>{" "}
+                            <strong>LabWars Game (Science):</strong>{" "}
                             {student.scienceCorrect}/{student.scienceAnswered}
                           </p>
                         </div>

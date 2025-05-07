@@ -3,6 +3,7 @@ import First from "./images/First-Medal.png";
 import Second from "./images/Second-Medal.png";
 import Third from "./images/Third-Medal.png";
 import "./styles/PodiumCard.css";
+import { useAnyEquippedAvatar } from "../../components/RetrievingAvatars/AnyEquippedAvatar";
 
 function Medal ({position}) {
     if (position === 1) {
@@ -14,7 +15,7 @@ function Medal ({position}) {
     }
 }
 
-function PodiumCard({height, width, position, colour, name, xp}) {
+function PodiumCard({height, width, position, colour, name, xp, user_id}) {
   return (
     <div className="podium-card shadow rounded p-3 d-flex flex-column align-items-center gap-3" style={{ height: height, width: width, borderColor: colour }}>
       <div className="d-flex flex-column align-items-center">
@@ -22,7 +23,7 @@ function PodiumCard({height, width, position, colour, name, xp}) {
         <div className="avatar-frame rounded overflow-hidden" style={{ height: "6rem", width: "6rem" }}>
           <img
             alt="Avatar"
-            src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
+            src={useAnyEquippedAvatar(user_id)}
             className="avatar1"
           />
         </div>

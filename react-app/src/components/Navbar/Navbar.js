@@ -8,9 +8,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuthStatus } from "../Authentication/CheckLoginStatus";
 import { backendAPI } from "../../constants";
+import { useCurrentEquippedAvatar } from "../RetrievingAvatars/CurrentEquippedAvatar";
+import React from "react";
+import Default from "../../avatars/Default.png";
 
 function Navigationbar() {
   const { isLoggedIn, userName, isLoading } = useAuthStatus();
+  const currentAvatar = useCurrentEquippedAvatar();
 
   const handleLogout = async () => {
     try {
@@ -73,7 +77,7 @@ function Navigationbar() {
                 <div className="avatar-holder rounded overflow-hidden">
                   <img
                     alt="Avatar"
-                    src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVhNXppajI5M2J0eWRzd3hmN3o0eWR0cHNjNHQyYWprMnhrczNjeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gJzHT5BZZuQYbmw/giphy.gif"
+                    src={currentAvatar || Default}
                     className="img-cover"
                   />
                 </div>

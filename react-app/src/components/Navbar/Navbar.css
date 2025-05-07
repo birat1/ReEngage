@@ -1,93 +1,103 @@
 .Navbar {
-    background-color: #A8D3E6;
-    font-family: 'Nunito', sans-serif;
-    color: #4A4A4A;
-    opacity: 100%;
-    height: 76px;
+  background-color: #a8d3e6;
+  font-family: "Nunito", sans-serif;
+  color: #4a4a4a;
+  opacity: 100%;
+  height: 76px;
 }
 
 .logo:hover {
-    animation: rotate-icon 04s linear infinite;
+  animation: rotate-icon 04s linear infinite;
 }
 
 .link-style {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .navbar-brand h2 {
-    color: #4b9cd3;
-    font-weight: bold;
+  color: #4b9cd3;
+  font-weight: bold;
 }
 
 .navbar-collapse .login-button {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #4b9cd3; /* Blue background */
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #4b9cd3; /* Blue background */
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
 }
 
 .navbar-collapse .login-button:hover {
-    filter: brightness(110%);
-    transform: scale(1.1);
-    color: #FFFFFF;
-    background-color: #357ABD; /* Darker blue on hover */
+  filter: brightness(110%);
+  transform: scale(1.1);
+  color: #ffffff;
+  background-color: #357abd; /* Darker blue on hover */
 }
 
-
 .avatar-holder {
-    height: 3.5rem;
-    width: 3.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.avatar-holder:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
 }
 
 .img-cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .underline-ani {
-    font-size: 1.1rem;
-    font-weight: bold;
-    display: inline-block;
-    position: relative;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
 }
 
 .underline-ani:hover {
-    color: #4b9cd3;
+  color: #4b9cd3;
 }
 
 .underline-ani:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #4b9cd3;
-    transition: transform 0.25s ease-out;
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #4b9cd3;
+  transition: transform 0.25s ease-out;
 }
 
 .underline-ani::after {
-    transform-origin: bottom right;
+  transform-origin: bottom right;
 }
 
 .underline-ani:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 @keyframes rotate-icon {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}

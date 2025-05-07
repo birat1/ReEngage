@@ -129,7 +129,7 @@ const ChildRegister = () => {
     return (
         <div className='boxed row' style={{ padding: '20px', maxWidth: '400px', margin: '0 auto', top: '50px', marginTop: '50px' }}>
             <h2 className='heading2'>Register a Child</h2>
-            <form onSubmit={handleSubmit} class="row g-3">
+            <form onSubmit={handleSubmit} className="row g-3">
                 <div className='column' style={{ marginBottom: '10px' }}>
                     <label className='lbl-txt' htmlFor="firstname">First Name:</label>
                     <input
