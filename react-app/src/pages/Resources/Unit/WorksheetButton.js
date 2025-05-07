@@ -1,42 +1,50 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchWorksheet } from "../api/lessonAssets";
+import { fetchWorksheet } from "../apiData.js";
 import { useParams } from "react-router-dom";
 import "./styles/WorksheetButton.css";
 import Button from "./assets/downloadbutton.svg";
+import Spinner from 'react-bootstrap/Spinner';
 
 function WorkSheetButton() {
+  const { lesson } = useParams();
 
-    const { year, subject, lesson } = useParams();
-  
-    const { data, isLoading, isFetching } = useQuery({
-      queryKey: ["worksheet", lesson],
-      queryFn: () => fetchWorksheet(lesson),
-      refetchOnWindowFocus: false,
-    });
+  const { data, isLoading } = useQuery({
+    queryKey: ["worksheet", lesson],
+    queryFn: () => fetchWorksheet(lesson),
+    refetchOnWindowFocus: false,
+  });
 
-    const download = () => {
-        if (data) {
-    
-          const link = document.createElement('a');
-          link.href = data;
-    
-          link.download = `${lesson}.pdf`;
-    
-          // Append the link, trigger the click, and remove the link
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-      };
+  const download = () => {
+    if (data) {
+      const link = document.createElement("a");
+      link.href = data;
 
+      link.download = `${lesson}.pdf`;
 
-    return (
-        <>
-        <div className="download-btn rounded d-flex justify-content-center shadow-sm" onClick={download} style={{ height: "2.5rem"}}>
-            <img src={Button} style={{ width: "90%"}}/>
+      // Append the link, trigger the click, and remove the link
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  return (
+    <>
+      {isLoading ? (
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <Spinner animation="border" variant="secondary" size="sm"/>
         </div>
-        </>
-    );
-};
+      ) : (
+        <div
+          className="download-btn rounded d-flex justify-content-center shadow-sm"
+          onClick={download}
+          style={{ height: "2.5rem" }}
+        >
+          <img alt="Download Icon" src={Button} style={{ width: "90%" }} />
+        </div>
+      )}
+    </>
+  );
+}
 
 export default WorkSheetButton;

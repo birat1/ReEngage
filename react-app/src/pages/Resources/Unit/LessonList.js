@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { fetchLessons } from "../api/lessons";
+import { fetchLessons } from "../apiData.js";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from 'react-bootstrap/Spinner';
 import "./styles/LessonList.css";

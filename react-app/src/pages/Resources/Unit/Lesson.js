@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import "./styles/Lesson.css";
 import { useQueries } from "@tanstack/react-query";
-import { fetchVideo } from "../api/lessonAssets";
-import { fetchSummary } from "../api/lessonSummary";
+import { fetchSummary, fetchVideo } from "../apiData.js";
 import WorkSheetButton from "./WorksheetButton";
 import Bricks from "./assets/bricks.png";
 import Spinner from 'react-bootstrap/Spinner';

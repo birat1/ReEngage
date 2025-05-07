@@ -3,6 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import LessonList from "./LessonList.js";
 import { useState } from "react";
 import "./styles/UnitLayout.css";
+import { CheckLoggedIn } from "../../../components/Authentication/CheckLoginStatus.js";
 
 function UnitLayout() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -12,21 +13,32 @@ function UnitLayout() {
   };
 
   return (
-    <div className="unit-layout gradient d-flex">
-      <div className={`sidebar pt-2 ${isExpanded ? "expanded" : ""}`}>
-        <LessonList />
-      </div>
-      <div className={`lesson-content d-flex flex-column align-items-center ${isExpanded ? "with-sidebar" : ""}`}>
-        <div className="icon-holder">
-        <div className={`hamburger slide-from-left pt-2 ${isExpanded ? "change" : ""}`} onClick={toggleUnitList}>
-          <div class="bar1 rounded"> </div>
-          <div class="bar2 rounded"> </div>
-          <div class="bar3 rounded"> </div>
+    <CheckLoggedIn>
+      <div className="unit-layout gradient d-flex">
+        <div className={`sidebar pt-2 ${isExpanded ? "expanded" : ""}`}>
+          <LessonList />
         </div>
+        <div
+          className={`lesson-content d-flex flex-column align-items-center ${
+            isExpanded ? "with-sidebar" : ""
+          }`}
+        >
+          <div className="icon-holder">
+            <div
+              className={`hamburger slide-from-left pt-2 ${
+                isExpanded ? "change" : ""
+              }`}
+              onClick={toggleUnitList}
+            >
+              <div class="bar1 rounded"> </div>
+              <div class="bar2 rounded"> </div>
+              <div class="bar3 rounded"> </div>
+            </div>
+          </div>
+          <Outlet />
         </div>
-        <Outlet />
       </div>
-    </div>
+    </CheckLoggedIn>
   );
 }
 

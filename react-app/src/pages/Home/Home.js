@@ -2,15 +2,23 @@ import Footer from "../../components/Footer/Footer.js";
 import Hero from "./Hero/Hero.js";
 import Dashboard from "../Dashboard/dashboard.js";
 import { useAuthStatus } from "../../components/Authentication/CheckLoginStatus.js";
+import { Spinner } from "react-bootstrap";
 
 function Home() {
-  const { isLoggedIn } = useAuthStatus();
+  const { isLoggedIn, isLoading } = useAuthStatus();
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "calc(100vh - 76px)" }}>
+        <Spinner animation="border" variant="secondary" />
+      </div>
+    );
+  }
 
   if (isLoggedIn) {
     return (
       <>
         <Dashboard />
-        <Footer />
       </>
     );
   } else {

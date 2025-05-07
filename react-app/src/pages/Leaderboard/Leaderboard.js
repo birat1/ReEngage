@@ -4,25 +4,28 @@ import BoardEntry from "./BoardEntry.js";
 import "./styles/Leaderboard.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { CheckLoggedIn } from "../../components/Authentication/CheckLoginStatus.js";
+import { backendAPI } from "../../constants.js";
+import Spinner from "react-bootstrap/Spinner";
 
 function Leaderboard() {
   return (
-    <div>
-      <Content />
-    </div>
+    <CheckLoggedIn>
+      <div>
+        <Content />
+      </div>
+    </CheckLoggedIn>
   );
 }
 
 const fetchStudents = async (subject, unit) => {
-  const response = await axios.get(
-    "http://localhost:8000/api/students/?sort_by=xp"
-  );
+  const response = await axios.get(`${backendAPI}api/students/?sort_by=xp`);
 
   return response.data;
 };
 
 function Content() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["students"],
     queryFn: fetchStudents,
     refetchOnWindowFocus: false,
@@ -36,7 +39,9 @@ function Content() {
           fluid
         >
           {isLoading ? (
-            <>Loading...</>
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <Spinner animation="border" variant="secondary" />
+            </div>
           ) : (
             <>
               <span className="slide-up">
@@ -95,9 +100,7 @@ function Content() {
                   />
                 </div>
               </div>
-              <div
-                className="board shadow rounded d-flex flex-column justify-content-center align-items-center gap-3 m-5 slide-up"
-              >
+              <div className="board shadow rounded d-flex flex-column justify-content-center align-items-center gap-3 m-5 slide-up">
                 {data.slice(3).map((student, index) => (
                   <div
                     className="fly-in"
