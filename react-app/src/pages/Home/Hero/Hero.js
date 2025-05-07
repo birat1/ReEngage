@@ -11,6 +11,7 @@ import Brain from "../../../assets/images/Brain.png";
 import Podium from "../../../assets/images/Podium.png";
 import { useInView } from "react-intersection-observer";
 import classNames from "classnames";
+import video from "./reengage.mp4";
 
 // Feature and testimonial data
 const features = [
@@ -103,10 +104,14 @@ function Hero() {
             </div>
           </div>
 
-          <div
-            className={classNames("hero-video card shadow mt-4", { "slide-up": videoInView })}
+          <video
+            className={classNames("hero-video card shadow-lg mt-4", { "slide-up": videoInView })}
             ref={videoRef}
             style={{ opacity: 0 }}
+            src={video}
+            autoPlay
+            muted
+            loop
           />
         </Container>
       </section>

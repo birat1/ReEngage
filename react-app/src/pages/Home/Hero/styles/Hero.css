@@ -11,6 +11,7 @@
 
 .hero-button {
     background-color: #6cbc44;
+    font-weight: bold;
     color: white;
     border: none;
     width: 11rem;
@@ -30,6 +31,14 @@
     width: 48rem;
     height: 27rem;
     opacity: 0;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.demo-video {
+  width: 48rem;
+  height: 27rem;
+  object-fit: cover;
 }
 
 .features-section {
