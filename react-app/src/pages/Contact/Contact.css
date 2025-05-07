@@ -1,6 +1,6 @@
 .contact-container {
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100vh - 76px);
     width: 100%;
     display: flex;
     flex-direction: column; /* Stack elements vertically */
@@ -87,7 +87,7 @@
 }
 
 .contact-form button:hover {
-    background-color: #0056b3;
+    filter: brightness(0.95);
     color: white;
 }
 

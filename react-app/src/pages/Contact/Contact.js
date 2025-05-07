@@ -39,6 +39,7 @@ const Contact = () => {
 
     return (
         <div className="contact-container">
+            <div className="contact-wrapper d-flex flex-column align-items-center">
             <h1>Contact Us</h1>
             <p>We’d love to hear from you! Reach out to us for any inquiries or support.</p>
             <div className="contact-details">
@@ -73,6 +74,7 @@ const Contact = () => {
                 <button type="submit">Send Message</button>
             </form>
             {responseMessage && <p className="response-message">{responseMessage}</p>}
+            </div>
         </div>
     );
 };

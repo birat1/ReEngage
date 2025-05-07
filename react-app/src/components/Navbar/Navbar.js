@@ -7,14 +7,18 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuthStatus } from "../Authentication/CheckLoginStatus";
-import { backendAPI } from '../../constants';
+import { backendAPI } from "../../constants";
 
 function Navigationbar() {
   const { isLoggedIn, userName, isLoading } = useAuthStatus();
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`${backendAPI}api/logout/`, {}, { withCredentials: true });
+      const response = await axios.post(
+        `${backendAPI}api/logout/`,
+        {},
+        { withCredentials: true }
+      );
       if (response.status === 200) {
         window.location.href = "/login"; // Redirect to login page
       } else {
@@ -42,23 +46,24 @@ function Navigationbar() {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-center">
-          <Nav className="d-flex justify-content-center w-100">
-            <Nav.Link href="/" to="/Home">
-              <span className="underline-ani">Home</span>
-            </Nav.Link>
-            <Nav.Link href="/games">
-              <span className="underline-ani">Games</span>
-            </Nav.Link>
-            <Nav.Link href="/resources">
-              <span className="underline-ani">Resources</span>
-            </Nav.Link>
-            <Nav.Link href="/leaderboard">
-              <span className="underline-ani">Leaderboard</span>
-            </Nav.Link>
-            <Nav.Link href="/contact">
-              <span className="underline-ani">Contact</span>
-            </Nav.Link>
-          </Nav>
+          {isLoggedIn ? (
+            <Nav className="d-flex justify-content-center w-100">
+              <Nav.Link href="/" to="/Home">
+                <span className="underline-ani">Home</span>
+              </Nav.Link>
+              <Nav.Link href="/games">
+                <span className="underline-ani">Games</span>
+              </Nav.Link>
+              <Nav.Link href="/resources">
+                <span className="underline-ani">Resources</span>
+              </Nav.Link>
+              <Nav.Link href="/leaderboard">
+                <span className="underline-ani">Leaderboard</span>
+              </Nav.Link>
+            </Nav>
+          ) : (
+            <></>
+          )}
           <div className="ms-auto hstack gap-3">
             {isLoading ? (
               // Show nothing or a placeholder while loading
@@ -73,8 +78,12 @@ function Navigationbar() {
                   />
                 </div>
                 <NavDropdown title={userName}>
-                  <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
-                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item href="/dashboard">
+                    Dashboard
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : (
