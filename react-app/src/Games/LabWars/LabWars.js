@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import QuestionCard from './components/QuestionCard';
-import AnswerOptions from './components/AnswerOptions';
-import FeedbackMessage from './components/FeedbackMessage';
-import StartMenu from './components/StartMenu';
-import GameOver from './components/GameOver';
-import { fetchQuestions } from './data/questions';
-import BackgroundMusic from './components/backgroundMusic';
-import './LabWars.css';
+import React, { useState } from "react";
+import { Container, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import QuestionCard from "./components/QuestionCard";
+import AnswerOptions from "./components/AnswerOptions";
+import FeedbackMessage from "./components/FeedbackMessage";
+import StartMenu from "./components/StartMenu";
+import GameOver from "./components/GameOver";
+import { fetchQuestions } from "./data/questions";
+import BackgroundMusic from "./components/backgroundMusic";
+import "./LabWars.css";
 import { CheckLoggedIn } from "../../components/Authentication/CheckLoginStatus";
 
 const BattleScene = ({ isAttacking, isBossTilting }) => (
   <div className="battle-scene">
     {/* Display the student character */}
     <div className="battle-container">
-      <div className={`character-circle student-circle ${isAttacking ? 'shake' : ''}`}>
-        <div className={`player-character ${isAttacking ? 'shake' : ''}`}>👨‍🔬</div>
+      <div
+        className={`character-circle student-circle ${
+          isAttacking ? "shake" : ""
+        }`}
+      >
+        <div className={`player-character ${isAttacking ? "shake" : ""}`}>
+          👨‍🔬
+        </div>
       </div>
     </div>
 
@@ -25,7 +31,11 @@ const BattleScene = ({ isAttacking, isBossTilting }) => (
 
     {/* Display the boss character */}
     <div className="battle-container">
-      <div className={`character-circle boss-circle ${isBossTilting ? 'tilt' : ''}`}>
+      <div
+        className={`character-circle boss-circle ${
+          isBossTilting ? "tilt" : ""
+        }`}
+      >
         <div className="boss-character">👾</div>
       </div>
     </div>
@@ -39,7 +49,7 @@ const LabWars = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [feedback, setFeedback] = useState({ message: '', isCorrect: null });
+  const [feedback, setFeedback] = useState({ message: "", isCorrect: null });
   const [isAnswered, setIsAnswered] = useState(false);
   const [isAttacking, setIsAttacking] = useState(false);
   const [isBossTilting, setIsBossTilting] = useState(false);
@@ -50,15 +60,15 @@ const LabWars = () => {
 
   const handleTextToSpeech = (text) => {
     if (isSpeaking) return; // Prevent multiple clicks
-  
+
     setIsSpeaking(true); // Set speaking state to true
     const speech = new SpeechSynthesisUtterance();
     speech.text = text;
-    speech.lang = 'en-GB';
-  
+    speech.lang = "en-GB";
+
     // Reset speaking state when speech ends
     speech.onend = () => setIsSpeaking(false);
-  
+
     window.speechSynthesis.speak(speech);
   };
 
@@ -75,13 +85,13 @@ const LabWars = () => {
     setQuestions(fetchedQuestions);
     setGameOver(false);
     setCurrentQuestion(0);
-    setFeedback({ message: '', isCorrect: null });
+    setFeedback({ message: "", isCorrect: null });
     setIsAnswered(false);
   };
 
   // Handle return to homepage
   const handleReturnHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   // Check if the submitted answers are correct based on the question type
@@ -106,20 +116,20 @@ const LabWars = () => {
     const isCorrect = checkAnswer(selectedAnswers, currentQ);
 
     // Increment the number of questions answered
-    setQuestionsAnswered(prev => prev + 1);
+    setQuestionsAnswered((prev) => prev + 1);
 
     // Provide feedback depending on if the answer is correct or not
     if (isCorrect) {
       // Increment the number of correct questions answered
-      setCorrectQuestionsAnswered(prev => prev + 1);
+      setCorrectQuestionsAnswered((prev) => prev + 1);
       // Update points based on the number of correct answers
-      setPoints(prev => prev + 100);
+      setPoints((prev) => prev + 100);
 
       setIsAttacking(true);
       setIsBossTilting(true);
       setFeedback({
-        message: 'Great job! You got it right! 🎉',
-        isCorrect: true
+        message: "Great job! You got it right! 🎉",
+        isCorrect: true,
       });
       // Reset the attack and tilt animations after they complete
       setTimeout(() => {
@@ -129,15 +139,15 @@ const LabWars = () => {
     } else {
       setFeedback({
         message: `Oops! That’s not correct. Try again next time! ❌`,
-        isCorrect: false
+        isCorrect: false,
       });
     }
 
     // Progress to next question after delay
     if (currentQuestion < questions.length - 1) {
       setTimeout(() => {
-        setCurrentQuestion(prev => prev + 1);
-        setFeedback({ message: '', isCorrect: null });
+        setCurrentQuestion((prev) => prev + 1);
+        setFeedback({ message: "", isCorrect: null });
         setIsAnswered(false);
       }, 2000);
     } else {
@@ -160,7 +170,9 @@ const LabWars = () => {
 
     return (
       <Container className="lab-wars-container">
-        <StartMenu onPlay={handleStartGame} />
+        <CheckLoggedIn>
+          <StartMenu onPlay={handleStartGame} />
+        </CheckLoggedIn>
       </Container>
     );
   }
@@ -168,9 +180,9 @@ const LabWars = () => {
   if (gameOver) {
     return (
       <Container className="lab-wars-container">
-        <GameOver 
-          onPlayAgain={handlePlayAgain} 
-          onReturnHome={handleReturnHome} 
+        <GameOver
+          onPlayAgain={handlePlayAgain}
+          onReturnHome={handleReturnHome}
           questionsAnswered={questionsAnswered}
           correctQuestionsAnswered={correctQuestionsAnswered}
           points={points}
@@ -192,31 +204,46 @@ const LabWars = () => {
       <Container className="lab-wars-container">
         <BackgroundMusic />
 
-        <button type="button" className="read-question-btn" onClick={() => handleTextToSpeech(questions[currentQuestion].question)} disabled={isSpeaking}>
-          {isSpeaking ? 'Speaking...' : 'Read Question'}
+        <button
+          type="button"
+          className="read-question-btn"
+          onClick={() =>
+            handleTextToSpeech(questions[currentQuestion].question)
+          }
+          disabled={isSpeaking}
+        >
+          {isSpeaking ? "Speaking..." : "Read Question"}
         </button>
 
         <h1 className="game-title">Lab Wars</h1>
 
         <BattleScene isAttacking={isAttacking} isBossTilting={isBossTilting} />
 
-        <QuestionCard 
+        <QuestionCard
           question={questions[currentQuestion].question}
           questionNumber={currentQuestion + 1}
           totalQuestions={questions.length}
         >
-          <AnswerOptions 
-            options={questions[currentQuestion].answers.map(answer => answer.content)}
+          <AnswerOptions
+            options={questions[currentQuestion].answers.map(
+              (answer) => answer.content
+            )}
             onSubmit={handleSubmit}
             isAnswered={isAnswered}
             correctAnswers={questions[currentQuestion].answers
-              .map((answer, index) => (answer.distractor === false ? index : null))
+              .map((answer, index) =>
+                answer.distractor === false ? index : null
+              )
               .filter((index) => index !== null)}
-            isMultiple={questions[currentQuestion].answers.filter(answer => answer.distractor === false).length > 1}
+            isMultiple={
+              questions[currentQuestion].answers.filter(
+                (answer) => answer.distractor === false
+              ).length > 1
+            }
           />
         </QuestionCard>
 
-        <FeedbackMessage 
+        <FeedbackMessage
           message={feedback.message}
           isCorrect={feedback.isCorrect}
         />
@@ -225,4 +252,4 @@ const LabWars = () => {
   );
 };
 
-export default LabWars; 
+export default LabWars;
