@@ -75,7 +75,7 @@ export default function ProgressTab({ subjectStats, handleContinueLearning }) {
                 <div className='mb-3'>
                   <div className='d-flex justify-content-between small'>
                     <span>
-                      {subject.correct_answers}/{subject.total_answers} Questions Answered
+                      {subject.correct_answers}/{subject.total_answers} Questions correct
                     </span>
                     <span>
                       {subject.total_answers > 0
