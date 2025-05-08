@@ -75,7 +75,6 @@ class apiStudent(viewsets.ModelViewSet):
 
 	def create(self, request):
 		data = {
-
 			'person_id': request.data.get('person_id'),
 			'user': request.data.get('user'),
 			'firstname': request.data.get('firstname'),
@@ -273,35 +272,60 @@ def get_students(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_info(request):
-    print("Session ID:", request.session.session_key)
-    print("User:", request.user)
-    print("Headers:", request.headers) 
+    logger.info(f"Session ID: {request.session.session_key}, User: {request.user}")
+
     user = request.user
-    if not request.user.is_authenticated:
+    if not user.is_authenticated:
         return Response({'error': 'Not authenticated'}, status=401)
-    
+
     try:
+        user_data = {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        }
+
         if hasattr(user, 'admin'):
-            return Response({
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
+            admin_data = {
                 'first_name': user.admin.firstname,
                 'last_name': user.admin.surname,
-                'is_admin': True
-            })
+                'is_admin': True,
+                'level': user.admin.level,
+                'xp': user.admin.xp,
+                'points': user.admin.points,
+                'streak': user.admin.streak,
+                'english_answered': user.admin.english_answered,
+                'english_correct': user.admin.english_correct,
+                'maths_answered': user.admin.maths_answered,
+                'maths_correct': user.admin.maths_correct,
+                'science_answered': user.admin.science_answered,
+                'science_correct': user.admin.science_correct,
+            }
+            user_data.update(admin_data)
         elif hasattr(user, 'student'):
-            return Response({
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
+            student_data = {
                 'first_name': user.student.firstname,
                 'last_name': user.student.surname,
-                'is_admin': False
-            })
+                'is_admin': False,
+                'level': user.student.level,
+                'xp': user.student.xp,
+                'points': user.student.points,
+                'streak': user.student.streak,
+                'english_answered': user.student.english_answered,
+                'english_correct': user.student.english_correct,
+                'maths_answered': user.student.maths_answered,
+                'maths_correct': user.student.maths_correct,
+                'science_answered': user.student.science_answered,
+                'science_correct': user.student.science_correct,
+            }
+            user_data.update(student_data)
+        else:
+            return Response({'error': 'User type not recognized'}, status=400)
+
+        return Response(user_data, status=200)
     except Exception as e:
+        logger.error(f"Error in get_user_info: {str(e)}")
         return Response({'error': str(e)}, status=500)
-    return Response({'error': 'User type not recognized'}, status=400)
 
 #to return current equipped student avatar
 @api_view(['GET'])
