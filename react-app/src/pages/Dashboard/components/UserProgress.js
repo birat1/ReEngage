@@ -16,9 +16,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default function ProgressTab({ subjectStats, handleContinueLearning }) {
   const colors = {
-    Science: '#0d6efd',
-    Math: '#ffc107',
-    English: '#198754',
+    Science: '#1d3557',
+    Math: '#457b9d',
+    English: '#a8dadc',
   }
 
   const getIcon = (subjectName) => {
