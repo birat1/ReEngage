@@ -3,34 +3,44 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { backendAPI } from '../../constants';
 
+
+export async function getUserInfo() {
+  try {
+    const response = await axios.get(`${backendAPI}api/current-user-info/`, { withCredentials: true });
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error('Failed to fetch user info:', response.statusText);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+    return null;
+  }
+}
+
 // Hook to check login status
 export function useAuthStatus() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
-  
-    useEffect(() => {
-      const checkLoginStatus = async () => {
-        try {
-          const response = await axios.get(`${backendAPI}api/current-user-info/`, { withCredentials: true });
-          if (response.status === 200 && response.data.username) {
-            setIsLoggedIn(true);
-            setUserName(response.data.username);
-          } else {
-            setIsLoggedIn(false);
-          }
-        } catch (error) {
-          console.error("Error checking login status:", error);
-          setIsLoggedIn(false);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-  
-      checkLoginStatus();
-    }, []);
-  
-    return { isLoggedIn, userName, isLoading };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const userInfo = await getUserInfo();
+      if (userInfo && userInfo.username) {
+        setIsLoggedIn(true);
+        setUserName(userInfo.username);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setIsLoading(false);
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  return { isLoggedIn, userName, isLoading };
 }
 
 
