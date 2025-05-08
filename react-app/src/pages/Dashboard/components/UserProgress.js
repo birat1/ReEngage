@@ -79,7 +79,7 @@ export default function ProgressTab({ subjectStats, handleContinueLearning }) {
                     </span>
                     <span>
                       {subject.total_answers > 0
-                        ? `${(subject.percentage).toFixed(1)}%`
+                        ? `${((subject.correct_answers / subject.total_answers) * 100).toFixed(1)}%`
                         : 'No data yet'}
                     </span>
                   </div>
@@ -88,7 +88,7 @@ export default function ProgressTab({ subjectStats, handleContinueLearning }) {
                       className='progress-bar'
                       style={{
                         width: subject.total_answers > 0
-                          ? `${subject.percentage}%`
+                          ? `${(subject.correct_answers / subject.total_answers) * 100}%`
                           : '0%',
                         backgroundColor: colors[subject.type],
                         borderRadius: 4,

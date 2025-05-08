@@ -17,7 +17,6 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
-import math
 
 @csrf_exempt
 def login_user(request):
@@ -94,21 +93,7 @@ class apiStudent(viewsets.ModelViewSet):
 		}
 		serializer = StudentSerializer(data=data)
 		if serializer.is_valid():
-			student = serializer.save()
-			#assigning default avatar (id=1) to the new student
-			try:
-				default_avatar = Avatar.objects.get(avatar_id=1)
-				StudentAvatar.objects.create(
-					student_id=student,
-					avatar_id=default_avatar,
-					is_equipped=True
-           		)
-			except Avatar.DoesNotExist:
-				logger.error("Default avatar (id=1) does not exist")
-				return Response(
-					{"error": "Default avatar not found"}, 
-					status=status.HTTP_500_INTERNAL_SERVER_ERROR
-				)
+			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		else:
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -305,6 +290,16 @@ def get_user_info(request):
                 'first_name': user.admin.firstname,
                 'last_name': user.admin.surname,
                 'is_admin': True,
+                'level': user.admin.level,
+                'xp': user.admin.xp,
+                'points': user.admin.points,
+                'streak': user.admin.streak,
+                'english_answered': user.admin.english_answered,
+                'english_correct': user.admin.english_correct,
+                'maths_answered': user.admin.maths_answered,
+                'maths_correct': user.admin.maths_correct,
+                'science_answered': user.admin.science_answered,
+                'science_correct': user.admin.science_correct,
             }
             user_data.update(admin_data)
         elif hasattr(user, 'student'):
@@ -312,22 +307,16 @@ def get_user_info(request):
                 'first_name': user.student.firstname,
                 'last_name': user.student.surname,
                 'is_admin': False,
-                'level': math.floor(user.student.xp/100),
+                'level': user.student.level,
                 'xp': user.student.xp,
                 'points': user.student.points,
                 'streak': user.student.streak,
                 'english_answered': user.student.english_answered,
                 'english_correct': user.student.english_correct,
-				'english_percentage': (user.student.english_correct / user.student.english_answered * 100)
-				if user.student.english_answered > 0 else 0,
                 'maths_answered': user.student.maths_answered,
                 'maths_correct': user.student.maths_correct,
-				'maths_percentage': (user.student.maths_correct / user.student.maths_answered * 100)
-				 if user.student.maths_answered > 0 else 0,
                 'science_answered': user.student.science_answered,
                 'science_correct': user.student.science_correct,
-				'science_percentage': (user.student.science_correct / user.student.science_answered * 100)
-				 if user.student.science_answered > 0 else 0,
             }
             user_data.update(student_data)
         else:

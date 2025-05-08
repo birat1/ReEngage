@@ -49,21 +49,18 @@ export default function Dashboard() {
       game: 'Lab Wars',
       correct_answers: userData.science_correct,
       total_answers: userData.science_answered,
-      percentage: userData.science_percentage,
       type: 'Science',
     },
     {
       game: 'Star Math',
       correct_answers: userData.maths_correct,
       total_answers: userData.maths_answered,
-      percentage: userData.maths_percentage,
       type: 'Math',
     },
     {
       game: 'Fill-it Fish',
       correct_answers: userData.english_correct,
       total_answers: userData.english_answered,
-      percentage: userData.english_percentage,
       type: 'English',
     },
   ];
