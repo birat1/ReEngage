@@ -8,17 +8,6 @@ import UserStats from './components/UserStats';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -61,54 +50,24 @@ export default function Dashboard() {
 
   const subjectStats = [
     {
-      name: 'Lab Wars',
-      correct: userData.science_correct,
-      answered: userData.science_answered,
-      icon: 'Flask',
-      original: 'Science',
+      game: 'Lab Wars',
+      correct_answers: userData.science_correct,
+      total_answers: userData.science_answered,
+      type: 'Science',
     },
     {
-      name: 'Star Math',
-      correct: userData.maths_correct,
-      answered: userData.maths_answered,
-      icon: 'Calculator',
-      original: 'Math',
+      game: 'Star Math',
+      correct_answers: userData.maths_correct,
+      total_answers: userData.maths_answered,
+      type: 'Math',
     },
     {
-      name: 'Fill-it Fish',
-      correct: userData.english_correct,
-      answered: userData.english_answered,
-      icon: 'BookOpen',
-      original: 'English',
+      game: 'Fill-it Fish',
+      correct_answers: userData.english_correct,
+      total_answers: userData.english_answered,
+      type: 'English',
     },
   ];
-
-  const chartData = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    datasets: [
-      {
-        label: 'Minutes Spent Learning',
-        data: [25, 30, 20, 35, 15, 40, 10],
-        backgroundColor: '#0d6efd',
-        borderRadius: 4,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'top' },
-      title: { display: true, text: 'Your Learning Time This Week' },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: { display: true, text: 'Minutes' },
-      },
-    },
-  };
 
   return (
     <div className='container py-4'>
@@ -117,8 +76,6 @@ export default function Dashboard() {
       {activeTab === 'progress' && (
         <ProgressTab
           subjectStats={subjectStats}
-          chartData={chartData}
-          chartOptions={chartOptions}
           handleContinueLearning={handleContinueLearning}
         />
       )}
