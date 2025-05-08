@@ -1,20 +1,26 @@
 import "./Navbar.css";
 import logo from "./logo.png";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuthStatus } from "../Authentication/CheckLoginStatus";
 import { backendAPI } from "../../constants";
 import { useCurrentEquippedAvatar } from "../RetrievingAvatars/CurrentEquippedAvatar";
-import React from "react";
+import React, { useState } from "react";
 import Default from "../../avatars/Default.png";
 
 function Navigationbar() {
   const { isLoggedIn, userName, isLoading } = useAuthStatus();
   const currentAvatar = useCurrentEquippedAvatar();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const handleLogout = async () => {
     try {
@@ -34,10 +40,10 @@ function Navigationbar() {
   };
 
   return (
-    <Navbar sticky="top" expand="lg" className="w-100 Navbar">
-      <Container>
-        <Link to="/" className="link-style">
-          <Navbar.Brand className="d-flex align-items-center gap-2">
+    <div className="navbar sticky-top">
+      <div className="navbar-container d-flex align-items-center justify-content-between mx-auto">
+        <Link to={"/"}>
+          <div className="d-flex justify-content-center align-items-center gap-2">
             <img
               alt="ReEngage Logo"
               src={logo}
@@ -46,59 +52,71 @@ function Navigationbar() {
               className="logo"
             />
             <h2>ReEngage</h2>
-          </Navbar.Brand>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse className="justify-content-center">
-          {isLoggedIn ? (
-            <Nav className="d-flex justify-content-center w-100">
-              <Nav.Link href="/" to="/Home">
-                <span className="underline-ani">Home</span>
-              </Nav.Link>
-              <Nav.Link href="/games">
-                <span className="underline-ani">Games</span>
-              </Nav.Link>
-              <Nav.Link href="/resources">
-                <span className="underline-ani">Resources</span>
-              </Nav.Link>
-              <Nav.Link href="/leaderboard">
-                <span className="underline-ani">Leaderboard</span>
-              </Nav.Link>
-            </Nav>
-          ) : (
-            <></>
-          )}
-          <div className="ms-auto hstack gap-3">
-            {isLoading ? (
-              // Show nothing or a placeholder while loading
-              <div style={{ width: "100px", height: "40px" }}></div>
-            ) : isLoggedIn ? (
-              <>
-                <div className="avatar-holder rounded overflow-hidden">
-                  <img
-                    alt="Avatar"
-                    src={currentAvatar || Default}
-                    className="img-cover"
-                  />
-                </div>
-                <NavDropdown title={userName}>
-                  <NavDropdown.Item href="/dashboard">
-                    Dashboard
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={handleLogout}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
-            ) : (
-              <Nav.Link href="/login">
-                <button className="login-button">Login</button>
-              </Nav.Link>
-            )}
           </div>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Link>
+
+        {isLoggedIn ? (
+          <div className={`nav-links gap-4 ${isOpen ? "active" : ""}`}>
+            <Link to={"/"}>
+              <span className="underline-ani">Home</span>
+            </Link>
+            <Link to={"/games"}>
+              <span className="underline-ani">Games</span>
+            </Link>
+            <Link to={"/resources"}>
+              <span className="underline-ani">Resources</span>
+            </Link>
+            <Link to={"/leaderboard"}>
+              <span className="underline-ani">Leaderboard</span>
+            </Link>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {isLoggedIn ? (
+          <div className="hstack gap-3">
+            <div className="avatar-holder rounded overflow-hidden">
+              <img
+                alt="Avatar"
+                src={currentAvatar || Default}
+                className="img-cover"
+              />
+            </div>
+            <div className="username d-flex gap-1" onClick={toggleDropdown}>
+              {userName}
+              <div className={`tri ${isDropdownOpen ? "rotate" : ""}`}>
+                &#9207;
+              </div>
+            </div>
+            {isDropdownOpen && (
+              <div className="options-menu rounded shadow-sm d-flex flex-column gap-1 p-2">
+                <Link to={"/dashboard"} className="option-item rounded p-1">
+                  <span>Dashboard</span>
+                </Link>
+                <div className="option-item rounded p-1" onClick={handleLogout}>
+                  <span>Logout</span>
+                </div>
+              </div>
+            )}
+            <div
+              className={`nav-hamburger ${isOpen ? "change" : ""}`}
+              onClick={toggleMenu}
+            >
+              <div class="bar-a rounded"> </div>
+              <div class="bar-b rounded"> </div>
+              <div class="bar-c rounded"> </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Link to={"/login"}>
+              <button className="login-button">Login</button>
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

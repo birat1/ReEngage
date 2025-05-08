@@ -1,41 +1,38 @@
-.Navbar {
+.navbar {
   background-color: #a8d3e6;
   font-family: "Nunito", sans-serif;
   color: #4a4a4a;
-  opacity: 100%;
   height: 76px;
+  width: 100%;
+  position: fixed;
+}
+
+.navbar-container {
+    height: 100%;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo:hover {
   animation: rotate-icon 04s linear infinite;
 }
 
-.link-style {
-  text-decoration: none;
-}
-
-.navbar-brand h2 {
-  color: #4b9cd3;
-  font-weight: bold;
-}
-
-.navbar-collapse .login-button {
+.login-button {
   font-size: 1.1rem;
   font-weight: bold;
   color: #ffffff;
-  background-color: #4b9cd3; /* Blue background */
+  background-color: #4b9cd3;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
-}
-
-.navbar-collapse .login-button:hover {
-  filter: brightness(110%);
-  transform: scale(1.1);
-  color: #ffffff;
-  background-color: #357abd; /* Darker blue on hover */
 }
 
 .avatar-holder {
@@ -61,11 +58,19 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .underline-ani {
   font-size: 1.1rem;
   font-weight: bold;
   display: inline-block;
   position: relative;
+  text-decoration: none;
 }
 
 .underline-ani:hover {
@@ -73,7 +78,7 @@
 }
 
 .underline-ani:after {
-  content: "";
+  content: "";  
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -91,6 +96,84 @@
 .underline-ani:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.username {
+    cursor: pointer;
+}
+
+.tri {
+    transition: transform 0.3s ease;
+}
+  
+.tri.rotate {
+    transform: rotate(180deg);
+}
+
+.options-menu {
+    position: absolute;
+    top: 75px;
+    background-color: #f2f2f2;
+    width: 200px;
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.option-item {
+    cursor: pointer;
+}
+
+.option-item:hover {
+    background-color: #c2c2c2;
+}
+
+.nav-hamburger {
+    cursor: pointer;
+    opacity: 0%;
+  }
+
+.bar-a, .bar-b, .bar-c {
+    width: 28px;
+    height: 3px;
+    background-color: #4A4A4A;
+    margin: 6px 0;
+    transition: 0.4s;
+    transform-origin: center;
+  }
+
+  .change .bar-a {
+    transform: rotate(-45deg) translate(0, 12px);
+  }
+
+  .change .bar-b {
+    opacity: 0;
+  }
+
+  .change .bar-c {
+    transform: rotate(45deg) translate(0, -12px);
+  }
+
+@media screen and (max-width: 830px) {
+    .nav-links {
+      position: fixed;
+      top: 76px;
+      left: -100%;
+      flex-direction: column;
+      background-color: #a8d3e6;
+      width: 100%;
+      padding: 20px;
+      transition: all 0.3s ease-in-out;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .nav-links.active {
+        left: 0;
+      }
+
+    .nav-hamburger {
+        opacity: 100%;
+    }
 }
 
 @keyframes rotate-icon {
