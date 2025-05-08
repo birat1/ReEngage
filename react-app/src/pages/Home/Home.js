@@ -1,7 +1,10 @@
 import Footer from "../../components/Footer/Footer.js";
 import Hero from "./Hero/Hero.js";
 import Dashboard from "../Dashboard/dashboard.js";
-import { useAuthStatus } from "../../components/Authentication/CheckLoginStatus.js";
+import {
+  CheckLoggedIn,
+  useAuthStatus,
+} from "../../components/Authentication/CheckLoginStatus.js";
 import { Spinner } from "react-bootstrap";
 
 function Home() {
@@ -9,7 +12,10 @@ function Home() {
 
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "calc(100vh - 76px)" }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "calc(100vh - 76px)" }}
+      >
         <Spinner animation="border" variant="secondary" />
       </div>
     );
@@ -18,7 +24,9 @@ function Home() {
   if (isLoggedIn) {
     return (
       <>
-        <Dashboard />
+        <CheckLoggedIn>
+          <Dashboard />
+        </CheckLoggedIn>
       </>
     );
   } else {
