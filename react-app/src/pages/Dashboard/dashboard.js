@@ -19,21 +19,6 @@ import {
 } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const mockUserData = {
-  name: 'Alex',
-  avatar: 'https://placehold.co/100x100',
-  level: 5,
-  xp: 1200,
-  points: 350,
-  streak: 7,
-  science_answered: 20,
-  science_correct: 16,
-  maths_answered: 25,
-  maths_correct: 20,
-  english_answered: 18,
-  english_correct: 15,
-};
-
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
