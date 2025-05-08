@@ -22,7 +22,7 @@ export default function UserStats({ userData }) {
             <div className='ms-2'>
               <h2 className='h5 mb-1'>Level {userData.level}</h2>
               <div className='text-muted small'>
-                XP: {userData.xp} | Points: {userData.points} | Streak: {userData.streak} days
+                XP: {userData.xp} | Points: {userData.points}
               </div>
             </div>
           </div>
