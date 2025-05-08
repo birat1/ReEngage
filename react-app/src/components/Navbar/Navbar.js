@@ -103,9 +103,9 @@ function Navigationbar() {
               className={`nav-hamburger ${isOpen ? "change" : ""}`}
               onClick={toggleMenu}
             >
-              <div class="bar-a rounded"> </div>
-              <div class="bar-b rounded"> </div>
-              <div class="bar-c rounded"> </div>
+              <div className="bar-a rounded"> </div>
+              <div className="bar-b rounded"> </div>
+              <div className="bar-c rounded"> </div>
             </div>
           </div>
         ) : (

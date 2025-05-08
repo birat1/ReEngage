@@ -348,7 +348,7 @@ function StudentProgress() {
                         <div
                           className="fill"
                           style={{
-                            width: `${Math.min(student.xp / 10, 100)}%`,
+                            width: `${student.xp % 100}%`,
                           }}
                         ></div>
                       </div>
