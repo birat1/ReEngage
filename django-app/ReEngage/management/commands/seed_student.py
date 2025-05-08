@@ -1,3 +1,4 @@
+import math
 import random
 from django.contrib.auth.models import User
 from ReEngage.models import Admin, Student
@@ -25,9 +26,10 @@ def seedStudent():
             mathsA=random.randint(10, 100)
             scienceA=random.randint(10, 100)
 
-            englishC=random.randint(0, englishA)
-            mathsC=random.randint(0, mathsA)
-            scienceC=random.randint(0, scienceA)
+            # Ensure correct answers are at least half of total answers
+            englishC = random.randint(math.ceil(englishA / 2), englishA)
+            mathsC = random.randint(math.ceil(mathsA / 2), mathsA)
+            scienceC = random.randint(math.ceil(scienceA / 2), scienceA)
 
             Student.objects.create(
                 user=student_user,
