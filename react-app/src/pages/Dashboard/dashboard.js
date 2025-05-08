@@ -6,6 +6,7 @@ import DailyLearningTab from './components/DailyLearningTab';
 import AchievementsTab from './components/AchievementsTab';
 import UserStats from './components/UserStats';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
 
 import {
   Chart as ChartJS,
@@ -41,13 +42,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
-        setUserData(mockUserData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        setLoading(false);
+      setLoading(true);
+      const userInfo = await getUserInfo();
+      if (userInfo) {
+        setUserData(userInfo);
       }
+      setLoading(false);
     };
 
     fetchUserData();
