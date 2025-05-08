@@ -1,9 +1,0 @@
-.dashboard-btn.hover-animate {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .dashboard-btn.hover-animate:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #0056b3; 
-    color: #fff; 
-  }
