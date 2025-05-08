@@ -61,21 +61,21 @@ export default function Dashboard() {
 
   const subjectStats = [
     {
-      name: 'LabWars',
+      name: 'Lab Wars',
       correct: userData.science_correct,
       answered: userData.science_answered,
       icon: 'Flask',
       original: 'Science',
     },
     {
-      name: 'StarMath',
+      name: 'Star Math',
       correct: userData.maths_correct,
       answered: userData.maths_answered,
       icon: 'Calculator',
       original: 'Math',
     },
     {
-      name: 'Fill-itFish',
+      name: 'Fill-it Fish',
       correct: userData.english_correct,
       answered: userData.english_answered,
       icon: 'BookOpen',
