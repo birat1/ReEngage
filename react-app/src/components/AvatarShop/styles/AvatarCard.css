@@ -1,0 +1,11 @@
+.avatar-card {
+    background-color: #d8eaf2;
+    border: solid 1px #4b9cd3;
+    height: 16rem;
+    width: 14rem;
+}
+
+.avatar-card-image {
+    height: 6.5rem;
+    width: 6.5rem;
+}

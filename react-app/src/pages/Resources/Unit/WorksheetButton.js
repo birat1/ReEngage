@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "./styles/WorksheetButton.css";
 import Button from "./assets/downloadbutton.svg";
 import Spinner from 'react-bootstrap/Spinner';
+import { Download } from "lucide-react";
 
 function WorkSheetButton() {
   const { lesson } = useParams();
@@ -40,7 +41,7 @@ function WorkSheetButton() {
           onClick={download}
           style={{ height: "2.5rem" }}
         >
-          <img alt="Download Icon" src={Button} style={{ width: "90%" }} />
+          <Download size={28} color="#4a4a4a" strokeWidth={1.5} />
         </div>
       )}
     </>

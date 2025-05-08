@@ -16,7 +16,6 @@ function Home() {
         className="d-flex justify-content-center align-items-center"
         style={{ height: "calc(100vh - 76px)" }}
       >
-        <Spinner animation="border" variant="secondary" />
       </div>
     );
   }

@@ -2,11 +2,13 @@ import "./Navbar.css";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useAuthStatus } from "../Authentication/CheckLoginStatus";
+import { getUserInfo, useAuthStatus } from "../Authentication/CheckLoginStatus";
 import { backendAPI } from "../../constants";
 import { useCurrentEquippedAvatar } from "../RetrievingAvatars/CurrentEquippedAvatar";
 import React, { useState } from "react";
 import Default from "../../avatars/Default.png";
+import AvatarShop from "../AvatarShop/AvatarShop.js";
+import { ChevronDown } from "lucide-react";
 
 function Navigationbar() {
   const { isLoggedIn, userName, isLoading } = useAuthStatus();
@@ -86,7 +88,7 @@ function Navigationbar() {
             <div className="username d-flex gap-1" onClick={toggleDropdown}>
               {userName}
               <div className={`tri ${isDropdownOpen ? "rotate" : ""}`}>
-                &#9207;
+              <ChevronDown size={20} color="#4a4a4a" strokeWidth={1.5} />
               </div>
             </div>
             {isDropdownOpen && (
@@ -94,6 +96,10 @@ function Navigationbar() {
                 <Link to={"/dashboard"} className="option-item rounded p-1">
                   <span>Dashboard</span>
                 </Link>
+                {}
+                <div className="option-item rounded p-1">
+                  <AvatarShop />
+                </div>
                 <div className="option-item rounded p-1" onClick={handleLogout}>
                   <span>Logout</span>
                 </div>
@@ -103,9 +109,9 @@ function Navigationbar() {
               className={`nav-hamburger ${isOpen ? "change" : ""}`}
               onClick={toggleMenu}
             >
-              <div class="bar-a rounded"> </div>
-              <div class="bar-b rounded"> </div>
-              <div class="bar-c rounded"> </div>
+              <div className="bar-a rounded"> </div>
+              <div className="bar-b rounded"> </div>
+              <div className="bar-c rounded"> </div>
             </div>
           </div>
         ) : (

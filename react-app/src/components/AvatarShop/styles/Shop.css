@@ -1,0 +1,36 @@
+.customise-container {
+    background-color: #f2f2f2;
+    width: 50rem;
+    height: 40rem;
+}
+
+.tab-button {
+    display:flex;
+    justify-content: center;
+    width: 50%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.current {
+    background-color: #d8eaf2;
+    color: #4b9cd3;
+}
+
+.tab-icon {
+    color: inherit;
+}
+
+.tab-button:hover {
+    color: #4b9cd3;
+}
+
+.tab {
+    height: 31rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
