@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Tabs from './components/Tabs';
-import ProgressTab from './components/ProgressTab';
-import DailyLearningTab from './components/DailyLearningTab';
-import AchievementsTab from './components/AchievementsTab';
+import UserProgress from './components/UserProgress';
 import UserStats from './components/UserStats';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
@@ -11,7 +8,6 @@ import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('progress');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,15 +68,10 @@ export default function Dashboard() {
   return (
     <div className='container py-4'>
       <UserStats userData={userData} />
-      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'progress' && (
-        <ProgressTab
+      <UserProgress
           subjectStats={subjectStats}
           handleContinueLearning={handleContinueLearning}
-        />
-      )}
-      {activeTab === 'daily' && <DailyLearningTab userData={userData} />}
-      {activeTab === 'achievements' && <AchievementsTab />}
+      />
     </div>
   );
 }
