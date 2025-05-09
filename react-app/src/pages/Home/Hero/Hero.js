@@ -124,7 +124,7 @@ function Hero() {
               <p className="fs-4">Say no to boring lessons and hello to gamification!</p>
             </div>
 
-            <div className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-4" style={{ width: "60%" }}>
+            <div className="features mt-4" style={{ width: "60%" }}>
               {features.map((feature, index) => (
                 <div
                   key={index}

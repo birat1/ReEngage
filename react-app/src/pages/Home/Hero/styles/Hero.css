@@ -44,6 +44,13 @@
     color: "#4b9cd3";
 }
 
+.features {
+  display: grid;
+  grid-template-columns: 17.5rem 17.5rem 17.5rem;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
 .testimonials-section {
     background-color: #d4e9f3;
     color: "#4b9cd3";
@@ -59,6 +66,18 @@
 
 .slide-from-left {
     animation: slidefromleft .8s ease-in-out forwards;
+}
+
+@media (max-width: 992px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
 }
 
 @keyframes slideUp {
