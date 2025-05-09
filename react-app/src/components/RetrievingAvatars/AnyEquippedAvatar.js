@@ -21,8 +21,6 @@ const avatarImages = {
 };
 
 export function useAnyEquippedAvatar(user_Id) {
-  // retrieving the name of the current user's avatar
-  console.log("found user id .." + user_Id);
   
   const { data: avatarData } = useQuery({
     queryKey: ["EquippedAvatar", user_Id],
@@ -45,6 +43,5 @@ export function useAnyEquippedAvatar(user_Id) {
   if (!avatarData) return undefined;
   
   const avatarName = avatarData?.name || "Default";
-  console.log("avatar name chosen..." + avatarName);
   return avatarImages[avatarName] || Default;
 }

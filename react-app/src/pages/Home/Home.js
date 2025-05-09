@@ -5,7 +5,6 @@ import {
   CheckLoggedIn,
   useAuthStatus,
 } from "../../components/Authentication/CheckLoginStatus.js";
-import { Spinner } from "react-bootstrap";
 
 function Home() {
   const { isLoggedIn, isLoading } = useAuthStatus();
