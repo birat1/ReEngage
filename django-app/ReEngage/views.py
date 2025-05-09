@@ -95,7 +95,21 @@ class apiStudent(viewsets.ModelViewSet):
 		}
 		serializer = StudentSerializer(data=data)
 		if serializer.is_valid():
-			serializer.save()
+			student = serializer.save()
+			#assigning default avatar (id=1) to the new student
+			try:
+				default_avatar = Avatar.objects.get(avatar_id=1)
+				StudentAvatar.objects.create(
+					student_id=student,
+					avatar_id=default_avatar,
+					is_equipped=True
+           		)
+			except Avatar.DoesNotExist:
+				logger.error("Default avatar (id=1) does not exist")
+				return Response(
+					{"error": "Default avatar not found"}, 
+					status=status.HTTP_500_INTERNAL_SERVER_ERROR
+				)
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		else:
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

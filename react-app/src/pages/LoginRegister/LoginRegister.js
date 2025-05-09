@@ -44,6 +44,8 @@ const LoginRegister = () => {
             setError('');
             console.log('Registration successful');
             // Registration logic goes here
+            //(look at child register code for guidance)
+            //register user, then add user to admin model
         }
     };
 

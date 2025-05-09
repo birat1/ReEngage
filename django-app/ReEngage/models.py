@@ -41,7 +41,7 @@ class Avatar(models.Model):
 #Class for avatar's owned by students
 class StudentAvatar(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    avatar_id = models.ForeignKey(Avatar, on_delete=models.CASCADE, default=1)
+    avatar_id = models.ForeignKey(Avatar, on_delete=models.CASCADE)
     is_equipped = models.BooleanField()
 
     class Meta:
