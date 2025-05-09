@@ -40,7 +40,7 @@ function Lesson() {
             <div>Something went wrong. Failed to load Lesson.</div>
           ) : (
             <>
-              <h2 className="text-center">{summary.lessonTitle}</h2>
+              <h3 className="fw-bold text-center">{summary.lessonTitle}</h3>
             </>
           )}
         </div>

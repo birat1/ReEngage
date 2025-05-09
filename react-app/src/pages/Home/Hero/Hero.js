@@ -92,7 +92,7 @@ function Hero() {
         >
           <div className="text-center mt-3" ref={heroRef}>
             <div className={classNames({ "slide-from-left": heroInView })} style={{ opacity: 0 }}>
-              <h1 className="fw-bolder">Learn Through Play with ReEngage</h1>
+              <h1 className="fw-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>Learn Through Play with ReEngage</h1>
               <p className="fs-4">Exciting games and resources to make learning fun!</p>
             </div>
             <div
@@ -120,7 +120,7 @@ function Hero() {
         <Container fluid className="features-section" style={{ minHeight: "40rem" }}>
           <div className="d-flex flex-column justify-content-center align-items-center pt-3" ref={featuresRef}>
             <div className={classNames("text-center", { "slide-from-left": featuresInView })} style={{ opacity: 0 }}>
-              <h1 className="fw-bolder">Features</h1>
+              <h1 className="fw-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>Features</h1>
               <p className="fs-4">Say no to boring lessons and hello to gamification!</p>
             </div>
 
@@ -143,7 +143,7 @@ function Hero() {
         <Container fluid className="testimonials-section pt-5" style={{ minHeight: "40rem" }}>
           <div className="d-flex flex-column justify-content-center align-items-center pt-5" ref={testimonialsRef}>
             <div className={classNames("text-center", { "slide-from-left": testimonialsInView })} style={{ opacity: 0 }}>
-              <h1 className="fw-bolder">Loved by Children, Teachers, and Parents</h1>
+              <h1 className="fw-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>Loved by Children, Teachers, and Parents</h1>
               <p className="fs-4">What our current users have to say about ReEngage:</p>
             </div>
 
@@ -166,7 +166,7 @@ function Hero() {
         <Container fluid className="join-section pt-5" style={{ minHeight: "30rem" }}>
           <div className="d-flex flex-column justify-content-center align-items-center pt-5 gap-3" ref={joinRef}>
             <div className={classNames("text-center", { "slide-from-left": joinInView })} style={{ opacity: 0 }}>
-              <h1 className="fw-bolder">Ready to elevate your learning?</h1>
+              <h1 className="fw-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>Ready to elevate your learning?</h1>
               <p className="fs-4">Join the hundreds of schools and families using ReEngage</p>
             </div>
 

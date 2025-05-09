@@ -1,5 +1,4 @@
 .hero {
-    font-family: 'Nunito', sans-serif;
     background-color: #d4e9f3;
     color: #4A4A4A;
     min-height: 100vh;
@@ -11,7 +10,6 @@
 
 .hero-button {
     background-color: #6cbc44;
-    font-weight: bold;
     color: white;
     border: none;
     width: 11rem;

@@ -64,6 +64,7 @@ REDIS_URL = "redis://redis:6379/0"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5000",
+    "http://localhost:3000",
     "http://127.0.0.1:5000",
     "http://10.2.8.15:5000",
 ]

@@ -24,7 +24,7 @@ function UnitList() {
 
   return (
     <>
-      <h2 className="fw-bolder">Year {year}</h2>
+      <h2>Year {year}</h2>
       {subject === "english" ? <img className="subject-icon" src={Book} /> : ""}
       {subject === "science" ? (
         <img className="subject-icon" src={Flask} />

@@ -55,7 +55,7 @@ function Content() {
               </span>
               <h1
                 className="fw-bolder slide-from-left"
-                style={{ color: "#4b9cd3" }}
+                style={{ color: "#4b9cd3", fontFamily: "'Nunito', sans-serif" }}
               >
                 ReEngage Leaderboard
               </h1>
