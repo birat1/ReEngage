@@ -4,6 +4,14 @@
     height: 40rem;
 }
 
+.points {
+    background-color: #f7df82;
+    border: solid 1px #efbf04;
+    padding: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .tab-button {
     display:flex;
     justify-content: center;

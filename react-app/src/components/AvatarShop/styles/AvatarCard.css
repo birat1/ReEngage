@@ -9,3 +9,51 @@
     height: 6.5rem;
     width: 6.5rem;
 }
+
+.equipped-card {
+    background-color: #d8f2e1;
+    border: solid 1px #97a99e;
+}
+
+.buy-btn {
+    color: #f2f2f2;
+    width: 50%;
+    background-color: #4b9cd3;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    border: solid 1px #448cbe;
+    cursor: pointer;
+}
+
+.buy-btn:hover {
+    color: white;
+    background-color: #448cbe;
+}
+
+.equip-btn {
+    color: #448cbe;
+    width: 50%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    border: solid 1px #448cbe;
+    cursor: pointer;
+}
+
+.equip-btn:hover {
+    color: white;
+    background-color: #448cbe;
+}
+
+.equipped-btn {
+    color: #f2f2f2;
+    width: 50%;
+    background-color: #4b9cd3;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    border: solid 1px #448cbe;
+    pointer-events: none;
+    cursor: not-allowed;
+}
