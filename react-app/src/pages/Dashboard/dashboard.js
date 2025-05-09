@@ -7,7 +7,8 @@ import AdminClassOverview from './components/AdminClassOverview';
 import AdminQuickActions from './components/AdminQuickActions';
 import AdminTopStudentsList from './components/AdminTopStudentsList';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
+import { getUserInfo, checkDailyStreak } from '../../components/Authentication/CheckLoginStatus';
+import FactAccuracyRow from './components/FactAccuracyRow';
 import axios from 'axios';
 import { backendAPI } from '../../constants';
 
@@ -34,6 +35,10 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchUserData = async () => {
       setLoading(true);
+      
+      // Check daily streak first to ensure it's updated before we get user data
+      await checkDailyStreak();
+      
       const userInfo = await getUserInfo();
       if (userInfo) {
         setUserData(userInfo);
@@ -205,9 +210,9 @@ export default function Dashboard() {
         minHeight: '100vh',
       }}
     >
-      <div className="container">
+      <div className='container'>
         <UserStats userData={userData} />
-
+        
         {isAdmin ? (
           <>
             <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
@@ -224,12 +229,17 @@ export default function Dashboard() {
             </div>
           </>
         ) : (
-          <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
+          <>
             <UserProgress
               subjectStats={subjectStats}
               handleContinueLearning={handleContinueLearning}
             />
-          </div>
+            <FactAccuracyRow
+              englishPercentage={userData.english_percentage}
+              mathPercentage={userData.maths_percentage}
+              sciencePercentage={userData.science_percentage}
+            />
+          </>
         )}
       </div>
     </div>

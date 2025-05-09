@@ -22,6 +22,7 @@ class Student(models.Model):
     xp = models.PositiveIntegerField(default=0)
     points = models.PositiveIntegerField(default=0)
     streak = models.PositiveIntegerField(default=0) #We may not ned this
+    last_streak_check = models.DateField(null=True, blank=True) #Date of last streak check
     english_answered = models.PositiveIntegerField(default=0)
     english_correct = models.PositiveIntegerField(default=0)
     maths_answered = models.PositiveIntegerField(default=0)

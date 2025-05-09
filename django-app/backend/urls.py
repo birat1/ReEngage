@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form
+from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form, check_streak
 from ReEngage.oak_api_views import (
     UnitsAPI,
     LessonsAPI,
@@ -78,5 +78,8 @@ urlpatterns = [
     path('api/current-equipped-avatar/<int:user_id>/', current_equipped_avatar, name='current_equipped_avatar'),
 
     path('api/contact/', submit_contact_form, name='submit_contact_form'),
+    
+    #to check and update daily streak
+    path('api/check-streak/', check_streak, name='check_streak'),
 ]
 
