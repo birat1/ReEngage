@@ -1,8 +1,27 @@
 .funFactCard {
-  text-align: center;
-  height: 28rem;
-  width: 28rem;
+  text-align: left;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   transition: opacity 0.3s ease;
+}
+
+.funFactCard h5.card-title {
+  color: #3498db;
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.funFactCard p.card-text {
+  color: #555;
+  margin-bottom: 5px;
+  font-size: 0.875rem;
+}
+.funFactCard p.card-text strong {
+  font-weight: bold;
+  color: #333;
 }
 
 .funFactCard.loading {
@@ -15,27 +34,35 @@
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border-left-color: #09f;
+  border-left-color: #3498db;
   animation: spin 1s linear infinite;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.countdown-timer {
+  margin-top: 10px;
+  color: #777;
+  font-size: 0.85rem;
 }
 
 .countdown-timer span {
-  font-weight: bold;
-  color: #09f;
+  font-weight: 500;
+  color: #3498db; 
+}
+
+.text-success.small { 
+  color: #2ecc71;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
 
 .text-info {
@@ -46,6 +73,7 @@
   color: #f39c12;
 }
 
-.text-success {
-  color: #2ecc71;
+.funFactCardBody {
+  padding-left: 10px;
+  padding-right: 10px;
 }

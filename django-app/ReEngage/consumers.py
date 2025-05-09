@@ -14,7 +14,7 @@ class AnimalFactConsumer(AsyncWebsocketConsumer):
         "Pygmy Hippopotamus", "Indian Rhinoceros", "Eastern Gorilla", "chimpanzee",
         "koala", "panda", "Arctic Wolf", "fox", "bear", "penguin",
         "Bottlenose Dolphin", "Blue Whale", "shark", "owl",
-        "falcon", "crocodile", "alligator", "River Turtle", "Sea Turtle",
+        "falcon", "crocodile", "alligator", "River Turtle",
         "Burrowing Frog", "toad", "Tiger Salamander", "Vampire Bat",
         "deer", "moose", "buffalo", "camel", "llama", "sloth",
         "armadillo", "platypus", "flamingo", "American Bulldog",

@@ -14,7 +14,6 @@ import LoginRegister from "./pages/LoginRegister/LoginRegister.js";
 import Navigationbar from "./components/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AnimalFact from "./components/AnimalFacts/AnimalFact.js";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 import ChildRegister from "./pages/ChildRegister/ChildRegister.js";
 import ForbiddenPage403 from "./pages/Forbidden/forbidden.js";
@@ -45,7 +44,6 @@ function App() {
           <Route path="/403" element={<ForbiddenPage403 />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/funfact" element={<AnimalFact />} />
         </Route>
       </Routes>
     </Router>

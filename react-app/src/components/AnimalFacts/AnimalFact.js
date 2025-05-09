@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Col, Card } from "react-bootstrap";
 import "./AnimalFact.css";
+import { Star } from "lucide-react";
 
 // frontend logic for displaying animal facts
 const AnimalFact = () => {
@@ -52,9 +53,11 @@ const AnimalFact = () => {
                 if (newTime <= 0) {
                   // requesting a new update if the automatic broadcast is not received
                   if (socketRef.current?.readyState === WebSocket.OPEN) {
-                    socketRef.current.send(JSON.stringify({
-                      type: "request_update"
-                    }));
+                    socketRef.current.send(
+                      JSON.stringify({
+                        type: "request_update",
+                      })
+                    );
                   }
                   return 0;
                 }
@@ -88,64 +91,50 @@ const AnimalFact = () => {
   }, []);
 
   return (
-    <Col>
-      <Card className="funFactCard">
+    <Col md={6} className="mb-3">
+      <div className="bg-white shadow-sm p-4 rounded h-100">
+        <div className="d-flex align-items-center mb-2">
+          <Star size={24} color="#3498db" className="text-primary me-2"/>
+          <h6 className="mb-0">Animal Fact - {animal.name}</h6>
+        </div>
         {connectionStatus !== "connected" ? (
-          <div className="loading-state">
-            <h3>Loading Animal Facts...</h3>
-            <div className="spinner"></div>
-            <p
-              className={`text-${
-                connectionStatus === "connecting" ? "info" : "warning"
-              }`}
-            >
-              {connectionStatus === "connecting"
-                ? "Establishing connection..."
-                : "Reconnecting..."}
+          <p className="mb-0">Loading animal fact...</p>
+        ) : (
+          <div>
+            <p className="mb-0">
+              <span style={{ color: "#3498db" }}>Fact: </span>{" "}
+              {animal.characteristics?.slogan ||
+                "Connecting to animal facts..."}
+            </p>
+            <p className="mb-0">
+              {animal.characteristics?.habitat && (
+                <>
+                  <span style={{ color: "#3498db" }}>Habitat: </span>{" "}
+                  {animal.characteristics.habitat}
+                </>
+              )}
+            </p>
+            <p className="mb-0">
+              {animal.characteristics?.diet && (
+                <>
+                  <span style={{ color: "#3498db" }}>Diet: </span>{" "}
+                  {animal.characteristics.diet}
+                </>
+              )}
             </p>
           </div>
-        ) : (
-          <>
-            <h3>{animal.name}</h3>
-            <p>
-              <strong>Fact:</strong>{" "}
-              {animal.characteristics?.slogan || "No fact available"}
-            </p>
-
-            {animal.characteristics?.habitat && (
-              <p>
-                <strong>Habitat:</strong> {animal.characteristics.habitat}
-              </p>
-            )}
-
-            {animal.characteristics?.group && (
-              <p>
-                <strong>Group:</strong> {animal.characteristics?.group}
-              </p>
-            )}
-
-            {animal.characteristics?.diet && (
-              <p>
-                <strong>Diet:</strong> {animal.characteristics.diet}
-              </p>
-            )}
-
-            <div className="countdown-timer">
-              {countdown > 0 ? (
-                <p>
-                  Next animal in: <span>{formatTime(countdown)}</span>
-                </p>
-              ) : (
-                <p>Loading new animal...</p>
-              )}
-            </div>
-
-            <p className="text-success connection-status">
-              ✓ Live Updates Active
-            </p>
-          </>
         )}
-      </Card>
+        <div className="countdown-timer mt-2">
+          {countdown > 0 && connectionStatus === "connected" ? (
+            <p className="small text-muted">
+              Next animal in: <span>{formatTime(countdown)}</span>
+            </p>
+          ) : null}
+          {connectionStatus === "connected" && (
+            <p className="text-success small mt-2">✓ Live Updates Active</p>
+          )}
+        </div>
+      </div>
     </Col>
   );
 };

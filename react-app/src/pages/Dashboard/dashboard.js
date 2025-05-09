@@ -4,6 +4,7 @@ import UserProgress from './components/UserProgress';
 import UserStats from './components/UserStats';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getUserInfo } from '../../components/Authentication/CheckLoginStatus';
+import FactAccuracyRow from './components/FactAccuracyRow';
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
@@ -68,12 +69,19 @@ export default function Dashboard() {
     },
   ];
 
+  console.log("cheching dash " + userData.english_percentage)
+
   return (
     <div className='container py-4'>
       <UserStats userData={userData} />
       <UserProgress
           subjectStats={subjectStats}
           handleContinueLearning={handleContinueLearning}
+      />
+      <FactAccuracyRow
+      englishPercentage={userData.english_percentage}
+      mathPercentage={userData.maths_percentage}
+      sciencePercentage={userData.science_percentage}
       />
     </div>
   );
