@@ -26,7 +26,7 @@ function FactAccuracyRow({englishPercentage, mathPercentage, sciencePercentage})
         }
     }
 
-    //finds game/subject with the lowest percentage
+    //finds game with the lowest percentage
     const lowestSubject = () => {
         const subjects = [
             { name: "Fill-it Fish", percentage: englishPercenFloat },
