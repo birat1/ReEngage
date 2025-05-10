@@ -2,7 +2,7 @@ import { backendAPI } from '../../constants';
 import { useQuery } from '@tanstack/react-query';
 
 export function useCheckAdmin() {
-    const { data: userInfo, isLoading } = useQuery({
+    const { data: userInfo, isLoading, error } = useQuery({
       queryKey: ["UserInfo"],
       queryFn: async () => {
         const response = await fetch(`${backendAPI}api/current-user-info/`, {
@@ -16,5 +16,5 @@ export function useCheckAdmin() {
   
     const isAdmin = userInfo?.is_admin ? userInfo : false; // if the user is an admin, return the user info, otherwise return false
 
-    return {isAdmin, isLoading};
+    return {isAdmin, isLoading, error};
   }

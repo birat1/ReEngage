@@ -64,10 +64,12 @@ export function useUpdateStudentStats() {
           withCredentials: true,
         }
       );
+      console.log("successfully updated");
       return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["StudentCurrentData", userInfo?.id]);
+      localStorage.setItem('reloadDashboard', 'true');
     },
   });
 
@@ -108,5 +110,5 @@ export function useUpdateStudentStats() {
     mutate(updateData);
   }
 
-  return { updateStats, updateStreak, incrementStreak };
+  return { updateStats, updateStreak, incrementStreak};
 }

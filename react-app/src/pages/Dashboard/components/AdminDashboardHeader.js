@@ -120,7 +120,9 @@ export default function AdminDashboardHeader({ colors }) {
                 background: `linear-gradient(to right, ${colors.secondary}, ${colors.secondary}ee)`,
                 color: 'white'
               }}
-              onClick={() => navigate('/child-register')}
+              onClick={() => {navigate('/child-register');
+                 localStorage.setItem('reloadchild-register', 'true');
+                }}
             >
               <i className="bi bi-person-plus me-2"></i>
               Register New Student

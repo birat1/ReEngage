@@ -233,6 +233,13 @@ function StarMathGame() {
     }
   }, [wrongMessage]);
 
+  useEffect(() =>{
+    if (localStorage.getItem("reloadStarMath") === "true") {
+      localStorage.removeItem("reloadStarMath");
+      window.location.reload();
+    }
+  });
+
   return (
     <CheckLoggedIn>
     <div className="star-math-container">

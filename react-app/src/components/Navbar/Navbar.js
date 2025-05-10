@@ -5,17 +5,24 @@ import axios from "axios";
 import { getUserInfo, useAuthStatus } from "../Authentication/CheckLoginStatus";
 import { backendAPI } from "../../constants";
 import { useCurrentEquippedAvatar } from "../RetrievingAvatars/CurrentEquippedAvatar";
-import React, { useState } from "react";
+import { useState } from "react";
 import Default from "../../avatars/Default.png";
 import AvatarShop from "../AvatarShop/AvatarShop.js";
 import { ChevronDown } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
 
 function Navigationbar() {
   const { isLoggedIn, userName } = useAuthStatus();
   const currentAvatar = useCurrentEquippedAvatar();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+    
+  //refreshes the dashboard after the game updates user's stats
+  const triggerRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
+  };
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
@@ -51,7 +58,7 @@ function Navigationbar() {
   return (
     <div className="navbar sticky-top">
       <div className="navbar-container d-flex align-items-center justify-content-between mx-auto">
-        <Link to={"/"}>
+        <Link to={"/"} onClick={triggerRefresh}>
           <div className="d-flex justify-content-center align-items-center gap-2">
             <img
               alt="ReEngage Logo"

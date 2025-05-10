@@ -374,7 +374,7 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
 
 function Finish({ score, audio }) {
   const navigate = useNavigate(); // Initialize hook functions
-  const updateStats = useUpdateStudentStats();
+  const {updateStats} = useUpdateStudentStats();
 
   function handleSelect() {  
     if (audio) {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Trophy, Flame } from 'lucide-react';
 
-export default function UserStats({ userData }) {
+export default function UserStats({ userData, isAdmin }) {
   // Calculate XP progress for current level
   const xpForCurrentLevel = userData.xp % 100;
+  const xptoNextlevel = 100 - (xpForCurrentLevel);
   const xpProgress = xpForCurrentLevel;
   const xpNeeded = 100;
 
@@ -18,8 +19,9 @@ export default function UserStats({ userData }) {
           <p className='text-muted mb-0'>Ready to achieve great things today?</p>
         </div>
 
-        {/* Stats Section */}
+        {!isAdmin && (
         <div className='d-flex align-items-center'>
+           {/* Stats Section */}
           <div className='d-flex align-items-center me-4'>
             <div className='bg-warning bg-opacity-25 p-2 rounded-circle'>
               <Trophy size={32} className='text-warning' />
@@ -39,7 +41,7 @@ export default function UserStats({ userData }) {
                 />
               </div>
               <div className='text-muted small'>
-                XP: {userData.xp} ({xpForCurrentLevel}/{xpNeeded} to next level) | Points: {userData.points}
+                XP: {userData.xp} ({xptoNextlevel} to the next level) | Points: {userData.points}
               </div>
             </div>
           </div>
@@ -66,6 +68,7 @@ export default function UserStats({ userData }) {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   );

@@ -5,10 +5,13 @@ import { useEffect } from 'react';
 import { useUpdateStudentStats } from "../../../components/UpdateStudentStats";
 
 function EndGameOverlay({ points, questions, resetGame, correctQuestions }) {
-  const updateStats = useUpdateStudentStats();
+  const {updateStats} = useUpdateStudentStats();
+  
   useEffect(() => {
-    updateStats(points, "maths", questions, correctQuestions);
-  }, []);
+    if (points !== undefined && questions !== undefined && correctQuestions !== undefined) {
+      updateStats(points, "maths", questions, correctQuestions);
+    }
+  }, [points, questions, correctQuestions, updateStats]);
 
   return (
     <div className="endGameOverlay">

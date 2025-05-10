@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UserProgress from './components/UserProgress';
-import UserStats from './components/UserStats';
-import AdminDashboardHeader from './components/AdminDashboardHeader';
-import AdminClassOverview from './components/AdminClassOverview';
-import AdminQuickActions from './components/AdminQuickActions';
-import AdminTopStudentsList from './components/AdminTopStudentsList';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { getUserInfo, checkDailyStreak } from '../../components/Authentication/CheckLoginStatus';
-import FactAccuracyRow from './components/FactAccuracyRow';
-import axios from 'axios';
-import { backendAPI } from '../../constants';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import UserProgress from "./components/UserProgress";
+import UserStats from "./components/UserStats";
+import AdminDashboardHeader from "./components/AdminDashboardHeader";
+import AdminClassOverview from "./components/AdminClassOverview";
+import AdminQuickActions from "./components/AdminQuickActions";
+import AdminTopStudentsList from "./components/AdminTopStudentsList";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  getUserInfo,
+  checkDailyStreak,
+} from "../../components/Authentication/CheckLoginStatus";
+import FactAccuracyRow from "./components/FactAccuracyRow";
+import axios from "axios";
+import { backendAPI } from "../../constants";
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
@@ -20,25 +23,25 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const colors = {
-    primary: '#3473c8',
-    secondary: '#5e60ce',
-    tertiary: '#4a7aec',
-    lightBg: '#f8f9fa',
-    darkText: '#333333',
-    lightText: '#6c757d',
-    accent: '#6366f1',
-    progressBar: '#4f46e5',
-    cardBorder: '#e9ecef',
-    hoverColor: '#f0f5ff',
+    primary: "#3473c8",
+    secondary: "#5e60ce",
+    tertiary: "#4a7aec",
+    lightBg: "#f8f9fa",
+    darkText: "#333333",
+    lightText: "#6c757d",
+    accent: "#6366f1",
+    progressBar: "#4f46e5",
+    cardBorder: "#e9ecef",
+    hoverColor: "#f0f5ff",
   };
 
   useEffect(() => {
     const fetchUserData = async () => {
       setLoading(true);
-      
+
       // Check daily streak first to ensure it's updated before we get user data
       await checkDailyStreak();
-      
+
       const userInfo = await getUserInfo();
       if (userInfo) {
         setUserData(userInfo);
@@ -57,13 +60,13 @@ export default function Dashboard() {
                 .slice(0, 3);
               setTopStudents(sortedStudents);
             } else {
-              console.log('No students data returned from API');
+              console.log("No students data returned from API");
               setStudentsCount(3);
               setTopStudents([
                 {
                   user: { id: 1 },
-                  firstname: 'Student 1',
-                  surname: '',
+                  firstname: "Student 1",
+                  surname: "",
                   xp: 500,
                   english_correct: 80,
                   maths_correct: 70,
@@ -74,8 +77,8 @@ export default function Dashboard() {
                 },
                 {
                   user: { id: 2 },
-                  firstname: 'Student 2',
-                  surname: '',
+                  firstname: "Student 2",
+                  surname: "",
                   xp: 400,
                   english_correct: 70,
                   maths_correct: 60,
@@ -86,8 +89,8 @@ export default function Dashboard() {
                 },
                 {
                   user: { id: 3 },
-                  firstname: 'Student 3',
-                  surname: '',
+                  firstname: "Student 3",
+                  surname: "",
                   xp: 300,
                   english_correct: 60,
                   maths_correct: 50,
@@ -99,13 +102,13 @@ export default function Dashboard() {
               ]);
             }
           } catch (error) {
-            console.error('Error fetching students:', error);
+            console.error("Error fetching students:", error);
             setStudentsCount(3);
             setTopStudents([
               {
                 user: { id: 1 },
-                firstname: 'Student 1',
-                surname: '',
+                firstname: "Student 1",
+                surname: "",
                 xp: 500,
                 english_correct: 80,
                 maths_correct: 70,
@@ -116,8 +119,8 @@ export default function Dashboard() {
               },
               {
                 user: { id: 2 },
-                firstname: 'Student 2',
-                surname: '',
+                firstname: "Student 2",
+                surname: "",
                 xp: 400,
                 english_correct: 70,
                 maths_correct: 60,
@@ -128,8 +131,8 @@ export default function Dashboard() {
               },
               {
                 user: { id: 3 },
-                firstname: 'Student 3',
-                surname: '',
+                firstname: "Student 3",
+                surname: "",
                 xp: 300,
                 english_correct: 60,
                 maths_correct: 50,
@@ -145,13 +148,20 @@ export default function Dashboard() {
       setLoading(false);
     };
 
+    if (localStorage.getItem("reloadDashboard") === "true") {
+      localStorage.removeItem("reloadDashboard");
+      window.location.reload();
+    }
+
     fetchUserData();
   }, []);
 
   const handleContinueLearning = (subjectName) => {
-    if (subjectName === 'Science') navigate('/games/labwars');
-    else if (subjectName === 'Math') navigate('/games/starmath');
-    else if (subjectName === 'English') navigate('/games/fill-itfish');
+    if (subjectName === "Science") navigate("/games/labwars");
+    else if (subjectName === "Math") {
+      navigate("/games/starmath");
+      localStorage.setItem("reloadStarMath", "true");
+    } else if (subjectName === "English") navigate("/games/fill-itfish");
   };
 
   if (loading || !userData) {
@@ -159,7 +169,7 @@ export default function Dashboard() {
       <div
         className="d-flex align-items-center justify-content-center vh-100"
         style={{
-          backgroundImage: 'linear-gradient(to bottom right, #f0f5ff, #fff)',
+          backgroundImage: "linear-gradient(to bottom right, #f0f5ff, #fff)",
         }}
       >
         <div className="text-center">
@@ -178,25 +188,25 @@ export default function Dashboard() {
 
   const subjectStats = [
     {
-      game: 'Lab Wars',
+      game: "Lab Wars",
       correct_answers: userData.science_correct,
       total_answers: userData.science_answered,
       percentage: userData.science_percentage,
-      type: 'Science',
+      type: "Science",
     },
     {
-      game: 'Star Math',
+      game: "Star Math",
       correct_answers: userData.maths_correct,
       total_answers: userData.maths_answered,
       percentage: userData.maths_percentage,
-      type: 'Math',
+      type: "Math",
     },
     {
-      game: 'Fill-it Fish',
+      game: "Fill-it Fish",
       correct_answers: userData.english_correct,
       total_answers: userData.english_answered,
       percentage: userData.english_percentage,
-      type: 'English',
+      type: "English",
     },
   ];
 
@@ -206,25 +216,40 @@ export default function Dashboard() {
     <div
       className="py-4"
       style={{
-        backgroundColor: '#f0f7ff',
-        minHeight: '100vh',
+        backgroundColor: "#f0f7ff",
+        minHeight: "100vh",
       }}
     >
-      <div className='container'>
-        <UserStats userData={userData} />
-        
+      <div className="container">
+        <UserStats userData={userData} isAdmin={isAdmin} />
+
         {isAdmin ? (
           <>
-            <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
+            <div
+              className="mb-2 p-4 rounded shadow-sm"
+              style={{ backgroundColor: "#ffffff" }}
+            >
               <AdminDashboardHeader colors={colors} />
             </div>
-            <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
-              <AdminClassOverview studentsCount={studentsCount} colors={colors} />
+            <div
+              className="mb-2 p-4 rounded shadow-sm"
+              style={{ backgroundColor: "#ffffff" }}
+            >
+              <AdminClassOverview
+                studentsCount={studentsCount}
+                colors={colors}
+              />
             </div>
-            <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
+            <div
+              className="mb-2 p-4 rounded shadow-sm"
+              style={{ backgroundColor: "#ffffff" }}
+            >
               <AdminQuickActions colors={colors} />
             </div>
-            <div className="mb-2 p-4 rounded shadow-sm" style={{ backgroundColor: '#ffffff' }}>
+            <div
+              className="mb-2 p-4 rounded shadow-sm"
+              style={{ backgroundColor: "#ffffff" }}
+            >
               <AdminTopStudentsList topStudents={topStudents} colors={colors} />
             </div>
           </>

@@ -1,22 +1,29 @@
-.h2 {
-    font-size: 10px;
-    margin-bottom: 1rem;
-    margin-bottom: 10px;
-    font-family: 'Nunito', sans-serif;
-}
-
-.lbl-txt {
-    color:#3088D5;
-    font-style: italic;
-    font-family: 'Nunito', sans-serif;
-}
-
 .boxed {
     width: 500px;
-    border: 5px solid #A8D3E6;
-    padding: 50px;
-    margin: 40px;
-    box-shadow: #a8d3e642 0px 2px 4px, #a8d3e680 0px 7px 13px -3px, #A8D3E6 0px -3px 0px inset;
+    border: 3px solid #A8D3E6;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px auto;
+    box-shadow: rgba(168, 211, 230, 0.25) 0px 4px 8px, rgba(168, 211, 230, 0.3) 0px 7px 13px -3px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.heading2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Nunito', sans-serif;
+    color: #3088D5;
+    font-weight: 600;
+    text-align: center;
+}
+
+.lbl-txt2 {
+    color: #3088D5;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: block;
 }
 
 .row:after {
@@ -25,7 +32,63 @@
     clear: both;
 }
 
-.column {
+.columns2 {
     float: left;
-    width: 50%;
+    width: 48%;
+    margin-right: 2%;
+    margin-bottom: 15px;
+}
+
+.column2:last-child {
+    margin-right: 0;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #A8D3E6;
+    border-radius: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3088D5;
+    box-shadow: 0 0 0 2px rgba(48, 136, 213, 0.2);
+}
+
+button[type="submit"] {
+    padding: 12px 24px;
+    background-color: #3088D5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2a76be;
+}
+
+.form-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        margin-right: 0;
+    }
 }

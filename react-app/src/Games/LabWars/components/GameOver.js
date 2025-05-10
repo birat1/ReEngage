@@ -4,7 +4,7 @@ import './GameOver.css';
 import { useUpdateStudentStats } from '../../../components/UpdateStudentStats';
 
 const GameOver = ({ onPlayAgain, onReturnHome, questionsAnswered, correctQuestionsAnswered, points }) => {
-  const updateStats = useUpdateStudentStats();
+  const {updateStats} = useUpdateStudentStats();
 
   useEffect(() => {
     // Update student stats when the game ends
