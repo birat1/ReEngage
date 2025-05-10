@@ -2,8 +2,7 @@ import { Backpack, Store } from "lucide-react";
 import "./styles/Shop.css";
 import { useState } from "react";
 import { AvatarCardShop, AvatarCardInventory } from "./AvatarCard.js";
-import { useQuery } from "@tanstack/react-query";
-import { getUserInfo } from "../Authentication/CheckLoginStatus";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchAvatars } from "./data";
 import { usePurchaseAvatar } from "./hooks/usePurchaseAvatar.js";
 import { useEquipAvatar } from "./hooks/useEquipAvatar.js";
@@ -11,30 +10,23 @@ import { useEquipAvatar } from "./hooks/useEquipAvatar.js";
 function Shop() {
   const [activeTab, setActiveTab] = useState("shop");
 
-  const {
-    data: userInfo,
-    isLoading: userLoading,
-    error: userError,
-  } = useQuery({
-    queryKey: ["userInfo"],
-    queryFn: getUserInfo,
-    refetchOnWindowFocus: false,
-  });
+  const queryClient = useQueryClient();
+  const userInfo = queryClient.getQueryData(["UserInfo"]);
 
   const {
     data: avatars,
     isLoading: avatarsLoading,
-    error: avatarError,
   } = useQuery({
     queryKey: ["avatars"],
     queryFn: fetchAvatars,
     refetchOnWindowFocus: false,
   });
 
+
   const purchase = usePurchaseAvatar();
   const equip = useEquipAvatar();
 
-  if (userLoading || avatarsLoading) return <div>Loading…</div>;
+  if (avatarsLoading) return <div>Loading…</div>;
 
   return (
     <div className="customise-container rounded p-3 d-flex flex-column">
@@ -66,7 +58,7 @@ function Shop() {
 
       {activeTab === "shop" ? (
         <div className="tab mt-3 pb-1 mx-auto">
-          {avatars
+          {avatars.slice(1)
             ?.filter(
               (avatar) =>
                 !userInfo.owned_avatars.some(
@@ -74,7 +66,7 @@ function Shop() {
                 )
             )
             .map((avatar, index) => (
-              <div key={index}>
+              <div key={avatar.avatar_id}>
                 <AvatarCardShop
                   name={avatar.name}
                   price={avatar.price}

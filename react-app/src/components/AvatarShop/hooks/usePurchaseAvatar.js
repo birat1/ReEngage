@@ -6,12 +6,9 @@ export const usePurchaseAvatar = () => {
 
   return useMutation({
     mutationFn: (avatarId) => purchaseAvatar(avatarId),
-    onSuccess: (data) => {
-      queryClient.setQueryData(['userInfo'], (old) => ({
-        ...old,
-        points: data.new_points,
-        owned_avatars: [...old.owned_avatars, data.purchased_avatar],
-      }));
+    onSuccess: () => {
+      queryClient.invalidateQueries(['UserInfo']);
+      queryClient.invalidateQueries(['avatars']);
     },
     onError: (err) => {
       alert(err.response?.data?.error || 'Purchase failed');

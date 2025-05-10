@@ -360,6 +360,14 @@ def get_user_info(request):
                 'science_correct': user.student.science_correct,
 					'science_percentage': (user.student.science_correct / user.student.science_answered * 100)
 				 	if user.student.science_answered > 0 else 0,
+				'owned_avatars': [{
+					'avatar_id': sa.avatar_id.avatar_id,
+					'name': sa.avatar_id.name,
+					'price': sa.avatar_id.price,
+					'is_equipped': sa.is_equipped,
+					}
+            		for sa in StudentAvatar.objects.filter(student_id=user.student).select_related('avatar_id')
+        		]
             }
             user_data.update(student_data)
         else:

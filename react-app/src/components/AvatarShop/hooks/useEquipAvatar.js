@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { purchaseAvatar, equipAvatar } from '../data';
+import { equipAvatar } from '../data';
 
 export function useEquipAvatar() {
   const queryClient = useQueryClient();
@@ -7,8 +7,11 @@ export function useEquipAvatar() {
   return useMutation({
     mutationFn: (avatarId) => equipAvatar(avatarId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userInfo'] });
-      queryClient.invalidateQueries({ queryKey: ['EquippedAvatar'] });
+      queryClient.invalidateQueries(['UserInfo']);
+      queryClient.invalidateQueries(['EquippedAvatar']);
+    },
+    onError: (err) => {
+      alert(err.response?.data?.error || 'Equip failed');
     },
   });
 }
