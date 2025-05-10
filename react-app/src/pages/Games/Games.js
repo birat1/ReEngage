@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer/Footer.js";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import GameCard from "../../components/GameCard/GameCard.js";

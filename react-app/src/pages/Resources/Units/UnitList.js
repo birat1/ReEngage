@@ -25,13 +25,13 @@ function UnitList() {
   return (
     <>
       <h2>Year {year}</h2>
-      {subject === "english" ? <img className="subject-icon" src={Book} /> : ""}
+      {subject === "english" ? <img alt="Subject Icon" className="subject-icon" src={Book} /> : ""}
       {subject === "science" ? (
-        <img className="subject-icon" src={Flask} />
+        <img alt="Subject Icon" className="subject-icon" src={Flask} />
       ) : (
         ""
       )}
-      {subject === "maths" ? <img className="subject-icon" src={Maths} /> : ""}
+      {subject === "maths" ? <img alt="Subject Icon" className="subject-icon" src={Maths} /> : ""}
 
       <div className="unit-list shadow-sm rounded d-flex flex-column justify-content-between align-items-center gap-3 pt-4 pb-4 mt-1">
         {isLoading || isFetching ? (

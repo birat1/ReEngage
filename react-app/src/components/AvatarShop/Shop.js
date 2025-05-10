@@ -55,7 +55,7 @@ function Shop() {
           <h5>Inventory</h5>
         </div>
       </div>
-
+      
       {activeTab === "shop" ? (
         <div className="tab mt-3 pb-1 mx-auto">
           {avatars.slice(1)

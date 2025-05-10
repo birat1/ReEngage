@@ -7,7 +7,7 @@ import Bricks from "./assets/bricks.png";
 import Spinner from 'react-bootstrap/Spinner';
 
 function Lesson() {
-  const { year, subject, lesson } = useParams();
+  const { subject, lesson } = useParams();
 
   const results = useQueries({
     queries: [

@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer/Footer";
 import YearCard from "./YearCard.js";
 import Container from "react-bootstrap/Container";
 import "./styles/Resources.css";

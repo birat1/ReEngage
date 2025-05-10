@@ -10,7 +10,6 @@ import Default from "../../avatars/Default.png";
 import AvatarShop from "../AvatarShop/AvatarShop.js";
 import { ChevronDown } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 
 function Navigationbar() {
   const { isLoggedIn, userName } = useAuthStatus();

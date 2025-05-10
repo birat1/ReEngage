@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import LessonList from "./LessonList.js";
 import { useState } from "react";
 import "./styles/UnitLayout.css";

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchWorksheet } from "../apiData.js";
 import { useParams } from "react-router-dom";
 import "./styles/WorksheetButton.css";
-import Button from "./assets/downloadbutton.svg";
 import Spinner from 'react-bootstrap/Spinner';
 import { Download } from "lucide-react";
 

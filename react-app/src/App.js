@@ -11,7 +11,6 @@ import Units from "./pages/Resources/Units/Units.js";
 import UnitLayout from "./pages/Resources/Unit/UnitLayout.js";
 import Lesson from "./pages/Resources/Unit/Lesson.js";
 import LoginRegister from "./pages/LoginRegister/LoginRegister.js";
-import Navigationbar from "./components/Navbar/Navbar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
