@@ -117,6 +117,9 @@ function Lesson() {
             )}
           </div>
         </div>
+        <div>
+          A {subject} lesson by Oak National Academy licensed under <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence (OGL)</a>
+        </div>
       </div>
     </>
   );
