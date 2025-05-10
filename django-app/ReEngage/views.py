@@ -99,10 +99,17 @@ class apiStudent(viewsets.ModelViewSet):
 	
 	def list(self, request):
 		sort_field = request.query_params.get('sort_by', None)
+		limit = request.query_params.get('limit', None)
 		students = Student.objects.all()
 
 		if sort_field in ['points', 'xp', 'firstname', 'surname']:
 			students = students.order_by(f'-{sort_field}') 
+		
+		if limit:
+			limit = int(limit)
+			students = students[:limit]
+
+			
 		serializer = StudentSerializer(students, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 

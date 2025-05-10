@@ -19,7 +19,7 @@ function Leaderboard() {
 }
 
 const fetchStudents = async (subject, unit) => {
-  const response = await axios.get(`${backendAPI}api/students/?sort_by=xp`);
+  const response = await axios.get(`${backendAPI}api/students/?sort_by=xp&limit=20`);
 
   return response.data;
 };
@@ -104,7 +104,7 @@ function Content() {
                 </div>
               </div>
               <div className="board shadow rounded d-flex flex-column justify-content-center align-items-center gap-3 m-5 slide-up">
-                {data.slice(3).map((student, index) => (
+                {data.slice(3)?.map((student, index) => (
                   <div
                     className="fly-in"
                     style={{
