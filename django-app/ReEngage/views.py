@@ -3,6 +3,8 @@ logger = logging.getLogger(__name__)
 
 import json
 from django.shortcuts import render
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
@@ -31,7 +33,11 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                request.session.save() #need to save the session
+                request.session.save()
+                
+                if hasattr(user, 'student'):
+                    update_login_streak(user)
+                
                 return JsonResponse({
                     'message': 'Login successful',
                     'username': user.username,
@@ -55,6 +61,31 @@ def logout_user(request):
 			return JsonResponse({'error': str(e)}, status=500)
 	return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+def update_login_streak(user):
+    try:
+        student = user.student
+        
+        today = datetime.now().date()
+        last_streak_check = getattr(student, 'last_streak_check', None)
+        
+        if last_streak_check is None:
+            student.streak = 1
+        elif last_streak_check == today:
+            pass
+        elif last_streak_check == today - timedelta(days=1):
+            student.streak += 1
+        else:
+            student.streak = 1
+       
+        student.last_streak_check = today
+        
+        student.save()
+        
+        return student.streak
+        
+    except Exception as e:
+        logger.error(f"Error updating login streak: {str(e)}")
+        return None
 
 class apiStudent(viewsets.ModelViewSet):
 	queryset = Student.objects.all()
@@ -329,14 +360,6 @@ def get_user_info(request):
                 'science_correct': user.student.science_correct,
 					'science_percentage': (user.student.science_correct / user.student.science_answered * 100)
 				 	if user.student.science_answered > 0 else 0,
-				'owned_avatars': [{
-					'avatar_id': sa.avatar_id.avatar_id,
-					'name': sa.avatar_id.name,
-					'price': sa.avatar_id.price,
-					'is_equipped': sa.is_equipped,
-					}
-            		for sa in StudentAvatar.objects.filter(student_id=user.student).select_related('avatar_id')
-        		]
             }
             user_data.update(student_data)
         else:
@@ -443,3 +466,38 @@ def equip_avatar(request):
             'is_equipped': student_avatar.is_equipped,
         }
     }, status=status.HTTP_200_OK)
+
+# Function to check and update streaks daily regardless of explicit login
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_streak(request):
+    user = request.user
+    if not user.is_authenticated:
+        return Response({'error': 'Not authenticated'}, status=401)
+    
+    # Only update streak for students
+    if hasattr(user, 'student'):
+        # Get the current streak before updating
+        current_streak = user.student.streak
+        
+        # Update the streak and get the new value
+        new_streak = update_login_streak(user)
+        
+        # Check if we reached a new milestone
+        milestones = [3, 7, 14, 30]
+        milestone_reached = False
+        for milestone in milestones:
+            if current_streak < milestone and new_streak >= milestone:
+                milestone_reached = True
+                break
+        
+        return Response({
+            'previous_streak': current_streak,
+            'current_streak': new_streak,
+            'streak_updated': current_streak != new_streak,
+            'milestone_reached': milestone_reached,
+            'message': 'Streak updated successfully',
+            'last_check': user.student.last_streak_check.strftime('%Y-%m-%d') if user.student.last_streak_check else None
+        }, status=200)
+    else:
+        return Response({'message': 'User is not a student'}, status=200)
