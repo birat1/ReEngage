@@ -12,7 +12,7 @@ def seedStudentAvatar():
 
     for student in students:
         if not StudentAvatar.objects.filter(student_id=student).exists():
-            equipped_avatar = random.choice(list(avatars))
+            avatar = Avatar.objects.get(avatar_id=1)
             StudentAvatar.objects.create(
                 student_id=student,
                 avatar_id=equipped_avatar,
