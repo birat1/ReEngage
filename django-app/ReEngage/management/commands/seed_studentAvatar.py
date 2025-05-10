@@ -13,10 +13,16 @@ def seedStudentAvatar():
     for student in students:
         if not StudentAvatar.objects.filter(student_id=student).exists():
             avatar = Avatar.objects.get(avatar_id=1)
+            equipped_avatar = random.choice(list(avatars))
             StudentAvatar.objects.create(
                 student_id=student,
                 avatar_id=equipped_avatar,
                 is_equipped=True
+            )
+            StudentAvatar.objects.create(
+                student_id=student,
+                avatar_id=avatar,
+                is_equipped=False
             )
             print(f'Student {student.user.username} seeded with avatar "{equipped_avatar.name}".')
         else:
