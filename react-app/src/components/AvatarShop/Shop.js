@@ -5,6 +5,8 @@ import { AvatarCardShop, AvatarCardInventory } from "./AvatarCard.js";
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "../Authentication/CheckLoginStatus";
 import { fetchAvatars } from "./data";
+import { usePurchaseAvatar } from "./hooks/usePurchaseAvatar.js";
+import { useEquipAvatar } from "./hooks/useEquipAvatar.js";
 
 function Shop() {
   const [activeTab, setActiveTab] = useState("shop");
@@ -29,9 +31,10 @@ function Shop() {
     refetchOnWindowFocus: false,
   });
 
-  if (userLoading || avatarsLoading) {
-    return <>Loading...</>;
-  }
+  const purchase = usePurchaseAvatar();
+  const equip = useEquipAvatar();
+
+  if (userLoading || avatarsLoading) return <div>Loading…</div>;
 
   return (
     <div className="customise-container rounded p-3 d-flex flex-column">
@@ -63,21 +66,38 @@ function Shop() {
 
       {activeTab === "shop" ? (
         <div className="tab mt-3 pb-1 mx-auto">
-          {avatars?.filter((avatar) => !userInfo.owned_avatars.some((owned) => owned.avatar_id === avatar.avatar_id))
+          {avatars
+            ?.filter(
+              (avatar) =>
+                !userInfo.owned_avatars.some(
+                  (owned) => owned.avatar_id === avatar.avatar_id
+                )
+            )
             .map((avatar, index) => (
               <div key={index}>
-                <AvatarCardShop name={avatar.name} price={avatar.price} />
+                <AvatarCardShop
+                  name={avatar.name}
+                  price={avatar.price}
+                  onBuy={() => purchase.mutate(avatar.avatar_id)}
+                  isBuying={
+                    purchase.isLoading &&
+                    purchase.variables === avatar.avatar_id
+                  }
+                />
               </div>
             ))}
         </div>
       ) : (
         <div className="tab mt-3 pb-1 mx-auto">
-            <AvatarCardInventory name={"Default"}/>
-          {userInfo.owned_avatars.map((avatar, index) => (
-            <div key={index}>
+          {userInfo.owned_avatars.map((avatar) => (
+            <div key={avatar.avatar_id}>
               <AvatarCardInventory
                 name={avatar.name}
-                isEquipped={avatar.is_equipped}
+                isEquipped={avatar.is_equipped === true}
+                onEquip={() => equip.mutate(avatar.avatar_id)}
+                isEquipping={
+                  equip.isLoading && equip.variables === avatar.avatar_id
+                }
               />
             </div>
           ))}

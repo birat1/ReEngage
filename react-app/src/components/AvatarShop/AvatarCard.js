@@ -17,7 +17,7 @@ const avatarImages = {
   Default: Default,
 };
 
-function AvatarCardShop({ name, price }) {
+function AvatarCardShop({ name, price, isBuying, onBuy }) {
   return (
     <div className="avatar-card rounded shadow-sm d-flex flex-column align-items-center gap-1 p-3">
       <div className="avatar-card-image rounded overflow-hidden">
@@ -27,7 +27,14 @@ function AvatarCardShop({ name, price }) {
       {name !== "Default" ? (
         <>
           <span>{price} Points</span>
-          <div className="buy-btn rounded mt-3">Buy</div>
+          <button
+            className="buy-btn rounded mt-3"
+            onClick={onBuy}
+            disabled={isBuying}
+            aria-busy={isBuying}
+          >
+            {isBuying ? "Buying…" : "Buy"}
+          </button>
         </>
       ) : (
         ""
@@ -36,7 +43,7 @@ function AvatarCardShop({ name, price }) {
   );
 }
 
-function AvatarCardInventory({ name, isEquipped }) {
+function AvatarCardInventory({ name, isEquipped, isEquipping, onEquip }) {
   return (
     <div
       className={`avatar-card rounded shadow-sm d-flex flex-column align-items-center gap-1 p-3 ${
@@ -50,7 +57,13 @@ function AvatarCardInventory({ name, isEquipped }) {
       {isEquipped ? (
         <div className="equipped-btn rounded">Equipped</div>
       ) : (
-        <div className="equip-btn rounded">Equip</div>
+        <button
+          className="equip-btn rounded"
+          onClick={onEquip}
+          disabled={isEquipping}
+        >
+          {isEquipping ? 'Equipping...' : 'Equip'}
+        </button>
       )}
     </div>
   );

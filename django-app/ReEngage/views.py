@@ -368,3 +368,78 @@ def submit_contact_form(request):
         serializer.save()
         return Response({'message': 'Your message has been sent successfully!'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def purchase_avatar(request):
+    user = request.user
+    if not hasattr(user, 'student'):
+        return Response({'error': 'Only students can buy avatars.'}, status=403)
+
+    avatar_id = request.data.get('avatar_id')
+    try:
+        avatar = Avatar.objects.get(pk=avatar_id)
+    except Avatar.DoesNotExist:
+        return Response({'error': 'Avatar not found.'}, status=404)
+
+    student = user.student
+
+    if StudentAvatar.objects.filter(student_id=student, avatar_id=avatar).exists():
+        return Response({'error': 'You already own that avatar.'}, status=400)
+
+    if student.points < avatar.price:
+        return Response({'error': 'Not enough points.'}, status=400)
+
+    student.points -= avatar.price
+    student.save()
+    StudentAvatar.objects.create(student_id=student, avatar_id=avatar, is_equipped=False)
+
+    return Response({
+        'new_points': student.points,
+        'purchased_avatar': {
+            'avatar_id': avatar.avatar_id,
+            'name': avatar.name,
+            'price': avatar.price,
+            'is_equipped': False
+        }
+    }, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def equip_avatar(request):
+    user = request.user
+    if not hasattr(user, 'student'):
+        return Response({'error': 'Only students can equip avatars.'}, status=403)
+
+    avatar_id = request.data.get('avatar_id')
+    try:
+        avatar = Avatar.objects.get(pk=avatar_id)
+    except Avatar.DoesNotExist:
+        return Response({'error': 'Avatar not found.'}, status=404)
+
+    student = user.student
+    
+    student_avatar = StudentAvatar.objects.filter(student_id=student, avatar_id=avatar).first()
+    if not student_avatar:
+        return Response({'error': 'You do not own this avatar.'}, status=400)
+
+    if student_avatar.is_equipped:
+        return Response({'error': 'This avatar is already equipped.'}, status=400)
+
+    current_equipped = StudentAvatar.objects.filter(student_id=student, is_equipped=True).first()
+    if current_equipped:
+        current_equipped.is_equipped = False
+        current_equipped.save()
+
+    student_avatar.is_equipped = True
+    student_avatar.save()
+
+    return Response({
+        'message': f'{avatar.name} equipped successfully.',
+        'equipped_avatar': {
+            'avatar_id': avatar.avatar_id,
+            'name': avatar.name,
+            'price': avatar.price,
+            'is_equipped': student_avatar.is_equipped,
+        }
+    }, status=status.HTTP_200_OK)

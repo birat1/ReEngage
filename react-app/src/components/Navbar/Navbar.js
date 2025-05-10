@@ -9,12 +9,19 @@ import React, { useState } from "react";
 import Default from "../../avatars/Default.png";
 import AvatarShop from "../AvatarShop/AvatarShop.js";
 import { ChevronDown } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 function Navigationbar() {
-  const { isLoggedIn, userName, isLoading } = useAuthStatus();
+  const { isLoggedIn, userName } = useAuthStatus();
   const currentAvatar = useCurrentEquippedAvatar();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo,
+    refetchOnWindowFocus: false,
+  });
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -88,7 +95,7 @@ function Navigationbar() {
             <div className="username d-flex gap-1" onClick={toggleDropdown}>
               {userName}
               <div className={`tri ${isDropdownOpen ? "rotate" : ""}`}>
-              <ChevronDown size={20} color="#4a4a4a" strokeWidth={1.5} />
+                <ChevronDown size={20} color="#4a4a4a" strokeWidth={1.5} />
               </div>
             </div>
             {isDropdownOpen && (
@@ -96,10 +103,11 @@ function Navigationbar() {
                 <Link to={"/dashboard"} className="option-item rounded p-1">
                   <span>Dashboard</span>
                 </Link>
-                {}
-                <div className="option-item rounded p-1">
-                  <AvatarShop />
-                </div>
+                {userInfo.is_admin === false  && (
+                  <div className="option-item rounded p-1">
+                    <AvatarShop />
+                  </div>
+                )}
                 <div className="option-item rounded p-1" onClick={handleLogout}>
                   <span>Logout</span>
                 </div>
