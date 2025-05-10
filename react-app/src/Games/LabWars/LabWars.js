@@ -68,6 +68,7 @@ const LabWars = () => {
 
     // Reset speaking state when speech ends
     speech.onend = () => setIsSpeaking(false);
+    console.log("is running");
 
     window.speechSynthesis.speak(speech);
   };
@@ -207,8 +208,10 @@ const LabWars = () => {
         <button
           type="button"
           className="read-question-btn"
-          onClick={() =>
-            handleTextToSpeech(questions[currentQuestion].question)
+          onClick={() => {
+            console.log(questions[currentQuestion].question);
+            handleTextToSpeech(questions[currentQuestion].question);
+          }
           }
           disabled={isSpeaking}
         >

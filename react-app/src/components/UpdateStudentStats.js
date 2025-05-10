@@ -64,7 +64,6 @@ export function useUpdateStudentStats() {
           withCredentials: true,
         }
       );
-      console.log("successfully updated");
       return response.data;
     },
     onSuccess: () => {

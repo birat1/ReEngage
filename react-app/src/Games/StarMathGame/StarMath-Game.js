@@ -60,11 +60,29 @@ function StarMathGame() {
 
   //handling webToSpeech API
   const handleTextToSpeech = (text) => {
-    const speech = new SpeechSynthesisUtterance();
-    speech.text = convertSymbolsToWords(text);
-    speech.lang = "en-GB";
-    window.speechSynthesis.speak(speech);
+  if (!window.speechSynthesis) {
+    console.error("Speech synthesis not supported");
+    return;
+  }
+
+  // Cancel any ongoing speech
+  window.speechSynthesis.cancel();
+
+  const speech = new SpeechSynthesisUtterance();
+  speech.text = convertSymbolsToWords(text);
+  speech.lang = "en-GB";
+
+  speech.onerror = (event) => {
+    console.error("Speech synthesis error:", event);
   };
+
+  try {
+    window.speechSynthesis.speak(speech);
+    console.log("Reading equation:", text);
+  } catch (error) {
+    console.error("Speech synthesis failed:", error);
+  }
+};
 
   //removes title screen and reveals the next screen - yr group choices
   const removeTitleScrn = () => {

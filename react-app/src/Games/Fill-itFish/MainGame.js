@@ -289,8 +289,10 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
     let hiddenArray = hiddenWord.split(" ");
 
     function speakWord() {
-      if ("speechSynthesis" in window) {
-        const utterance = new SpeechSynthesisUtterance(word);
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = word;
         utterance.lang = "en-US"; // Set the language
         utterance.volume = 1.0;
         window.speechSynthesis.speak(utterance);
@@ -304,7 +306,7 @@ function Round({ wordBank, numLeft, onNextRound, usedWords, setUsedWords, music 
         <div className="fish-container "> {/* Flex container */}
           {hiddenArray.map((item, index) =>
             index === 0 ? (
-              <div key={index} className="fishbod-container fishhd-container" onClick={speakWord}>
+              <div key={index} className="fishbod-container fishhd-container" onClick={speakWord}  style={{ cursor: 'pointer' }}>
                 <p className="text-over-img fishhd-text">{item}</p>
               </div>
             ) : index === hiddenArray.length - 1 ? (
@@ -376,12 +378,15 @@ function Finish({ score, audio }) {
   const navigate = useNavigate(); // Initialize hook functions
   const {updateStats} = useUpdateStudentStats();
 
+  useEffect(() => {
+    updateStats(score * 100, "english", 3, score); // Update student stats
+  }, [score, updateStats]);
+
   function handleSelect() {  
     if (audio) {
       audio.pause();  // Stop the audio
       audio.currentTime = 0; // Reset playback position
     }
-    updateStats(score * 100, "english", 3, score); // Update student stats
     navigate("/"); // Redirect to homepage
   };
 
