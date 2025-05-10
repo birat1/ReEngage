@@ -3,20 +3,21 @@ import random
 
 def seedStudentAvatar():
     students = Student.objects.all()
-    avatars = Avatar.objects.all()
+    avatarID = [2,3,4,5,6,7]
+    avatars = Avatar.objects.filter(avatar_id__in=avatarID)
 
-    if not students.exists() or not avatars.exists():
-        print('No students or/or avatars found. Please seed them first.')
+    if not students.exists():
+        print('No students found. Please seed them first.')
         return
 
     for student in students:
         if not StudentAvatar.objects.filter(student_id=student).exists():
-            avatar = random.choice(avatars)
+            equipped_avatar = random.choice(list(avatars))
             StudentAvatar.objects.create(
                 student_id=student,
-                avatar_id=avatar,
+                avatar_id=equipped_avatar,
                 is_equipped=True
             )
-            print(f'Student {student.user.username} seeded with avatar "{avatar.name}".')
+            print(f'Student {student.user.username} seeded with avatar "{equipped_avatar.name}".')
         else:
             print(f'Student {student.user.username} already has an avatar assigned')
