@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form, purchase_avatar, equip_avatar, check_streak
+from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form, purchase_avatar, equip_avatar, check_streak, register_user
 from ReEngage.oak_api_views import (
     UnitsAPI,
     LessonsAPI,
@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/logout/', logout_user, name='logout_user'),
     path('api/csrf/', get_csrf, name='get_csrf'),
 
+    path('api/register/', register_user, name='register_user'),
 
     #path('api/students/', apiStudent.as_view({'get':'list'}), name = 'listapistudents'),
     #path('api/students/', apiStudent.as_view({'post':'create'}), name = 'createapistudents'),

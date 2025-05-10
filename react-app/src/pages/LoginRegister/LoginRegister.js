@@ -30,7 +30,7 @@ const LoginRegister = () => {
         setResetMessage('');
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         const age = calculateAge(dob);
 
@@ -40,12 +40,51 @@ const LoginRegister = () => {
             setError('You must be at least 18 years old to register.');
         } else if (password.length < 8) {
             setError('Password must be at least 8 characters long.');
+        } else if (!username.trim()) {
+            setError('Username is required.');
         } else {
             setError('');
-            console.log('Registration successful');
-            // Registration logic goes here
-            //(look at child register code for guidance)
-            //register user, then add user to admin model
+            try {
+                // Fetch CSRF token
+                const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
+                    credentials: 'include',
+                    mode: 'cors',
+                });
+                const csrfData = await csrfResponse.json();
+                const csrfToken = csrfData.csrfToken;
+
+                // Send registration data to the backend
+                const response = await fetch(`${backendAPI}api/register/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                    credentials: 'include',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        first_name: firstName,
+                        last_name: lastName,
+                        username,
+                        email: username, // Assuming username is the email
+                        password,
+                        dob,
+                    }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    console.log('Registration successful:', data);
+                    // Redirect to login page after successful registration
+                    showLogin();
+                } else {
+                    console.error('Registration failed:', data.error);
+                    setError(data.error || 'Registration failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                setError('An error occurred. Please try again.');
+            }
         }
     };
 
@@ -159,7 +198,13 @@ const LoginRegister = () => {
                                 />
                             </div>
                             <div className="inputbox">
-                                <input type="text" placeholder="Username" required />
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                />
                             </div>
                             <div className="inputbox">
                                 <input type="email" placeholder="Email" required />
