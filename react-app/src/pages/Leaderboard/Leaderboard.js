@@ -69,7 +69,8 @@ function Content() {
                     width={"17.5rem"}
                     position={2}
                     colour={"#C4C4C4"}
-                    name={data[1].firstname}
+                    name={data[1].user.username}
+                    level={data[1].level}
                     xp={data[1].xp}
                     user_id={data[1].user.id}
                   />
@@ -82,8 +83,9 @@ function Content() {
                     height={"25rem"}
                     width={"20rem"}
                     position={1}
-                    colour={"#efbf04"}
-                    name={data[0].firstname}
+                    colour={"#FFD700"}
+                    name={data[0].user.username}
+                    level={data[0].level}
                     xp={data[0].xp}
                     user_id={data[0].user.id}
                   />
@@ -97,7 +99,8 @@ function Content() {
                     width={"17.5rem"}
                     position={3}
                     colour={"#CE8946"}
-                    name={data[2].firstname}
+                    name={data[2].user.username}
+                    level={data[2].level}
                     xp={data[2].xp}
                     user_id={data[2].user.id}
                   />
@@ -114,7 +117,7 @@ function Content() {
                     }}
                     key={index}
                   >
-                    <BoardEntry name={student.firstname} xp={student.xp} user_id={student.user.id}/>
+                    <BoardEntry name={student.user.username} xp={student.xp} user_id={student.user.id} level={student.level}/>
                   </div>
                 ))}
               </div>

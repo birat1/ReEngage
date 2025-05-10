@@ -1,7 +1,7 @@
 import "./styles/BoardEntry.css";
 import { useAnyEquippedAvatar } from "../../components/RetrievingAvatars/AnyEquippedAvatar";
 
-function BoardEntry({name, xp, user_id}) {
+function BoardEntry({name, xp, user_id, level}) {
   return (
     <div className="entry shadow-sm d-flex align-items-center justify-content-between gap-3 rounded">
       <div className="d-flex align-items-center gap-4">
@@ -17,7 +17,10 @@ function BoardEntry({name, xp, user_id}) {
         </div>
         <h4 className="mb-0">{name}</h4>
       </div>
-      <h5 className="mb-0">{xp} XP</h5>
+      <div>
+        <h5 className="mb-0">Level {level}</h5>
+        <h5 className="mb-0">{xp} XP</h5>
+      </div>
     </div>
   );
 }

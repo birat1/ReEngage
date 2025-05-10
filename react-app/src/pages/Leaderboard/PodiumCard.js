@@ -15,7 +15,7 @@ function Medal ({position}) {
     }
 }
 
-function PodiumCard({height, width, position, colour, name, xp, user_id}) {
+function PodiumCard({height, width, position, colour, name, xp, user_id, level}) {
   return (
     <div className="podium-card shadow rounded p-3 d-flex flex-column align-items-center gap-3" style={{ height: height, width: width, borderColor: colour }}>
       <div className="d-flex flex-column align-items-center">
@@ -29,6 +29,7 @@ function PodiumCard({height, width, position, colour, name, xp, user_id}) {
         </div>
       </div>
       <h3 className="text-center">{name}</h3>
+      <h4 className="text-center">Level {level}</h4>
       <h5 className="text-center">{xp} XP</h5>
       <Medal position = {position}/>
     </div>
