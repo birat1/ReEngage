@@ -474,7 +474,7 @@ def purchase_avatar(request):
         }
     }, status=status.HTTP_201_CREATED)
 
-@api_view(['POST'])
+@api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def equip_avatar(request):
     user = request.user

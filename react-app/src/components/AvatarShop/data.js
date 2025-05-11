@@ -14,6 +14,11 @@ export const fetchAvatars = async () => {
   return response.data;
 };
 
+export const fetchUserAvatars = async () => {
+  const response = await axios.get(`${backendAPI}api/avatar`);
+  return response.data;
+}
+
 export const purchaseAvatar = async (avatarId) => {
   const response = await axios.post(
     `${backendAPI}api/purchase-avatar/`,
@@ -29,7 +34,7 @@ export const purchaseAvatar = async (avatarId) => {
 };
 
 export const equipAvatar = async (avatarId) => {
-  const response = await axios.post(
+  const response = await axios.patch(
     `${backendAPI}api/equip-avatar/`,
     { avatar_id: avatarId },
     {
