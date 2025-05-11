@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [studentsCount, setStudentsCount] = useState(0);
   const [topStudents, setTopStudents] = useState([]);
+  const [yearGroups, setYearGroups] = useState(0);
   const navigate = useNavigate();
 
   const colors = {
@@ -59,51 +60,25 @@ export default function Dashboard() {
                 .sort((a, b) => b.xp - a.xp)
                 .slice(0, 3);
               setTopStudents(sortedStudents);
+
+              //counting the number of year groups
+              const yearGroups = new Set();
+              for (const student of response.data) {
+                yearGroups.add(student.year);
+              }
+              setYearGroups(yearGroups.size);
+
+
             } else {
               console.log("No students data returned from API");
-              setStudentsCount(3);
-              setTopStudents([
-                {
-                  user: { id: 1 },
-                  firstname: "Student 1",
-                  surname: "",
-                  xp: 500,
-                  english_correct: 80,
-                  maths_correct: 70,
-                  science_correct: 90,
-                  english_answered: 100,
-                  maths_answered: 100,
-                  science_answered: 100,
-                },
-                {
-                  user: { id: 2 },
-                  firstname: "Student 2",
-                  surname: "",
-                  xp: 400,
-                  english_correct: 70,
-                  maths_correct: 60,
-                  science_correct: 80,
-                  english_answered: 100,
-                  maths_answered: 100,
-                  science_answered: 100,
-                },
-                {
-                  user: { id: 3 },
-                  firstname: "Student 3",
-                  surname: "",
-                  xp: 300,
-                  english_correct: 60,
-                  maths_correct: 50,
-                  science_correct: 70,
-                  english_answered: 100,
-                  maths_answered: 100,
-                  science_answered: 100,
-                },
-              ]);
+              setStudentsCount(0);
+              setYearGroups(0);
+              setTopStudents([]);
             }
           } catch (error) {
             console.error("Error fetching students:", error);
             setStudentsCount(3);
+            setYearGroups(3);
             setTopStudents([
               {
                 user: { id: 1 },
@@ -238,6 +213,7 @@ export default function Dashboard() {
               <AdminClassOverview
                 studentsCount={studentsCount}
                 colors={colors}
+                yearGroups = {yearGroups}
               />
             </div>
             <div
@@ -246,12 +222,14 @@ export default function Dashboard() {
             >
               <AdminQuickActions colors={colors} />
             </div>
-            <div
+            {studentsCount > 0 && (
+             <div
               className="mb-2 p-4 rounded shadow-sm"
               style={{ backgroundColor: "#ffffff" }}
             >
               <AdminTopStudentsList topStudents={topStudents} colors={colors} />
             </div>
+            )}
           </>
         ) : (
           <>
@@ -263,6 +241,12 @@ export default function Dashboard() {
               englishPercentage={userData.english_percentage}
               mathPercentage={userData.maths_percentage}
               sciencePercentage={userData.science_percentage}
+              english_correct = {userData.english_correct}
+              maths_correct = {userData.maths_correct}
+              science_correct  = {userData.science_correct}
+              english_answered  = {userData.english_answered}
+              maths_answered  = {userData.maths_answered}
+              science_answered  = {userData.science_answered}
             />
           </>
         )}

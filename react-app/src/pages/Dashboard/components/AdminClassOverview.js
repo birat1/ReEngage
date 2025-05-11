@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AdminClassOverview({ studentsCount, colors }) {
+export default function AdminClassOverview({ studentsCount, colors, yearGroups }) {
   return (
     <div>
       <h5
@@ -44,7 +44,7 @@ export default function AdminClassOverview({ studentsCount, colors }) {
                 marginTop: '6px',
               }}
             >
-              <i className="bi bi-mortarboard me-1"></i> Students
+              <i className="bi bi-mortarboard me-1"></i> Student(s)
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function AdminClassOverview({ studentsCount, colors }) {
                 lineHeight: 1.1,
               }}
             >
-              4
+              {yearGroups}
             </div>
             <div
               style={{
@@ -106,7 +106,7 @@ export default function AdminClassOverview({ studentsCount, colors }) {
                 marginTop: '6px',
               }}
             >
-              <i className="bi bi-layers me-1"></i> Year Groups
+              <i className="bi bi-layers me-1"></i> Year Group(s)
             </div>
           </div>
         </div>

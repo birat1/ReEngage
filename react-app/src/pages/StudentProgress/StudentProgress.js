@@ -9,7 +9,6 @@ import Four from "../../avatars/Four.png";
 import Five from "../../avatars/Five.png";
 import Six from "../../avatars/Six.png";
 import Default from "../../avatars/Default.png";
-import Footer from "../../components/Footer/Footer.js";
 import { backendAPI } from "../../constants.js";
 import { Navigate } from "react-router-dom";
 
@@ -382,7 +381,6 @@ function StudentProgress() {
           </table>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
