@@ -18,7 +18,6 @@ function BoardEntry({name, xp, user_id, level}) {
         <h4 className="mb-0">{name}</h4>
       </div>
       <div>
-        <h5 className="mb-0">Level {level}</h5>
         <h5 className="mb-0">{xp} XP</h5>
       </div>
     </div>

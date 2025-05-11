@@ -29,7 +29,6 @@ function PodiumCard({height, width, position, colour, name, xp, user_id, level})
         </div>
       </div>
       <h3 className="text-center">{name}</h3>
-      <h4 className="text-center">Level {level}</h4>
       <h5 className="text-center">{xp} XP</h5>
       <Medal position = {position}/>
     </div>
