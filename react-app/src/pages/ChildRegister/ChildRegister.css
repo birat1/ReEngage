@@ -1,4 +1,4 @@
-.boxed {
+.child-register-container .boxed {
     width: 500px;
     border: 3px solid #A8D3E6;
     border-radius: 12px;
@@ -8,7 +8,7 @@
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.heading2 {
+.child-register-container .heading2 {
     font-size: 24px;
     margin-bottom: 20px;
     font-family: 'Nunito', sans-serif;
@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.lbl-txt2 {
+.child-register-container .lbl-txt2 {
     color: #3088D5;
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
@@ -26,24 +26,24 @@
     display: block;
 }
 
-.row:after {
+.child-register-container .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-.columns2 {
+.child-register-container .columns2 {
     float: left;
     width: 48%;
     margin-right: 2%;
     margin-bottom: 15px;
 }
 
-.column2:last-child {
+.child-register-container .column2:last-child {
     margin-right: 0;
 }
 
-input, select {
+.child-register-container input, select {
     width: 100%;
     padding: 10px;
     margin-top: 4px;
@@ -55,13 +55,13 @@ input, select {
     box-sizing: border-box;
 }
 
-input:focus, select:focus {
+.child-register-container input:focus, select:focus {
     outline: none;
     border-color: #3088D5;
     box-shadow: 0 0 0 2px rgba(48, 136, 213, 0.2);
 }
 
-button[type="submit"] {
+.child-register-container button[type="submit"] {
     padding: 12px 24px;
     background-color: #3088D5;
     color: white;
@@ -76,11 +76,11 @@ button[type="submit"] {
     transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
+.child-register-container button[type="submit"]:hover {
     background-color: #2a76be;
 }
 
-.form-row:after {
+.child-register-container .form-row:after {
     content: "";
     display: table;
     clear: both;

@@ -132,7 +132,8 @@ const ChildRegister = () => {
   };
 
   return (
-    <div
+    <div className="child-register-container">
+       <div
       className="boxed row"
       style={{
         padding: "20px",
@@ -255,6 +256,7 @@ const ChildRegister = () => {
           Register
         </button>
       </form>
+    </div>
     </div>
   );
 };
