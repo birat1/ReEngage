@@ -62,7 +62,18 @@ CHANNEL_LAYERS = {
 REDIS_URL = "redis://redis:6379/0"
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
+    "http://10.2.8.15:5000",
+    "http://localhost:3000",
+    "ws://localhost:5000",
+    "ws://127.0.0.1:5000",
+    "ws://10.2.8.15:5000",
+    "ws://localhost:3000",
+    "ws://127.0.0.1:3000",
+    "ws://10.2.8.15:3000",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 

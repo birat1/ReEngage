@@ -1,13 +1,12 @@
 import axios from "axios";
 import { backendAPI } from "../../constants";
 
-const csrfResponse = await fetch(`${backendAPI}api/csrf/`, {
-  credentials: "include",
-  mode: "cors",
-});
 
-const csrfData = await csrfResponse.json();
-const csrfToken = csrfData.csrfToken;
+const csrfResponse = await axios.get(`${backendAPI}api/csrf/`, {
+        withCredentials: true,
+      });
+
+      const csrfToken = csrfResponse.data.csrfToken;
 
 export const fetchAvatars = async () => {
   const response = await axios.get(`${backendAPI}api/avatar`);
