@@ -11,13 +11,13 @@ class PermissionsTest(TestCase):
     def test_get_students_requires_auth(self):
         # Should be unauthorized if not logged in
         response = self.client.get('/api/get-students/')
-        print('Permissions test response:', response.status_code)  # Debug print
-        # print(response.content)  # For debugging
+    
         self.assertIn(response.status_code, [401, 403])
 
         # Login and try again
         self.client.login(username='admin', password='pass')
         response = self.client.get('/api/get-students/')
-        # Should be allowed (200 or 403 if no students, but not 401)
+        # Should be allowed (200 or 403 if no students)
         self.assertNotEqual(response.status_code, 401)
-        # TODO: Test with a user who is not an admin 
+
+        # Should test with a user who is not an admin (using student account)

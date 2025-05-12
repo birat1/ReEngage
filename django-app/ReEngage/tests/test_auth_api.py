@@ -57,13 +57,12 @@ class AuthenticationAPITest(TestCase):
         self.student.refresh_from_db()
         self.assertEqual(self.student.streak, 1)
         self.assertEqual(self.student.last_streak_check, datetime.now().date())
-        # Logout
         self.client.post('/api/logout/')
-        # Set the last streak check to yesterday
+       
         yesterday = datetime.now().date() - timedelta(days=1)
         self.student.last_streak_check = yesterday
         self.student.save()
-        # Login again
+
         response = self.client.post(
             '/api/login/',
             json.dumps({'username': 'student_user', 'password': 'password123'}),

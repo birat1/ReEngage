@@ -9,7 +9,7 @@ class StreakTestCase(TestCase):
         self.admin_user = User.objects.create_user(
             username='admin_user',
             password='password123',
-            email='admin@example.com'
+            email='admin@email.com'
         )
         self.admin = Admin.objects.create(
             user=self.admin_user,
@@ -20,7 +20,7 @@ class StreakTestCase(TestCase):
         self.student_user = User.objects.create_user(
             username='student_user',
             password='password123',
-            email='student@example.com'
+            email='student@email.com'
         )
         self.student = Student.objects.create(
             user=self.student_user,

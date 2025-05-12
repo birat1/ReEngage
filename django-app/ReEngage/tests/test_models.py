@@ -24,20 +24,20 @@ class StudentModelTest(TestCase):
         self.assertEqual(student.managed_by, self.admin)
 
     def test_student_requires_admin_manager(self):
-        # Should fail, as managed_by is required
+
         with self.assertRaises(IntegrityError):
             with transaction.atomic():
                 Student.objects.create(
                     user=User.objects.create_user(username='student2', password='pass'),
-                    firstname='Eve',
+                    firstname='John',
                     surname='Doe',
                     year=4,
                     managed_by=None
                 )
-        # Should succeed with an Admin
+
         student = Student.objects.create(
             user=User.objects.create_user(username='student3', password='pass'),
-            firstname='Sam',
+            firstname='William',
             surname='Lee',
             year=5,
             managed_by=self.admin

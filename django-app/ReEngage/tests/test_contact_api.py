@@ -8,12 +8,10 @@ class ContactMessageAPITest(TestCase):
     def test_submit_contact_message(self):
         data = {
             'name': 'Test User',
-            'email': 'test@example.com',
+            'email': 'testuser@email.com',
             'message': 'This is a test message.'
         }
         response = self.client.post('/api/contact/', data)
-        print('Contact POST response:', response.status_code)  # Debug print
-        # print(response.content)  # Uncomment if you want to see the response
+
         self.assertEqual(response.status_code, 201)
-        self.assertTrue(ContactMessage.objects.filter(email='test@example.com').exists())
-        # TODO: Test for invalid email or missing fields 
+        self.assertTrue(ContactMessage.objects.filter(email='testuser@email.com').exists())
