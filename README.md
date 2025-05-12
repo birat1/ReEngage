@@ -19,7 +19,7 @@
 ## Tech Stack
 * **Frontend**: React
 * **Backend**: Django
-* **Database**: MySQL
+* **Database**: SQLite
 * **Containerisation**: Docker
 
 ## Getting started
@@ -59,6 +59,19 @@ docker-compose exec web python manage.py test
 2. **To run frontend tests:**
 ```
 docker-compose exec frontend npm test
+```
+
+### Logins
+
+1. **Admin Login:**
+```
+Username: admin_Gianna
+Password: Gpw
+```
+2. **Student Login:**
+```
+Username: student_Nisaar
+Password: studentpw
 ```
 
 ## Contributors
