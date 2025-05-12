@@ -69,12 +69,12 @@ Use the following sample accounts to explore the system with pre-seeded data:
 
 1. **Admin Login:**
 ```
-Username: admin_Gianna
-Password: Gpw
+Username: admin_Riley
+Password: Rpw
 ```
 2. **Student Login:**
 ```
-Username: student_Nisaar
+Username: student_Ashley
 Password: studentpw
 ```
 

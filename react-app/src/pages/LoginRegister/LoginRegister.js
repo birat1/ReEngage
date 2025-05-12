@@ -242,7 +242,7 @@ const LoginRegister = () => {
                     <div className="form-box forgot">
                         <h1>Reset Password</h1>
                         <p className="info-message">
-                            Please contact an admin or teacher for assistance with resetting your password.
+                            Please contact ReEngage for assistance with resetting your password.
                         </p>
                         <div className="register-link">
                             <p>Back to <a href="#" onClick={showLogin}>Login</a></p>

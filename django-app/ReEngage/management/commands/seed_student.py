@@ -10,10 +10,14 @@ def seedStudent():
         print('No Admins found. Please seed Admins first.')
         return
 
-    names = ["student_Nisaar", "student_Jason", "student_Yuken", "student_Birat"]
+    usernames = ["student_Ashley", "student_Alex", "student_Rowan", "student_Cameron"]
+    firstnames = ["Ashley", "Alex", "Rowan", "Cameron"]
+    surnames = ["Jordan", "Blake", "Reed", "Quinn"]
 
     for i in range(4):
-        username = names[i]
+        username = usernames[i]
+        firstname = firstnames[i]
+        surname = surnames[i]
         if not User.objects.filter(username=username).exists():
 
             student_user = User.objects.create_user(
@@ -33,8 +37,8 @@ def seedStudent():
 
             Student.objects.create(
                 user=student_user,
-                firstname = username + "'s firstname",
-                surname = username + "'s surname",
+                firstname = firstname,
+                surname = surname,
                 year=3 + i,
                 managed_by=random.choice(admin_objects),
                 level=random.randint(1, 10),

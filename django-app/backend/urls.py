@@ -88,6 +88,6 @@ urlpatterns = [
     path('api/equip-avatar/', equip_avatar, name='equip-avatar'),
 
     # Admin reset password
-    path('admin/reset-password/', admin_reset_password, name='admin_reset_password'),
+    path('api/reset-password/', admin_reset_password, name='admin_reset_password'),
 ]
 
