@@ -100,6 +100,8 @@ def admin_reset_password(request):
             data = json.loads(request.body)
             student_id = data.get('student_id')
             new_password = data.get('new_password')
+			
+            logger.info(f"Request data: {data}")
 
             if not student_id or not new_password:
                 return JsonResponse({'error': 'Student ID and new password are required.'}, status=400)
@@ -118,8 +120,12 @@ def admin_reset_password(request):
                 return JsonResponse({'error': 'You do not manage this student.'}, status=403)
 
             # Reset the password
-            student.user.set_password(new_password)
-            student.user.save()
+            user = student.user
+            user.set_password(new_password)  # Hash the new password
+            user.save()  # Save the changes to the database
+			
+            logger.info(f"Resetting password for student ID: {student_id}")
+            logger.info(f"New password hash: {user.password}")
 
             return JsonResponse({'message': 'Password reset successfully.'}, status=200)
         except Exception as e:
