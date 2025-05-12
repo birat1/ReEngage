@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./StarMath.css";
 import EndGameOverlay from "./components/EndGameOverlay.js";
 import BackgroundMusic from "./components/backgroundMusic.js";
@@ -78,7 +78,7 @@ function StarMathGame() {
 
   try {
     window.speechSynthesis.speak(speech);
-    console.log("Reading equation:", text);
+    //console.log("Reading equation:", text);
   } catch (error) {
     console.error("Speech synthesis failed:", error);
   }
@@ -88,7 +88,7 @@ function StarMathGame() {
   const removeTitleScrn = () => {
     setShowTitleScreen(false);
     setShowYearChoices(true);
-    console.log("showYearChoices after removeTitleScrn:", showYearChoices);
+    //console.log("showYearChoices after removeTitleScrn:", showYearChoices);
   };
 
   //removes yr group choices and reveals the difficulty screen
@@ -97,7 +97,7 @@ function StarMathGame() {
     setDifficulty(true);
     //introducing the game logic by tailoring questions based on yr Group chosen
     setYearG(year);
-    console.log(year + " selected");
+    //console.log(year + " selected");
   };
 
   //removes difficulty screen and shows question choices
@@ -105,7 +105,7 @@ function StarMathGame() {
     setDifficulty(false);
     difficultyChoice(difficulty);
     setQuestionChoices(true);
-    console.log(difficulty + " selected");
+    //console.log(difficulty + " selected");
   };
 
   //removes question choices and reveals the main game
@@ -113,13 +113,13 @@ function StarMathGame() {
     setQuestionChoices(false);
     setShowMainGame(true);
     questionCount(qAmount);
-    console.log(qAmount + " selected");
+    //console.log(qAmount + " selected");
   };
 
   //toggle on/off button for the how to play button
   const toggleHTP = () => {
     setShowHowToPlay((currentState) => !currentState); //true -> false or false -> true
-    console.log("toggleHTP: showHowToPlay =", !showHowToPlay);
+    //console.log("toggleHTP: showHowToPlay =", !showHowToPlay);
   };
 
   const changeToEndScreen = () => {
@@ -196,7 +196,6 @@ function StarMathGame() {
       intialiseDragAndDrop();
       setupClickSounds();
       changeDenominator();
-      console.log(yearG + "this is it");
       yrGroupSorter(
         yearG,
         operatorRef,
@@ -306,7 +305,7 @@ function StarMathGame() {
             complete the equation.
           </p>
           <p>
-            You have 2 tries to get it right before the answer is shown, good
+            You have 1 extra try to get it right before the answer is shown, good
             luck!
           </p>
         </div>

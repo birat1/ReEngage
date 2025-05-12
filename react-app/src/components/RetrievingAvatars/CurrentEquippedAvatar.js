@@ -65,16 +65,19 @@ export function useCurrentEquippedAvatar() {
   const { data: avatarData } = useQuery({
     queryKey: ["EquippedAvatar", userInfo?.id],
     queryFn: async () => {
-      try {
-        const response = await axios.get(
-          `${backendAPI}api/current-equipped-avatar/${userInfo.id}/`,
-          { withCredentials: true }
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Failed to fetch avatar info:", error);
-        throw new Error("Failed to fetch avatar info");
+      if (!userInfo?.is_admin) {
+        try {
+          const response = await axios.get(
+            `${backendAPI}api/current-equipped-avatar/${userInfo.id}/`,
+            { withCredentials: true }
+          );
+          return response.data;
+        } catch (error) {
+          console.error("Failed to fetch avatar info:", error);
+          throw new Error("Failed to fetch avatar info");
+        }
       }
+      return null;
     },
     enabled: !!userInfo?.id,
     onError: (error) => console.error("Avatar query failed:", error),

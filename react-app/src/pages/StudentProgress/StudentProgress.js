@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { useQuery } from "@tanstack/react-query";
 import "./styles/StudentProgress.css";
 // import "./avataaars.png";
@@ -148,8 +148,6 @@ function StudentProgress() {
             if (response.ok) {
               const avatarData = await response.json();
               avatarName = avatarData.name;
-            } else {
-              console.error("Avatar fetch failed:", response.status);
             }
           } catch (error) {
             console.error("Failed to fetch avatar:", error);
@@ -236,8 +234,6 @@ function StudentProgress() {
   }
   if (isPending) return "Loading";
   if (error) return "An error occured here: " + error.message;
-  console.log(data);
-  console.log("Logged in user:", userInfo);
 
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);

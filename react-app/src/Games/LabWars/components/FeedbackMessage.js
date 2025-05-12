@@ -10,8 +10,6 @@
  * @param {boolean} props.isCorrect - Whether the answer was correct
  */
 
-import React from 'react';
-
 const FeedbackMessage = ({ message, isCorrect }) => {
   if (!message) return null;
 

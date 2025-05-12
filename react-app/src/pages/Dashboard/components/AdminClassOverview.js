@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export default function AdminClassOverview({ studentsCount, colors, yearGroups }) {
   return (

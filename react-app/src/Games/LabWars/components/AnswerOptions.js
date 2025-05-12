@@ -13,7 +13,7 @@
  * @param {boolean} props.isMultiple - Indicates if the question is multiple choice
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './AnswerOptions.css';
 
 const AnswerOptions = ({ options, onSubmit, isAnswered, correctAnswers, isMultiple }) => {

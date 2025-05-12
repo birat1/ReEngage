@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 let numQuestions = "";
 let difficulty = "";
@@ -49,7 +48,7 @@ export function yrGroupSorter(
   switch (year) {
     case "Year 3":
       yearGroup = "Year3";
-      console.log(yearGroup + " yearGroup");
+      //console.log(yearGroup + " yearGroup");
       answer = generateEquation();
       break;
     case "Year 4":
@@ -64,6 +63,9 @@ export function yrGroupSorter(
       yearGroup = "Year6";
       answer = generateEquation();
       break;
+    default:
+      yearGroup = "Year3";
+      answer = generateEquation();
   }
 }
 
@@ -71,7 +73,7 @@ export function difficultyChoice(difficult) {
   switch (difficult) {
     case "Easy":
       difficulty = "Easy";
-      console.log(difficult + "from game logic");
+      //console.log(difficult + "from game logic");
       break;
     case "Medium":
       difficulty = "Medium";
@@ -163,7 +165,7 @@ export function generateEquation() {
 
   if (operatorRef.current) {
     //check if ref is valid change the operator randomly.
-    console.log(operatorArray[randOperatorIdx]);
+    //console.log(operatorArray[randOperatorIdx]);
     operatorRef.current.innerHTML = selectedOperator;
   } else {
     console.error("operator element not found");
@@ -309,7 +311,7 @@ function generateStarValues(answer) {
       fakeAnswer = Math.floor(Math.random() * 50) + answer + 1;
     }
 
-    if (fakeAnswer != answer && fakeAnswer > 0) {
+    if (fakeAnswer !== answer && fakeAnswer > 0) {
       allValues.add(fakeAnswer);
     }
   }
@@ -352,7 +354,7 @@ function addValuesToStars(starValues) {
 //this will check if the player's answer is correct
 export function checkEquation(changeToEndScreen, toggleCorrect, toggleWrong, toggleRetry) {
   //return true or false
-  if (thisIsTheEnd != 1) {
+  if (thisIsTheEnd !== 1) {
      let firstNumber = parseInt(firstNumRef.current.innerHTML);
   let secondNumber;
   if (secondNumRef.current) {

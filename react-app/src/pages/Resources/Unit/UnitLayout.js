@@ -29,9 +29,9 @@ function UnitLayout() {
               }`}
               onClick={toggleUnitList}
             >
-              <div class="bar1 rounded"> </div>
-              <div class="bar2 rounded"> </div>
-              <div class="bar3 rounded"> </div>
+              <div className="bar1 rounded"> </div>
+              <div className="bar2 rounded"> </div>
+              <div className="bar3 rounded"> </div>
             </div>
           </div>
           <Outlet />

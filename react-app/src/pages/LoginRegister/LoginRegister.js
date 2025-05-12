@@ -111,7 +111,6 @@ const LoginRegister = () => {
     
             const data = await response.json();
             if (response.ok) {
-                console.log('Login successful:', data);
                 // Handle successful login (e.g., redirect, save token, etc.)
                 window.location.href = '/dashboard'; 
             } else {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Trophy, Flame } from 'lucide-react';
 
 export default function UserStats({ userData, isAdmin }) {
@@ -6,7 +5,7 @@ export default function UserStats({ userData, isAdmin }) {
   const xpForCurrentLevel = userData.xp % 100;
   const xptoNextlevel = 100 - (xpForCurrentLevel);
   const xpProgress = xpForCurrentLevel;
-  const xpNeeded = 100;
+  //const xpNeeded = 100;
 
   return (
     <div className='mb-4 bg-white rounded shadow-sm p-4'>
