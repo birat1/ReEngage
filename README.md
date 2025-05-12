@@ -39,6 +39,8 @@ cd Group5
 ### Executing program
 
 2. **Run Docker Containers**
+Ensure the Docker Engine is running before executing this command.
+
 ```
 docker-compose up --build
 ```
@@ -47,18 +49,18 @@ docker-compose up --build
 * Frontend: http://localhost:5000
 * Backend API: http://localhost:8000
 
-**Note**: The app’s database has been populated with sample data for testing purposes. No real user information is used.
-
 ### Running Tests
+
+Ensure your Docker containers are running before attempting these tests.
 
 1. **To run backend tests:**
 ```
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py test
+docker-compose exec django python manage.py migrate
+docker-compose exec django python manage.py test
 ```
 2. **To run frontend tests:**
 ```
-docker-compose exec frontend npm test
+docker-compose exec react npm test -- --watchAll=false 
 ```
 
 ### Logins
