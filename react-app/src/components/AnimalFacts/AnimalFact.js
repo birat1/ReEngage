@@ -34,6 +34,7 @@ const AnimalFact = () => {
 
       socketRef.current.onopen = () => {
         setConnectionStatus("connected");
+        console.log("Connected successfully!");
       };
 
       socketRef.current.onmessage = (e) => {
@@ -75,8 +76,8 @@ const AnimalFact = () => {
         setTimeout(connect, 2000);
       };
 
-      socketRef.current.onerror = () => {
-        setConnectionStatus("error");
+      socketRef.current.onerror = (e) => {
+        console.error("WebSocket error:", e);
       };
     };
 
@@ -84,7 +85,7 @@ const AnimalFact = () => {
 
     return () => {
       clearInterval(countdownRef.current);
-      if (socketRef.current) {
+      if (socketRef.current?.readyState === WebSocket.OPEN) {
         socketRef.current.close();
       }
     };
@@ -94,7 +95,7 @@ const AnimalFact = () => {
     <Col md={6} className="mb-3">
       <div className="bg-white shadow-sm p-4 rounded h-100">
         <div className="d-flex align-items-center mb-2">
-          <Star size={24} color="#3498db" className="text-primary me-2"/>
+          <Star size={24} color="#3498db" className="text-primary me-2" />
           <h6 className="mb-0">Animal Fact - {animal.name}</h6>
         </div>
         {connectionStatus !== "connected" ? (

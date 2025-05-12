@@ -378,15 +378,15 @@ function StudentProgress() {
                       <td colSpan="6" className="hiddenRow">
                         <div className="details-content">
                           <p>
-                            <strong>Fill-itFish Game (English):</strong>{" "}
+                            Fill-itFish Game (English):{" "}
                             {student.englishCorrect}/{student.englishAnswered}
                           </p>
                           <p>
-                            <strong>Starmath Game (Maths):</strong> {student.mathCorrect}/
+                            Starmath Game (Maths):{" "} {student.mathCorrect}/
                             {student.mathAnswered}
                           </p>
                           <p>
-                            <strong>LabWars Game (Science):</strong>{" "}
+                            LabWars Game (Science):{" "}
                             {student.scienceCorrect}/{student.scienceAnswered}
                           </p>
                         </div>
