@@ -21,6 +21,14 @@ export default function AdminQuickActions({ colors }) {
       background: `${colors.secondary}15`,
       route: '/resources',
     },
+    {
+      title: 'Reset Password',
+      description: 'Reset a student’s password',
+      icon: 'bi-key',
+      color: colors.tertiary,
+      background: `${colors.tertiary}15`,
+      route: '/reset-password', // Add the route for the reset password page
+    },
   ];
 
   return (
@@ -33,7 +41,6 @@ export default function AdminQuickActions({ colors }) {
               transition: 'all 0.3s ease',
               border: `1px solid ${colors.cardBorder}`,
               background: `linear-gradient(to right, #ffffff, ${action.background})`,
-              borderLeft: `4px solid ${action.color}`,
             }}
             onMouseOver={(e) => {
               e.currentTarget.style.transform = 'translateY(-3px)';

@@ -93,6 +93,39 @@ def register_user(request):
             return JsonResponse({'error': str(e)}, status=500)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+@csrf_exempt
+def admin_reset_password(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            student_id = data.get('student_id')
+            new_password = data.get('new_password')
+
+            if not student_id or not new_password:
+                return JsonResponse({'error': 'Student ID and new password are required.'}, status=400)
+
+            # Check if the user is an admin
+            if not hasattr(request.user, 'admin'):
+                return JsonResponse({'error': 'Only admins can reset passwords.'}, status=403)
+
+            # Check if the student exists
+            student = Student.objects.filter(user_id=student_id).first()
+            if not student:
+                return JsonResponse({'error': 'Student not found.'}, status=404)
+
+            # Check if the admin manages the student
+            if student.managed_by != request.user.admin:
+                return JsonResponse({'error': 'You do not manage this student.'}, status=403)
+
+            # Reset the password
+            student.user.set_password(new_password)
+            student.user.save()
+
+            return JsonResponse({'message': 'Password reset successfully.'}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
 def update_login_streak(user):
     try:
         student = user.student

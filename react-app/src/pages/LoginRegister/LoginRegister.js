@@ -241,31 +241,13 @@ const LoginRegister = () => {
                 {/* FORGOT PASSWORD FORM */}
                 {view === 'forgot' && (
                     <div className="form-box forgot">
-                        <form onSubmit={(e) => {
-                            e.preventDefault();
-                            if (!resetEmail.trim()) {
-                                setResetMessage('Please enter your email address.');
-                            } else {
-                                setResetMessage('Password reset instructions have been sent to your email.');
-                                // API call to send reset link goes here
-                            }
-                        }}>
-                            <h1>Reset Password</h1>
-                            <div className="inputbox">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    value={resetEmail}
-                                    onChange={(e) => setResetEmail(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            {resetMessage && <p className="error-message">{resetMessage}</p>}
-                            <button type="submit">Send Reset Link</button>
-                            <div className="register-link">
-                                <p>Back to <a href="#" onClick={showLogin}>Login</a></p>
-                            </div>
-                        </form>
+                        <h1>Reset Password</h1>
+                        <p className="info-message">
+                            Please contact an admin or teacher for assistance with resetting your password.
+                        </p>
+                        <div className="register-link">
+                            <p>Back to <a href="#" onClick={showLogin}>Login</a></p>
+                        </div>
                     </div>
                 )}
             </div>

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form, purchase_avatar, equip_avatar, check_streak, register_user
+from ReEngage.views import apiAdmin, apiAvatar, apiStudent, get_user_info, get_students, current_equipped_avatar, login_user, logout_user, submit_contact_form, purchase_avatar, equip_avatar, check_streak, register_user, admin_reset_password
 from ReEngage.oak_api_views import (
     UnitsAPI,
     LessonsAPI,
@@ -86,5 +86,8 @@ urlpatterns = [
     #Purchase request from student
     path('api/purchase-avatar/', purchase_avatar, name='purchase_avatar'),
     path('api/equip-avatar/', equip_avatar, name='equip-avatar'),
+
+    # Admin reset password
+    path('admin/reset-password/', admin_reset_password, name='admin_reset_password'),
 ]
 

@@ -17,6 +17,7 @@ import StudentProgress from "./pages/StudentProgress/StudentProgress.js";
 import ChildRegister from "./pages/ChildRegister/ChildRegister.js";
 import ForbiddenPage403 from "./pages/Forbidden/forbidden.js";
 import Dashboard from "./pages/Dashboard/dashboard.js";
+import ResetPassword from "./pages/Dashboard/components/ResetPasswordPage.js";
 import Contact from "./pages/Contact/Contact.js";
 import Layout from "./components/Layout.js";
 
@@ -27,6 +28,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/login" element={<LoginRegister />} />
           <Route path="/" element={<Home />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/games" element={<Games />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/:year" element={<Subjects />} />
