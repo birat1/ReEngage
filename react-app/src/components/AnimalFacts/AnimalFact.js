@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Col, Card } from "react-bootstrap";
+import { useState, useEffect, useRef } from "react";
+import { Col } from "react-bootstrap";
 import "./AnimalFact.css";
 import { Star } from "lucide-react";
 

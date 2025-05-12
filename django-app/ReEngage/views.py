@@ -421,15 +421,19 @@ def get_user_info(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def current_equipped_avatar(request, user_id):
-        try: 
-            equipped_avatar = StudentAvatar.objects.get(
+	user = request.user
+	if hasattr(user, 'student'):
+		try: 
+			equipped_avatar = StudentAvatar.objects.get(
                 student_id=user_id,
                 is_equipped=True
             )
-            serializer = AvatarSerializer(equipped_avatar.avatar_id)
-            return Response(serializer.data)
-        except StudentAvatar.DoesNotExist:
-            return Response({"error": "No avatar equipped"}, status=404)
+			serializer = AvatarSerializer(equipped_avatar.avatar_id)
+			return Response(serializer.data)
+		except StudentAvatar.DoesNotExist:
+			return Response({"error": "No avatar equipped"}, status=404)
+	else:
+			return Response({"message": "Admins use default avatar"}, status=200)
 
 @api_view(['POST'])
 def submit_contact_form(request):

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Contact.css";
+import { backendAPI } from "../../constants";
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/contact/", {
+            const response = await fetch(`${backendAPI}api/contact/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,7 +1,8 @@
 // TODO: FIGURE OUT HOW TO GET ASSETS FOR SOME QUESTIONS FROM THE API
 import axios from "axios";
+import { backendAPI } from "../../../constants";
 
-const API_URL = "http://localhost:8000/api/oak/questions/{keyStage}/{subject}";
+const API_URL = `${backendAPI}api/oak/questions/{keyStage}/{subject}`;
 
 // Fetch questions from the National Academy API
 export async function fetchQuestions(keyStage) {

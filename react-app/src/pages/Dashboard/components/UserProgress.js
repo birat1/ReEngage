@@ -1,4 +1,3 @@
-import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { FaFlask, FaCalculator, FaBook } from 'react-icons/fa';
 import './UserProgress.css';

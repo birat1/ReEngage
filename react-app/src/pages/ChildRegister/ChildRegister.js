@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCheckAdmin } from "./useCheckAdmin";
 import "./ChildRegister.css"; // Assuming you have some CSS for styling
 import "bootstrap/dist/css/bootstrap.min.css";
+import { backendAPI } from "../../constants";
 
 const ChildRegister = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ const ChildRegister = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Selected Admin ID:", isAdmin.id);
+    //console.log("Selected Admin ID:", isAdmin.id);
 
     const userData = {
       username: formData.username,
@@ -80,11 +81,11 @@ const ChildRegister = () => {
       streak: formData.streak,
       xp: formData.xp,
     };
-    console.log("Payload being sent:", studentData);
+    //console.log("Payload being sent:", studentData);
 
     // Sends the entire student data to the backend API
     axios
-      .post("http://localhost:8000/api/students/", studentData, {
+      .post(`${backendAPI}api/students/`, studentData, {
         headers: {
           "Content-Type": "application/json",
         },

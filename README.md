@@ -39,7 +39,7 @@ cd Group5
 ### Executing program
 
 2. **Run Docker Containers**
-Ensure the Docker Engine is running before executing this command.
+ - Ensure the Docker Engine is running before executing this command.
 
 ```
 docker-compose up --build
@@ -65,6 +65,8 @@ docker-compose exec react npm test -- --watchAll=false
 
 ### Logins
 
+Use the following sample accounts to explore the system with pre-seeded data:
+
 1. **Admin Login:**
 ```
 Username: admin_Gianna
@@ -86,7 +88,7 @@ Password: studentpw
 * Shizu Rai
 
 
-Old - Getting started
+Getting started (OLD)
 ---------------
 
 Before you get started, you should update your com2027.yml file with your team members and project details. This will appear at [your static site](https://csee.pages.surrey.ac.uk/com2027/2024-25/Group5).

@@ -1,4 +1,3 @@
-import React from "react";
 import StarMathGame from "./Games/StarMathGame/StarMath-Game.js";
 import StartGame from "./Games/Fill-itFish/MainGame.js";
 import LabWars from "./Games/LabWars/LabWars.js";
