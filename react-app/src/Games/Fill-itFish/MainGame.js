@@ -48,7 +48,7 @@ export default function TitleScreen() { // screen user sees before playing the g
   const [isOpen, setIsOpen] = useState(true); // Controls button visibility
   const [showTransitionScreen, setShowTransitionScreen] = useState(false); // Controls ChooseYear visibility
   const [showHelpScreen, setShowHelpScreen] = useState(false); // controls help screen visibility
-  const [audio] = useState(new Audio("/water.mp3"));
+  const [audio] = useState(new Audio("/water.flac"));
 
   useEffect(() => {
     audio.loop = true;

@@ -26,9 +26,12 @@ const AnimalFact = () => {
   // websocket connection management
   useEffect(() => {
     const connect = () => {
-      const wsUrl =
-        process.env.REACT_APP_WS_URL ||
-        `ws://${window.location.hostname}:8000/ws/animalfact/`;
+      let wsUrl;
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        wsUrl = `ws://${window.location.hostname}:8000/ws/animalfact/`;
+      } else {
+        wsUrl = `ws://${window.location.hostname}/ws/animalfact/`
+      }
 
       socketRef.current = new WebSocket(wsUrl);
 

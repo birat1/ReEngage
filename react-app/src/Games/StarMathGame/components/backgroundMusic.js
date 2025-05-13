@@ -7,7 +7,7 @@ function BackgroundMusic(playBtn) {
 
   useEffect(() => {
       // Initialise audio object
-      backgrndAudio.current = new Audio("/happy_adventure.mp3");
+      backgrndAudio.current = new Audio("/happy_adventure.flac");
       backgrndAudio.current.loop = true;
       backgrndAudio.current.volume = 0.5;
       backgrndSoundbtn.current.innerHTML = "🔉";
