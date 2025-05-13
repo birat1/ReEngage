@@ -92,7 +92,7 @@ CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_AGE = 1209600
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_DOMAIN = None
@@ -102,16 +102,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = 'None'
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5000',
-    'http://127.0.0.1:5000',
-    "http://10.2.8.15:5000",
-    "http://10.2.8.15:3000",
-    "http://localhost:3000",
-]
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
