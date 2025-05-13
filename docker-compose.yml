@@ -28,7 +28,7 @@ services:
     tty: true
     environment:
       - WDS_SOCKET_PORT=0 
-      - REACT_APP_API_URL=http://django:8000
+      - REACT_APP_API_URL=http://django:8000/
       - PORT=3000
     networks:
       - app-network
