@@ -101,6 +101,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://10.2.8.15:5000",
     "http://10.2.8.15:3000",
     "http://localhost:3000",
+    'http://react:3000',
 ]
 
 MIDDLEWARE = [

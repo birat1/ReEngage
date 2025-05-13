@@ -1,1 +1,1 @@
-export const backendAPI = `http://${window.location.hostname}:8000/`;
+export const backendAPI = process.env.REACT_APP_API_URL || 'http://localhost:8000';
