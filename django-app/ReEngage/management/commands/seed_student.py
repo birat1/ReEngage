@@ -1,13 +1,15 @@
 import math
 import random
+
 from django.contrib.auth.models import User
 from ReEngage.models import Admin, Student
 
-def seedStudent():
+
+def seedStudent() -> None:
     admin_objects = list(Admin.objects.all())
-    
+
     if not admin_objects:
-        print('No Admins found. Please seed Admins first.')
+        print("No Admins found. Please seed Admins first.")
         return
 
     usernames = ["student_Ashley", "student_Alex", "student_Rowan", "student_Cameron"]
@@ -19,16 +21,11 @@ def seedStudent():
         firstname = firstnames[i]
         surname = surnames[i]
         if not User.objects.filter(username=username).exists():
+            student_user = User.objects.create_user(username=username, password="studentpw", email=f"{username}@example.com")
 
-            student_user = User.objects.create_user(
-                username=username,
-                password='studentpw',
-                email=f"{username}@example.com"
-            )
-
-            englishA=random.randint(10, 100)
-            mathsA=random.randint(10, 100)
-            scienceA=random.randint(10, 100)
+            englishA = random.randint(10, 100)
+            mathsA = random.randint(10, 100)
+            scienceA = random.randint(10, 100)
 
             # Ensure correct answers are at least half of total answers
             englishC = random.randint(math.ceil(englishA / 2), englishA)
@@ -37,8 +34,8 @@ def seedStudent():
 
             Student.objects.create(
                 user=student_user,
-                firstname = firstname,
-                surname = surname,
+                firstname=firstname,
+                surname=surname,
                 year=3 + i,
                 managed_by=random.choice(admin_objects),
                 level=random.randint(1, 10),
@@ -50,8 +47,8 @@ def seedStudent():
                 science_answered=scienceA,
                 english_correct=englishC,
                 maths_correct=mathsC,
-                science_correct=scienceC
+                science_correct=scienceC,
             )
-            print(f'Student {username} created.')
+            print(f"Student {username} created.")
         else:
-            print(f'Student {username} already exists.')
+            print(f"Student {username} already exists.")

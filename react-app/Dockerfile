@@ -1,8 +1,13 @@
 FROM node:20-alpine
+
 WORKDIR /app
+
+ENV CI=true
+
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
+
 COPY . .
+
 EXPOSE 3000
-RUN apk update && apk add curl
 CMD ["npm", "start"]

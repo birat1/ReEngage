@@ -1,6 +1,7 @@
 from ReEngage.models import Avatar
 
-def seedAvatar():
+
+def seedAvatar() -> None:
     avatars = [
         {"name": "Default", "price": 0},
         {"name": "One", "price": 200},
@@ -18,13 +19,13 @@ def seedAvatar():
         {"name": "Thirteen", "price": 1400},
         {"name": "Fourteen", "price": 1500},
         {"name": "Fifteen", "price": 1600},
-        {"name": "Sixteen", "price": 1700}
+        {"name": "Sixteen", "price": 1700},
     ]
 
     # Seed 6 avatars
     for a in avatars:
         if not Avatar.objects.filter(name=a["name"]).exists():
             Avatar.objects.create(**a)
-            print(f'Avatar {a["name"]} created.')
+            print(f"Avatar {a['name']} created.")
         else:
-            print(f'Avatar {a["name"]} already exists.')
+            print(f"Avatar {a['name']} already exists.")

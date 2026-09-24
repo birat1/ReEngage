@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ReengageConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'ReEngage'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "ReEngage"
