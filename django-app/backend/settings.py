@@ -56,17 +56,21 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis", 6379)],
-            "socket_timeout": 30,
-            "socket_connect_timeout": 30,
-            "socket_keepalive": True,
+            "hosts": [
+                {
+                    "address": os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0"),
+                    "socket_timeout": 10,
+                    "socket_connect_timeout": 10,
+                    "health_check_interval": 30,
+                }
+            ],
             "capacity": 1500,
             "expiry": 10,
         },
     },
 }
 
-REDIS_URL = "redis://redis:6379/0"
+REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0")
 
 
 CORS_ALLOW_ALL_ORIGINS = True

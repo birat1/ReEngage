@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import json
 import random
 import time
@@ -54,24 +55,27 @@ class AnimalFactConsumer(AsyncWebsocketConsumer):
 
     GROUP_NAME = "animal_fact_group"
     UPDATE_INTERVAL = 300  # change timer here
+    _timer_task = None
+    _connection_count = 0
 
     async def connect(self) -> None:
         await self.channel_layer.group_add(self.GROUP_NAME, self.channel_name)
         await self.accept()
+        type(self)._connection_count += 1
 
-        # starts up the system upon first connection
-        state = await self.get_or_create_shared_state()
-        if not state.get("task_started"):
-            await self.start_background_task()
+        await self.start_background_task()
 
         await self.send_current_fact()
 
     async def start_background_task(self) -> None:
+        timer_task = type(self)._timer_task
+        if timer_task and not timer_task.done():
+            return
+
         state = await self.get_or_create_shared_state()
         state["task_started"] = True
         await database_sync_to_async(cache.set)("animal_fact_state", state)
-
-        asyncio.create_task(self.global_timer_loop())
+        type(self)._timer_task = asyncio.create_task(self.global_timer_loop())
 
     # global timer that updates facts on its own
     async def global_timer_loop(self) -> None:
@@ -172,3 +176,13 @@ class AnimalFactConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code) -> None:
         await self.channel_layer.group_discard(self.GROUP_NAME, self.channel_name)
+
+        consumer_type = type(self)
+        consumer_type._connection_count = max(0, consumer_type._connection_count - 1)
+        if consumer_type._connection_count == 0:
+            timer_task = consumer_type._timer_task
+            consumer_type._timer_task = None
+            if timer_task and not timer_task.done():
+                timer_task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await timer_task

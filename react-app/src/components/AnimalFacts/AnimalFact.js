@@ -15,6 +15,7 @@ const AnimalFact = () => {
   const [connectionStatus, setConnectionStatus] = useState("connecting");
   const socketRef = useRef(null);
   const countdownRef = useRef(null);
+  const reconnectTimeoutRef = useRef(null);
 
   // formats time display
   const formatTime = (seconds) => {
@@ -25,7 +26,11 @@ const AnimalFact = () => {
 
   // websocket connection management
   useEffect(() => {
+    let isActive = true;
+
     const connect = () => {
+      if (!isActive) return;
+
       let wsUrl;
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         wsUrl = `ws://${window.location.hostname}:8000/ws/animalfact/`;
@@ -76,7 +81,9 @@ const AnimalFact = () => {
 
       socketRef.current.onclose = () => {
         setConnectionStatus("disconnected");
-        setTimeout(connect, 2000);
+        if (isActive) {
+          reconnectTimeoutRef.current = setTimeout(connect, 2000);
+        }
       };
 
       socketRef.current.onerror = (e) => {
@@ -87,8 +94,10 @@ const AnimalFact = () => {
     connect();
 
     return () => {
+      isActive = false;
+      clearTimeout(reconnectTimeoutRef.current);
       clearInterval(countdownRef.current);
-      if (socketRef.current?.readyState === WebSocket.OPEN) {
+      if (socketRef.current && socketRef.current.readyState !== WebSocket.CLOSED) {
         socketRef.current.close();
       }
     };
