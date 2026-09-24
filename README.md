@@ -1,10 +1,6 @@
-# ReEngage - Group5
+# ReEngage
 
-**ReEngage** - A gamified learning platform for Key Stage 2 students.
-
-## Description
-
-**ReEngage** is a full-stack educational web application designed with neurodivergent and anxious children in mind. It provides interactive learning, pressure-free games in English, Maths, and Science, while parent/teacher accounts monitor progress.
+A full-stack educational web application designed with neurodivergent and anxious children in mind. It provides interactive learning, pressure-free games in English, Maths, and Science, while parent/teacher accounts monitor progress.
 
 ## Key Features
 
