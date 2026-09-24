@@ -50,7 +50,7 @@ docker compose up --build
 
 ### Access the App
 
-* Frontend: <http://localhost:5000>
+* Frontend: <http://localhost:5001>
 * Backend API: <http://localhost:8000>
 
 ### Running Tests

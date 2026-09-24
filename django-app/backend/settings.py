@@ -101,7 +101,9 @@ CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5000",
+    "http://localhost:5001",
     "http://127.0.0.1:5000",
+    "http://127.0.0.1:5001",
     "http://10.2.8.15:5000",
     "http://10.2.8.15:3000",
     "http://localhost:3000",

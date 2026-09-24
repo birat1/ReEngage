@@ -1,9 +1,9 @@
+import pytest
 from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 
 from ReEngage.models import Admin, Student
-import pytest
 
 
 class StudentModelTest(TestCase):
